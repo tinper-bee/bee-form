@@ -18,6 +18,10 @@ npm install --save bee-form
 组件调用
 ```js
 import Form from 'bee-form';
+import FormGroup from 'bee-form-group';
+import ControlLabel from 'bee-control-label';
+import Button from 'bee-button';
+import FormControl from 'bee-form-control';
 
 React.render(
 	<Form inline>
