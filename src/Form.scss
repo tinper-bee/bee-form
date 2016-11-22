@@ -1,24 +1,21 @@
 @import "../node_modules/tinper-bee-core/scss/minxin-variables";
 @import "../node_modules/tinper-bee-core/scss/minxin-mixins";
-@import "../node_modules/bee-form-group/src/FormGroup.scss";
-@import "../node_modules/bee-form-control/src/FormControl.scss";
-@import "../node_modules/bee-control-label/src/ControlLabel.scss";
-@import "../node_modules/bee-button/src/Button.scss";
+
 
 @media (min-width: 768px){
-	.form-inline {
-		.form-group {
+	.u-form-inline {
+		.u-form-group {
 		    display: inline-block;
 		    margin-bottom: 0;
 		    vertical-align: middle;
 		    margin: 2px;
 		}
-		.form-control {
+		.u-form-control {
 		    display: inline-block;
 		    width: auto;
 		    vertical-align: middle;
 		}
-		.control-label {
+		.u-control-label {
 		    margin-bottom: 0;
 		    vertical-align: middle;
 		}
@@ -26,8 +23,8 @@
 }
 
 @media (min-width: 768px){
-	.form-horizontal {
-		.control-label {
+	.u-form-horizontal {
+		.u-control-label {
 		    text-align: right;
 		    margin-bottom: 0;
 		    padding-top: 7px;

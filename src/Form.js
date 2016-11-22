@@ -5,8 +5,8 @@ const propTypes = {
   horizontal: PropTypes.bool,
   inline: PropTypes.bool,
   componentClass: PropTypes.oneOfType([
-      React.PropTypes.element,
-      React.PropTypes.string
+      PropTypes.element,
+      PropTypes.string
   ]),
 };
 
@@ -14,6 +14,7 @@ const defaultProps = {
   horizontal: false,
   inline: false,
   componentClass: 'form',
+  clsPrefix: 'u-form'
 };
 
 class Form extends React.Component {
@@ -23,17 +24,20 @@ class Form extends React.Component {
       inline,
       componentClass: Component,
       className,
+      clsPrefix,
       ...others
     } = this.props;
 
     const classes = {};
+
     if(inline){
-    	console.log(inline);
-    	classes[`form-inline`] =true;
+    	classes[`${clsPrefix}-inline`] =true;
 	
     }
-    
-    classes['form-horizontal'] = !!horizontal;
+    if(horizontal){
+      classes[`${clsPrefix}-horizontal`] =true;
+  
+    }
 
     return (
       <Component

@@ -29,13 +29,14 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var propTypes = {
   horizontal: _react.PropTypes.bool,
   inline: _react.PropTypes.bool,
-  componentClass: _react.PropTypes.oneOfType([_react2["default"].PropTypes.element, _react2["default"].PropTypes.string])
+  componentClass: _react.PropTypes.oneOfType([_react.PropTypes.element, _react.PropTypes.string])
 };
 
 var defaultProps = {
   horizontal: false,
   inline: false,
-  componentClass: 'form'
+  componentClass: 'form',
+  clsPrefix: 'u-form'
 };
 
 var Form = function (_React$Component) {
@@ -53,16 +54,18 @@ var Form = function (_React$Component) {
     var inline = _props.inline;
     var Component = _props.componentClass;
     var className = _props.className;
+    var clsPrefix = _props.clsPrefix;
 
-    var others = _objectWithoutProperties(_props, ['horizontal', 'inline', 'componentClass', 'className']);
+    var others = _objectWithoutProperties(_props, ['horizontal', 'inline', 'componentClass', 'className', 'clsPrefix']);
 
     var classes = {};
-    if (inline) {
-      console.log(inline);
-      classes['form-inline'] = true;
-    }
 
-    classes['form-horizontal'] = !!horizontal;
+    if (inline) {
+      classes[clsPrefix + '-inline'] = true;
+    }
+    if (horizontal) {
+      classes[clsPrefix + '-horizontal'] = true;
+    }
 
     return _react2["default"].createElement(Component, _extends({}, others, {
       className: (0, _classnames2["default"])(className, classes)
