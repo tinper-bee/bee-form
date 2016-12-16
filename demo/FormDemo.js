@@ -5,6 +5,8 @@ import FormGroup from 'bee-form-group';
 import ControlLabel from 'bee-control-label';
 import Button from 'bee-button';
 import FormControl from 'bee-form-control';
+import InputGroup from 'bee-input-group';
+
 
 class Demo extends Component {
 	render(){
