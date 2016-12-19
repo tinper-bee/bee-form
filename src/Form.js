@@ -32,17 +32,16 @@ class Form extends React.Component {
 
     if(inline){
     	classes[`${clsPrefix}-inline`] =true;
-	
     }
     if(horizontal){
       classes[`${clsPrefix}-horizontal`] =true;
-  
     }
 
+    let classnames = classNames(classes,clsPrefix);
     return (
       <Component
         {...others}
-        className={classNames(className, classes)}
+        className={classNames(className, classnames)}
       />
     );
   }

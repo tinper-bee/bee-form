@@ -1,11 +1,19 @@
 
 import { Con, Row, Col } from 'bee-layout';
 import { Panel } from 'bee-panel';
-import Button from 'bee-button';
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import Checkbox from '../src';
-
+import Form from '../src';
+import FormGroup from 'bee-form-group';
+import ControlLabel from 'bee-control-label';
+import Button from 'bee-button';
+import FormControl from 'bee-form-control';
+import InputGroup from 'bee-input-group';
+import RadioGroup from 'bee-radio-group';
+import Select from 'bee-select';
+import Checkbox from 'bee-checkbox';
+import Icon from 'bee-icon';
+import Upload from 'bee-upload'
 
 const CARET = <i className="uf uf-chevronarrowdown"></i>;
 
@@ -53,7 +61,7 @@ class Demo extends Component {
             <Col md={10} mdOffset={1} sm={12} smOffset={0}>
                 <h3>{ title }</h3>
                 <p>{ desc }</p>
-                <Panel collapsible expanded={ this.state.open } colors='bordered' header={ header } footer={footer} footerStyle = {{padding: 0}}>
+                <Panel headerContent collapsible expanded={ this.state.open } colors='bordered' header={ header } footer={footer} footerStyle = {{padding: 0}}>
                     <pre><code className="hljs javascript">{ code }</code></pre>
                 </Panel>
             </Col>
