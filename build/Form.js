@@ -67,8 +67,9 @@ var Form = function (_React$Component) {
       classes[clsPrefix + '-horizontal'] = true;
     }
 
+    var classnames = (0, _classnames2["default"])(classes, clsPrefix);
     return _react2["default"].createElement(Component, _extends({}, others, {
-      className: (0, _classnames2["default"])(className, classes)
+      className: (0, _classnames2["default"])(className, classnames)
     }));
   };
 
