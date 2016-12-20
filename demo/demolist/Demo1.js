@@ -73,7 +73,7 @@ class Demo1 extends Component {
 			<Form horizontal>
 				<Row>
 				    <FormGroup controlId="formInlineName">
-				    	<Col md={1} className="text-right">
+				    	<Col md={2} className="text-right">
 				    		<ControlLabel>姓名:</ControlLabel>
 				    	</Col>
 				      	<Col md={5}>
@@ -83,7 +83,7 @@ class Demo1 extends Component {
 			    </Row>
 			    <Row>
 				    <FormGroup controlId="formInlineSex">
-				    	<Col md={1} className="text-right">
+				    	<Col md={2} className="text-right">
 				    		<ControlLabel>姓别:</ControlLabel>
 				    	</Col>
 				      	<Col md={5}>
@@ -99,7 +99,7 @@ class Demo1 extends Component {
 			    </Row>
 			    <Row>
 			    	<FormGroup controlId="formInlineMoney">
-				    	<Col md={1} className="text-right">
+				    	<Col md={2} className="text-right">
 				    		<ControlLabel>首付款:</ControlLabel>
 				    	</Col>
 				      	<Col md={5}>
@@ -113,7 +113,7 @@ class Demo1 extends Component {
 			    </Row>
 			    <Row>
 			    	<FormGroup controlId="formInlineSex">
-				    	<Col md={1} className="text-right">
+				    	<Col md={2} className="text-right">
 					    		<ControlLabel>住址:</ControlLabel>
 					    	</Col>
 					    <Col md={5}>
@@ -128,7 +128,7 @@ class Demo1 extends Component {
 			    </Row>
 			    <Row>
 			    	<FormGroup controlId="formInlineSex">
-				    	<Col md={1} className="text-right">
+				    	<Col md={2} className="text-right">
 					    		<ControlLabel>标签:</ControlLabel>
 					    	</Col>
 					    <Col md={5}>
@@ -142,7 +142,7 @@ class Demo1 extends Component {
 			    </Row>
 			    <Row>
 			    	<FormGroup controlId="formInlineSex">
-				    	<Col md={1} className="text-right">
+				    	<Col md={2} className="text-right">
 					    		<ControlLabel>邮件:</ControlLabel>
 					    	</Col>
 					    <Col md={5}>
@@ -158,7 +158,7 @@ class Demo1 extends Component {
 			    </Row>
 			    <Row>
 			    	<FormGroup controlId="formInlineSex">
-				    	<Col md={1} className="text-right">
+				    	<Col md={2} className="text-right">
 					    		<ControlLabel>标签:</ControlLabel>
 					    </Col>
 					    <Col md={5}>

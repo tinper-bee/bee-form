@@ -1,6 +1,6 @@
-## Checkbox
+## Form
 
-从选中选择多个值
+表单包裹层，所有相关的表单元素均放在Form里面
 
 ## 代码演示
 
@@ -9,8 +9,8 @@
 |参数|说明|类型|默认值|
 |:--|:---|:--|:---|
 |className|类名|string|-|
-|color|one of: `primary` `success` `info` `error`  `warning` `dark`|string|''|
-|disabled|是否可用|bool|false|
+|inline|表单元素显示成行内|bool|false|
+|horizontal|表单元素显示成块级|bool|false|
 
 
 
