@@ -1,6 +1,6 @@
 /**
- * @title Checkbox
- * @description `checked` 参数设置是否选中，`disabled`设置是否可用。
+ * @title 表单Form
+ * @description 以下例子是个表单集合，将常用的表单元素集合起来放到Form里面。
  */
  const provinceData = ['Zhejiang', 'Jiangsu'];
 const cityData = {
