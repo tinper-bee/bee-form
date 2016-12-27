@@ -1,60 +1,60 @@
 {
- "name": "bee-form",
- "version": "0.0.5",
- "description": "form ui component for react",
- "keywords": [
-  "react",
-  "react-component",
-  "react-form",
-  "iuap-design",
-  "neoui-react",
-  "form"
- ],
- "engines": {
-  "node": ">=4.0.0"
- },
- "homepage": "https://github.com/tinper-bee/form",
- "author": "",
- "repository": "http://github.com/tinper-bee/form",
- "bugs": "https://github.com/tinper-bee/form/issues",
- "license": "MIT",
- "main": "./build/index",
- "config": {
-  "port": 8000
- },
- "scripts": {
-  "dev": "bee-tools run start",
-  "build": "bee-tools run build",
-  "lint": "bee-tools run lint",
-  "test": "bee-tools run test",
-  "chrome": "bee-tools run chrome",
-  "browsers": "bee-tools run browsers",
-  "pub": "bee-tools run pub",
-  "coveralls": "bee-tools run coverage"
- },
- "dependencies": {
-  "bee-button": "^0.1.8",
-  "bee-checkbox": "^0.1.0",
-  "bee-control-label": "^0.1.4",
-  "bee-form-control": "^0.1.2",
-  "bee-form-group": "^1.0.4",
-  "bee-icon": "0.0.3",
-  "bee-input-group": "latest",
-  "bee-radio-group": "^0.1.1",
-  "bee-select": "0.0.4",
-  "bee-upload": "0.0.3",
-  "classnames": "^2.2.5",
-  "tinper-bee-core": "latest"
- },
- "devDependencies": {
-  "chai": "^3.5.0",
-  "enzyme": "^2.4.1",
-  "react": "~0.14.0",
-  "react-addons-test-utils": "15.3.2",
-  "react-dom": "~0.14.0",
-  "console-polyfill": "~0.2.1",
-  "es5-shim": "~4.1.10",
-  "bee-panel": "latest",
-  "bee-layout": "latest"
- }
+  "name": "bee-form",
+  "version": "0.0.5",
+  "description": "form ui component for react",
+  "keywords": [
+    "react",
+    "react-component",
+    "react-form",
+    "iuap-design",
+    "neoui-react",
+    "form"
+  ],
+  "engines": {
+    "node": ">=4.0.0"
+  },
+  "homepage": "https://github.com/tinper-bee/form",
+  "author": "",
+  "repository": "http://github.com/tinper-bee/form",
+  "bugs": "https://github.com/tinper-bee/form/issues",
+  "license": "MIT",
+  "main": "./build/index",
+  "config": {
+    "port": 8000
+  },
+  "scripts": {
+    "dev": "bee-tools run start",
+    "build": "bee-tools run build",
+    "lint": "bee-tools run lint",
+    "test": "bee-tools run test",
+    "chrome": "bee-tools run chrome",
+    "browsers": "bee-tools run browsers",
+    "pub": "bee-tools run pub",
+    "coveralls": "bee-tools run coverage"
+  },
+  "dependencies": {
+    "bee-button": "^0.2.1",
+    "bee-checkbox": "^0.1.0",
+    "bee-control-label": "^0.1.4",
+    "bee-form-control": "^0.1.2",
+    "bee-form-group": "^1.0.4",
+    "bee-icon": "0.0.5",
+    "bee-input-group": "latest",
+    "bee-radio-group": "^0.1.1",
+    "bee-select": "0.0.4",
+    "bee-upload": "0.0.3",
+    "classnames": "^2.2.5",
+    "tinper-bee-core": "0.0.21"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "enzyme": "^2.4.1",
+    "react": "~0.14.0",
+    "react-addons-test-utils": "15.3.2",
+    "react-dom": "~0.14.0",
+    "console-polyfill": "~0.2.1",
+    "es5-shim": "~4.1.10",
+    "bee-panel": "latest",
+    "bee-layout": "latest"
+  }
 }

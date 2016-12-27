@@ -164,7 +164,7 @@ class Demo1 extends Component {
 					    <Col md={5}>
 					    	<Upload {...uploadprops}>
 						        <Button shape="border">
-						          <Icon type="upload" /> Click to Upload
+						          <Icon type="uf-download" /> Click to Upload
 						        </Button>
 						    </Upload>
 					    </Col>
