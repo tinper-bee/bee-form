@@ -78,20 +78,20 @@ class Demo1 extends Component {
             <Form horizontal>
                 <Row>
                     <FormGroup>
-                        <Col md={2} className="text-right">
+                        <Col md={2} sm={2} className="text-right">
                             <Label>姓名:</Label>
                         </Col>
-                        <Col md={5}>
+                        <Col md={5} sm={6}>
                             <FormControl placeholder="Jane Doe"/>
                         </Col>
                     </FormGroup>
                 </Row>
                 <Row>
                     <FormGroup>
-                        <Col md={2} className="text-right">
+                        <Col md={2} sm={2} className="text-right">
                             <Label>姓别:</Label>
                         </Col>
-                        <Col md={5}>
+                        <Col md={5} sm={6}>
                             <Radio.RadioGroup
                                 name="sex"
                                 selectedValue={this.state.selectedSex}
@@ -104,10 +104,10 @@ class Demo1 extends Component {
                 </Row>
                 <Row>
                     <FormGroup>
-                        <Col md={2} className="text-right">
+                        <Col md={2} sm={2} className="text-right">
                             <Label>首付款:</Label>
                         </Col>
-                        <Col md={5}>
+                        <Col md={5} sm={6}>
                             <InputGroup>
                                 <InputGroup.Addon>￥</InputGroup.Addon>
                                 <FormControl type="text"/>
@@ -118,10 +118,10 @@ class Demo1 extends Component {
                 </Row>
                 <Row>
                     <FormGroup>
-                        <Col md={2} className="text-right">
+                        <Col md={2} sm={2} className="text-right">
                             <Label>住址:</Label>
                         </Col>
-                        <Col md={5}>
+                        <Col md={5} sm={6}>
                             <Select defaultValue={provinceData[0]} style={{ width: 90 }}
                                     onChange={this.handleProvinceChange}>
                                 {provinceOptions}
@@ -135,10 +135,10 @@ class Demo1 extends Component {
                 </Row>
                 <Row>
                     <FormGroup>
-                        <Col md={2} className="text-right">
+                        <Col md={2} sm={2} className="text-right">
                             <Label>标签:</Label>
                         </Col>
-                        <Col md={5}>
+                        <Col md={5} sm={6}>
                             <InputGroup>
                                 <InputGroup.Addon style={{paddingBottom: 0}}><Checkbox style={{marginTop:4}}></Checkbox></InputGroup.Addon>
                                 <FormControl type="text"/>
@@ -149,10 +149,10 @@ class Demo1 extends Component {
                 </Row>
                 <Row>
                     <FormGroup>
-                        <Col md={2} className="text-right">
+                        <Col md={2} sm={2} className="text-right">
                             <Label>邮件:</Label>
                         </Col>
-                        <Col md={5}>
+                        <Col md={5} sm={6}>
                             <Select combobox
                                     onChange={this.ChangeMail}
                                     filterOption={false}

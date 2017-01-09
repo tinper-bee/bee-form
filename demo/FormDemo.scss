@@ -11,5 +11,7 @@
 @import "../node_modules/bee-select/src/Select.scss";
 @import "../node_modules/bee-checkbox/src/Checkbox.scss";
 @import "../node_modules/bee-upload/src/Upload.scss";
-
+.u-label {
+	line-height: 30px;
+}
 
