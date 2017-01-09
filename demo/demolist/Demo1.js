@@ -77,35 +77,35 @@ class Demo1 extends Component {
         return (
             <Form horizontal>
                 <Row>
-                    <FormGroup controlId="formInlineName">
+                    <FormGroup>
                         <Col md={2} className="text-right">
-                            <ControlLabel>姓名:</ControlLabel>
+                            <Label>姓名:</Label>
                         </Col>
                         <Col md={5}>
-                            <FormControl htmlType="text" placeholder="Jane Doe"/>
+                            <FormControl placeholder="Jane Doe"/>
                         </Col>
                     </FormGroup>
                 </Row>
                 <Row>
-                    <FormGroup controlId="formInlineSex">
+                    <FormGroup>
                         <Col md={2} className="text-right">
-                            <ControlLabel>姓别:</ControlLabel>
+                            <Label>姓别:</Label>
                         </Col>
                         <Col md={5}>
-                            <RadioGroup
+                            <Radio.RadioGroup
                                 name="sex"
                                 selectedValue={this.state.selectedSex}
                                 onChange={this.ChangeSex.bind(this)}>
-                                <RadioGroup.Radio colors="dark" value="female">female</RadioGroup.Radio>
-                                <RadioGroup.Radio colors="dark" value="male">male</RadioGroup.Radio>
-                            </RadioGroup>
+                                <Radio colors="dark" value="female">female</Radio>
+                                <Radio colors="dark" value="male">male</Radio>
+                            </Radio.RadioGroup>
                         </Col>
                     </FormGroup>
                 </Row>
                 <Row>
-                    <FormGroup controlId="formInlineMoney">
+                    <FormGroup>
                         <Col md={2} className="text-right">
-                            <ControlLabel>首付款:</ControlLabel>
+                            <Label>首付款:</Label>
                         </Col>
                         <Col md={5}>
                             <InputGroup>
@@ -117,9 +117,9 @@ class Demo1 extends Component {
                     </FormGroup>
                 </Row>
                 <Row>
-                    <FormGroup controlId="formInlineSex">
+                    <FormGroup>
                         <Col md={2} className="text-right">
-                            <ControlLabel>住址:</ControlLabel>
+                            <Label>住址:</Label>
                         </Col>
                         <Col md={5}>
                             <Select defaultValue={provinceData[0]} style={{ width: 90 }}
@@ -134,9 +134,9 @@ class Demo1 extends Component {
                     </FormGroup>
                 </Row>
                 <Row>
-                    <FormGroup controlId="formInlineSex">
+                    <FormGroup>
                         <Col md={2} className="text-right">
-                            <ControlLabel>标签:</ControlLabel>
+                            <Label>标签:</Label>
                         </Col>
                         <Col md={5}>
                             <InputGroup>
@@ -148,9 +148,9 @@ class Demo1 extends Component {
                     </FormGroup>
                 </Row>
                 <Row>
-                    <FormGroup controlId="formInlineSex">
+                    <FormGroup>
                         <Col md={2} className="text-right">
-                            <ControlLabel>邮件:</ControlLabel>
+                            <Label>邮件:</Label>
                         </Col>
                         <Col md={5}>
                             <Select combobox
@@ -163,20 +163,7 @@ class Demo1 extends Component {
                         </Col>
                     </FormGroup>
                 </Row>
-                <Row>
-                    <FormGroup controlId="formInlineSex">
-                        <Col md={2} className="text-right">
-                            <ControlLabel>标签:</ControlLabel>
-                        </Col>
-                        <Col md={5}>
-                            <Upload {...uploadprops}>
-                                <Button shape="border">
-                                    <Icon type="uf-download"/> Click to Upload
-                                </Button>
-                            </Upload>
-                        </Col>
-                    </FormGroup>
-                </Row>
+               
             </Form>
         )
     }

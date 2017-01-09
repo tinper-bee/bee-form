@@ -5,19 +5,18 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import Form from '../src';
 import FormGroup from 'bee-form-group';
-import ControlLabel from 'bee-control-label';
+import Label from 'bee-label';
 import Button from 'bee-button';
 import FormControl from 'bee-form-control';
 import InputGroup from 'bee-input-group';
-import RadioGroup from 'bee-radio-group';
+import Radio from 'bee-radio';
 import Select from 'bee-select';
 import Checkbox from 'bee-checkbox';
 import Icon from 'bee-icon';
-import Upload from 'bee-upload'
 
-const CARET = <i className="uf uf-chevronarrowdown"></i>;
+const CARET = <i className="uf uf-arrow-down"></i>;
 
-const CARETUP = <i className="uf uf-chevronarrowup"></i>;
+const CARETUP = <i className="uf uf-arrow-up"></i>;
 
 
 /**
@@ -99,35 +98,35 @@ class Demo1 extends Component {
         return (
             <Form horizontal>
                 <Row>
-                    <FormGroup controlId="formInlineName">
+                    <FormGroup>
                         <Col md={2} className="text-right">
-                            <ControlLabel>姓名:</ControlLabel>
+                            <Label>姓名:</Label>
                         </Col>
                         <Col md={5}>
-                            <FormControl htmlType="text" placeholder="Jane Doe"/>
+                            <FormControl placeholder="Jane Doe"/>
                         </Col>
                     </FormGroup>
                 </Row>
                 <Row>
-                    <FormGroup controlId="formInlineSex">
+                    <FormGroup>
                         <Col md={2} className="text-right">
-                            <ControlLabel>姓别:</ControlLabel>
+                            <Label>姓别:</Label>
                         </Col>
                         <Col md={5}>
-                            <RadioGroup
+                            <Radio.RadioGroup
                                 name="sex"
                                 selectedValue={this.state.selectedSex}
                                 onChange={this.ChangeSex.bind(this)}>
-                                <RadioGroup.Radio colors="dark" value="female">female</RadioGroup.Radio>
-                                <RadioGroup.Radio colors="dark" value="male">male</RadioGroup.Radio>
-                            </RadioGroup>
+                                <Radio colors="dark" value="female">female</Radio>
+                                <Radio colors="dark" value="male">male</Radio>
+                            </Radio.RadioGroup>
                         </Col>
                     </FormGroup>
                 </Row>
                 <Row>
-                    <FormGroup controlId="formInlineMoney">
+                    <FormGroup>
                         <Col md={2} className="text-right">
-                            <ControlLabel>首付款:</ControlLabel>
+                            <Label>首付款:</Label>
                         </Col>
                         <Col md={5}>
                             <InputGroup>
@@ -139,9 +138,9 @@ class Demo1 extends Component {
                     </FormGroup>
                 </Row>
                 <Row>
-                    <FormGroup controlId="formInlineSex">
+                    <FormGroup>
                         <Col md={2} className="text-right">
-                            <ControlLabel>住址:</ControlLabel>
+                            <Label>住址:</Label>
                         </Col>
                         <Col md={5}>
                             <Select defaultValue={provinceData[0]} style={{ width: 90 }}
@@ -156,9 +155,9 @@ class Demo1 extends Component {
                     </FormGroup>
                 </Row>
                 <Row>
-                    <FormGroup controlId="formInlineSex">
+                    <FormGroup>
                         <Col md={2} className="text-right">
-                            <ControlLabel>标签:</ControlLabel>
+                            <Label>标签:</Label>
                         </Col>
                         <Col md={5}>
                             <InputGroup>
@@ -170,9 +169,9 @@ class Demo1 extends Component {
                     </FormGroup>
                 </Row>
                 <Row>
-                    <FormGroup controlId="formInlineSex">
+                    <FormGroup>
                         <Col md={2} className="text-right">
-                            <ControlLabel>邮件:</ControlLabel>
+                            <Label>邮件:</Label>
                         </Col>
                         <Col md={5}>
                             <Select combobox
@@ -185,25 +184,12 @@ class Demo1 extends Component {
                         </Col>
                     </FormGroup>
                 </Row>
-                <Row>
-                    <FormGroup controlId="formInlineSex">
-                        <Col md={2} className="text-right">
-                            <ControlLabel>标签:</ControlLabel>
-                        </Col>
-                        <Col md={5}>
-                            <Upload {...uploadprops}>
-                                <Button shape="border">
-                                    <Icon type="uf-download"/> Click to Upload
-                                </Button>
-                            </Upload>
-                        </Col>
-                    </FormGroup>
-                </Row>
+               
             </Form>
         )
     }
 }
-var DemoArray = [{"example":<Demo1 />,"title":" 表单Form","code":"/**\n * @title 表单Form\n * @description 以下例子是个表单集合，将常用的表单元素集合起来放到Form里面。\n */\nconst provinceData = ['Zhejiang', 'Jiangsu'];\nconst cityData = {\n    Zhejiang: ['Hangzhou', 'Ningbo', 'Wenzhou'],\n    Jiangsu: ['Nanjing', 'Suzhou', 'Zhenjiang']\n};\nconst uploadprops = {\n    action: '/upload.do',\n    onChange(info) {\n        if (info.file.status !== 'uploading') {\n            console.log(info.file);\n            console.log(info.fileList);\n        }\n    },\n    defaultFileList: [{\n        uid: -1,\n        name: 'xxx.png',\n        status: 'done',\n        url: 'http://www.baidu.com/xxx.png'\n    }, {\n        uid: -2,\n        name: 'yyy.png',\n        status: 'done',\n        url: 'http://www.baidu.com/yyy.png'\n    }]\n};\nclass Demo1 extends Component {\n    constructor(props) {\n        super(props);\n        this.state = {\n            options: [],\n            selectedSex: 'female',\n            cities: cityData[provinceData[0]],\n            secondCity: cityData[provinceData[0]][0]\n        };\n        this.handleProvinceChange = this.handleProvinceChange.bind(this);\n        this.onSecondCityChange = this.onSecondCityChange.bind(this);\n        this.ChangeMail = this.ChangeMail.bind(this);\n    }\n\n    ChangeMail(value) {\n        let options;\n        if (!value || value.indexOf('@') >= 0) {\n            options = [];\n        } else {\n            options = ['gmail.com', '163.com', 'qq.com'].map((domain) => {\n                const email = `${value}@${domain}`;\n                return <Option key={email}>{email}</Option>;\n            });\n        }\n        this.setState({options});\n    }\n\n    ChangeSex(value) {\n        this.setState({selectedSex: value});\n    }\n\n    handleProvinceChange(value) {\n        this.setState({\n            cities: cityData[value],\n            secondCity: cityData[value][0]\n        });\n    }\n\n    onSecondCityChange(value) {\n        this.setState({\n            secondCity: value\n        });\n    }\n\n    render() {\n        const provinceOptions = provinceData.map(province => <Option key={province}>{province}</Option>);\n        const cityOptions = this.state.cities.map(city => <Option key={city}>{city}</Option>);\n        return (\n            <Form horizontal>\n                <Row>\n                    <FormGroup controlId=\"formInlineName\">\n                        <Col md={2} className=\"text-right\">\n                            <ControlLabel>姓名:</ControlLabel>\n                        </Col>\n                        <Col md={5}>\n                            <FormControl htmlType=\"text\" placeholder=\"Jane Doe\"/>\n                        </Col>\n                    </FormGroup>\n                </Row>\n                <Row>\n                    <FormGroup controlId=\"formInlineSex\">\n                        <Col md={2} className=\"text-right\">\n                            <ControlLabel>姓别:</ControlLabel>\n                        </Col>\n                        <Col md={5}>\n                            <RadioGroup\n                                name=\"sex\"\n                                selectedValue={this.state.selectedSex}\n                                onChange={this.ChangeSex.bind(this)}>\n                                <RadioGroup.Radio colors=\"dark\" value=\"female\">female</RadioGroup.Radio>\n                                <RadioGroup.Radio colors=\"dark\" value=\"male\">male</RadioGroup.Radio>\n                            </RadioGroup>\n                        </Col>\n                    </FormGroup>\n                </Row>\n                <Row>\n                    <FormGroup controlId=\"formInlineMoney\">\n                        <Col md={2} className=\"text-right\">\n                            <ControlLabel>首付款:</ControlLabel>\n                        </Col>\n                        <Col md={5}>\n                            <InputGroup>\n                                <InputGroup.Addon>￥</InputGroup.Addon>\n                                <FormControl type=\"text\"/>\n                                <InputGroup.Addon>.00</InputGroup.Addon>\n                            </InputGroup>\n                        </Col>\n                    </FormGroup>\n                </Row>\n                <Row>\n                    <FormGroup controlId=\"formInlineSex\">\n                        <Col md={2} className=\"text-right\">\n                            <ControlLabel>住址:</ControlLabel>\n                        </Col>\n                        <Col md={5}>\n                            <Select defaultValue={provinceData[0]} style={{ width: 90 }}\n                                    onChange={this.handleProvinceChange}>\n                                {provinceOptions}\n                            </Select>\n                            <Select value={this.state.secondCity} style={{ width: 90 }}\n                                    onChange={this.onSecondCityChange}>\n                                {cityOptions}\n                            </Select>\n                        </Col>\n                    </FormGroup>\n                </Row>\n                <Row>\n                    <FormGroup controlId=\"formInlineSex\">\n                        <Col md={2} className=\"text-right\">\n                            <ControlLabel>标签:</ControlLabel>\n                        </Col>\n                        <Col md={5}>\n                            <InputGroup>\n                                <InputGroup.Addon style={{paddingBottom: 0}}><Checkbox style={{marginTop:4}}></Checkbox></InputGroup.Addon>\n                                <FormControl type=\"text\"/>\n                                <InputGroup.Addon>.00</InputGroup.Addon>\n                            </InputGroup>\n                        </Col>\n                    </FormGroup>\n                </Row>\n                <Row>\n                    <FormGroup controlId=\"formInlineSex\">\n                        <Col md={2} className=\"text-right\">\n                            <ControlLabel>邮件:</ControlLabel>\n                        </Col>\n                        <Col md={5}>\n                            <Select combobox\n                                    onChange={this.ChangeMail}\n                                    filterOption={false}\n                                    placeholder=\"Enter the account name\"\n                                >\n                                {this.state.options}\n                            </Select>\n                        </Col>\n                    </FormGroup>\n                </Row>\n                <Row>\n                    <FormGroup controlId=\"formInlineSex\">\n                        <Col md={2} className=\"text-right\">\n                            <ControlLabel>标签:</ControlLabel>\n                        </Col>\n                        <Col md={5}>\n                            <Upload {...uploadprops}>\n                                <Button shape=\"border\">\n                                    <Icon type=\"uf-download\"/> Click to Upload\n                                </Button>\n                            </Upload>\n                        </Col>\n                    </FormGroup>\n                </Row>\n            </Form>\n        )\n    }\n}\n","desc":" 以下例子是个表单集合，将常用的表单元素集合起来放到Form里面。"}]
+var DemoArray = [{"example":<Demo1 />,"title":" 表单Form","code":"/**\n * @title 表单Form\n * @description 以下例子是个表单集合，将常用的表单元素集合起来放到Form里面。\n */\nconst provinceData = ['Zhejiang', 'Jiangsu'];\nconst cityData = {\n    Zhejiang: ['Hangzhou', 'Ningbo', 'Wenzhou'],\n    Jiangsu: ['Nanjing', 'Suzhou', 'Zhenjiang']\n};\nconst uploadprops = {\n    action: '/upload.do',\n    onChange(info) {\n        if (info.file.status !== 'uploading') {\n            console.log(info.file);\n            console.log(info.fileList);\n        }\n    },\n    defaultFileList: [{\n        uid: -1,\n        name: 'xxx.png',\n        status: 'done',\n        url: 'http://www.baidu.com/xxx.png'\n    }, {\n        uid: -2,\n        name: 'yyy.png',\n        status: 'done',\n        url: 'http://www.baidu.com/yyy.png'\n    }]\n};\nclass Demo1 extends Component {\n    constructor(props) {\n        super(props);\n        this.state = {\n            options: [],\n            selectedSex: 'female',\n            cities: cityData[provinceData[0]],\n            secondCity: cityData[provinceData[0]][0]\n        };\n        this.handleProvinceChange = this.handleProvinceChange.bind(this);\n        this.onSecondCityChange = this.onSecondCityChange.bind(this);\n        this.ChangeMail = this.ChangeMail.bind(this);\n    }\n\n    ChangeMail(value) {\n        let options;\n        if (!value || value.indexOf('@') >= 0) {\n            options = [];\n        } else {\n            options = ['gmail.com', '163.com', 'qq.com'].map((domain) => {\n                const email = `${value}@${domain}`;\n                return <Option key={email}>{email}</Option>;\n            });\n        }\n        this.setState({options});\n    }\n\n    ChangeSex(value) {\n        this.setState({selectedSex: value});\n    }\n\n    handleProvinceChange(value) {\n        this.setState({\n            cities: cityData[value],\n            secondCity: cityData[value][0]\n        });\n    }\n\n    onSecondCityChange(value) {\n        this.setState({\n            secondCity: value\n        });\n    }\n\n    render() {\n        const provinceOptions = provinceData.map(province => <Option key={province}>{province}</Option>);\n        const cityOptions = this.state.cities.map(city => <Option key={city}>{city}</Option>);\n        return (\n            <Form horizontal>\n                <Row>\n                    <FormGroup>\n                        <Col md={2} className=\"text-right\">\n                            <Label>姓名:</Label>\n                        </Col>\n                        <Col md={5}>\n                            <FormControl placeholder=\"Jane Doe\"/>\n                        </Col>\n                    </FormGroup>\n                </Row>\n                <Row>\n                    <FormGroup>\n                        <Col md={2} className=\"text-right\">\n                            <Label>姓别:</Label>\n                        </Col>\n                        <Col md={5}>\n                            <Radio.RadioGroup\n                                name=\"sex\"\n                                selectedValue={this.state.selectedSex}\n                                onChange={this.ChangeSex.bind(this)}>\n                                <Radio colors=\"dark\" value=\"female\">female</Radio>\n                                <Radio colors=\"dark\" value=\"male\">male</Radio>\n                            </Radio.RadioGroup>\n                        </Col>\n                    </FormGroup>\n                </Row>\n                <Row>\n                    <FormGroup>\n                        <Col md={2} className=\"text-right\">\n                            <Label>首付款:</Label>\n                        </Col>\n                        <Col md={5}>\n                            <InputGroup>\n                                <InputGroup.Addon>￥</InputGroup.Addon>\n                                <FormControl type=\"text\"/>\n                                <InputGroup.Addon>.00</InputGroup.Addon>\n                            </InputGroup>\n                        </Col>\n                    </FormGroup>\n                </Row>\n                <Row>\n                    <FormGroup>\n                        <Col md={2} className=\"text-right\">\n                            <Label>住址:</Label>\n                        </Col>\n                        <Col md={5}>\n                            <Select defaultValue={provinceData[0]} style={{ width: 90 }}\n                                    onChange={this.handleProvinceChange}>\n                                {provinceOptions}\n                            </Select>\n                            <Select value={this.state.secondCity} style={{ width: 90 }}\n                                    onChange={this.onSecondCityChange}>\n                                {cityOptions}\n                            </Select>\n                        </Col>\n                    </FormGroup>\n                </Row>\n                <Row>\n                    <FormGroup>\n                        <Col md={2} className=\"text-right\">\n                            <Label>标签:</Label>\n                        </Col>\n                        <Col md={5}>\n                            <InputGroup>\n                                <InputGroup.Addon style={{paddingBottom: 0}}><Checkbox style={{marginTop:4}}></Checkbox></InputGroup.Addon>\n                                <FormControl type=\"text\"/>\n                                <InputGroup.Addon>.00</InputGroup.Addon>\n                            </InputGroup>\n                        </Col>\n                    </FormGroup>\n                </Row>\n                <Row>\n                    <FormGroup>\n                        <Col md={2} className=\"text-right\">\n                            <Label>邮件:</Label>\n                        </Col>\n                        <Col md={5}>\n                            <Select combobox\n                                    onChange={this.ChangeMail}\n                                    filterOption={false}\n                                    placeholder=\"Enter the account name\"\n                                >\n                                {this.state.options}\n                            </Select>\n                        </Col>\n                    </FormGroup>\n                </Row>\n               \n            </Form>\n        )\n    }\n}\n","desc":" 以下例子是个表单集合，将常用的表单元素集合起来放到Form里面。"}]
 
 
 class Demo extends Component {

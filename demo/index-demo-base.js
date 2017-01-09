@@ -5,19 +5,18 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import Form from '../src';
 import FormGroup from 'bee-form-group';
-import ControlLabel from 'bee-control-label';
+import Label from 'bee-label';
 import Button from 'bee-button';
 import FormControl from 'bee-form-control';
 import InputGroup from 'bee-input-group';
-import RadioGroup from 'bee-radio-group';
+import Radio from 'bee-radio';
 import Select from 'bee-select';
 import Checkbox from 'bee-checkbox';
 import Icon from 'bee-icon';
-import Upload from 'bee-upload'
 
-const CARET = <i className="uf uf-chevronarrowdown"></i>;
+const CARET = <i className="uf uf-arrow-down"></i>;
 
-const CARETUP = <i className="uf uf-chevronarrowup"></i>;
+const CARETUP = <i className="uf uf-arrow-up"></i>;
 
 
 {demolist}
