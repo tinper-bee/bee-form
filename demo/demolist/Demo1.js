@@ -2,6 +2,20 @@
  * @title 表单Form
  * @description 以下例子是个表单集合，将常用的表单元素集合起来放到Form里面。
  */
+
+import React, { Component } from 'react';
+import FormGroup from 'bee-form-group';
+import { Row, Col } from 'bee-layout';
+import Label from 'bee-label';
+import Button from 'bee-button';
+import FormControl from 'bee-form-control';
+import InputGroup from 'bee-input-group';
+import Radio from 'bee-radio';
+import Select from 'bee-select';
+import Checkbox from 'bee-checkbox';
+import Icon from 'bee-icon';
+import Form from '../../src';
+
 const provinceData = ['Zhejiang', 'Jiangsu'];
 const cityData = {
     Zhejiang: ['Hangzhou', 'Ningbo', 'Wenzhou'],
@@ -27,7 +41,7 @@ const uploadprops = {
         url: 'http://www.baidu.com/yyy.png'
     }]
 };
-class Demo1 extends Component {
+export default class Demo1 extends Component {
     constructor(props) {
         super(props);
         this.state = {
