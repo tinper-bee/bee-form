@@ -7185,6 +7185,9 @@ a, .mdl-accordion, .mdl-button, .mdl-card, .mdl-checkbox, .mdl-dropdown-menu,
     margin-bottom: 0;
     padding-top: 7px; } }
 
+.u-label {
+  line-height: 30px; }
+
 /*  IMAGES  */
 /* 默认颜色 */
 /* 客户化 */
@@ -12221,8 +12224,5 @@ ul {
   to {
     margin-top: -25px;
     opacity: 0; } }
-
-.u-label {
-  line-height: 30px; }
 
 /*# sourceMappingURL=demo.css.map */

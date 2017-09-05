@@ -641,3 +641,6 @@
     text-align: right;
     margin-bottom: 0;
     padding-top: 7px; } }
+
+.u-label {
+  line-height: 30px; }
