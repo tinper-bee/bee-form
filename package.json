@@ -40,17 +40,21 @@
     "bee-icon": "latest",
     "bee-input-group": "latest",
     "bee-label": "latest",
-    "bee-radio": "^0.1.4",
+    "bee-radio": "latest",
     "bee-select": "latest",
     "classnames": "^2.2.5",
-    "tinper-bee-core": "latest"
+    "tinper-bee-core": "latest",
+    "bee-upload":"latest"
+  },
+  "peerDependencies": {
+    "react": "^15.3.0 || ^16.0",
+    "react-dom": "^15.3.0 || ^16.0",
+    "prop-types": "15.6.0"
   },
   "devDependencies": {
     "chai": "^3.5.0",
     "enzyme": "^2.4.1",
-    "react": "15.3.2",
     "react-addons-test-utils": "15.3.2",
-    "react-dom": "15.3.2",
     "console-polyfill": "~0.2.1",
     "es5-shim": "~4.1.10",
     "bee-panel": "latest",
