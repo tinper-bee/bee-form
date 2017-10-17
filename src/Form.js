@@ -1,4 +1,5 @@
 import classNames from 'classnames';
+<<<<<<< HEAD
 import React, { Component } from 'react';
 import FormGroup from 'bee-form-group';
 import { Row, Col } from 'bee-layout';
@@ -10,6 +11,11 @@ import Icon from 'bee-icon';
 import PropTypes from 'prop-types';
 import DatePicker from 'bee-datepicker';
 import CitySelect from 'bee-city-select';
+=======
+import React , {  Component }  from 'react';
+import PropTypes from 'prop-types';
+
+>>>>>>> 24e2a0579b465b5c4f8961bfc274c915220aaef1
 const propTypes = {
   horizontal: PropTypes.bool,
   inline: PropTypes.bool,
