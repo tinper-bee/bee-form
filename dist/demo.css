@@ -7662,12 +7662,6 @@ ul {
 .u-progress-bar.active, .u-progress.active .u-progress-bar {
   animation: progress-bar-stripes 2s linear infinite; }
 
-@-webkit-key-keyframes progress-bar-stripes {
-  0% {
-    background-position: 40px 0; }
-  to {
-    background-position: 0 0; } }
-
 @keyframes progress-bar-stripes {
   0% {
     background-position: 40px 0; }
