@@ -1,21 +1,16 @@
-import classNames from 'classnames';
-<<<<<<< HEAD
 import React, { Component } from 'react';
 import FormGroup from 'bee-form-group';
 import { Row, Col } from 'bee-layout';
 import Button from 'bee-button';
 import Radio from 'bee-radio';
 import Select from 'bee-select';
+import classNames from 'classnames';
 import Checkbox from 'bee-checkbox';
 import Icon from 'bee-icon';
 import PropTypes from 'prop-types';
 import DatePicker from 'bee-datepicker';
 import CitySelect from 'bee-city-select';
-=======
-import React , {  Component }  from 'react';
-import PropTypes from 'prop-types';
 
->>>>>>> 24e2a0579b465b5c4f8961bfc274c915220aaef1
 const propTypes = {
   horizontal: PropTypes.bool,
   inline: PropTypes.bool,
@@ -97,7 +92,7 @@ class FormItem extends React.Component {
   }
   // 正则判断
   regTest = (tag, value) => {
-    console.log(tag,value);
+    console.log(tag, value);
     let data = tag.props,
       type = data.regtype,
       val = value.trim(),
@@ -219,7 +214,7 @@ class FormItem extends React.Component {
 
   }
   // 获取生日
-  handleGetDate=(e)=>{
+  handleGetDate = (e) => {
     console.log(e);
   }
   // 判断显示元素
