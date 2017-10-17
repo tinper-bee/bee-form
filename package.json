@@ -35,13 +35,16 @@
   "dependencies": {
     "bee-button": "latest",
     "bee-checkbox": "latest",
-    "bee-form-control": "latest",
+    "bee-city-select": "0.0.4",
+    "bee-datepicker": "^0.1.7",
+    "bee-form-control": "file:///Users/brucefang/work_hongyan/yonyou/tinper/bee-form-control",
     "bee-form-group": "latest",
     "bee-icon": "latest",
     "bee-input-group": "latest",
     "bee-label": "latest",
-    "bee-radio": "^0.1.4",
+    "bee-radio": "^0.1.10",
     "bee-select": "latest",
+    "bee-upload": "^0.1.5",
     "classnames": "^2.2.5",
     "tinper-bee-core": "latest"
   },

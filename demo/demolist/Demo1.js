@@ -15,7 +15,6 @@ import Select from 'bee-select';
 import Checkbox from 'bee-checkbox';
 import Icon from 'bee-icon';
 import Form from '../../src';
-
 const provinceData = ['Zhejiang', 'Jiangsu'];
 const cityData = {
     Zhejiang: ['Hangzhou', 'Ningbo', 'Wenzhou'],
@@ -25,8 +24,6 @@ const uploadprops = {
     action: '/upload.do',
     onChange(info) {
         if (info.file.status !== 'uploading') {
-            console.log(info.file);
-            console.log(info.fileList);
         }
     },
     defaultFileList: [{
@@ -48,7 +45,8 @@ export default class Demo1 extends Component {
             options: [],
             selectedSex: 'female',
             cities: cityData[provinceData[0]],
-            secondCity: cityData[provinceData[0]][0]
+            secondCity: cityData[provinceData[0]][0],
+           
         };
         this.handleProvinceChange = this.handleProvinceChange.bind(this);
         this.onSecondCityChange = this.onSecondCityChange.bind(this);
@@ -84,23 +82,13 @@ export default class Demo1 extends Component {
             secondCity: value
         });
     }
-
     render() {
         const provinceOptions = provinceData.map(province => <Option key={province}>{province}</Option>);
         const cityOptions = this.state.cities.map(city => <Option key={city}>{city}</Option>);
         return (
-            <Form horizontal>
-                <Row>
-                    <FormGroup>
-                        <Col md={2} sm={2} className="text-right">
-                            <Label>姓名:</Label>
-                        </Col>
-                        <Col md={5} sm={6}>
-                            <FormControl placeholder="Jane Doe"/>
-                        </Col>
-                    </FormGroup>
-                </Row>
-                <Row>
+            <Form horizontal data-type="all"> 
+             
+                {/*<Row>
                     <FormGroup>
                         <Col md={2} sm={2} className="text-right">
                             <Label>姓别:</Label>
@@ -176,7 +164,7 @@ export default class Demo1 extends Component {
                             </Select>
                         </Col>
                     </FormGroup>
-                </Row>
+                </Row>*/}
                
             </Form>
         )
