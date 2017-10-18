@@ -19,6 +19,21 @@ const propTypes = {
     PropTypes.string
   ]),
 };
+Date.prototype.Format = function (fmt) { //author: meizz 
+  var o = {
+    "M+": this.getMonth() + 1, //月份 
+    "d+": this.getDate(), //日 
+    "h+": this.getHours(), //小时 
+    "m+": this.getMinutes(), //分 
+    "s+": this.getSeconds(), //秒 
+    "q+": Math.floor((this.getMonth() + 3) / 3), //季度 
+    "S": this.getMilliseconds() //毫秒 
+  };
+  if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+  for (var k in o)
+    if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+  return fmt;
+}
 const ALLREG = {
   emailReg: /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/,
   telReg: /^1[3|4|5|7|8]\d{9}$/,
@@ -30,8 +45,8 @@ const ALLREG = {
   codeReg: /^\d{4}/,
   emailCodeReg: /^\d{6}$/,
   birthdayReg: /^(?:(?!0000)[0-9]{4}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-8])|(?:0[13-9]|1[0-2])-(?:29|30)|(?:0[13578]|1[02])-31)|(?:[0-9]{2}(?:0[48]|[2468][048]|[13579][26])|(?:0[48]|[2468][048]|[13579][26])00)-02-29)$/,
-  cityInfoReg: /^\w\W$/,
-  sexReg: /^orange||apple$/,
+  cityInfoReg: /^[\w\W]+$/,
+  sexReg: /^[a-zA-Z]+$/,
 };
 const defaultProps = {
   horizontal: false,
@@ -91,8 +106,8 @@ class FormItem extends React.Component {
     })
   }
   // 正则判断
+  // ？tips 提出
   regTest = (tag, value) => {
-    console.log(tag, value);
     let data = tag.props,
       type = data.regtype,
       val = value.trim(),
@@ -141,8 +156,12 @@ class FormItem extends React.Component {
         reg = 'nickNameReg';
         tips = '昵称';
         break;
+      case 'city':
+        reg = 'cityInfoReg';
+        tips = '详情地址'
+        break;
     }
-    keyval[reg] = val;
+    keyval[reg] = val, keyval['must'] = must;
     if (!must) {
       return (keyval);
     }
@@ -156,6 +175,10 @@ class FormItem extends React.Component {
       }, () => {
         return false;
       })
+      // this.state.iserror = '不能为空';
+      // this.setState({
+      //    ...tis.state
+      // })
     } else {
       this.setState({
         iserror: tips + '输入错误'
@@ -193,7 +216,11 @@ class FormItem extends React.Component {
   }
   // 性别切换
   sexChange = (e) => {
-    this.setState({ tagValue: e });
+    this.setState({
+      tagValue: e,
+      iserror: '',
+      isnull: ''
+    });
   }
   // 显示密码
   showPassWord = (e) => {
@@ -211,11 +238,18 @@ class FormItem extends React.Component {
       })
       password.setAttribute('type', 'text');
     }
-
   }
   // 获取生日
   handleGetDate = (e) => {
-    console.log(e);
+
+    this.setState({
+      tagValue: e._d.Format("yyyy-MM-dd"),//？需要修改转换时间格式方法。
+      iserror: '',
+      isnull: ''
+    });
+  }
+  select=()=>{
+
   }
   // 判断显示元素
   renderDom = (type) => {
@@ -243,8 +277,9 @@ class FormItem extends React.Component {
         </div>)
         break;
       case 'city':
+      //？使用 classnames 操作 classname
         return (<div>
-          <CitySelect className="u-form-city" />
+          <CitySelect className="u-form-city" onChange={this.select}/>
           <input className={'u-form-input u-form-info ' + classname} placeholder={data.placeholder} type="text" />
         </div>);
         break;
@@ -268,13 +303,16 @@ class FormItem extends React.Component {
   render() {
     let data = this.props,
       istype = data.regtype,
-      dom = this.renderDom(istype);
+      dom = this.renderDom(istype),
+      error = this.state.iserror;
     return (
       <div >
         <div className="u-form-input-parent">
           <span className="u-form-name">{data.title ? data.title : ''}</span>
           {dom}
-          {this.state.iserror ? <div className="u-form-error shake animated">{this.state.iserror}</div> : ''}
+          {error ?
+            <div className="u-form-error shake animated">{error}</div>
+            : ''}
           <i className="u-form-oh"></i>
         </div>
       </div>

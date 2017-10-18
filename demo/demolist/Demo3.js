@@ -39,7 +39,6 @@ export default class Demo2 extends Component {
                 <h1 className="u-form-title">用户登录</h1>
                 <FormItem regtype="phone" placeholder="请输入手机号" ref={(input) => { this.phone = input }} type="number" must={true} title="手机号" />
                 <FormItem regtype="pass" placeholder="请输入密码" ref={(input) => { this.pass = input }} type="password" must={true} title="密码" />
-                {/*<FormItem regtype="pass" placeholder="确认密码" ref={(input) => { this.pass = input }} type="password" must={true} title="确认密码" />*/}
                 <Button size="lg" onClick={this.handleSubmit} colors="primary">登录</Button>
             </Form>
         )
