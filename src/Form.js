@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import FormGroup from 'bee-form-group';
 import { Row, Col } from 'bee-layout';
 import Button from 'bee-button';
@@ -7,7 +8,6 @@ import Select from 'bee-select';
 import classNames from 'classnames';
 import Checkbox from 'bee-checkbox';
 import Icon from 'bee-icon';
-import PropTypes from 'prop-types';
 import DatePicker from 'bee-datepicker';
 import CitySelect from 'bee-city-select';
 
