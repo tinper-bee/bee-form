@@ -1,24 +1,25 @@
 /* FormGroup */
 /*  Navlayout  */
-@media (min-width: 768px) {
-  .u-form-inline .u-form-group {
-    display: inline-block;
-    margin-bottom: 0;
-    vertical-align: middle;
-    margin: 2px; }
-  .u-form-inline .u-form-control {
-    display: inline-block;
-    width: auto;
-    vertical-align: middle; }
-  .u-form-inline .u-control-label {
-    margin-bottom: 0;
-    vertical-align: middle; } }
+.u-form .u-form-item {
+  padding-top: 5px;
+  padding-bottom: 5px; }
 
-@media (min-width: 768px) {
-  .u-form-horizontal .u-control-label {
-    text-align: right;
-    margin-bottom: 0;
-    padding-top: 7px; } }
+.u-form-error {
+  display: none;
+  border: 1px solid #F22C1D;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  background: #FFEBEE;
+  color: #F22C1D;
+  padding-left: 12px;
+  padding-right: 12px; }
 
-.u-label {
-  line-height: 30px; }
+.u-form-inline {
+  display: inline-block; }
+
+.u-form-error.u-form-error-inline.show {
+  display: inline-block !important;
+  margin-left: 10px; }
+
+.u-form .u-form-submit {
+  margin-top: 10px; }
