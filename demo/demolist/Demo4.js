@@ -1,7 +1,7 @@
 /**
  *
- * @title 单个input校验
- * @description 使用FormItem
+ * @title 表单校验
+ * @description input和select
  *
  */
 import React ,{Component } from 'react';

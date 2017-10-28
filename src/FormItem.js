@@ -163,8 +163,7 @@ class FormItem extends Component {
                     React.cloneElement(children,{
                         onBlur: this.handleBlur,
                         onChange: this.handleChange,
-                        ref:'input',
-                        domValue:children.props.defaultValue||''
+                        ref:'input'
                     })
                 }
                 <div className={classnames(clsErrObj)}>

@@ -207,8 +207,7 @@ var FormItem = function (_Component) {
             _react2["default"].cloneElement(children, {
                 onBlur: this.handleBlur,
                 onChange: this.handleChange,
-                ref: 'input',
-                domValue: children.props.defaultValue || ''
+                ref: 'input'
             }),
             _react2["default"].createElement(
                 'div',
