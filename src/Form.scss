@@ -1,118 +1,29 @@
 @import "../node_modules/tinper-bee-core/scss/minxin-variables";
 @import "../node_modules/tinper-bee-core/scss/minxin-mixins";
-@import "../node_modules/bee-datepicker/src/DatePicker.scss";
+.u-form{
 
-.u-form-modul{
-    width: 390px;padding: 32px;overflow: hidden;margin: 0 auto;border-radius: 4px;border: 1px solid #ccc;
-	.u-form-title{
-			width: 100%;font-size: 16px;font-weight: bold;margin: 0px  0 30px 0; 
-	}
-	.u-form-input-parent{
-		margin-bottom: 30px;position:relative;
-		.u-form-pass{
-			position: relative;
-			.u-form-show{
-				position: absolute;right: 10px;top: 0;line-height: 30px;
-			}
-		}
-		.u-form-oh{
-			display: block;clear: both;
-		}
-		.u-form-input{
-			height: 30px;width: 77%;border-radius: 4px;border: 1px solid #ccc;padding: 0 10px;float: left;
-		}
-		
-		.u-select{
-			width: 25%;margin-left: 2px;
-		}
-		.u-form-info{
-			float: right;margin-top: 20px;
-		}
-		.u-form-sex{
-			line-height: 30px;
-			label{
-				margin-right: 15px;
-				input{
-					margin-right: 12px;
-				}
-			}
-		}
-		.u-form-name{
-			width: 23%;text-align: left;font-size: 16px;float: left;line-height: 30px;
-		}
-		.u-form-error{
-			display: block;height: 20px;right: 0;top: 34px;border: 1px solid #f44336;background-color: rgba(255,235,238,1);color: #f44336;position: absolute;width: 77%;line-height: 20px;padding: 0 10px;font-size: 12px;
-		}
-		@-webkit-keyframes shake {
-			0%,to {
-				-webkit-transform: translateZ(0);
-				transform: translateZ(0)
-			}
-			10%,30%,50%,70%,90% {
-				-webkit-transform: translate3d(-5px,0,0);
-				transform: translate3d(-5px,0,0)
-			}
-			20%,40%,60%,80% {
-				-webkit-transform: translate3d(5px,0,0);
-				transform: translate3d(5px,0,0)
-			}
-		}
-		@keyframes shake {
-			0%,to {
-				-webkit-transform: translateZ(0);
-				transform: translateZ(0)
-			}
-			10%,30%,50%,70%,90% {
-				-webkit-transform: translate3d(-5px,0,0);
-				transform: translate3d(-5px,0,0)
-			}
-			20%,40%,60%,80% {
-				-webkit-transform: translate3d(5px,0,0);
-				transform: translate3d(5px,0,0)
-			}
-		}
-		.shake {
-			-webkit-animation-name: shake;
-			animation-name: shake
-		}
-		.animated {
-			-webkit-animation-duration: .5s;
-			animation-duration: .5s;
-			-webkit-animation-fill-mode: both;
-			animation-fill-mode: both
-		}
-	}
 }
-@media (min-width: 768px){
-	.u-form-inline {
-		.u-form-group {
-		    display: inline-block;
-		    margin-bottom: 0;
-		    vertical-align: middle;
-		    margin: 2px;
-		}
-		.u-form-control {
-		    display: inline-block;
-		    width: auto;
-		    vertical-align: middle;
-		}
-		.u-control-label {
-		    margin-bottom: 0;
-		    vertical-align: middle;
-		}
-	} 
+.u-form .u-form-item{
+  padding-top: 5px;
+  padding-bottom: 5px;
 }
-
-@media (min-width: 768px){
-	.u-form-horizontal {
-		.u-control-label {
-		    text-align: right;
-		    margin-bottom: 0;
-		    padding-top: 7px;
-		}
-	}
+.u-form-error{
+  display: none;
+  border: 1px solid #F22C1D;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  background: #FFEBEE;
+  color: #F22C1D;
+  padding-left: 12px;
+  padding-right: 12px;
 }
-
-.u-label {
-	line-height: 30px;
+.u-form-inline{
+  display: inline-block;
+}
+.u-form-error.u-form-error-inline.show{
+  display: inline-block!important;
+  margin-left: 10px;
+}
+.u-form .u-form-submit{
+  margin-top: 10px;
 }

@@ -9,19 +9,19 @@
 [![Percentage of issues still open](http://isitmaintained.com/badge/open/tinper-bee/bee-form.svg)](http://isitmaintained.com/project/tinper-bee/bee-form "Percentage of issues still open")
 
 
+
 react bee-form component for tinper-bee
 
-some description...
-
-## 依赖
+## Rely
 
 - react >= 15.3.0
 - react-dom >= 15.3.0
 - prop-types >= 15.6.0
 
-## 使用方法
+## Usage
 
 ```js
+
 
 ```
 
@@ -32,7 +32,7 @@ some description...
 |参数|说明|类型|默认值|
 |:--|:---:|:--:|---:|
 
-#### 开发调试
+#### develop
 
 ```sh
 $ npm install -g bee-tools

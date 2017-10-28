@@ -1,18 +1,11 @@
 
 import { Con, Row, Col } from 'bee-layout';
 import { Panel } from 'bee-panel';
+import Button from 'bee-button';
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import Form from '../src';
-import FormGroup from 'bee-form-group';
-import Label from 'bee-label';
-import Button from 'bee-button';
-import FormControl from 'bee-form-control';
-import InputGroup from 'bee-input-group';
-import Radio from 'bee-radio';
-import Select from 'bee-select';
-import Checkbox from 'bee-checkbox';
-import Icon from 'bee-icon';
+
 
 const CARET = <i className="uf uf-arrow-down"></i>;
 
@@ -45,10 +38,10 @@ class Demo extends Component {
             </Button>
         );
         return (
-            <Col md={12}>
+            <Col md={12} >
                 <h3>{ title }</h3>
                 <p>{ desc }</p>
-                <Panel collapsible expanded={ this.state.open } colors='bordered' header={ example } footer={footer} footerStyle = {{padding: 0,borderColor: "transparent"}} >
+                <Panel collapsible headerContent expanded={ this.state.open } colors='bordered' header={ example } footer={footer} footerStyle = {{padding: 0}}>
                     <pre><code className="hljs javascript">{ code }</code></pre>
                 </Panel>
             </Col>
