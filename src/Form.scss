@@ -1,11 +1,16 @@
 @import "../node_modules/tinper-bee-core/scss/minxin-variables";
 @import "../node_modules/tinper-bee-core/scss/minxin-mixins";
-.u-form{
-
+.u-form .u-form-group{
+  margin-top: 0;
+  margin-bottom: 0;
 }
-.u-form .u-form-item{
+.u-form-item{
   padding-top: 5px;
   padding-bottom: 5px;
+  height: 64px;
+}
+.u-form .u-form-item.u-form-inline{
+  height: auto;
 }
 .u-form-error{
   display: none;
@@ -23,7 +28,17 @@
 .u-form-error.u-form-error-inline.show{
   display: inline-block!important;
   margin-left: 10px;
+  margin-top: 0;
+  margin-bottom: 0;
 }
 .u-form .u-form-submit{
   margin-top: 10px;
+}
+.u-form-item .u-input-group{
+  width:100%;
+}
+.u-form .u-form-item.u-form-inline .u-input-group{
+  display: inline-block;
+  vertical-align: middle;
+  width: auto;
 }

@@ -3,12 +3,10 @@ import PropTypes from 'prop-types';
 import Button from 'bee-button';
 import FormGroup from 'bee-form-group';
 import Label from 'bee-label';
-import classnames from 'classnames';
 const propTypes = {
     clsPrefix:PropTypes.string,
     className:PropTypes.string,
-    submitError:PropTypes.func,//form验证失败的回调
-    submitSuccess:PropTypes.func,//form验证成功的回调
+    submitCallBack:PropTypes.func,//form验证的回调
     submitAreaClassName:PropTypes.string,//提交区域className
     submitBtnClassName:PropTypes.string,//提交按钮className
     beforeSubmitBtn:PropTypes.element,//提交按钮之前的dom
@@ -17,8 +15,7 @@ const propTypes = {
 const defaultProps = {
     clsPrefix:'u-form',
     className:'',
-    submitError:()=>{},//form验证失败的回调
-    submitSuccess:()=>{},//form验证成功的回调
+    submitCallBack:()=>{},//form验证失败的回调
     submitAreaClassName:'',
     submitBtnClassName:'',
     beforeSubmitBtn:'',
@@ -72,7 +69,6 @@ class Form extends Component {
                 });
             }
         }
-
         this.setState({
             items:items
         });
@@ -89,26 +85,19 @@ class Form extends Component {
                 flag=false;
             }
         });
-        if(flag){
-            this.setState({
-                checkNow:false
-            });
-            this.props.submitSuccess(this.state.items);
-        }else{
-            this.setState({
-                checkNow:false
-            });
-            this.props.submitError(this.state.items);
-        }
+        this.setState({
+            checkNow:false
+        });
+        this.props.submitCallBack(flag,this.state.items);
     }
 
     render() {
+        const {className,submitAreaClassName,submitBtnClassName,beforeSubmitBtn,afterSubmitBtn,clsPrefix}=this.props;
         let childs=[];
-        React.Children.map(this.props.children,child=>{
+        React.Children.map(this.props.children,(child,index)=>{
             if(child.props.isFormItem){
-                childs.push(<FormGroup>
+                childs.push(<FormGroup key={index}>
                     <Label>{child.props.labelName}</Label>
-                    {child.props.inputAfore}
                     {
                         React.cloneElement(child,
                             {
@@ -116,20 +105,18 @@ class Form extends Component {
                                 checkNow:this.state.checkNow
                             })
                     }
-                    {child.props.inputBefore}
                 </FormGroup>);
 
             }else{
                 childs.push(React.cloneElement(child));
             }
         })
-        const {className,submitAreaClassName,submitBtnClassName,beforeSubmitBtn,afterSubmitBtn,clsPrefix}=this.props;
         return (
-            <form className={clsPrefix+' '+className} onSubmit={this.checkNow}>
+            <form className={`${clsPrefix} ${className}`} onSubmit={this.checkNow}>
                 {childs}
-                <div className={clsPrefix+'-submit '+submitAreaClassName}>
+                <div className={`${clsPrefix}-submit ${submitAreaClassName}`}>
                     {beforeSubmitBtn}
-                    <Button onClick={this.checkNow} colors="primary" className={clsPrefix+'-submit-btn '+submitBtnClassName}>提交</Button>
+                    <Button onClick={this.checkNow} colors="primary" className={`${clsPrefix}-submit-btn ${submitBtnClassName}`}>提交</Button>
                     {afterSubmitBtn}
                 </div>
             </form>

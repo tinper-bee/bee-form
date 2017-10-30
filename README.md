@@ -22,38 +22,29 @@ react bee-form component for tinper-bee
 ## 使用方法
 
 ```
+/**
+ *
+ * @title 基本form校验
+ * @description 块级布局
+ */
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import Form from '../../src/Form';
 const FormItem = Form.FormItem;
 import FormControl from 'bee-form-control';
-import Label from 'bee-label';
-import FormGroup from 'bee-form-group';
 class Demo1 extends Component {
-    FormError = (obj) => {
-        console.log('error');
-        console.log(obj);
-    }
-    FormSuccess = (obj) => {
-        console.log('success');
-        console.log(obj);
-    }
-    checkSuccess = (obj) => {
-        console.log('item success');
-        console.log(obj);
-    }
-    checkError = (obj) => {
-        console.log('item error');
+    checkForm = (flag,obj) => {
+        console.log(flag);
         console.log(obj);
     }
     render() {
         return (
-            <Form  submitError={this.FormError} submitSuccess={this.FormSuccess} checkError={this.checkError}>
-                <FormItem isRequire={true} labelName="姓名" htmlType="name" errorMessage="姓名格式错误" method="blur" checkSuccess={this.checkSuccess}>
-                    <FormControl name="name"/>
+            <Form  submitCallBack={this.checkForm}  >
+                <FormItem  isRequire={true} labelName="姓名" htmlType="chinese" errorMessage="姓名格式错误" method="blur" >
+                    <FormControl name="name" placeholder="只能输入中文"/>
                 </FormItem>
                 <FormItem isRequire={true} labelName="年龄" method="blur" reg={/^[0-9]+$/} errorMessage="年龄格式错误" >
-                    <FormControl name="age" ref="input" />
+                    <FormControl name="age"  />
                 </FormItem>
             </Form>
         )
@@ -85,16 +76,21 @@ export default Demo1;
 |:---|:-----|:----|:------|
 |isRequire|是否必填|bool|false|
 |errorMessage|错误提示信息|string|校验失败|
-|htmlType|数值类型，目前支持 email/tel/IDCard/name/password'类型|string|-|
+|htmlType|数值类型，目前支持 email/tel/IDCard/chinese/password'类型|string|-|
 |reg|校验正则，注：设置 htmlType 后 reg 无效|regExp|-|
 |method|何时校验 change/blur|string|-|
 |blur|失去焦点的回调函数|function|-|
 |change|改变值的回调函数|function|-|
-|checkSuccess|验证成功的回调函数|function|-|
-|checkError|验证失败的回调函数|function|-|
+|check|验证的回调函数，参数两个，第一个为校验是否成功`true/false` 第二个为验证结果对象`{name: "", verify: false, value: ""}`|function|-|
 |inline|是否行内显示|bool|false|
 |labelName|输入框label标签内容|string|-|
+|mesClassName|校验错误信息的class|string|-|
+|inputBefore|input前缀|dom/string|-|
+|inputBefore|input后缀|dom/string|-|
 
+### 注意
+- `FormItem`的子元素，`name`必须存在
+- 组件初期，`FormItem`子元素只能存在一个,可以使用 `FormControl` 或者 `Select`
 
 #### 开发调试
 
