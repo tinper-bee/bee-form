@@ -24,10 +24,6 @@ var _beeLabel = require('bee-label');
 
 var _beeLabel2 = _interopRequireDefault(_beeLabel);
 
-var _classnames = require('classnames');
-
-var _classnames2 = _interopRequireDefault(_classnames);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
@@ -41,8 +37,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var propTypes = {
     clsPrefix: _propTypes2["default"].string,
     className: _propTypes2["default"].string,
-    submitError: _propTypes2["default"].func, //form验证失败的回调
-    submitSuccess: _propTypes2["default"].func, //form验证成功的回调
+    submitCallBack: _propTypes2["default"].func, //form验证的回调
     submitAreaClassName: _propTypes2["default"].string, //提交区域className
     submitBtnClassName: _propTypes2["default"].string, //提交按钮className
     beforeSubmitBtn: _propTypes2["default"].element, //提交按钮之前的dom
@@ -51,8 +46,7 @@ var propTypes = {
 var defaultProps = {
     clsPrefix: 'u-form',
     className: '',
-    submitError: function submitError() {}, //form验证失败的回调
-    submitSuccess: function submitSuccess() {}, //form验证成功的回调
+    submitCallBack: function submitCallBack() {}, //form验证失败的回调
     submitAreaClassName: '',
     submitBtnClassName: '',
     beforeSubmitBtn: '',
@@ -105,7 +99,6 @@ var Form = function (_Component) {
                     });
                 }
             }
-
             _this.setState({
                 items: items
             });
@@ -124,17 +117,10 @@ var Form = function (_Component) {
                     flag = false;
                 }
             });
-            if (flag) {
-                _this.setState({
-                    checkNow: false
-                });
-                _this.props.submitSuccess(_this.state.items);
-            } else {
-                _this.setState({
-                    checkNow: false
-                });
-                _this.props.submitError(_this.state.items);
-            }
+            _this.setState({
+                checkNow: false
+            });
+            _this.props.submitCallBack(flag, _this.state.items);
         };
 
         _this.state = {
@@ -151,28 +137,6 @@ var Form = function (_Component) {
     Form.prototype.render = function render() {
         var _this2 = this;
 
-        var childs = [];
-        _react2["default"].Children.map(this.props.children, function (child) {
-            if (child.props.isFormItem) {
-                childs.push(_react2["default"].createElement(
-                    _beeFormGroup2["default"],
-                    null,
-                    _react2["default"].createElement(
-                        _beeLabel2["default"],
-                        null,
-                        child.props.labelName
-                    ),
-                    child.props.inputAfore,
-                    _react2["default"].cloneElement(child, {
-                        checkItem: _this2.checkItem,
-                        checkNow: _this2.state.checkNow
-                    }),
-                    child.props.inputBefore
-                ));
-            } else {
-                childs.push(_react2["default"].cloneElement(child));
-            }
-        });
         var _props = this.props,
             className = _props.className,
             submitAreaClassName = _props.submitAreaClassName,
@@ -181,6 +145,26 @@ var Form = function (_Component) {
             afterSubmitBtn = _props.afterSubmitBtn,
             clsPrefix = _props.clsPrefix;
 
+        var childs = [];
+        _react2["default"].Children.map(this.props.children, function (child, index) {
+            if (child.props.isFormItem) {
+                childs.push(_react2["default"].createElement(
+                    _beeFormGroup2["default"],
+                    { key: index },
+                    _react2["default"].createElement(
+                        _beeLabel2["default"],
+                        null,
+                        child.props.labelName
+                    ),
+                    _react2["default"].cloneElement(child, {
+                        checkItem: _this2.checkItem,
+                        checkNow: _this2.state.checkNow
+                    })
+                ));
+            } else {
+                childs.push(_react2["default"].cloneElement(child));
+            }
+        });
         return _react2["default"].createElement(
             'form',
             { className: clsPrefix + ' ' + className, onSubmit: this.checkNow },
