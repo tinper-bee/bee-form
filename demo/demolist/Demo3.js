@@ -32,8 +32,8 @@ class Demo3 extends Component {
 
     render() {
         return (
-            <Form submitError={this.FormError} submitSuccess={this.FormSuccess} checkError={this.checkError}>
-                    <FormItem labelName="姓名" isRequire={true} htmlType="name" errorMessage="姓名格式错误" method="blur" checkSuccess={this.checkSuccess} inline={true}>
+            <Form submitError={this.FormError} submitSuccess={this.FormSuccess} >
+                    <FormItem labelName="姓名" isRequire={true} htmlType="name" errorMessage="姓名格式错误" method="blur" checkSuccess={this.checkSuccess} checkError={this.checkError} inline={true}>
                         <FormControl name="name"/>
                     </FormItem>
                     <FormItem labelName="年龄" isRequire={true} method="blur" errorMessage="年龄格式错误" reg={/^[0-9]+$/} inline={true}>
