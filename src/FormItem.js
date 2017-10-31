@@ -14,7 +14,7 @@ const propTypes = {
     clsPrefix:PropTypes.string,
     className:PropTypes.string,
     isRequire:PropTypes.bool,//是否必填
-    errorMessage:PropTypes.string,//错误信息
+    errorMessage:PropTypes.element,//错误信息
     htmlType:PropTypes.oneOf(['email','tel','IDCard','name','password',null]),//htmlType有值的时候 reg不生效
     reg:PropTypes.instanceOf(RegExp),//校验正则
     method:PropTypes.oneOf(['change','blur',null]),//校验方式
@@ -50,13 +50,16 @@ class FormItem extends Component {
         super(props);
         this.state={
             hasError:false,
-            value:''
+            value:'',
         }
     }
     componentWillReceiveProps(nextProps){
         if(nextProps.checkNow&&(!this.props.checkNow)){
             this.checkSelf();
         }
+    }
+    componentDidMount(){
+        console.log(this);
     }
     handleBlur=()=>{
         let value=ReactDOM.findDOMNode(this.input).value;
@@ -75,6 +78,7 @@ class FormItem extends Component {
             );
         }
         this.props.blur(value);
+        this.props.children.props.onBlur&&this.props.children.props.onBlur(value);
     }
     handleChange=(selectV)=>{
         let value=selectV||ReactDOM.findDOMNode(this.input).value||this.input.props.defaultValue;
@@ -96,6 +100,8 @@ class FormItem extends Component {
             );
         }
         this.props.change(value);
+        this.props.blur(value);
+        this.props.children.props.onChange&&this.props.children.props.onChange(value);
     }
     /**
      * 校验方法

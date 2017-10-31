@@ -45,7 +45,7 @@ var propTypes = {
     clsPrefix: _propTypes2["default"].string,
     className: _propTypes2["default"].string,
     isRequire: _propTypes2["default"].bool, //是否必填
-    errorMessage: _propTypes2["default"].string, //错误信息
+    errorMessage: _propTypes2["default"].element, //错误信息
     htmlType: _propTypes2["default"].oneOf(['email', 'tel', 'IDCard', 'name', 'password', null]), //htmlType有值的时候 reg不生效
     reg: _propTypes2["default"].instanceOf(RegExp), //校验正则
     method: _propTypes2["default"].oneOf(['change', 'blur', null]), //校验方式
@@ -100,6 +100,7 @@ var FormItem = function (_Component) {
                 });
             }
             _this.props.blur(value);
+            _this.props.children.props.onBlur && _this.props.children.props.onBlur(value);
         };
 
         _this.handleChange = function (selectV) {
@@ -120,6 +121,8 @@ var FormItem = function (_Component) {
                 });
             }
             _this.props.change(value);
+            _this.props.blur(value);
+            _this.props.children.props.onChange && _this.props.children.props.onChange(value);
         };
 
         _this.itemCheck = function (value, name) {
@@ -173,6 +176,10 @@ var FormItem = function (_Component) {
         if (nextProps.checkNow && !this.props.checkNow) {
             this.checkSelf();
         }
+    };
+
+    FormItem.prototype.componentDidMount = function componentDidMount() {
+        console.log(this);
     };
     /**
      * 校验方法
