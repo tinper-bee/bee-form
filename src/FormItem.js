@@ -58,9 +58,6 @@ class FormItem extends Component {
             this.checkSelf();
         }
     }
-    componentDidMount(){
-        console.log(this);
-    }
     handleBlur=()=>{
         let value=ReactDOM.findDOMNode(this.input).value;
         let name=ReactDOM.findDOMNode(this.input).name;

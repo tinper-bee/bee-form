@@ -177,10 +177,6 @@ var FormItem = function (_Component) {
             this.checkSelf();
         }
     };
-
-    FormItem.prototype.componentDidMount = function componentDidMount() {
-        console.log(this);
-    };
     /**
      * 校验方法
      * @param value
