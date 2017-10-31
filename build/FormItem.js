@@ -88,8 +88,8 @@ var FormItem = function (_Component) {
         _this.handleBlur = function () {
             var value = _reactDom2["default"].findDOMNode(_this.input).value;
             var name = _reactDom2["default"].findDOMNode(_this.input).name;
-            var flag = _this.itemCheck(value, name);
             if (_this.props.method === 'blur') {
+                var flag = _this.itemCheck(value, name);
                 _this.setState({
                     hasError: !flag
                 });
@@ -108,8 +108,8 @@ var FormItem = function (_Component) {
             _this.setState({
                 value: value
             });
-            var flag = _this.itemCheck(value, name);
             if (_this.props.method === 'change') {
+                var flag = _this.itemCheck(value, name);
                 _this.setState({
                     hasError: !flag
                 });

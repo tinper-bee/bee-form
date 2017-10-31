@@ -13,10 +13,14 @@ class Demo2 extends Component {
         console.log(flag);
         console.log(obj);
     }
+    check=(flag,obj)=>{
+        console.log(flag);
+        console.log(obj);
+    }
     render() {
         return (
             <Form  submitCallBack={this.checkForm}  >
-                <FormItem  isRequire={true} labelName="姓名" htmlType="chinese" errorMessage="姓名格式错误" method="blur" >
+                <FormItem check={this.check} isRequire={true} labelName="姓名" htmlType="chinese" errorMessage="姓名格式错误" method="blur" >
                     <FormControl name="name" placeholder="只能输入中文"/>
                 </FormItem>
                 <FormItem isRequire={true} labelName="年龄" method="blur" reg={/^[0-9]+$/} errorMessage="年龄格式错误" >

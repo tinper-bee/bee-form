@@ -24,7 +24,7 @@ class Demo1 extends Component {
             </span>)
         }
         return (
-            <FormItem inputBefore={before()} inputAfter={after()} isRequire={true} method="change" reg={/^[0-9]+$/} check={this.check}>
+            <FormItem inputBefore={before()} inputAfter={after()} isRequire={true} method="blur" reg={/^[0-9]+$/} check={this.check}>
                 <FormControl name="age" placeholder="请输入数字"/>
             </FormItem>
         )

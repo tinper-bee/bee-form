@@ -61,8 +61,8 @@ class FormItem extends Component {
     handleBlur=()=>{
         let value=ReactDOM.findDOMNode(this.input).value;
         let name=ReactDOM.findDOMNode(this.input).name;
-        let flag=this.itemCheck(value,name);
         if(this.props.method==='blur') {
+            let flag=this.itemCheck(value,name);
             this.setState({
                 hasError: !flag
             });
@@ -82,8 +82,8 @@ class FormItem extends Component {
         this.setState({
             value:value
         });
-        let flag=this.itemCheck(value,name);
         if(this.props.method==='change') {
+            let flag=this.itemCheck(value,name);
             this.setState({
                 hasError: !flag
             });

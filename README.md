@@ -89,6 +89,7 @@ export default Demo1;
 |inputBefore|input后缀|dom/string|-|
 
 ### 注意
+- `Form`整体校验时，会触发`FormItem`的校验
 - `FormItem`的子元素，`name`必须存在
 - 组件初期，`FormItem`子元素只能存在一个,可以使用 `FormControl` 或者 `Select`
 
