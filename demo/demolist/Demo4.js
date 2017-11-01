@@ -8,7 +8,6 @@ import Form from '../../src/Form';
 const FormItem=Form.FormItem;
 import FormControl from 'bee-form-control';
 import Select from 'bee-select';
-
 const Option = Select.Option;
 class Demo4 extends Component {
     checkForm = (flag,obj) => {

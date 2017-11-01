@@ -14,8 +14,8 @@ const propTypes = {
     clsPrefix:PropTypes.string,
     className:PropTypes.string,
     isRequire:PropTypes.bool,//是否必填
-    errorMessage:PropTypes.element,//错误信息
-    htmlType:PropTypes.oneOf(['email','tel','IDCard','name','password',null]),//htmlType有值的时候 reg不生效
+    errorMessage:PropTypes.node,//错误信息
+    htmlType:PropTypes.oneOf(['email','tel','IDCard','chinese','password',null]),//htmlType有值的时候 reg不生效
     reg:PropTypes.instanceOf(RegExp),//校验正则
     method:PropTypes.oneOf(['change','blur',null]),//校验方式
     blur:PropTypes.func,//失去焦点的回调,参数为value
@@ -24,9 +24,26 @@ const propTypes = {
     checkItem:PropTypes.func,
     inline:PropTypes.bool,//formItem是否行内
     labelName:PropTypes.string,//label标签文字
-    inputBefore:PropTypes.element,//input之前的
-    inputAfter:PropTypes.element,//input之后的
-    mesClassName:PropTypes.string//提示信息样式名
+    inputBefore:PropTypes.node,//input之前的
+    inputAfter:PropTypes.node,//input之后的
+    mesClassName:PropTypes.string,//提示信息样式名
+    checkInitialValue:PropTypes.bool,//是否校验初始值，未开放
+    xs:PropTypes.number,//xs显示列数
+    sm:PropTypes.number,//sm显示列数
+    md:PropTypes.number,//md显示列数
+    lg: PropTypes.number,//lg显示列数
+    xsOffset: PropTypes.number,//xs偏移列数
+    smOffset: PropTypes.number,//sm偏移列数
+    mdOffset: PropTypes.number,//md偏移列数
+    lgOffset: PropTypes.number,//lg偏移列数
+    xsPush: PropTypes.number,//xs右偏移列数
+    smPush: PropTypes.number,//sm右偏移列数
+    mdPush: PropTypes.number,//md右偏移列数
+    lgPush: PropTypes.number,//lg右偏移列数
+    xsPull: PropTypes.number,//xs左偏移列数
+    smPull: PropTypes.number,//sm左偏移列数`
+    mdPull: PropTypes.number,//md左偏移列数
+    lgPull: PropTypes.number,//lg左偏移列数
 };
 const defaultProps = {
     clsPrefix:'u-form',
@@ -43,7 +60,8 @@ const defaultProps = {
     labelName:'',
     inputBefore:'',
     inputAfter:'',
-    mesClassName:''
+    mesClassName:'',
+    checkInitialValue:false
 };
 class FormItem extends Component {
     constructor(props){
@@ -58,6 +76,16 @@ class FormItem extends Component {
             this.checkSelf();
         }
     }
+    /*componentDidMount(){
+        if(this.props.checkInitialValue){
+            let value=ReactDOM.findDOMNode(this.input).value||this.input.props.defaultValue;
+            let name=ReactDOM.findDOMNode(this.input).name||this.input.props.name;
+            //校验初始值
+            this.setState({
+                hasError: !this.itemCheck(value,name)
+            });
+        }
+    }*/
     handleBlur=()=>{
         let value=ReactDOM.findDOMNode(this.input).value;
         let name=ReactDOM.findDOMNode(this.input).name;
@@ -97,7 +125,6 @@ class FormItem extends Component {
             );
         }
         this.props.change(value);
-        this.props.blur(value);
         this.props.children.props.onChange&&this.props.children.props.onChange(value);
     }
     /**
@@ -112,7 +139,7 @@ class FormItem extends Component {
         let obj={
             "name":name,
             "verify":flag,
-            "value":value
+            "value":value||''
         };
         if(isRequire){
             if(value){

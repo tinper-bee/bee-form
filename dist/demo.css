@@ -5227,11 +5227,14 @@ a, .mdl-accordion, .mdl-button, .mdl-card, .mdl-checkbox, .mdl-dropdown-menu,
   padding-left: 12px;
   padding-right: 12px; }
 
+.u-form-error.show {
+  display: block; }
+
 .u-form-inline {
   display: inline-block; }
 
 .u-form-error.u-form-error-inline.show {
-  display: inline-block !important;
+  display: inline-block;
   margin-left: 10px;
   margin-top: 0;
   margin-bottom: 0; }
@@ -6214,5 +6217,8 @@ input.u-button[type="submit"] {
 
 .collapse.in {
   display: block; }
+
+.u-form-error.u-form-error-inline.show {
+  display: inline-block !important; }
 
 /*# sourceMappingURL=demo.css.map */

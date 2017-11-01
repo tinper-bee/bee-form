@@ -24,6 +24,8 @@ var _beeLabel = require('bee-label');
 
 var _beeLabel2 = _interopRequireDefault(_beeLabel);
 
+var _beeLayout = require('bee-layout');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
@@ -40,8 +42,9 @@ var propTypes = {
     submitCallBack: _propTypes2["default"].func, //form验证的回调
     submitAreaClassName: _propTypes2["default"].string, //提交区域className
     submitBtnClassName: _propTypes2["default"].string, //提交按钮className
-    beforeSubmitBtn: _propTypes2["default"].element, //提交按钮之前的dom
-    afterSubmitBtn: _propTypes2["default"].element //提交按钮之后的dom
+    beforeSubmitBtn: _propTypes2["default"].node, //提交按钮之前的dom
+    afterSubmitBtn: _propTypes2["default"].node, //提交按钮之后的dom
+    userRow: _propTypes2["default"].bool //是否使用栅格布局
 };
 var defaultProps = {
     clsPrefix: 'u-form',
@@ -50,7 +53,8 @@ var defaultProps = {
     submitAreaClassName: '',
     submitBtnClassName: '',
     beforeSubmitBtn: '',
-    afterSubmitBtn: ''
+    afterSubmitBtn: '',
+    userRow: false
 };
 
 var Form = function (_Component) {
@@ -147,19 +151,43 @@ var Form = function (_Component) {
 
         var childs = [];
         _react2["default"].Children.map(this.props.children, function (child, index) {
+            var _child$props = child.props,
+                xs = _child$props.xs,
+                sm = _child$props.sm,
+                md = _child$props.md,
+                lg = _child$props.lg,
+                xsOffset = _child$props.xsOffset,
+                smOffset = _child$props.smOffset,
+                mdOffset = _child$props.mdOffset,
+                lgOffset = _child$props.lgOffset,
+                xsPush = _child$props.xsPush,
+                smPush = _child$props.smPush,
+                mdPush = _child$props.mdPush,
+                lgPush = _child$props.lgPush,
+                xsPull = _child$props.xsPull,
+                smPull = _child$props.smPull,
+                mdPull = _child$props.mdPull,
+                lgPull = _child$props.lgPull;
+
             if (child.props.isFormItem) {
                 childs.push(_react2["default"].createElement(
-                    _beeFormGroup2["default"],
-                    { key: index },
+                    _beeLayout.Col,
+                    { key: index, xs: xs, sm: sm, md: md, lg: lg, xsOffset: xsOffset, smOffset: smOffset, mdOffset: mdOffset,
+                        lgOffset: lgOffset, xsPush: xsPush, smPush: smPush, mdPush: mdPush, lgPush: lgPush,
+                        xsPull: xsPull, smPull: smPull, mdPull: mdPull, lgPull: lgPull },
                     _react2["default"].createElement(
-                        _beeLabel2["default"],
+                        _beeFormGroup2["default"],
                         null,
-                        child.props.labelName
-                    ),
-                    _react2["default"].cloneElement(child, {
-                        checkItem: _this2.checkItem,
-                        checkNow: _this2.state.checkNow
-                    })
+                        _react2["default"].createElement(
+                            _beeLabel2["default"],
+                            null,
+                            child.props.labelName
+                        ),
+                        _react2["default"].cloneElement(child, {
+                            checkItem: _this2.checkItem,
+                            checkNow: _this2.state.checkNow
+                        })
+                    )
                 ));
             } else {
                 childs.push(_react2["default"].cloneElement(child));
@@ -168,14 +196,23 @@ var Form = function (_Component) {
         return _react2["default"].createElement(
             'form',
             { className: clsPrefix + ' ' + className, onSubmit: this.checkNow },
-            childs,
+            this.props.userRow ? _react2["default"].createElement(
+                _beeLayout.Row,
+                null,
+                childs
+            ) : _react2["default"].createElement(
+                'div',
+                null,
+                childs
+            ),
             _react2["default"].createElement(
                 'div',
                 { className: clsPrefix + '-submit ' + submitAreaClassName },
                 beforeSubmitBtn,
                 _react2["default"].createElement(
                     _beeButton2["default"],
-                    { onClick: this.checkNow, colors: 'primary', className: clsPrefix + '-submit-btn ' + submitBtnClassName },
+                    { onClick: this.checkNow, colors: 'primary',
+                        className: clsPrefix + '-submit-btn ' + submitBtnClassName },
                     '\u63D0\u4EA4'
                 ),
                 afterSubmitBtn

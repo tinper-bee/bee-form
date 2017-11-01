@@ -14,18 +14,13 @@ class Demo1 extends Component {
         console.log(obj);
     }
     render() {
-        let before=()=>{
-            return (<span>
-                before
-            </span>)
-        }
         let after=()=>{
             return (<span>
                 after
             </span>)
         }
         return (
-            <FormItem  inputBefore={before()} inputAfter={after()} isRequire={true} method="blur" reg={/^[0-9]+$/} check={this.check}>
+            <FormItem  inputBefore="before" inputAfter={after()} isRequire={true} method="blur" reg={/^[0-9]+$/} check={this.check}>
                 <FormControl name="age" placeholder="请输入数字" />
             </FormItem>
         )

@@ -45,8 +45,8 @@ var propTypes = {
     clsPrefix: _propTypes2["default"].string,
     className: _propTypes2["default"].string,
     isRequire: _propTypes2["default"].bool, //是否必填
-    errorMessage: _propTypes2["default"].element, //错误信息
-    htmlType: _propTypes2["default"].oneOf(['email', 'tel', 'IDCard', 'name', 'password', null]), //htmlType有值的时候 reg不生效
+    errorMessage: _propTypes2["default"].node, //错误信息
+    htmlType: _propTypes2["default"].oneOf(['email', 'tel', 'IDCard', 'chinese', 'password', null]), //htmlType有值的时候 reg不生效
     reg: _propTypes2["default"].instanceOf(RegExp), //校验正则
     method: _propTypes2["default"].oneOf(['change', 'blur', null]), //校验方式
     blur: _propTypes2["default"].func, //失去焦点的回调,参数为value
@@ -55,9 +55,26 @@ var propTypes = {
     checkItem: _propTypes2["default"].func,
     inline: _propTypes2["default"].bool, //formItem是否行内
     labelName: _propTypes2["default"].string, //label标签文字
-    inputBefore: _propTypes2["default"].element, //input之前的
-    inputAfter: _propTypes2["default"].element, //input之后的
-    mesClassName: _propTypes2["default"].string //提示信息样式名
+    inputBefore: _propTypes2["default"].node, //input之前的
+    inputAfter: _propTypes2["default"].node, //input之后的
+    mesClassName: _propTypes2["default"].string, //提示信息样式名
+    checkInitialValue: _propTypes2["default"].bool, //是否校验初始值，未开放
+    xs: _propTypes2["default"].number, //xs显示列数
+    sm: _propTypes2["default"].number, //sm显示列数
+    md: _propTypes2["default"].number, //md显示列数
+    lg: _propTypes2["default"].number, //lg显示列数
+    xsOffset: _propTypes2["default"].number, //xs偏移列数
+    smOffset: _propTypes2["default"].number, //sm偏移列数
+    mdOffset: _propTypes2["default"].number, //md偏移列数
+    lgOffset: _propTypes2["default"].number, //lg偏移列数
+    xsPush: _propTypes2["default"].number, //xs右偏移列数
+    smPush: _propTypes2["default"].number, //sm右偏移列数
+    mdPush: _propTypes2["default"].number, //md右偏移列数
+    lgPush: _propTypes2["default"].number, //lg右偏移列数
+    xsPull: _propTypes2["default"].number, //xs左偏移列数
+    smPull: _propTypes2["default"].number, //sm左偏移列数`
+    mdPull: _propTypes2["default"].number, //md左偏移列数
+    lgPull: _propTypes2["default"].number //lg左偏移列数
 };
 var defaultProps = {
     clsPrefix: 'u-form',
@@ -74,7 +91,8 @@ var defaultProps = {
     labelName: '',
     inputBefore: '',
     inputAfter: '',
-    mesClassName: ''
+    mesClassName: '',
+    checkInitialValue: false
 };
 
 var FormItem = function (_Component) {
@@ -121,7 +139,6 @@ var FormItem = function (_Component) {
                 });
             }
             _this.props.change(value);
-            _this.props.blur(value);
             _this.props.children.props.onChange && _this.props.children.props.onChange(value);
         };
 
@@ -135,7 +152,7 @@ var FormItem = function (_Component) {
             var obj = {
                 "name": name,
                 "verify": flag,
-                "value": value
+                "value": value || ''
             };
             if (isRequire) {
                 if (value) {
@@ -177,6 +194,17 @@ var FormItem = function (_Component) {
             this.checkSelf();
         }
     };
+    /*componentDidMount(){
+        if(this.props.checkInitialValue){
+            let value=ReactDOM.findDOMNode(this.input).value||this.input.props.defaultValue;
+            let name=ReactDOM.findDOMNode(this.input).name||this.input.props.name;
+            //校验初始值
+            this.setState({
+                hasError: !this.itemCheck(value,name)
+            });
+        }
+    }*/
+
     /**
      * 校验方法
      * @param value
