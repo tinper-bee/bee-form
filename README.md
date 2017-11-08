@@ -70,7 +70,7 @@ export default Demo1;
 |beforeSubmitBtn|表单提交按钮之前的dom|node|-|
 |afterSubmitBtn|表单提交按钮之后的dom|node|-|
 |useRow|是否使用栅格布局,如使用：需要再`FormItem`传格子数和label的格子数|bool|-|
-|showSubmit|是否显示提交区域|bool|true|
+|showSubmit|是否显示提交按钮|bool|true|
 |checkFormNow|是否立即校验|bool|false|
 
 ### FormItem 参数说明
@@ -88,8 +88,8 @@ export default Demo1;
 |labelName|输入框label标签内容|string|-|
 |labelClassName|输入框label标签的class|string|-|
 |mesClassName|校验错误信息的class|string|-|
-|inputBefore|input前缀|node|-|
-|inputBefore|input后缀|node|-|
+|inputBefore|input前置标签|node|-|
+|inputBefore|input后置标签|node|-|
 |xs|移动设备显示列数(<768px)|number|-|
 |sm|小屏幕桌面设备显示列数(≥768px)|number|-|
 |md|中等屏幕设备显示列数(≥992px)|number|-|
