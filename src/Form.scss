@@ -4,44 +4,45 @@
   margin-top: 0;
   margin-bottom: 0;
 }
-.u-form-item{
+.u-form .u-form-item{
   padding-top: 5px;
   padding-bottom: 5px;
-  height: 64px;
+}
+.u-form-item{
+  min-height: 64px;
+}
+.u-form-item .u-select{
+  min-width: 100px;
+}
+.u-form .u-form-item{
+  min-height: 94px;
 }
 .u-form .u-form-item.u-form-inline{
-  height: auto;
+  min-height: 72px;
 }
 .u-form-error{
   display: none;
-  border: 1px solid #F22C1D;
   margin-top: 5px;
   margin-bottom: 5px;
-  background: #FFEBEE;
   color: #F22C1D;
-  padding-left: 12px;
-  padding-right: 12px;
 }
 .u-form-error.show{
   display: block;
 }
-.u-form-inline{
-  display: inline-block;
-}
-.u-form-error.u-form-error-inline.show{
-  display: inline-block;
-  margin-left: 10px;
-  margin-top: 0;
-  margin-bottom: 0;
-}
 .u-form .u-form-submit{
   margin-top: 10px;
-}
-.u-form-item .u-input-group{
-  width:100%;
 }
 .u-form .u-form-item.u-form-inline .u-input-group{
   display: inline-block;
   vertical-align: middle;
   width: auto;
+}
+.u-form-inline .u-label{
+  display: inline-block;
+}
+.u-form .u-row .u-label{
+  line-height: 40px;
+}
+.u-form-item.u-form-inline .u-input-group-outer{
+  display: inline-block;
 }

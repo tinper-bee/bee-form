@@ -3,12 +3,13 @@ import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import InputGroup from 'bee-input-group';
+import Label from 'bee-label';
 const regs = {
     email: /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/,
     tel: /^1[3|4|5|7|8]\d{9}$/,
     IDCard: /^(\d{15}$|^\d{18}$|^\d{17}(\d|X|x))$/,//身份证
     chinese: /^[\u4e00-\u9fa5]+?$/,//中文校验
-    password: /^[0-9a-zA-Z,.!?`~#$%^&*()-=_+<>'"\[\]\{\}\\\|]{6,15}$/,//6-15位数字
+    password: /^[0-9a-zA-Z,.!?`~#$%^&*()-=_+<>'"\[\]\{\}\\\|]{6,15}$/,//6-15位数字英文符号
 };
 const propTypes = {
     clsPrefix:PropTypes.string,
@@ -22,12 +23,14 @@ const propTypes = {
     change:PropTypes.func,//值改变的回调,参数为value
     check:PropTypes.func,//验证的回调
     checkItem:PropTypes.func,
+    useRow:PropTypes.func,
     inline:PropTypes.bool,//formItem是否行内
     labelName:PropTypes.string,//label标签文字
+    labelClassName:PropTypes.string,//label样式名
     inputBefore:PropTypes.node,//input之前的
     inputAfter:PropTypes.node,//input之后的
     mesClassName:PropTypes.string,//提示信息样式名
-    checkInitialValue:PropTypes.bool,//是否校验初始值，未开放
+    checkInitialValue:PropTypes.bool,//是否校验初始值，未开放 ...col.propTypes
     xs:PropTypes.number,//xs显示列数
     sm:PropTypes.number,//sm显示列数
     md:PropTypes.number,//md显示列数
@@ -44,6 +47,22 @@ const propTypes = {
     smPull: PropTypes.number,//sm左偏移列数`
     mdPull: PropTypes.number,//md左偏移列数
     lgPull: PropTypes.number,//lg左偏移列数
+    labelXs:PropTypes.number,
+    labelSm:PropTypes.number,
+    labelMd:PropTypes.number,
+    labelLg: PropTypes.number,
+    labelXsOffset: PropTypes.number,
+    labelSmOffset: PropTypes.number,
+    labelMdOffset: PropTypes.number,
+    labelLgOffset: PropTypes.number,
+    labelXsPush: PropTypes.number,
+    labelSmPush: PropTypes.number,
+    labelMdPush: PropTypes.number,
+    labelLgPush: PropTypes.number,
+    labelXsPull: PropTypes.number,
+    labelSmPull: PropTypes.number,
+    labelMdPull: PropTypes.number,
+    labelLgPull: PropTypes.number,
 };
 const defaultProps = {
     clsPrefix:'u-form',
@@ -58,10 +77,12 @@ const defaultProps = {
     checkItem:()=>{},
     inline:false,
     labelName:'',
+    labelClassName:'',
     inputBefore:'',
     inputAfter:'',
     mesClassName:'',
-    checkInitialValue:false
+    checkInitialValue:false,
+    useRow:false
 };
 class FormItem extends Component {
     constructor(props){
@@ -69,6 +90,8 @@ class FormItem extends Component {
         this.state={
             hasError:false,
             value:'',
+            width:0,
+            maxWidth:'100%'
         }
     }
     componentWillReceiveProps(nextProps){
@@ -76,16 +99,16 @@ class FormItem extends Component {
             this.checkSelf();
         }
     }
-    /*componentDidMount(){
-        if(this.props.checkInitialValue){
-            let value=ReactDOM.findDOMNode(this.input).value||this.input.props.defaultValue;
-            let name=ReactDOM.findDOMNode(this.input).name||this.input.props.name;
-            //校验初始值
+    componentDidMount(){
+        if(this.props.inline){
+            let outerWidth=ReactDOM.findDOMNode(this.refs.outer)?(ReactDOM.findDOMNode(this.refs.outer).clientWidth||ReactDOM.findDOMNode(this.refs.outer).offsetWidth):0;
+            let width=ReactDOM.findDOMNode(this.refs.label)?(ReactDOM.findDOMNode(this.refs.label).clientWidth||ReactDOM.findDOMNode(this.refs.label).offsetWidth):0;
             this.setState({
-                hasError: !this.itemCheck(value,name)
-            });
+                width,
+                maxWidth:outerWidth?outerWidth-width:'100%'
+            })
         }
-    }*/
+    }
     handleBlur=()=>{
         let value=ReactDOM.findDOMNode(this.input).value;
         let name=ReactDOM.findDOMNode(this.input).name;
@@ -106,7 +129,10 @@ class FormItem extends Component {
         this.props.children.props.onBlur&&this.props.children.props.onBlur(value);
     }
     handleChange=(selectV)=>{
-        let value=selectV||ReactDOM.findDOMNode(this.input).value||this.input.props.defaultValue;
+        let value=selectV||ReactDOM.findDOMNode(this.input).value||this.input.props.defaultValue||this.input.selectedValue;
+        if(this.input.props&&this.input.props.defaultChecked!=undefined){//checkbox
+            value=selectV;
+        }
         let name=ReactDOM.findDOMNode(this.input).name||this.input.props.name;
         this.setState({
             value:value
@@ -139,7 +165,7 @@ class FormItem extends Component {
         let obj={
             "name":name,
             "verify":flag,
-            "value":value||''
+            "value":value===undefined?'':value
         };
         if(isRequire){
             if(value){
@@ -158,7 +184,13 @@ class FormItem extends Component {
      * 触发校验
      */
     checkSelf=()=>{
-        let value=ReactDOM.findDOMNode(this.input).value||this.state.value||this.input.domValue||this.input.props.defaultValue;
+        //this.input.props.defaultValue select
+        //this.input.props.selectedValue radio
+        //this.input.props.value datapick
+        let value=ReactDOM.findDOMNode(this.input).value||this.state.value||this.input.domValue||(this.input.props&&this.input.props.defaultValue)||(this.input.props&&this.input.props.selectedValue)||(this.input.props&&this.input.props.value);
+        if(this.input.props&&this.input.props.defaultChecked!=undefined){//checkbox
+            value=!!this.state.value;
+        }
         let name=ReactDOM.findDOMNode(this.input).name||this.input.props.name;
         let flag=this.itemCheck(value,name);
         this.props.checkItem(
@@ -173,7 +205,7 @@ class FormItem extends Component {
         })
     }
     render() {
-        const {children,inline,errorMessage,className,clsPrefix,inputBefore,inputAfter,mesClassName}=this.props;
+        const {useRow,children,inline,errorMessage,className,clsPrefix,inputBefore,inputAfter,mesClassName,labelName,labelClassName}=this.props;
         let clsObj={};
         clsObj[`${clsPrefix}-item`]=true;
         className?clsObj[className]=true:'';
@@ -187,41 +219,60 @@ class FormItem extends Component {
         if(this.state.hasError)clsErrObj['show']=true;
         let childs=[];
         React.Children.map(this.props.children,(child,index)=>{
-            if(child.props.type==='text'){
+            if(child.props.type==='text'||child.props.type==='password'){
                 childs.push(
-                    <InputGroup key={index}>
-                        {inputBefore?<InputGroup.Addon>{inputBefore}</InputGroup.Addon>:''}
+                    <div ref="outer" key={index}>
                         {
-                            React.cloneElement(children, {
-                                onBlur: this.handleBlur,
-                                onChange: this.handleChange,
-                                ref: (e) => {
-                                    this.input = e
-                                }
-                            })
+                            useRow?'':<Label ref="label" className={labelClassName?labelClassName:''} >{labelName}</Label>
                         }
-                        {inputAfter?<InputGroup.Addon>{inputAfter}</InputGroup.Addon>:''}
-                    </InputGroup>
+                        <span className="u-input-group-outer"  style={{'maxWidth':this.state.maxWidth}}>
+                            <InputGroup key={index}>
+                            {inputBefore?<InputGroup.Addon>{inputBefore}</InputGroup.Addon>:''}
+                                {
+                                    React.cloneElement(children, {
+                                        onBlur: this.handleBlur,
+                                        onChange: this.handleChange,
+                                        ref: (e) => {
+                                            this.input = e
+                                        }
+                                    })
+                                }
+                                {inputAfter?<InputGroup.Addon>{inputAfter}</InputGroup.Addon>:''}
+                           </InputGroup>
+                        </span>
+
+                    </div>
                 )
             }else{
                 childs.push(
-                    React.cloneElement(children, {
-                        key:{index},
-                        onBlur: this.handleBlur,
-                        onChange: this.handleChange,
-                        ref: (e) => {
-                            this.input = e
+                    <div ref="outer" key={index}>
+                        {
+                            useRow?'':<Label ref="label" className={labelClassName?labelClassName:''} >{labelName}</Label>
                         }
-                    })
+                        <span className="u-input-group-outer"  style={{'maxWidth':this.state.maxWidth}}>
+                            <InputGroup >
+                            {inputBefore?<InputGroup.Addon>{inputBefore}</InputGroup.Addon>:''}
+                                {
+                                    React.cloneElement(children, {
+                                        key:{index},
+                                        onBlur: this.handleBlur,
+                                        onChange: this.handleChange,
+                                        ref: (e) => {
+                                            this.input = e
+                                        }
+                                    })
+                                }
+                                {inputAfter?<InputGroup.Addon>{inputAfter}</InputGroup.Addon>:''}
+                        </InputGroup>
+                        </span>
+                    </div>
                 );
             }
         });
-
-
         return (
             <div className={classnames(clsObj)}>
                 {childs}
-                <div className={classnames(clsErrObj)}>
+                <div className={classnames(clsErrObj)} style={{'marginLeft':this.state.width}}>
                     {errorMessage}
                 </div>
             </div> )

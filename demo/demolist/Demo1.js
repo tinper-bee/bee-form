@@ -8,20 +8,14 @@ import Form from '../../src/Form';
 const FormItem=Form.FormItem;
 import FormControl from 'bee-form-control';
 class Demo1 extends Component {
-
     check=(flag,obj)=>{
         console.log(flag);
         console.log(obj);
     }
     render() {
-        let after=()=>{
-            return (<span>
-                after
-            </span>)
-        }
         return (
-            <FormItem  inputBefore="before" inputAfter={after()} isRequire={true} method="blur" reg={/^[0-9]+$/} check={this.check}>
-                <FormControl name="age" placeholder="请输入数字" />
+            <FormItem labelName="域名" inline={true} inputBefore="http://"  isRequire={true} method="blur"  check={this.check}>
+                <FormControl name="url" placeholder="请输入域名" />
             </FormItem>
         )
     }

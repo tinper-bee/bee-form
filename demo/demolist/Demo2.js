@@ -1,32 +1,36 @@
 /**
  *
  * @title 基本form校验
- * @description 块级布局
+ * @description 登录示例
  */
 import React, {Component} from 'react';
-import ReactDOM from 'react-dom';
 import Form from '../../src/Form';
 const FormItem = Form.FormItem;
 import FormControl from 'bee-form-control';
+import Button from 'bee-button';
+
 class Demo2 extends Component {
     checkForm = (flag,obj) => {
         console.log(flag);
         console.log(obj);
     }
-    check=(flag,obj)=>{
-        console.log(flag);
-        console.log(obj);
-    }
     render() {
+        let cancel=()=>{
+            return (
+                <Button shape="border" className="cancel">取消</Button>
+            )
+        }
         return (
-            <Form  submitCallBack={this.checkForm}  >
-                <FormItem check={this.check} isRequire={true} labelName="姓名" htmlType="chinese" errorMessage="姓名格式错误" method="blur" >
-                    <FormControl name="name" placeholder="只能输入中文"/>
-                </FormItem>
-                <FormItem isRequire={true} labelName="年龄" method="blur" reg={/^[0-9]+$/} errorMessage="年龄格式错误" >
-                    <FormControl name="age"  />
-                </FormItem>
-            </Form>
+            <div className="demo2">
+                <Form submitCallBack={this.checkForm} afterSubmitBtn={cancel()}>
+                    <FormItem labelName="用户名:" isRequire={true}  errorMessage="请输入用户名" method="blur"  inline={true}>
+                        <FormControl name="username"  placeholder="请输入用户名"/>
+                    </FormItem>
+                    <FormItem labelName="密码:" isRequire={true} method="blur" errorMessage="请输入密码"   inline={true}>
+                        <FormControl name="password" type="password" placeholder="请输入密码" />
+                    </FormItem>
+                </Form>
+            </div>
         )
     }
 }

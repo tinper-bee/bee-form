@@ -20,11 +20,11 @@ var _beeFormGroup = require('bee-form-group');
 
 var _beeFormGroup2 = _interopRequireDefault(_beeFormGroup);
 
+var _beeLayout = require('bee-layout');
+
 var _beeLabel = require('bee-label');
 
 var _beeLabel2 = _interopRequireDefault(_beeLabel);
-
-var _beeLayout = require('bee-layout');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
@@ -44,17 +44,21 @@ var propTypes = {
     submitBtnClassName: _propTypes2["default"].string, //提交按钮className
     beforeSubmitBtn: _propTypes2["default"].node, //提交按钮之前的dom
     afterSubmitBtn: _propTypes2["default"].node, //提交按钮之后的dom
-    userRow: _propTypes2["default"].bool //是否使用栅格布局
+    useRow: _propTypes2["default"].bool, //是否使用栅格布局
+    checkFormNow: _propTypes2["default"].bool, //现在就校验（主动校验参数）
+    showSubmit: _propTypes2["default"].bool //是否显示提交按钮
 };
 var defaultProps = {
     clsPrefix: 'u-form',
     className: '',
-    submitCallBack: function submitCallBack() {}, //form验证失败的回调
+    submitCallBack: function submitCallBack() {}, //form验证的回调
     submitAreaClassName: '',
     submitBtnClassName: '',
     beforeSubmitBtn: '',
     afterSubmitBtn: '',
-    userRow: false
+    useRow: false,
+    checkFormNow: false,
+    showSubmit: true
 };
 
 var Form = function (_Component) {
@@ -70,7 +74,7 @@ var Form = function (_Component) {
             items.forEach(function (item) {
                 if (item.name === obj.name) {
                     item.verify = obj.verify;
-                    item.value = obj.value || '';
+                    item.value = obj.value === undefined ? '' : obj.value;
                 }
             });
             _this.setState({
@@ -138,11 +142,19 @@ var Form = function (_Component) {
         this.getFormItems();
     };
 
+    Form.prototype.componentWillReceiveProps = function componentWillReceiveProps(nextProps) {
+        if (nextProps.checkFormNow) {
+            this.checkNow();
+        }
+    };
+
     Form.prototype.render = function render() {
         var _this2 = this;
 
         var _props = this.props,
             className = _props.className,
+            showSubmit = _props.showSubmit,
+            useRow = _props.useRow,
             submitAreaClassName = _props.submitAreaClassName,
             submitBtnClassName = _props.submitBtnClassName,
             beforeSubmitBtn = _props.beforeSubmitBtn,
@@ -152,6 +164,8 @@ var Form = function (_Component) {
         var childs = [];
         _react2["default"].Children.map(this.props.children, function (child, index) {
             var _child$props = child.props,
+                labelName = _child$props.labelName,
+                labelClassName = _child$props.labelClassName,
                 xs = _child$props.xs,
                 sm = _child$props.sm,
                 md = _child$props.md,
@@ -167,28 +181,63 @@ var Form = function (_Component) {
                 xsPull = _child$props.xsPull,
                 smPull = _child$props.smPull,
                 mdPull = _child$props.mdPull,
-                lgPull = _child$props.lgPull;
+                lgPull = _child$props.lgPull,
+                labelXs = _child$props.labelXs,
+                labelSm = _child$props.labelSm,
+                labelMd = _child$props.labelMd,
+                labelLg = _child$props.labelLg,
+                labelXsOffset = _child$props.labelXsOffset,
+                labelSmOffset = _child$props.labelSmOffset,
+                labelMdOffset = _child$props.labelMdOffset,
+                labelLgOffset = _child$props.labelLgOffset,
+                labelXsPush = _child$props.labelXsPush,
+                labelSmPush = _child$props.labelSmPush,
+                labelMdPush = _child$props.labelMdPush,
+                labelLgPush = _child$props.labelLgPush,
+                labelXsPull = _child$props.labelXsPull,
+                labelSmPull = _child$props.labelSmPull,
+                labelMdPull = _child$props.labelMdPull,
+                labelLgPull = _child$props.labelLgPull;
 
             if (child.props.isFormItem) {
-                childs.push(_react2["default"].createElement(
-                    _beeLayout.Col,
-                    { key: index, xs: xs, sm: sm, md: md, lg: lg, xsOffset: xsOffset, smOffset: smOffset, mdOffset: mdOffset,
-                        lgOffset: lgOffset, xsPush: xsPush, smPush: smPush, mdPush: mdPush, lgPush: lgPush,
-                        xsPull: xsPull, smPull: smPull, mdPull: mdPull, lgPull: lgPull },
-                    _react2["default"].createElement(
-                        _beeFormGroup2["default"],
-                        null,
+                if (useRow) {
+                    childs.push(_react2["default"].createElement(
+                        _beeLayout.Col,
+                        { key: 'label' + index, xs: labelXs, sm: labelSm, md: labelMd, lg: labelLg, xsOffset: labelXsOffset, smOffset: labelSmOffset,
+                            mdOffset: labelMdOffset, lgOffset: labelLgOffset, xsPush: labelXsPush, smPush: labelSmPush, mdPush: labelMdPush, lgPush: labelLgPush,
+                            xsPull: labelXsPull, smPull: labelSmPull, mdPull: labelMdPull, lgPull: labelLgPull },
                         _react2["default"].createElement(
                             _beeLabel2["default"],
+                            { className: labelClassName ? labelClassName : '' },
+                            labelName
+                        )
+                    ));
+                    childs.push(_react2["default"].createElement(
+                        _beeLayout.Col,
+                        { key: 'fromGroup' + index, xs: xs, sm: sm, md: md, lg: lg, xsOffset: xsOffset, smOffset: smOffset, mdOffset: mdOffset,
+                            lgOffset: lgOffset, xsPush: xsPush, smPush: smPush, mdPush: mdPush, lgPush: lgPush,
+                            xsPull: xsPull, smPull: smPull, mdPull: mdPull, lgPull: lgPull },
+                        _react2["default"].createElement(
+                            _beeFormGroup2["default"],
                             null,
-                            child.props.labelName
-                        ),
+                            _react2["default"].cloneElement(child, {
+                                useRow: useRow,
+                                checkItem: _this2.checkItem,
+                                checkNow: _this2.state.checkNow
+                            })
+                        )
+                    ));
+                } else {
+                    childs.push(_react2["default"].createElement(
+                        _beeFormGroup2["default"],
+                        { key: index },
                         _react2["default"].cloneElement(child, {
+                            useRow: useRow,
                             checkItem: _this2.checkItem,
                             checkNow: _this2.state.checkNow
                         })
-                    )
-                ));
+                    ));
+                }
             } else {
                 childs.push(_react2["default"].cloneElement(child));
             }
@@ -196,7 +245,7 @@ var Form = function (_Component) {
         return _react2["default"].createElement(
             'form',
             { className: clsPrefix + ' ' + className, onSubmit: this.checkNow },
-            this.props.userRow ? _react2["default"].createElement(
+            useRow ? _react2["default"].createElement(
                 _beeLayout.Row,
                 null,
                 childs
@@ -205,18 +254,17 @@ var Form = function (_Component) {
                 null,
                 childs
             ),
-            _react2["default"].createElement(
+            showSubmit ? _react2["default"].createElement(
                 'div',
                 { className: clsPrefix + '-submit ' + submitAreaClassName },
                 beforeSubmitBtn,
                 _react2["default"].createElement(
                     _beeButton2["default"],
-                    { onClick: this.checkNow, colors: 'primary',
-                        className: clsPrefix + '-submit-btn ' + submitBtnClassName },
+                    { onClick: this.checkNow, colors: 'primary', className: clsPrefix + '-submit-btn ' + submitBtnClassName },
                     '\u63D0\u4EA4'
                 ),
                 afterSubmitBtn
-            )
+            ) : ''
         );
     };
 

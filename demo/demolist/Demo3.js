@@ -1,30 +1,42 @@
 /**
  *
  * @title 基本form校验
- * @description 行内布局
+ * @description 注册示例
  */
 import React, {Component} from 'react';
-import ReactDOM from 'react-dom';
 import Form from '../../src/Form';
 const FormItem = Form.FormItem;
 import FormControl from 'bee-form-control';
-import Label from 'bee-label';
-import FormGroup from 'bee-form-group';
+import Button from 'bee-button';
+
 class Demo3 extends Component {
     checkForm = (flag,obj) => {
         console.log(flag);
         console.log(obj);
     }
     render() {
+        let cancel=()=>{
+            return (
+                <Button shape="border" className="cancel">取消</Button>
+            )
+        }
         return (
-            <Form submitCallBack={this.checkForm}>
-                    <FormItem labelName="姓名" isRequire={true} htmlType="chinese" errorMessage="姓名格式错误" method="blur"  inline={true}>
-                        <FormControl name="name" placeholder="只能输入中文"/>
+            <div className="demo3">
+                <Form submitCallBack={this.checkForm} afterSubmitBtn={cancel()}>
+                    <FormItem labelName="用户名:" isRequire={true}  errorMessage="请输入用户名" method="blur"  inline={true}>
+                        <FormControl name="username"  placeholder="请输入用户名"/>
                     </FormItem>
-                    <FormItem labelName="年龄" isRequire={true} method="blur" errorMessage="年龄格式错误" reg={/^[0-9]+$/} inline={true}>
-                        <FormControl name="age" ref="input" />
+                    <FormItem labelName="密码:" isRequire={true} method="blur" errorMessage="请输入密码"   inline={true}>
+                        <FormControl name="password1" type="password" placeholder="请输入密码" />
                     </FormItem>
-            </Form>
+                    <FormItem labelName="再次输入密码:" isRequire={true} method="blur" errorMessage="请再次输入密码"  inline={true}>
+                        <FormControl name="password2" type="password" placeholder="请再次输入密码" />
+                    </FormItem>
+                    <FormItem labelName="邮箱:" isRequire={true} method="blur" htmlType="email" errorMessage="邮箱格式错误"  inline={true}>
+                        <FormControl name="email"  placeholder="请输入邮箱" />
+                    </FormItem>
+                </Form>
+            </div>
         )
     }
 }

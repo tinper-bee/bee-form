@@ -4,26 +4,51 @@
  * @description 使用栅格布局，配置 Form：userRow={true}  FormItem 格子数，参照栅格布局
  */
 import React ,{Component } from 'react';
-import ReactDOM from 'react-dom';
 import Form from '../../src/Form';
 const FormItem=Form.FormItem;
 import FormControl from 'bee-form-control';
+import Button from 'bee-button';
 class Demo5 extends Component {
-
-    checkForm = (flag,obj) => {
+    constructor(props){
+        super(props);
+        this.state={
+            checkFormNow:false
+        }
+    }
+    checkForm = (flag,obj,num) => {
+        console.log('第'+num+'个');
         console.log(flag);
         console.log(obj);
     }
+    handClick=()=>{
+        this.setState({
+            checkFormNow:true
+        })
+    }
     render() {
         return (
-           <Form userRow={true} submitCallBack={this.checkForm}>
-               <FormItem inline={true} md={6} labelName="姓名"  isRequire={true} htmlType="chinese" errorMessage="姓名格式错误" method="blur"  >
-                   <FormControl  name="name" placeholder="只能输入中文"  />
-               </FormItem>
-               <FormItem inline={true} md={6} labelName="年龄" isRequire={true} method="blur" errorMessage="年龄格式错误" reg={/^[0-9]+$/}  >
-                   <FormControl  name="age" />
-               </FormItem>
-           </Form>
+            <div>
+                <Form useRow={true} showSubmit={false} submitCallBack={(flag,obj)=>this.checkForm(flag,obj,1)} checkFormNow={this.state.checkFormNow}>
+                    <FormItem inline={true} labelMd={2} md={4} labelName="姓名"  isRequire={true} htmlType="chinese" errorMessage="姓名格式错误" method="blur"  >
+                        <FormControl  name="name" placeholder="只能输入中文"  />
+                    </FormItem>
+                    <FormItem inline={true} labelMd={2} md={4} labelName="年龄" isRequire={true} method="blur" errorMessage="年龄格式错误" reg={/^[0-9]+$/}  >
+                        <FormControl  name="age" />
+                    </FormItem>
+                </Form>
+
+                <Form useRow={true} showSubmit={false} submitCallBack={(flag,obj)=>this.checkForm(flag,obj,2)} checkFormNow={this.state.checkFormNow}>
+                    <FormItem inline={true} labelMd={2} md={4} labelName="姓名"  isRequire={true} htmlType="chinese" errorMessage="姓名格式错误" method="blur"  >
+                        <FormControl  name="name" placeholder="只能输入中文"  />
+                    </FormItem>
+                    <FormItem inline={true} labelMd={2} md={4} labelName="年龄" isRequire={true} method="blur" errorMessage="年龄格式错误" reg={/^[0-9]+$/}  >
+                        <FormControl  name="age" />
+                    </FormItem>
+                </Form>
+
+                <Button colors="primary" onClick={this.handClick}>主动校验form</Button>
+            </div>
+
         )
     }
 }
