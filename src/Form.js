@@ -81,10 +81,17 @@ class Form extends Component {
             items: items
         });
     }
-    checkNow = () => {
+    checkNow = (onClickFn) => {
         this.setState({
             checkNow: true
         });
+        typeof onClickFn==='function'?onClickFn():'';
+    }
+    btnCheck=(onClickFn)=>{
+        let self=this;
+        return function (){
+            self.checkNow(onClickFn);
+        }
     }
     componentWillReceiveProps(nextProps){
         if(nextProps.checkFormNow){
@@ -109,7 +116,8 @@ class Form extends Component {
         React.Children.map(this.props.children, (child, index) => {
             let {
                 labelName,labelClassName,xs, sm, md, lg, xsOffset, smOffset, mdOffset, lgOffset, xsPush, smPush, mdPush, lgPush, xsPull, smPull, mdPull, lgPull,
-                labelXs, labelSm, labelMd, labelLg, labelXsOffset, labelSmOffset, labelMdOffset, labelLgOffset, labelXsPush, labelSmPush, labelMdPush, labelLgPush, labelXsPull, labelSmPull, labelMdPull, labelLgPull,
+                labelXs, labelSm, labelMd, labelLg, labelXsOffset, labelSmOffset, labelMdOffset, labelLgOffset, labelXsPush, labelSmPush, labelMdPush, labelLgPush,
+                labelXsPull, labelSmPull, labelMdPull, labelLgPull,showMast,isSubmit
             } = child.props;
             if (child.props.isFormItem) {
                 if(useRow){
@@ -117,11 +125,13 @@ class Form extends Component {
                         <Col key={'label'+index} xs={labelXs} sm={labelSm} md={labelMd} lg={labelLg} xsOffset={labelXsOffset} smOffset={labelSmOffset}
                              mdOffset={labelMdOffset} lgOffset={labelLgOffset} xsPush={labelXsPush} smPush={labelSmPush} mdPush={labelMdPush} lgPush={labelLgPush}
                              xsPull={labelXsPull} smPull={labelSmPull} mdPull={labelMdPull} lgPull={labelLgPull}>
-                            <Label className={labelClassName?labelClassName:''}>{labelName}</Label>
+                            <Label className={labelClassName?labelClassName:''}>
+                                {showMast?(<span className="u-mast">*</span>):''}
+                                {labelName}</Label>
                         </Col>
                     );
                     childs.push(
-                        <Col key={'fromGroup'+index}xs={xs} sm={sm} md={md} lg={lg} xsOffset={xsOffset} smOffset={smOffset} mdOffset={mdOffset}
+                        <Col key={'fromGroup'+index} xs={xs} sm={sm} md={md} lg={lg} xsOffset={xsOffset} smOffset={smOffset} mdOffset={mdOffset}
                               lgOffset={lgOffset} xsPush={xsPush} smPush={smPush} mdPush={mdPush} lgPush={lgPush}
                               xsPull={xsPull} smPull={smPull} mdPull={mdPull} lgPull={lgPull}>
                             <FormGroup>
@@ -150,6 +160,17 @@ class Form extends Component {
                         </FormGroup>
                     )
                 }
+            } else if(child.props.isSubmit){
+                childs.push(
+                    <span key={index}>
+                        {
+                            React.cloneElement(child,
+                                {
+                                    onClick:this.btnCheck(child.props.onClick)
+                        })
+                        }
+                    </span>
+                )
             } else {
                 childs.push(React.cloneElement(child));
             }

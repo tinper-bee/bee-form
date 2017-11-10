@@ -5251,6 +5251,12 @@ a, .mdl-accordion, .mdl-button, .mdl-card, .mdl-checkbox, .mdl-dropdown-menu,
 .u-form-item.u-form-inline .u-input-group-outer {
   display: inline-block; }
 
+.u-mast {
+  color: #F22C1D;
+  position: relative;
+  top: 2px;
+  margin-right: 2px; }
+
 /* FormGroup */
 /*  Navlayout  */
 .collapsing {
@@ -6389,17 +6395,25 @@ textarea {
   min-height: 100px;
   min-width: 300px; }
 
+.demo1 .u-label {
+  position: relative;
+  bottom: 8px; }
+
 .u-form-control {
   max-width: 500px; }
 
 .demo2 .u-label {
-  min-width: 60px;
-  width: 60px; }
+  min-width: 70px;
+  width: 70px;
+  text-align: right; }
 
 .demo2 .cancel, .demo3 .cancel {
   margin-left: 20px; }
 
 .demo3 .u-form .u-label {
-  width: 100px; }
+  width: 120px; }
+
+.demo5 .u-form .u-col-md-2 {
+  text-align: right; }
 
 /*# sourceMappingURL=demo.css.map */

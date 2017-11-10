@@ -71,7 +71,7 @@ export default Demo1;
 |afterSubmitBtn|表单提交按钮之后的dom|node|-|
 |useRow|是否使用栅格布局,如使用：需要再`FormItem`传格子数和label的格子数|bool|-|
 |showSubmit|是否显示提交区域|bool|true|
-|checkFormNow|是否立即校验|bool|false|
+|checkFormNow|是否立即校验，校验完成后将checkFormNow置为false，否则在form渲染的时候会直接校验|bool|false|
 
 ### FormItem 参数说明
 |参数|说明|类型|默认值|
@@ -85,7 +85,8 @@ export default Demo1;
 |change|改变值的回调函数|function|-|
 |check|验证的回调函数，参数两个，第一个为校验是否成功`true/false` 第二个为验证结果对象`{name: "", verify: false, value: ""}`|function|-|
 |inline|是否行内显示，须有`Form`才有效，单个`FormItem`无效|bool|false|
-|labelName|输入框label标签内容|string|-|
+|labelName|输入框label标签内容|node|-|
+|showMast|是否显示必输项的*|bool|false|
 |labelClassName|输入框label标签的class|string|-|
 |mesClassName|校验错误信息的class|string|-|
 |inputBefore|input前缀|node|-|
@@ -123,7 +124,13 @@ export default Demo1;
 |labelMdOffset|label中等屏幕设备偏移列数|number|-|
 |labelLgOffset|label大屏幕设备偏移列数|number|-|
 
-### 注意
+### 自定义组件说明
+- 需要有`onChange`方法，并且参数为改变后的值
+- 默认值为`defaultValue`
+
+
+### 其它说明
+- ~Form`的子元素中如果有`Button`并且此`Button`的`isSubmit=true`，则可以作为提交按钮
 - `Form`整体校验时，会触发`FormItem`的校验
 - `FormItem`的子元素，`name`必须存在且不能重复
 - 组件初期，`FormItem`子元素只能存在一个,可以使用 `FormControl` 或者 `Select`

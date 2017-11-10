@@ -14,8 +14,8 @@ class Demo1 extends Component {
     }
     render() {
         return (
-            <FormItem labelName="域名" inline={true} inputBefore="http://"  isRequire={true} method="blur"  check={this.check}>
-                <FormControl name="url" placeholder="请输入域名" />
+            <FormItem className="demo1" showMast={true} labelName="域名" inline={true} inputBefore="http://"  isRequire={true} method="blur"  check={this.check}>
+                <FormControl name="url" placeholder="请输入域名" value="123" />
             </FormItem>
         )
     }

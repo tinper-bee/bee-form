@@ -55,13 +55,13 @@ class Demo4 extends Component {
                <FormItem labelName="年龄" isRequire={true} method="blur" errorMessage="年龄格式错误" reg={/^[0-9]+$/}  >
                    <FormControl name="age" />
                </FormItem>
-               <FormItem labelName="性别"  methon="change">
+               <FormItem labelName="性别"  method="change">
                    <Select name="select"  defaultValue="woman"  >
                        <Option value="man">男</Option>
                        <Option value="woman">女</Option>
                    </Select>
                </FormItem>
-               <FormItem inline={true} labelName="喜好"  methon="change" change={this.radioChange}>
+               <FormItem inline={true} labelName="喜好"  method="change" change={this.radioChange}>
                    <Radio.RadioGroup
                        selectedValue={this.state.radioValue}
                        name="fruit">
@@ -70,7 +70,7 @@ class Demo4 extends Component {
                    <Radio value="watermelon" >柠檬</Radio>
                </Radio.RadioGroup>
                </FormItem>
-               <FormItem labelName="时间"  methon="change" change={this.timeChange}>
+               <FormItem labelName="时间"  method="change" change={this.timeChange}>
                    <DatePicker
                        name="time"
                        format={format}
@@ -79,13 +79,13 @@ class Demo4 extends Component {
                        placeholder = {dateInputPlaceholder}
                    />
                </FormItem>
-               <FormItem inline={true} labelName="完成"   methon="change" change={this.checkboxChange}>
+               <FormItem inline={true} labelName="完成"   method="change" change={this.checkboxChange}>
                    <Checkbox colors="info" name="checkbox"/>
                </FormItem>
-               <FormItem inline={true} labelName="启用"   methon="change" change={this.switchChange}>
+               <FormItem inline={true} labelName="启用"   method="change" change={this.switchChange}>
                    <Switch  name="switch"/>
                </FormItem>
-               <FormItem labelName="备注"   methon="change" change={this.textareaChange}>
+               <FormItem labelName="备注"   method="change" change={this.textareaChange}>
                    <textarea name="textarea" />
                </FormItem>
            </Form>

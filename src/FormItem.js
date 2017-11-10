@@ -25,12 +25,13 @@ const propTypes = {
     checkItem:PropTypes.func,
     useRow:PropTypes.func,
     inline:PropTypes.bool,//formItem是否行内
-    labelName:PropTypes.string,//label标签文字
+    labelName:PropTypes.node,//label标签文字或dom
     labelClassName:PropTypes.string,//label样式名
     inputBefore:PropTypes.node,//input之前的
     inputAfter:PropTypes.node,//input之后的
     mesClassName:PropTypes.string,//提示信息样式名
     checkInitialValue:PropTypes.bool,//是否校验初始值，未开放 ...col.propTypes
+    showMast:PropTypes.bool,//是否显示必填项的 *
     xs:PropTypes.number,//xs显示列数
     sm:PropTypes.number,//sm显示列数
     md:PropTypes.number,//md显示列数
@@ -82,14 +83,15 @@ const defaultProps = {
     inputAfter:'',
     mesClassName:'',
     checkInitialValue:false,
-    useRow:false
+    useRow:false,
+    showMast:false
 };
 class FormItem extends Component {
     constructor(props){
         super(props);
         this.state={
             hasError:false,
-            value:'',
+            value:this.props.children.props.value||'',
             width:0,
             maxWidth:'100%'
         }
@@ -105,7 +107,7 @@ class FormItem extends Component {
             let width=ReactDOM.findDOMNode(this.refs.label)?(ReactDOM.findDOMNode(this.refs.label).clientWidth||ReactDOM.findDOMNode(this.refs.label).offsetWidth):0;
             this.setState({
                 width,
-                maxWidth:outerWidth?outerWidth-width:'100%'
+                maxWidth:outerWidth?outerWidth-width-10:'100%'
             })
         }
     }
@@ -205,7 +207,7 @@ class FormItem extends Component {
         })
     }
     render() {
-        const {useRow,children,inline,errorMessage,className,clsPrefix,inputBefore,inputAfter,mesClassName,labelName,labelClassName}=this.props;
+        const {showMast,useRow,children,inline,errorMessage,className,clsPrefix,inputBefore,inputAfter,mesClassName,labelName,labelClassName}=this.props;
         let clsObj={};
         clsObj[`${clsPrefix}-item`]=true;
         className?clsObj[className]=true:'';
@@ -223,7 +225,10 @@ class FormItem extends Component {
                 childs.push(
                     <div ref="outer" key={index}>
                         {
-                            useRow?'':<Label ref="label" className={labelClassName?labelClassName:''} >{labelName}</Label>
+                            useRow?'':<Label ref="label" className={labelClassName?labelClassName:''} >
+                                {showMast?(<span className="u-mast">*</span>):''}
+                                {labelName}
+                                </Label>
                         }
                         <span className="u-input-group-outer"  style={{'maxWidth':this.state.maxWidth}}>
                             <InputGroup key={index}>
@@ -234,7 +239,8 @@ class FormItem extends Component {
                                         onChange: this.handleChange,
                                         ref: (e) => {
                                             this.input = e
-                                        }
+                                        },
+                                        value:this.state.value
                                     })
                                 }
                                 {inputAfter?<InputGroup.Addon>{inputAfter}</InputGroup.Addon>:''}
@@ -247,7 +253,9 @@ class FormItem extends Component {
                 childs.push(
                     <div ref="outer" key={index}>
                         {
-                            useRow?'':<Label ref="label" className={labelClassName?labelClassName:''} >{labelName}</Label>
+                            useRow?'':<Label ref="label" className={labelClassName?labelClassName:''} >
+                                {showMast?(<span className="u-mast">*</span>):''}
+                                {labelName}</Label>
                         }
                         <span className="u-input-group-outer"  style={{'maxWidth':this.state.maxWidth}}>
                             <InputGroup >
