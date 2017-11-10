@@ -112,10 +112,18 @@ var Form = function (_Component) {
             });
         };
 
-        _this.checkNow = function () {
+        _this.checkNow = function (onClickFn) {
             _this.setState({
                 checkNow: true
             });
+            typeof onClickFn === 'function' ? onClickFn() : '';
+        };
+
+        _this.btnCheck = function (onClickFn) {
+            var self = _this;
+            return function () {
+                self.checkNow(onClickFn);
+            };
         };
 
         _this.submit = function (items) {
@@ -197,7 +205,9 @@ var Form = function (_Component) {
                 labelXsPull = _child$props.labelXsPull,
                 labelSmPull = _child$props.labelSmPull,
                 labelMdPull = _child$props.labelMdPull,
-                labelLgPull = _child$props.labelLgPull;
+                labelLgPull = _child$props.labelLgPull,
+                showMast = _child$props.showMast,
+                isSubmit = _child$props.isSubmit;
 
             if (child.props.isFormItem) {
                 if (useRow) {
@@ -209,6 +219,11 @@ var Form = function (_Component) {
                         _react2["default"].createElement(
                             _beeLabel2["default"],
                             { className: labelClassName ? labelClassName : '' },
+                            showMast ? _react2["default"].createElement(
+                                'span',
+                                { className: 'u-mast' },
+                                '*'
+                            ) : '',
                             labelName
                         )
                     ));
@@ -238,6 +253,14 @@ var Form = function (_Component) {
                         })
                     ));
                 }
+            } else if (child.props.isSubmit) {
+                childs.push(_react2["default"].createElement(
+                    'span',
+                    { key: index },
+                    _react2["default"].cloneElement(child, {
+                        onClick: _this2.btnCheck(child.props.onClick)
+                    })
+                ));
             } else {
                 childs.push(_react2["default"].cloneElement(child));
             }

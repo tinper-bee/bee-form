@@ -59,12 +59,13 @@ var propTypes = {
     checkItem: _propTypes2["default"].func,
     useRow: _propTypes2["default"].func,
     inline: _propTypes2["default"].bool, //formItem是否行内
-    labelName: _propTypes2["default"].string, //label标签文字
+    labelName: _propTypes2["default"].node, //label标签文字或dom
     labelClassName: _propTypes2["default"].string, //label样式名
     inputBefore: _propTypes2["default"].node, //input之前的
     inputAfter: _propTypes2["default"].node, //input之后的
     mesClassName: _propTypes2["default"].string, //提示信息样式名
     checkInitialValue: _propTypes2["default"].bool, //是否校验初始值，未开放 ...col.propTypes
+    showMast: _propTypes2["default"].bool, //是否显示必填项的 *
     xs: _propTypes2["default"].number, //xs显示列数
     sm: _propTypes2["default"].number, //sm显示列数
     md: _propTypes2["default"].number, //md显示列数
@@ -116,7 +117,8 @@ var defaultProps = {
     inputAfter: '',
     mesClassName: '',
     checkInitialValue: false,
-    useRow: false
+    useRow: false,
+    showMast: false
 };
 
 var FormItem = function (_Component) {
@@ -219,7 +221,7 @@ var FormItem = function (_Component) {
 
         _this.state = {
             hasError: false,
-            value: '',
+            value: _this.props.children.props.value || '',
             width: 0,
             maxWidth: '100%'
         };
@@ -238,7 +240,7 @@ var FormItem = function (_Component) {
             var width = _reactDom2["default"].findDOMNode(this.refs.label) ? _reactDom2["default"].findDOMNode(this.refs.label).clientWidth || _reactDom2["default"].findDOMNode(this.refs.label).offsetWidth : 0;
             this.setState({
                 width: width,
-                maxWidth: outerWidth ? outerWidth - width : '100%'
+                maxWidth: outerWidth ? outerWidth - width - 10 : '100%'
             });
         }
     };
@@ -257,6 +259,7 @@ var FormItem = function (_Component) {
         var _this2 = this;
 
         var _props = this.props,
+            showMast = _props.showMast,
             useRow = _props.useRow,
             children = _props.children,
             inline = _props.inline,
@@ -289,6 +292,11 @@ var FormItem = function (_Component) {
                     useRow ? '' : _react2["default"].createElement(
                         _beeLabel2["default"],
                         { ref: 'label', className: labelClassName ? labelClassName : '' },
+                        showMast ? _react2["default"].createElement(
+                            'span',
+                            { className: 'u-mast' },
+                            '*'
+                        ) : '',
                         labelName
                     ),
                     _react2["default"].createElement(
@@ -307,7 +315,8 @@ var FormItem = function (_Component) {
                                 onChange: _this2.handleChange,
                                 ref: function ref(e) {
                                     _this2.input = e;
-                                }
+                                },
+                                value: _this2.state.value
                             }),
                             inputAfter ? _react2["default"].createElement(
                                 _beeInputGroup2["default"].Addon,
@@ -324,6 +333,11 @@ var FormItem = function (_Component) {
                     useRow ? '' : _react2["default"].createElement(
                         _beeLabel2["default"],
                         { ref: 'label', className: labelClassName ? labelClassName : '' },
+                        showMast ? _react2["default"].createElement(
+                            'span',
+                            { className: 'u-mast' },
+                            '*'
+                        ) : '',
                         labelName
                     ),
                     _react2["default"].createElement(
