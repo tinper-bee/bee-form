@@ -14,9 +14,6 @@ class Demo2 extends Component {
         console.log(flag);
         console.log(obj);
     }
-    click=()=>{
-        alert();
-    }
     render() {
         let cancel=()=>{
             return (
@@ -32,7 +29,7 @@ class Demo2 extends Component {
                     <FormItem showMast={true}  labelName="密码:" isRequire={true} method="blur" errorMessage="请输入密码"   inline={true}>
                         <FormControl name="password" type="password" placeholder="请输入密码" />
                     </FormItem>
-                    <Button onClick={this.click} colors="primary" isSubmit={true}>提交</Button>
+                    <Button  colors="primary" isSubmit={true}>提交</Button>
                 </Form>
             </div>
         )
