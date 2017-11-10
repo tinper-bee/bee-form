@@ -73,6 +73,7 @@ export default Demo1;
 |showSubmit|是否显示提交区域|bool|true|
 |checkFormNow|是否立即校验，校验完成后将checkFormNow置为false，否则在form渲染的时候会直接校验|bool|false|
 
+
 ### FormItem 参数说明
 |参数|说明|类型|默认值|
 |:---|:-----|:----|:------|
@@ -89,8 +90,8 @@ export default Demo1;
 |showMast|是否显示必输项的*|bool|false|
 |labelClassName|输入框label标签的class|string|-|
 |mesClassName|校验错误信息的class|string|-|
-|inputBefore|input前缀|node|-|
-|inputBefore|input后缀|node|-|
+|inputBefore|input前置标签|node|-|
+|inputBefore|input后置标签|node|-|
 |xs|移动设备显示列数(<768px)|number|-|
 |sm|小屏幕桌面设备显示列数(≥768px)|number|-|
 |md|中等屏幕设备显示列数(≥992px)|number|-|
