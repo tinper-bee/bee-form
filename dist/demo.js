@@ -80,7 +80,7 @@
 	
 	var CARETUP = _react2['default'].createElement('i', { className: 'uf uf-arrow-up' });
 	
-	var Demo1 = __webpack_require__(117);var Demo2 = __webpack_require__(122);var Demo3 = __webpack_require__(123);var Demo4 = __webpack_require__(124);var Demo5 = __webpack_require__(422);var DemoArray = [{ "example": _react2['default'].createElement(Demo1, null), "title": " 单个input校验", "code": "/**\n *\n * @title 单个input校验\n * @description 使用FormItem\n */\nimport React ,{Component } from 'react';\nimport Form from '../../src/Form';\nconst FormItem=Form.FormItem;\nimport FormControl from 'bee-form-control';\nclass Demo1 extends Component {\n    check=(flag,obj)=>{\n        console.log(flag);\n        console.log(obj);\n    }\n    render() {\n        return (\n            <FormItem className=\"demo1\" showMast={true} labelName=\"域名\" inline={true} inputBefore=\"http://\"  isRequire={true} method=\"blur\"  check={this.check}>\n                <FormControl name=\"url\" placeholder=\"请输入域名\" value=\"123\" />\n            </FormItem>\n        )\n    }\n}\n", "desc": " 使用FormItem" }, { "example": _react2['default'].createElement(Demo2, null), "title": " 基本form校验", "code": "/**\n *\n * @title 基本form校验\n * @description 登录示例\n */\nimport React, {Component} from 'react';\nimport Form from '../../src/Form';\nconst FormItem = Form.FormItem;\nimport FormControl from 'bee-form-control';\nimport Button from 'bee-button';\n\nclass Demo2 extends Component {\n    checkForm = (flag,obj) => {\n        console.log(flag);\n        console.log(obj);\n    }\n    render() {\n        let cancel=()=>{\n            return (\n                <Button shape=\"border\" className=\"cancel\">取消</Button>\n            )\n        }\n        return (\n            <div className=\"demo2\">\n                <Form showSubmit={false} submitCallBack={this.checkForm} afterSubmitBtn={cancel()}>\n                    <FormItem showMast={true}  labelName=\"用户名:\" isRequire={true}  errorMessage=\"请输入用户名\" method=\"blur\"  inline={true}>\n                        <FormControl name=\"username\"  placeholder=\"请输入用户名\" value=\"\"/>\n                    </FormItem>\n                    <FormItem showMast={true}  labelName=\"密码:\" isRequire={true} method=\"blur\" errorMessage=\"请输入密码\"   inline={true}>\n                        <FormControl name=\"password\" type=\"password\" placeholder=\"请输入密码\" />\n                    </FormItem>\n                    <Button  colors=\"primary\" isSubmit={true}>提交</Button>\n                </Form>\n            </div>\n        )\n    }\n}\n", "desc": " 登录示例" }, { "example": _react2['default'].createElement(Demo3, null), "title": " 基本form校验", "code": "/**\n *\n * @title 基本form校验\n * @description 注册示例\n */\nimport React, {Component} from 'react';\nimport Form from '../../src/Form';\nconst FormItem = Form.FormItem;\nimport FormControl from 'bee-form-control';\nimport Button from 'bee-button';\n\nclass Demo3 extends Component {\n    checkForm = (flag,obj) => {\n        console.log(flag);\n        console.log(obj);\n    }\n    render() {\n        let cancel=()=>{\n            return (\n                <Button shape=\"border\" className=\"cancel\">取消</Button>\n            )\n        }\n        return (\n            <div className=\"demo3\">\n                <Form submitCallBack={this.checkForm} afterSubmitBtn={cancel()}>\n                    <FormItem showMast={true}  labelName=\"用户名:\" isRequire={true}  errorMessage=\"请输入用户名\" method=\"blur\"  inline={true}>\n                        <FormControl name=\"username\"  placeholder=\"请输入用户名\"/>\n                    </FormItem>\n                    <FormItem showMast={true}  labelName=\"密码:\" isRequire={true} method=\"blur\" errorMessage=\"请输入密码\"   inline={true}>\n                        <FormControl name=\"password1\" type=\"password\" placeholder=\"请输入密码\" />\n                    </FormItem>\n                    <FormItem showMast={true}  labelName=\"再次输入密码:\" isRequire={true} method=\"blur\" errorMessage=\"请再次输入密码\"  inline={true}>\n                        <FormControl name=\"password2\" type=\"password\" placeholder=\"请再次输入密码\" />\n                    </FormItem>\n                    <FormItem showMast={true}  showMast={true}  labelName=\"邮箱:\" isRequire={true} method=\"blur\" htmlType=\"email\" errorMessage=\"邮箱格式错误\"  inline={true}>\n                        <FormControl name=\"email\"  placeholder=\"请输入邮箱\" />\n                    </FormItem>\n                </Form>\n            </div>\n        )\n    }\n}\n", "desc": " 注册示例" }, { "example": _react2['default'].createElement(Demo4, null), "title": " 表单校验", "code": "/**\n *\n * @title 表单校验\n * @description input和select\n */\nimport React ,{Component } from 'react';\nimport Form from '../../src/Form';\nimport FormControl from 'bee-form-control';\nimport Select from 'bee-select';\nimport Radio from 'bee-radio'\nimport DatePicker from 'bee-datepicker';\nimport zhCN from 'rc-calendar/lib/locale/zh_CN';\nimport moment from 'moment';\nimport Checkbox from 'bee-checkbox';\nimport Switch from 'bee-switch';\nconst FormItem=Form.FormItem;\nconst Option = Select.Option;\nconst format = 'YYYY-MM-DD HH:mm:ss';\nconst dateInputPlaceholder = '选择日期';\nclass Demo4 extends Component {\n    constructor(props) {\n        super(props);\n        this.state = {\n            radioValue: 'apple'\n        };\n    }\n\n    checkForm = (flag,obj) => {\n        console.log(flag);\n        console.log(obj);\n    }\n    radioChange=value=>{\n        this.setState({\n            radioValue:value\n        });\n    }\n    timeChange=v=>{\n        console.log(v);\n    }\n    textareaChange=v=>{\n        console.log(v);\n    }\n    checkboxChange=v=>{\n        console.log(v);\n    }\n    switchChange=v=>{\n        console.log(v);\n    }\n    render() {\n        return (\n           <Form submitCallBack={this.checkForm}>\n               <FormItem labelName=\"姓名\"  isRequire={true} htmlType=\"chinese\" errorMessage=\"姓名格式错误\" method=\"blur\"  >\n                   <FormControl name=\"name\" placeholder=\"只能输入中文\"/>\n               </FormItem>\n               <FormItem labelName=\"年龄\" isRequire={true} method=\"blur\" errorMessage=\"年龄格式错误\" reg={/^[0-9]+$/}  >\n                   <FormControl name=\"age\" />\n               </FormItem>\n               <FormItem labelName=\"性别\"  method=\"change\">\n                   <Select name=\"select\"  defaultValue=\"woman\"  >\n                       <Option value=\"man\">男</Option>\n                       <Option value=\"woman\">女</Option>\n                   </Select>\n               </FormItem>\n               <FormItem inline={true} labelName=\"喜好\"  method=\"change\" change={this.radioChange}>\n                   <Radio.RadioGroup\n                       selectedValue={this.state.radioValue}\n                       name=\"fruit\">\n                   <Radio value=\"apple\" >苹果</Radio>\n                   <Radio value=\"orange\" >橘子</Radio>\n                   <Radio value=\"watermelon\" >柠檬</Radio>\n               </Radio.RadioGroup>\n               </FormItem>\n               <FormItem labelName=\"时间\"  method=\"change\" change={this.timeChange}>\n                   <DatePicker\n                       name=\"time\"\n                       format={format}\n                       locale={zhCN}\n                       value={moment()}\n                       placeholder = {dateInputPlaceholder}\n                   />\n               </FormItem>\n               <FormItem inline={true} labelName=\"完成\"   method=\"change\" change={this.checkboxChange}>\n                   <Checkbox colors=\"info\" name=\"checkbox\"/>\n               </FormItem>\n               <FormItem inline={true} labelName=\"启用\"   method=\"change\" change={this.switchChange}>\n                   <Switch  name=\"switch\"/>\n               </FormItem>\n               <FormItem labelName=\"备注\"   method=\"change\" change={this.textareaChange}>\n                   <textarea name=\"textarea\" />\n               </FormItem>\n           </Form>\n\n\n        )\n    }\n}\n", "desc": " input和select" }, { "example": _react2['default'].createElement(Demo5, null), "title": " 表单校验", "code": "/**\n *\n * @title 表单校验\n * @description 使用栅格布局，配置 Form：userRow={true}  FormItem 格子数，参照栅格布局\n */\nimport React ,{Component } from 'react';\nimport Form from '../../src/Form';\nconst FormItem=Form.FormItem;\nimport FormControl from 'bee-form-control';\nimport Button from 'bee-button';\nclass Demo5 extends Component {\n    constructor(props){\n        super(props);\n        this.state={\n            checkFormNow:false\n        }\n    }\n    checkForm = (flag,obj,num) => {\n        console.log('第'+num+'个');\n        console.log(flag);\n        console.log(obj);\n    }\n    handClick=()=>{\n        this.setState({\n            checkFormNow:true\n        })\n    }\n    render() {\n        return (\n            <div className=\"demo5\">\n                <Form useRow={true} showSubmit={false} submitCallBack={(flag,obj)=>this.checkForm(flag,obj,1)} checkFormNow={this.state.checkFormNow}>\n                    <FormItem showMast={true}  inline={true} labelMd={2} md={4} labelName=\"姓名\"  isRequire={true} htmlType=\"chinese\" errorMessage=\"姓名格式错误\" method=\"blur\"  >\n                        <FormControl  name=\"name\" placeholder=\"只能输入中文\"  />\n                    </FormItem>\n                    <FormItem showMast={true}  inline={true} labelMd={2} md={4} labelName=\"年龄\" isRequire={true} method=\"blur\" errorMessage=\"年龄格式错误\" reg={/^[0-9]+$/}  >\n                        <FormControl  name=\"age\" />\n                    </FormItem>\n                </Form>\n\n                <Form useRow={true} showSubmit={false} submitCallBack={(flag,obj)=>this.checkForm(flag,obj,2)} checkFormNow={this.state.checkFormNow}>\n                    <FormItem showMast={true}  inline={true} labelMd={2} md={4} labelName=\"姓名\"  isRequire={true} htmlType=\"chinese\" errorMessage=\"姓名格式错误\" method=\"blur\"  >\n                        <FormControl  name=\"name\" placeholder=\"只能输入中文\"  />\n                    </FormItem>\n                    <FormItem showMast={true}  inline={true} labelMd={2} md={4} labelName=\"年龄\" isRequire={true} method=\"blur\" errorMessage=\"年龄格式错误\" reg={/^[0-9]+$/}  >\n                        <FormControl  name=\"age\" />\n                    </FormItem>\n                </Form>\n\n                <Button colors=\"primary\" onClick={this.handClick}>主动校验form</Button>\n            </div>\n\n        )\n    }\n}\n", "desc": " 使用栅格布局，配置 Form：userRow={true}  FormItem 格子数，参照栅格布局" }];
+	var Demo1 = __webpack_require__(117);var Demo2 = __webpack_require__(122);var Demo3 = __webpack_require__(123);var Demo4 = __webpack_require__(124);var Demo5 = __webpack_require__(421);var DemoArray = [{ "example": _react2['default'].createElement(Demo1, null), "title": " 单个input校验", "code": "/**\n *\n * @title 单个input校验\n * @description 使用FormItem\n */\nimport React ,{Component } from 'react';\nimport Form from '../../src/Form';\nconst FormItem=Form.FormItem;\nimport FormControl from 'bee-form-control';\nclass Demo1 extends Component {\n    check=(flag,obj)=>{\n        console.log(flag);\n        console.log(obj);\n    }\n    render() {\n        return (\n            <FormItem className=\"demo1\" showMast={true} labelName=\"域名\" inline={true} inputBefore=\"http://\"  isRequire={true} method=\"blur\"  check={this.check}>\n                <FormControl name=\"url\" placeholder=\"请输入域名\" value=\"123\" />\n            </FormItem>\n        )\n    }\n}\n", "desc": " 使用FormItem" }, { "example": _react2['default'].createElement(Demo2, null), "title": " 基本form校验", "code": "/**\n *\n * @title 基本form校验\n * @description 登录示例\n */\nimport React, {Component} from 'react';\nimport Form from '../../src/Form';\nconst FormItem = Form.FormItem;\nimport FormControl from 'bee-form-control';\nimport Button from 'bee-button';\n\nclass Demo2 extends Component {\n    checkForm = (flag,obj) => {\n        console.log(flag);\n        console.log(obj);\n    }\n    render() {\n        let cancel=()=>{\n            return (\n                <Button shape=\"border\" className=\"cancel\">取消</Button>\n            )\n        }\n        return (\n            <div className=\"demo2\">\n                <Form showSubmit={false} submitCallBack={this.checkForm} afterSubmitBtn={cancel()}>\n                    <FormItem showMast={true}  labelName=\"用户名:\" isRequire={true}  errorMessage=\"请输入用户名\" method=\"blur\"  inline={true}>\n                        <FormControl name=\"username\"  placeholder=\"请输入用户名\" value=\"\"/>\n                    </FormItem>\n                    <FormItem showMast={true}  labelName=\"密码:\" isRequire={true} method=\"blur\" errorMessage=\"请输入密码\"   inline={true}>\n                        <FormControl name=\"password\" type=\"password\" placeholder=\"请输入密码\" />\n                    </FormItem>\n                    <Button  colors=\"primary\" isSubmit={true}>提交</Button>\n                </Form>\n            </div>\n        )\n    }\n}\n", "desc": " 登录示例" }, { "example": _react2['default'].createElement(Demo3, null), "title": " 基本form校验", "code": "/**\n *\n * @title 基本form校验\n * @description 注册示例\n */\nimport React, {Component} from 'react';\nimport Form from '../../src/Form';\nconst FormItem = Form.FormItem;\nimport FormControl from 'bee-form-control';\nimport Button from 'bee-button';\n\nclass Demo3 extends Component {\n    checkForm = (flag,obj) => {\n        console.log(flag);\n        console.log(obj);\n    }\n    render() {\n        let cancel=()=>{\n            return (\n                <Button shape=\"border\" className=\"cancel\">取消</Button>\n            )\n        }\n        return (\n            <div className=\"demo3\">\n                <Form submitCallBack={this.checkForm} afterSubmitBtn={cancel()}>\n                    <FormItem showMast={true}  labelName=\"用户名:\" isRequire={true}  errorMessage=\"请输入用户名\" method=\"blur\"  inline={true}>\n                        <FormControl name=\"username\"  placeholder=\"请输入用户名\"/>\n                    </FormItem>\n                    <FormItem showMast={true}  labelName=\"密码:\" isRequire={true} method=\"blur\" errorMessage=\"请输入密码\"   inline={true}>\n                        <FormControl name=\"password1\" type=\"password\" placeholder=\"请输入密码\" />\n                    </FormItem>\n                    <FormItem showMast={true}  labelName=\"再次输入密码:\" isRequire={true} method=\"blur\" errorMessage=\"请再次输入密码\"  inline={true}>\n                        <FormControl name=\"password2\" type=\"password\" placeholder=\"请再次输入密码\" />\n                    </FormItem>\n                    <FormItem showMast={true}  showMast={true}  labelName=\"邮箱:\" isRequire={true} method=\"blur\" htmlType=\"email\" errorMessage=\"邮箱格式错误\"  inline={true}>\n                        <FormControl name=\"email\"  placeholder=\"请输入邮箱\" />\n                    </FormItem>\n                </Form>\n            </div>\n        )\n    }\n}\n", "desc": " 注册示例" }, { "example": _react2['default'].createElement(Demo4, null), "title": " 表单校验", "code": "/**\n *\n * @title 表单校验\n * @description input和select\n */\nimport React ,{Component } from 'react';\nimport Form from '../../src/Form';\nimport FormControl from 'bee-form-control';\nimport Select from 'bee-select';\nimport Radio from 'bee-radio'\nimport DatePicker from 'bee-datepicker';\nimport zhCN from 'rc-calendar/lib/locale/zh_CN';\nimport moment from 'moment';\nimport Checkbox from 'bee-checkbox';\nimport Switch from 'bee-switch';\nconst FormItem=Form.FormItem;\nconst Option = Select.Option;\nconst format = 'YYYY-MM-DD HH:mm:ss';\nconst dateInputPlaceholder = '选择日期';\nclass Demo4 extends Component {\n    constructor(props) {\n        super(props);\n        this.state = {\n            radioValue: 'apple'\n        };\n    }\n\n    checkForm = (flag,obj) => {\n        console.log(flag);\n        console.log(obj);\n    }\n    radioChange=value=>{\n        this.setState({\n            radioValue:value\n        });\n    }\n    timeChange=v=>{\n        console.log(v);\n    }\n    textareaChange=v=>{\n        console.log(v);\n    }\n    checkboxChange=v=>{\n        console.log(v);\n    }\n    switchChange=v=>{\n        console.log(v);\n    }\n    render() {\n        return (\n           <Form submitCallBack={this.checkForm}>\n               <FormItem labelName=\"姓名\"  isRequire={true} htmlType=\"chinese\" errorMessage=\"姓名格式错误\" method=\"blur\"  >\n                   <FormControl name=\"name\" placeholder=\"只能输入中文\"/>\n               </FormItem>\n               <FormItem labelName=\"年龄\" isRequire={true} method=\"blur\" errorMessage=\"年龄格式错误\" reg={/^[0-9]+$/}  >\n                   <FormControl name=\"age\" />\n               </FormItem>\n               <FormItem labelName=\"性别\"  method=\"change\">\n                   <Select name=\"select\"  defaultValue=\"woman\"  >\n                       <Option value=\"man\">男</Option>\n                       <Option value=\"woman\">女</Option>\n                   </Select>\n               </FormItem>\n               <FormItem inline={true} labelName=\"喜好\"  method=\"change\" change={this.radioChange}>\n                   <Radio.RadioGroup\n                       selectedValue={this.state.radioValue}\n                       name=\"fruit\">\n                   <Radio value=\"apple\" >苹果</Radio>\n                   <Radio value=\"orange\" >橘子</Radio>\n                   <Radio value=\"watermelon\" >柠檬</Radio>\n               </Radio.RadioGroup>\n               </FormItem>\n               <FormItem labelName=\"时间\"  method=\"change\" change={this.timeChange}>\n                   <DatePicker\n                       name=\"time\"\n                       format={format}\n                       locale={zhCN}\n                       value={moment()}\n                       placeholder = {dateInputPlaceholder}\n                   />\n               </FormItem>\n               <FormItem inline={true} labelName=\"完成\"   method=\"change\" change={this.checkboxChange}>\n                   <Checkbox colors=\"info\" name=\"checkbox\"/>\n               </FormItem>\n               <FormItem inline={true} labelName=\"启用\"   method=\"change\" change={this.switchChange}>\n                   <Switch  name=\"switch\"/>\n               </FormItem>\n               <FormItem labelName=\"备注\"   method=\"change\" change={this.textareaChange}>\n                   <textarea name=\"textarea\" />\n               </FormItem>\n           </Form>\n\n\n        )\n    }\n}\n", "desc": " input和select" }, { "example": _react2['default'].createElement(Demo5, null), "title": " 表单校验", "code": "/**\n *\n * @title 表单校验\n * @description 使用栅格布局，配置 Form：userRow={true}  FormItem 格子数，参照栅格布局\n */\nimport React ,{Component } from 'react';\nimport Form from '../../src/Form';\nconst FormItem=Form.FormItem;\nimport FormControl from 'bee-form-control';\nimport Button from 'bee-button';\nclass Demo5 extends Component {\n    constructor(props){\n        super(props);\n        this.state={\n            checkFormNow:false\n        }\n    }\n    checkForm = (flag,obj,num) => {\n        console.log('第'+num+'个');\n        console.log(flag);\n        console.log(obj);\n    }\n    handClick=()=>{\n        this.setState({\n            checkFormNow:true\n        })\n    }\n    render() {\n        return (\n            <div className=\"demo5\">\n                <Form useRow={true} showSubmit={false} submitCallBack={(flag,obj)=>this.checkForm(flag,obj,1)} checkFormNow={this.state.checkFormNow}>\n                    <FormItem showMast={true}  inline={true} labelMd={2} md={4} labelName=\"姓名\"  isRequire={true} htmlType=\"chinese\" errorMessage=\"姓名格式错误\" method=\"blur\"  >\n                        <FormControl  name=\"name\" placeholder=\"只能输入中文\"  />\n                    </FormItem>\n                    <FormItem showMast={true}  inline={true} labelMd={2} md={4} labelName=\"年龄\" isRequire={true} method=\"blur\" errorMessage=\"年龄格式错误\" reg={/^[0-9]+$/}  >\n                        <FormControl  name=\"age\" />\n                    </FormItem>\n                </Form>\n\n                <Form useRow={true} showSubmit={false} submitCallBack={(flag,obj)=>this.checkForm(flag,obj,2)} checkFormNow={this.state.checkFormNow}>\n                    <FormItem showMast={true}  inline={true} labelMd={2} md={4} labelName=\"姓名\"  isRequire={true} htmlType=\"chinese\" errorMessage=\"姓名格式错误\" method=\"blur\"  >\n                        <FormControl  name=\"name\" placeholder=\"只能输入中文\"  />\n                    </FormItem>\n                    <FormItem showMast={true}  inline={true} labelMd={2} md={4} labelName=\"年龄\" isRequire={true} method=\"blur\" errorMessage=\"年龄格式错误\" reg={/^[0-9]+$/}  >\n                        <FormControl  name=\"age\" />\n                    </FormItem>\n                </Form>\n\n                <Button colors=\"primary\" onClick={this.handClick}>主动校验form</Button>\n            </div>\n\n        )\n    }\n}\n", "desc": " 使用栅格布局，配置 Form：userRow={true}  FormItem 格子数，参照栅格布局" }];
 	
 	var Demo = function (_Component) {
 	    _inherits(Demo, _Component);
@@ -9084,8 +9084,7 @@
 	var propTypes = {
 	  componentClass: _propTypes2["default"].oneOfType([_propTypes2["default"].element, _propTypes2["default"].string]),
 	  type: _propTypes2["default"].string,
-	  size: _propTypes2["default"].oneOf(['sm', 'md', 'lg']),
-	  id: _propTypes2["default"].string
+	  size: _propTypes2["default"].oneOf(['sm', 'md', 'lg'])
 	};
 	
 	var defaultProps = {
@@ -9103,7 +9102,7 @@
 	
 	    var _this = _possibleConstructorReturn(this, _React$Component.call(this, props));
 	
-	    _this.onChange = function (e) {
+	    _this.handleChange = function (e) {
 	      var value = e.target.value;
 	      var onChange = _this.props.onChange;
 	
@@ -9140,11 +9139,11 @@
 	    var _props = this.props,
 	        Component = _props.componentClass,
 	        type = _props.type,
-	        id = _props.id,
 	        className = _props.className,
 	        size = _props.size,
 	        clsPrefix = _props.clsPrefix,
-	        others = _objectWithoutProperties(_props, ['componentClass', 'type', 'id', 'className', 'size', 'clsPrefix']);
+	        onChange = _props.onChange,
+	        others = _objectWithoutProperties(_props, ['componentClass', 'type', 'className', 'size', 'clsPrefix', 'onChange']);
 	    // input[type="file"] 不应该有类名 .form-control.
 	
 	
@@ -9168,9 +9167,11 @@
 	        { className: 'u-input-search u-input-affix-wrapper' },
 	        _react2["default"].createElement(Component, _extends({}, others, {
 	          type: type,
-	          onChange: this.onChange,
+	          ref: function ref(el) {
+	            return _this2.input = el;
+	          },
+	          onChange: this.handleChange,
 	          value: this.state.value,
-	          id: id,
 	          className: (0, _classnames2["default"])(className, classNames)
 	        })),
 	        _react2["default"].createElement(
@@ -9184,12 +9185,11 @@
 	
 	    return _react2["default"].createElement(Component, _extends({}, others, {
 	      type: type,
-	      id: id,
 	      ref: function ref(el) {
 	        return _this2.input = el;
 	      },
 	      value: this.state.value,
-	      onChange: this.onChange,
+	      onChange: this.handleChange,
 	      className: (0, _classnames2["default"])(className, classNames)
 	    }));
 	  };
@@ -9544,7 +9544,7 @@
 	
 	var _beeDatepicker2 = _interopRequireDefault(_beeDatepicker);
 	
-	var _zh_CN = __webpack_require__(416);
+	var _zh_CN = __webpack_require__(415);
 	
 	var _zh_CN2 = _interopRequireDefault(_zh_CN);
 	
@@ -9552,11 +9552,11 @@
 	
 	var _moment2 = _interopRequireDefault(_moment);
 	
-	var _beeCheckbox = __webpack_require__(418);
+	var _beeCheckbox = __webpack_require__(417);
 	
 	var _beeCheckbox2 = _interopRequireDefault(_beeCheckbox);
 	
-	var _beeSwitch = __webpack_require__(420);
+	var _beeSwitch = __webpack_require__(419);
 	
 	var _beeSwitch2 = _interopRequireDefault(_beeSwitch);
 	
@@ -11209,6 +11209,7 @@
 	    _this.state = {
 	      openKeys: []
 	    };
+	    _this.rcMenu = {};
 	    return _this;
 	  }
 	
@@ -11228,6 +11229,8 @@
 	  };
 	
 	  Menu.prototype.render = function render() {
+	    var _this2 = this;
+	
 	    var openAnimation = this.props.openAnimation || this.props.openTransitionName;
 	    if (!openAnimation) {
 	      switch (this.props.mode) {
@@ -11270,7 +11273,9 @@
 	        className: className
 	      };
 	    }
-	    return _react2["default"].createElement(_ExportMenu2["default"], _extends({}, this.props, props));
+	    return _react2["default"].createElement(_ExportMenu2["default"], _extends({ ref: function ref(el) {
+	        return _this2.rcMenu = el;
+	      } }, this.props, props));
 	  };
 	
 	  return Menu;
@@ -11948,12 +11953,6 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _tinperBeeCore = __webpack_require__(26);
-	
-	var _warning = __webpack_require__(31);
-	
-	var _warning2 = _interopRequireDefault(_warning);
-	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 	
 	function noop() {}
@@ -12096,7 +12095,9 @@
 	
 	var _propTypes2 = _interopRequireDefault(_propTypes);
 	
-	var _tinperBeeCore = __webpack_require__(26);
+	var _keyCode = __webpack_require__(72);
+	
+	var _keyCode2 = _interopRequireDefault(_keyCode);
 	
 	var _classnames = __webpack_require__(3);
 	
@@ -12224,7 +12225,7 @@
 	    var menu = this.menuInstance;
 	    var isOpen = this.isOpen();
 	
-	    if (keyCode === _tinperBeeCore.KeyCode.ENTER) {
+	    if (keyCode === _keyCode2["default"].ENTER) {
 	      this.onTitleClick(e);
 	      this.setState({
 	        defaultActiveFirst: true
@@ -12232,7 +12233,7 @@
 	      return true;
 	    }
 	
-	    if (keyCode === _tinperBeeCore.KeyCode.RIGHT) {
+	    if (keyCode === _keyCode2["default"].RIGHT) {
 	      if (isOpen) {
 	        menu.onKeyDown(e);
 	      } else {
@@ -12243,7 +12244,7 @@
 	      }
 	      return true;
 	    }
-	    if (keyCode === _tinperBeeCore.KeyCode.LEFT) {
+	    if (keyCode === _keyCode2["default"].LEFT) {
 	      var handled = void 0;
 	      if (isOpen) {
 	        handled = menu.onKeyDown(e);
@@ -12257,7 +12258,7 @@
 	      return handled;
 	    }
 	
-	    if (isOpen && (keyCode === _tinperBeeCore.KeyCode.UP || keyCode === _tinperBeeCore.KeyCode.DOWN)) {
+	    if (isOpen && (keyCode === _keyCode2["default"].UP || keyCode === _keyCode2["default"].DOWN)) {
 	      return menu.onKeyDown(e);
 	    }
 	  };
@@ -12639,7 +12640,9 @@
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
-	var _tinperBeeCore = __webpack_require__(26);
+	var _createChainedFunction = __webpack_require__(71);
+	
+	var _createChainedFunction2 = _interopRequireDefault(_createChainedFunction);
 	
 	var _util = __webpack_require__(132);
 	
@@ -12707,7 +12710,6 @@
 	  }
 	}
 	
-	//import Animate from 'bee-transition';
 	var propTypes = {
 	  onSelect: _propTypes2["default"].func,
 	  onClick: _propTypes2["default"].func,
@@ -12866,7 +12868,7 @@
 	      rootPrefixCls: props.prefixCls,
 	      index: i,
 	      parentMenu: this,
-	      ref: childProps.disabled ? undefined : (0, _tinperBeeCore.createChainedFunction)(child.ref, saveRef.bind(this, i, subIndex)),
+	      ref: childProps.disabled ? undefined : (0, _createChainedFunction2["default"])(child.ref, saveRef.bind(this, i, subIndex)),
 	      eventKey: key,
 	      closeSubMenuOnMouseLeave: props.closeSubMenuOnMouseLeave,
 	      onItemHover: this.onItemHover,
@@ -13697,7 +13699,9 @@
 	
 	var _propTypes2 = _interopRequireDefault(_propTypes);
 	
-	var _tinperBeeCore = __webpack_require__(26);
+	var _keyCode = __webpack_require__(72);
+	
+	var _keyCode2 = _interopRequireDefault(_keyCode);
 	
 	var _classnames = __webpack_require__(3);
 	
@@ -13778,7 +13782,7 @@
 	
 	  MenuItem.prototype.onKeyDown = function onKeyDown(e) {
 	    var keyCode = e.keyCode;
-	    if (keyCode === _tinperBeeCore.KeyCode.ENTER) {
+	    if (keyCode === _keyCode2["default"].ENTER) {
 	      this.onClick(e);
 	      return true;
 	    }
@@ -14193,7 +14197,9 @@
 	
 	var _propTypes2 = _interopRequireDefault(_propTypes);
 	
-	var _tinperBeeCore = __webpack_require__(26);
+	var _createChainedFunction = __webpack_require__(71);
+	
+	var _createChainedFunction2 = _interopRequireDefault(_createChainedFunction);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 	
@@ -14267,7 +14273,7 @@
 	    var buttonProps = _extends({
 	      type: 'button'
 	    }, props, {
-	      onClick: (0, _tinperBeeCore.createChainedFunction)(onClick, this.handleClick.bind(this)),
+	      onClick: (0, _createChainedFunction2["default"])(onClick, this.handleClick.bind(this)),
 	      className: (0, _classnames2["default"])(className, clsPrefix, show && 'show')
 	      //!this.context.u_navbar.expanded && 'collapsed',
 	    });
@@ -17093,8 +17099,6 @@
 	
 	function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
 	
-	function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
-	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -17119,10 +17123,6 @@
 	  }
 	
 	  RadioButton.prototype.render = function render() {
-	    var _props = this.props,
-	        clsPrefic = _props.clsPrefic,
-	        onthers = _objectWithoutProperties(_props, ['clsPrefic']);
-	
 	    return _react2["default"].createElement(_Radio2["default"], this.props);
 	  };
 	
@@ -17152,15 +17152,15 @@
 	
 	var _DatePicker2 = _interopRequireDefault(_DatePicker);
 	
-	var _MonthPicker = __webpack_require__(394);
+	var _MonthPicker = __webpack_require__(393);
 	
 	var _MonthPicker2 = _interopRequireDefault(_MonthPicker);
 	
-	var _RangePicker = __webpack_require__(396);
+	var _RangePicker = __webpack_require__(395);
 	
 	var _RangePicker2 = _interopRequireDefault(_RangePicker);
 	
-	var _WeekPicker = __webpack_require__(417);
+	var _WeekPicker = __webpack_require__(416);
 	
 	var _WeekPicker2 = _interopRequireDefault(_WeekPicker);
 	
@@ -17177,10 +17177,10 @@
 /* 168 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	'use strict';
+	"use strict";
 	
 	Object.defineProperty(exports, "__esModule", {
-	    value: true
+	  value: true
 	});
 	
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -17201,7 +17201,7 @@
 	
 	var _beeFormControl2 = _interopRequireDefault(_beeFormControl);
 	
-	var _Panel = __webpack_require__(390);
+	var _Panel = __webpack_require__(389);
 	
 	var _Panel2 = _interopRequireDefault(_Panel);
 	
@@ -17221,88 +17221,118 @@
 	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * Created by chief on 17/4/6.
 	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                */
 	
-	var timePickerElement = _react2["default"].createElement(_Panel2["default"], { defaultValue: (0, _moment2["default"])('00:00:00', 'HH:mm:ss') });
+	var timePickerElement = _react2["default"].createElement(_Panel2["default"], { defaultValue: (0, _moment2["default"])("00:00:00", "HH:mm:ss") });
 	
 	var DatePicker = function (_Component) {
-	    _inherits(DatePicker, _Component);
+	  _inherits(DatePicker, _Component);
 	
-	    function DatePicker(props, context) {
-	        _classCallCheck(this, DatePicker);
+	  function DatePicker(props, context) {
+	    _classCallCheck(this, DatePicker);
 	
-	        var _this = _possibleConstructorReturn(this, _Component.call(this, props, context));
+	    var _this = _possibleConstructorReturn(this, _Component.call(this, props, context));
 	
-	        _this.onChange = function (value) {
-	            _this.setState({
-	                value: value
-	            });
-	        };
+	    _initialiseProps.call(_this);
 	
-	        _this.onOpenChange = function (open) {
-	            _this.setState({
-	                open: open
-	            });
-	        };
+	    _this.state = {
+	      type: "month",
+	      value: props.value || props.defaultValue,
+	      open: false
+	    };
+	    return _this;
+	  }
 	
-	        _this.state = {
-	            type: 'month',
-	            value: props.value,
-	            open: false
-	        };
-	        return _this;
+	  DatePicker.prototype.componentWillReceiveProps = function componentWillReceiveProps(nextProps) {
+	    if ("value" in nextProps) {
+	      this.setState({
+	        value: nextProps.value
+	      });
+	    }
+	  };
+	
+	  DatePicker.prototype.render = function render() {
+	    var _this2 = this;
+	
+	    var state = this.state;
+	    var props = this.props;
+	    var value = state.value;
+	
+	    var pickerChangeHandler = {};
+	    var calendarHandler = {};
+	    if (props.showTime) {
+	      calendarHandler = {
+	        // fix https://github.com/ant-design/ant-design/issues/1902
+	        onSelect: this.handleChange
+	      };
+	    } else {
+	      pickerChangeHandler = {
+	        onChange: this.handleChange
+	      };
 	    }
 	
-	    DatePicker.prototype.render = function render() {
-	        var _this2 = this;
+	    var calendar = _react2["default"].createElement(_rcCalendar2["default"], _extends({
+	      timePicker: props.showTime ? timePickerElement : null
+	    }, props));
 	
-	        var state = this.state;
+	    return _react2["default"].createElement(
+	      "div",
+	      null,
+	      _react2["default"].createElement(
+	        _Picker2["default"],
+	        _extends({}, props, pickerChangeHandler, {
+	          onOpenChange: this.onOpenChange,
+	          animation: "slide-up",
+	          calendar: calendar,
+	          open: this.state.open,
+	          defaultValue: state.value,
+	          onChange: this.onChange
+	        }),
+	        function () {
+	          return _react2["default"].createElement(_beeFormControl2["default"], {
+	            disabled: props.disabled,
+	            readOnly: true,
+	            placeholder: _this2.props.placeholder,
+	            className: _this2.props.className,
+	            value: value && value.format(props.format) || ""
+	          });
+	        }
+	      )
+	    );
+	  };
 	
-	        var props = this.props;
-	
-	        var calendar = _react2["default"].createElement(_rcCalendar2["default"], _extends({
-	            timePicker: props.showTime ? timePickerElement : null
-	        }, props));
-	
-	        return _react2["default"].createElement(
-	            'div',
-	            null,
-	            _react2["default"].createElement(
-	                _Picker2["default"],
-	                {
-	
-	                    onOpenChange: this.onOpenChange,
-	
-	                    animation: 'slide-up',
-	
-	                    calendar: calendar,
-	
-	                    open: this.state.open,
-	
-	                    value: state.value,
-	
-	                    onChange: this.onChange
-	
-	                },
-	                function (_ref) {
-	                    var value = _ref.value;
-	
-	                    return _react2["default"].createElement(_beeFormControl2["default"], {
-	
-	                        placeholder: _this2.props.placeholder,
-	
-	                        className: _this2.props.className,
-	
-	                        value: value && value.format(props.format) || ''
-	                    });
-	                }
-	            )
-	        );
-	    };
-	
-	    return DatePicker;
+	  return DatePicker;
 	}(_react.Component);
 	
+	var _initialiseProps = function _initialiseProps() {
+	  var _this3 = this;
+	
+	  this.onChange = function (value) {
+	    var props = _this3.props;
+	    // // if (!('value' in props)) {
+	    // //   this.setState({ value });
+	    // // }
+	    _this3.setState({
+	      value: value
+	    });
+	    props.onChange(value, value && value.format(props.format) || "");
+	  };
+	
+	  this.onOpenChange = function (open) {
+	    _this3.setState({
+	      open: open
+	    });
+	  };
+	
+	  this.handleChange = function (value) {
+	    var props = _this3.props;
+	    if (!("value" in props)) {
+	      _this3.setState({ value: value });
+	    }
+	    props.onChange(value, value && value.format(props.format) || "");
+	  };
+	};
+	
 	exports["default"] = DatePicker;
-	module.exports = exports['default'];
+	module.exports = exports["default"];
 
 /***/ }),
 /* 169 */
@@ -19599,7 +19629,7 @@
 /***/ (function(module, exports, __webpack_require__) {
 
 	var require;/* WEBPACK VAR INJECTION */(function(module) {//! moment.js
-	//! version : 2.19.1
+	//! version : 2.19.2
 	//! authors : Tim Wood, Iskren Chernev, Moment.js contributors
 	//! license : MIT
 	//! momentjs.com
@@ -20414,7 +20444,7 @@
 	
 	function set$1 (mom, unit, value) {
 	    if (mom.isValid() && !isNaN(value)) {
-	        if (unit === 'FullYear' && isLeapYear(mom.year())) {
+	        if (unit === 'FullYear' && isLeapYear(mom.year()) && mom.month() === 1 && mom.date() === 29) {
 	            mom._d['set' + (mom._isUTC ? 'UTC' : '') + unit](value, mom.month(), daysInMonth(value, mom.month()));
 	        }
 	        else {
@@ -21520,10 +21550,11 @@
 	
 	function updateLocale(name, config) {
 	    if (config != null) {
-	        var locale, parentConfig = baseConfig;
+	        var locale, tmpLocale, parentConfig = baseConfig;
 	        // MERGE
-	        if (locales[name] != null) {
-	            parentConfig = locales[name]._config;
+	        tmpLocale = loadLocale(name);
+	        if (tmpLocale != null) {
+	            parentConfig = tmpLocale._config;
 	        }
 	        config = mergeConfigs(parentConfig, config);
 	        locale = new Locale(config);
@@ -24077,7 +24108,7 @@
 	// Side effect imports
 	
 	
-	hooks.version = '2.19.1';
+	hooks.version = '2.19.2';
 	
 	setHookCallback(createLocal);
 	
@@ -38405,10 +38436,6 @@
 	
 	var _getContainerRenderMixin2 = _interopRequireDefault(_getContainerRenderMixin);
 	
-	var _Portal = __webpack_require__(389);
-	
-	var _Portal2 = _interopRequireDefault(_Portal);
-	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
 	function noop() {}
@@ -38421,26 +38448,9 @@
 	  return window.document;
 	}
 	
-	var ALL_HANDLERS = ['onClick', 'onMouseDown', 'onTouchStart', 'onMouseEnter', 'onMouseLeave', 'onFocus', 'onBlur', 'onContextMenu'];
-	
-	var IS_REACT_16 = !!_reactDom.createPortal;
-	
 	var isMobile = typeof navigator !== 'undefined' && !!navigator.userAgent.match(/(Android|iPhone|iPad|iPod|iOS|UCWEB)/i);
 	
-	var mixins = [];
-	
-	if (!IS_REACT_16) {
-	  mixins.push((0, _getContainerRenderMixin2['default'])({
-	    autoMount: false,
-	
-	    isVisible: function isVisible(instance) {
-	      return instance.state.popupVisible;
-	    },
-	    getContainer: function getContainer(instance) {
-	      return instance.getContainer();
-	    }
-	  }));
-	}
+	var ALL_HANDLERS = ['onClick', 'onMouseDown', 'onTouchStart', 'onMouseEnter', 'onMouseLeave', 'onFocus', 'onBlur'];
 	
 	var Trigger = (0, _createReactClass2['default'])({
 	  displayName: 'Trigger',
@@ -38477,7 +38487,27 @@
 	    maskAnimation: _propTypes2['default'].string
 	  },
 	
-	  mixins: mixins,
+	  mixins: [(0, _getContainerRenderMixin2['default'])({
+	    autoMount: false,
+	
+	    isVisible: function isVisible(instance) {
+	      return instance.state.popupVisible;
+	    },
+	    getContainer: function getContainer(instance) {
+	      var props = instance.props;
+	
+	      var popupContainer = document.createElement('div');
+	      // Make sure default popup container will never cause scrollbar appearing
+	      // https://github.com/react-component/trigger/issues/41
+	      popupContainer.style.position = 'absolute';
+	      popupContainer.style.top = '0';
+	      popupContainer.style.left = '0';
+	      popupContainer.style.width = '100%';
+	      var mountNode = props.getPopupContainer ? props.getPopupContainer((0, _reactDom.findDOMNode)(instance)) : props.getDocument().body;
+	      mountNode.appendChild(popupContainer);
+	      return popupContainer;
+	    }
+	  })],
 	
 	  getDefaultProps: function getDefaultProps() {
 	    return {
@@ -38511,9 +38541,6 @@
 	    } else {
 	      popupVisible = !!props.defaultPopupVisible;
 	    }
-	
-	    this.prevPopupVisible = popupVisible;
-	
 	    return {
 	      popupVisible: popupVisible
 	    };
@@ -38544,16 +38571,11 @@
 	  componentDidUpdate: function componentDidUpdate(_, prevState) {
 	    var props = this.props;
 	    var state = this.state;
-	    var triggerAfterPopupVisibleChange = function triggerAfterPopupVisibleChange() {
+	    this.renderComponent(null, function () {
 	      if (prevState.popupVisible !== state.popupVisible) {
 	        props.afterPopupVisibleChange(state.popupVisible);
 	      }
-	    };
-	    if (!IS_REACT_16) {
-	      this.renderComponent(null, triggerAfterPopupVisibleChange);
-	    }
-	
-	    this.prevPopupVisible = prevState.popupVisible;
+	    });
 	
 	    // We must listen to `mousedown`, edge case:
 	    // https://github.com/ant-design/ant-design/issues/5804
@@ -38561,7 +38583,7 @@
 	    // https://github.com/react-component/trigger/issues/50
 	    if (state.popupVisible) {
 	      var currentDocument = void 0;
-	      if (!this.clickOutsideHandler && (this.isClickToHide() || this.isContextMenuToShow())) {
+	      if (!this.clickOutsideHandler && this.isClickToHide()) {
 	        currentDocument = props.getDocument();
 	        this.clickOutsideHandler = (0, _addEventListener2['default'])(currentDocument, 'mousedown', this.onDocumentClick);
 	      }
@@ -38572,15 +38594,6 @@
 	      if (!this.touchOutsideHandler && isMobile) {
 	        currentDocument = currentDocument || props.getDocument();
 	        this.touchOutsideHandler = (0, _addEventListener2['default'])(currentDocument, 'click', this.onDocumentClick);
-	      }
-	      // close popup when trigger type contains 'onContextMenu' and document is scrolling.
-	      if (!this.contextMenuOutsideHandler1 && this.isContextMenuToShow()) {
-	        currentDocument = currentDocument || props.getDocument();
-	        this.contextMenuOutsideHandler1 = (0, _addEventListener2['default'])(currentDocument, 'scroll', this.onContextMenuClose);
-	      }
-	      // close popup when trigger type contains 'onContextMenu' and window is blur.
-	      if (!this.contextMenuOutsideHandler2 && this.isContextMenuToShow()) {
-	        this.contextMenuOutsideHandler2 = (0, _addEventListener2['default'])(window, 'blur', this.onContextMenuClose);
 	      }
 	      return;
 	    }
@@ -38634,16 +38647,6 @@
 	      this.delaySetPopupVisible(false, this.props.blurDelay);
 	    }
 	  },
-	  onContextMenu: function onContextMenu(e) {
-	    e.preventDefault();
-	    this.fireEvents('onContextMenu', e);
-	    this.setPopupVisible(true);
-	  },
-	  onContextMenuClose: function onContextMenuClose() {
-	    if (this.isContextMenuToShow()) {
-	      this.close();
-	    }
-	  },
 	  onClick: function onClick(event) {
 	    this.fireEvents('onClick', event);
 	    // focus will trigger click
@@ -38678,11 +38681,6 @@
 	    var popupNode = this.getPopupDomNode();
 	    if (!(0, _contains2['default'])(root, target) && !(0, _contains2['default'])(popupNode, target)) {
 	      this.close();
-	    }
-	  },
-	  handlePortalUpdate: function handlePortalUpdate() {
-	    if (this.prevPopupVisible !== this.state.popupVisible) {
-	      this.props.afterPopupVisibleChange(this.state.popupVisible);
 	    }
 	  },
 	  getPopupDomNode: function getPopupDomNode() {
@@ -38751,25 +38749,10 @@
 	        zIndex: props.zIndex,
 	        transitionName: props.popupTransitionName,
 	        maskAnimation: props.maskAnimation,
-	        maskTransitionName: props.maskTransitionName,
-	        ref: this.savePopup
+	        maskTransitionName: props.maskTransitionName
 	      }),
 	      typeof props.popup === 'function' ? props.popup() : props.popup
 	    );
-	  },
-	  getContainer: function getContainer() {
-	    var props = this.props;
-	
-	    var popupContainer = document.createElement('div');
-	    // Make sure default popup container will never cause scrollbar appearing
-	    // https://github.com/react-component/trigger/issues/41
-	    popupContainer.style.position = 'absolute';
-	    popupContainer.style.top = '0';
-	    popupContainer.style.left = '0';
-	    popupContainer.style.width = '100%';
-	    var mountNode = props.getPopupContainer ? props.getPopupContainer((0, _reactDom.findDOMNode)(this)) : props.getDocument().body;
-	    mountNode.appendChild(popupContainer);
-	    return popupContainer;
 	  },
 	  setPopupVisible: function setPopupVisible(popupVisible) {
 	    this.clearDelayTimer();
@@ -38808,16 +38791,6 @@
 	      this.clickOutsideHandler = null;
 	    }
 	
-	    if (this.contextMenuOutsideHandler1) {
-	      this.contextMenuOutsideHandler1.remove();
-	      this.contextMenuOutsideHandler1 = null;
-	    }
-	
-	    if (this.contextMenuOutsideHandler2) {
-	      this.contextMenuOutsideHandler2.remove();
-	      this.contextMenuOutsideHandler2 = null;
-	    }
-	
 	    if (this.touchOutsideHandler) {
 	      this.touchOutsideHandler.remove();
 	      this.touchOutsideHandler = null;
@@ -38838,45 +38811,38 @@
 	
 	    return action.indexOf('click') !== -1 || showAction.indexOf('click') !== -1;
 	  },
-	  isContextMenuToShow: function isContextMenuToShow() {
+	  isClickToHide: function isClickToHide() {
 	    var _props2 = this.props,
 	        action = _props2.action,
-	        showAction = _props2.showAction;
-	
-	    return action.indexOf('contextMenu') !== -1 || showAction.indexOf('contextMenu') !== -1;
-	  },
-	  isClickToHide: function isClickToHide() {
-	    var _props3 = this.props,
-	        action = _props3.action,
-	        hideAction = _props3.hideAction;
+	        hideAction = _props2.hideAction;
 	
 	    return action.indexOf('click') !== -1 || hideAction.indexOf('click') !== -1;
 	  },
 	  isMouseEnterToShow: function isMouseEnterToShow() {
-	    var _props4 = this.props,
-	        action = _props4.action,
-	        showAction = _props4.showAction;
+	    var _props3 = this.props,
+	        action = _props3.action,
+	        showAction = _props3.showAction;
 	
 	    return action.indexOf('hover') !== -1 || showAction.indexOf('mouseEnter') !== -1;
 	  },
 	  isMouseLeaveToHide: function isMouseLeaveToHide() {
-	    var _props5 = this.props,
-	        action = _props5.action,
-	        hideAction = _props5.hideAction;
+	    var _props4 = this.props,
+	        action = _props4.action,
+	        hideAction = _props4.hideAction;
 	
 	    return action.indexOf('hover') !== -1 || hideAction.indexOf('mouseLeave') !== -1;
 	  },
 	  isFocusToShow: function isFocusToShow() {
-	    var _props6 = this.props,
-	        action = _props6.action,
-	        showAction = _props6.showAction;
+	    var _props5 = this.props,
+	        action = _props5.action,
+	        showAction = _props5.showAction;
 	
 	    return action.indexOf('focus') !== -1 || showAction.indexOf('focus') !== -1;
 	  },
 	  isBlurToHide: function isBlurToHide() {
-	    var _props7 = this.props,
-	        action = _props7.action,
-	        hideAction = _props7.hideAction;
+	    var _props6 = this.props,
+	        action = _props6.action,
+	        hideAction = _props6.hideAction;
 	
 	    return action.indexOf('focus') !== -1 || hideAction.indexOf('blur') !== -1;
 	  },
@@ -38898,25 +38864,11 @@
 	  close: function close() {
 	    this.setPopupVisible(false);
 	  },
-	  savePopup: function savePopup(node) {
-	    if (IS_REACT_16) {
-	      this._component = node;
-	    }
-	  },
 	  render: function render() {
-	    var popupVisible = this.state.popupVisible;
-	
 	    var props = this.props;
 	    var children = props.children;
 	    var child = _react2['default'].Children.only(children);
-	    var newChildProps = { key: 'trigger' };
-	
-	    if (this.isContextMenuToShow()) {
-	      newChildProps.onContextMenu = this.onContextMenu;
-	    } else {
-	      newChildProps.onContextMenu = this.createTwoChains('onContextMenu');
-	    }
-	
+	    var newChildProps = {};
 	    if (this.isClickToHide() || this.isClickToShow()) {
 	      newChildProps.onClick = this.onClick;
 	      newChildProps.onMouseDown = this.onMouseDown;
@@ -38944,27 +38896,7 @@
 	      newChildProps.onBlur = this.createTwoChains('onBlur');
 	    }
 	
-	    var trigger = _react2['default'].cloneElement(child, newChildProps);
-	
-	    if (!IS_REACT_16) {
-	      return trigger;
-	    }
-	
-	    var portal = void 0;
-	    // prevent unmounting after it's rendered
-	    if (popupVisible || this._component) {
-	      portal = _react2['default'].createElement(
-	        _Portal2['default'],
-	        {
-	          key: 'portal',
-	          getContainer: this.getContainer,
-	          didUpdate: this.handlePortalUpdate
-	        },
-	        this.getComponent()
-	      );
-	    }
-	
-	    return [trigger, portal];
+	    return _react2['default'].cloneElement(child, newChildProps);
 	  }
 	});
 	
@@ -40879,104 +40811,6 @@
 	  value: true
 	});
 	
-	var _classCallCheck2 = __webpack_require__(180);
-	
-	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
-	
-	var _createClass2 = __webpack_require__(181);
-	
-	var _createClass3 = _interopRequireDefault(_createClass2);
-	
-	var _possibleConstructorReturn2 = __webpack_require__(185);
-	
-	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
-	
-	var _inherits2 = __webpack_require__(220);
-	
-	var _inherits3 = _interopRequireDefault(_inherits2);
-	
-	var _react = __webpack_require__(4);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _propTypes = __webpack_require__(5);
-	
-	var _propTypes2 = _interopRequireDefault(_propTypes);
-	
-	var _reactDom = __webpack_require__(12);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-	
-	var Portal = function (_React$Component) {
-	  (0, _inherits3['default'])(Portal, _React$Component);
-	
-	  function Portal() {
-	    (0, _classCallCheck3['default'])(this, Portal);
-	    return (0, _possibleConstructorReturn3['default'])(this, (Portal.__proto__ || Object.getPrototypeOf(Portal)).apply(this, arguments));
-	  }
-	
-	  (0, _createClass3['default'])(Portal, [{
-	    key: 'componentDidMount',
-	    value: function componentDidMount() {
-	      this.createContainer();
-	    }
-	  }, {
-	    key: 'componentDidUpdate',
-	    value: function componentDidUpdate(prevProps) {
-	      var didUpdate = this.props.didUpdate;
-	
-	      if (didUpdate) {
-	        didUpdate(prevProps);
-	      }
-	    }
-	  }, {
-	    key: 'componentWillUnmount',
-	    value: function componentWillUnmount() {
-	      this.removeContainer();
-	    }
-	  }, {
-	    key: 'createContainer',
-	    value: function createContainer() {
-	      this._container = this.props.getContainer();
-	      this.forceUpdate();
-	    }
-	  }, {
-	    key: 'removeContainer',
-	    value: function removeContainer() {
-	      if (this._container) {
-	        this._container.parentNode.removeChild(this._container);
-	      }
-	    }
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      if (this._container) {
-	        return (0, _reactDom.createPortal)(this.props.children, this._container);
-	      }
-	      return null;
-	    }
-	  }]);
-	  return Portal;
-	}(_react2['default'].Component);
-	
-	Portal.propTypes = {
-	  getContainer: _propTypes2['default'].func.isRequired,
-	  children: _propTypes2['default'].node.isRequired,
-	  didUpdate: _propTypes2['default'].func
-	};
-	exports['default'] = Portal;
-	module.exports = exports['default'];
-
-/***/ }),
-/* 390 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
 	var _defineProperty2 = __webpack_require__(352);
 	
 	var _defineProperty3 = _interopRequireDefault(_defineProperty2);
@@ -41005,11 +40839,11 @@
 	
 	var _propTypes2 = _interopRequireDefault(_propTypes);
 	
-	var _Header = __webpack_require__(391);
+	var _Header = __webpack_require__(390);
 	
 	var _Header2 = _interopRequireDefault(_Header);
 	
-	var _Combobox = __webpack_require__(392);
+	var _Combobox = __webpack_require__(391);
 	
 	var _Combobox2 = _interopRequireDefault(_Combobox);
 	
@@ -41211,7 +41045,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 391 */
+/* 390 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -41475,7 +41309,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 392 */
+/* 391 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -41508,7 +41342,7 @@
 	
 	var _propTypes2 = _interopRequireDefault(_propTypes);
 	
-	var _Select = __webpack_require__(393);
+	var _Select = __webpack_require__(392);
 	
 	var _Select2 = _interopRequireDefault(_Select);
 	
@@ -41757,7 +41591,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 393 */
+/* 392 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -41959,16 +41793,16 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 394 */
+/* 393 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	'use strict';
+	"use strict";
 	
 	Object.defineProperty(exports, "__esModule", {
-	    value: true
+	  value: true
 	});
 	
-	var _MonthCalendar = __webpack_require__(395);
+	var _MonthCalendar = __webpack_require__(394);
 	
 	var _MonthCalendar2 = _interopRequireDefault(_MonthCalendar);
 	
@@ -41997,92 +41831,82 @@
 	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                */
 	
 	var MonthPicker = function (_Component) {
-	    _inherits(MonthPicker, _Component);
+	  _inherits(MonthPicker, _Component);
 	
-	    function MonthPicker(props, context) {
-	        _classCallCheck(this, MonthPicker);
+	  function MonthPicker(props, context) {
+	    _classCallCheck(this, MonthPicker);
 	
-	        var _this = _possibleConstructorReturn(this, _Component.call(this, props, context));
+	    var _this = _possibleConstructorReturn(this, _Component.call(this, props, context));
 	
-	        _this.onChange = function (value) {
-	
-	            _this.setState({
-	                value: value
-	            });
-	        };
-	
-	        _this.onOpenChange = function (open) {
-	            _this.setState({
-	                open: open
-	            });
-	        };
-	
-	        _this.onTypeChange = function (type) {
-	            _this.setState({
-	                type: type
-	            });
-	        };
-	
-	        _this.state = {
-	            type: 'month',
-	            value: props.value,
-	            open: false
-	        };
-	        return _this;
-	    }
-	
-	    MonthPicker.prototype.render = function render() {
-	        var _this2 = this;
-	
-	        var state = this.state;
-	
-	        var props = this.props;
-	
-	        var monthCalendar = _react2["default"].createElement(_MonthCalendar2["default"], props);
-	
-	        return _react2["default"].createElement(
-	            'div',
-	            null,
-	            _react2["default"].createElement(
-	                _Picker2["default"],
-	                {
-	
-	                    onOpenChange: this.onOpenChange,
-	
-	                    animation: 'slide-up',
-	
-	                    calendar: monthCalendar,
-	
-	                    open: this.state.open,
-	
-	                    value: state.value,
-	
-	                    onChange: this.onChange
-	
-	                },
-	                function (_ref) {
-	                    var value = _ref.value;
-	
-	                    return _react2["default"].createElement(_beeFormControl2["default"], {
-	                        placeholder: _this2.props.placeholder,
-	
-	                        className: _this2.props.className,
-	
-	                        value: value && value.format(props.format) || ''
-	                    });
-	                }
-	            )
-	        );
+	    _this.onChange = function (value) {
+	      _this.setState({
+	        value: value
+	      });
 	    };
 	
-	    return MonthPicker;
+	    _this.onOpenChange = function (open) {
+	      _this.setState({
+	        open: open
+	      });
+	    };
+	
+	    _this.onTypeChange = function (type) {
+	      _this.setState({
+	        type: type
+	      });
+	    };
+	
+	    _this.state = {
+	      type: "month",
+	      value: props.value || props.defaultValue,
+	      open: false
+	    };
+	    return _this;
+	  }
+	
+	  MonthPicker.prototype.render = function render() {
+	    var _this2 = this;
+	
+	    var state = this.state;
+	
+	    var props = this.props;
+	
+	    var monthCalendar = _react2["default"].createElement(_MonthCalendar2["default"], props);
+	
+	    return _react2["default"].createElement(
+	      "div",
+	      null,
+	      _react2["default"].createElement(
+	        _Picker2["default"],
+	        {
+	          onOpenChange: this.onOpenChange,
+	          animation: "slide-up",
+	          calendar: monthCalendar,
+	          open: this.state.open,
+	          value: state.value,
+	          onChange: this.onChange
+	        },
+	        function (_ref) {
+	          var value = _ref.value;
+	
+	          return _react2["default"].createElement(_beeFormControl2["default"], {
+	            placeholder: _this2.props.placeholder,
+	            className: _this2.props.className,
+	            value: value && value.format(props.format) || ""
+	          });
+	        }
+	      )
+	    );
+	  };
+	
+	  return MonthPicker;
 	}(_react.Component);
 	
 	exports["default"] = MonthPicker;
-	module.exports = exports['default'];
+	module.exports = exports["default"];
 
 /***/ }),
-/* 395 */
+/* 394 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -42200,20 +42024,20 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 396 */
+/* 395 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	'use strict';
+	"use strict";
 	
 	Object.defineProperty(exports, "__esModule", {
-	    value: true
+	  value: true
 	});
 	
 	var _react = __webpack_require__(4);
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _RangeCalendar = __webpack_require__(397);
+	var _RangeCalendar = __webpack_require__(396);
 	
 	var _RangeCalendar2 = _interopRequireDefault(_RangeCalendar);
 	
@@ -42225,7 +42049,7 @@
 	
 	var _Picker2 = _interopRequireDefault(_Picker);
 	
-	var _zh_CN = __webpack_require__(416);
+	var _zh_CN = __webpack_require__(415);
 	
 	var _zh_CN2 = _interopRequireDefault(_zh_CN);
 	
@@ -42254,171 +42078,169 @@
 	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                */
 	
 	
-	var format = 'YYYY-MM-DD';
+	var format = "YYYY-MM-DD";
 	
-	var fullFormat = 'YYYY-MM-DD';
+	var fullFormat = "YYYY-MM-DD";
 	
-	var cn = location.search.indexOf('cn') !== -1;
+	var cn = location.search.indexOf("cn") !== -1;
 	
 	var now = (0, _moment2["default"])();
 	if (cn) {
-	    now.locale('zh-cn').utcOffset(8);
+	  now.locale("zh-cn").utcOffset(8);
 	} else {
-	    now.locale('en-gb').utcOffset(0);
+	  now.locale("en-gb").utcOffset(0);
 	}
 	
 	var Picker = function (_Component) {
-	    _inherits(Picker, _Component);
+	  _inherits(Picker, _Component);
 	
-	    function Picker(props, context) {
-	        _classCallCheck(this, Picker);
+	  function Picker(props, context) {
+	    _classCallCheck(this, Picker);
 	
-	        var _this = _possibleConstructorReturn(this, _Component.call(this, props, context));
+	    var _this = _possibleConstructorReturn(this, _Component.call(this, props, context));
 	
-	        _this.onHoverChange = function (hoverValue) {
-	
-	            _this.setState({ hoverValue: hoverValue });
-	        };
-	
-	        _this.state = {
-	            hoverValue: []
-	        };
-	        return _this;
-	    }
-	
-	    Picker.prototype.render = function render() {
-	        var _this2 = this;
-	
-	        var props = this.props;
-	        var showValue = props.showValue;
-	
-	        var calendar = _react2["default"].createElement(_RangeCalendar2["default"], {
-	            hoverValue: this.state.hoverValue,
-	            onHoverChange: this.onHoverChange,
-	            type: this.props.type,
-	            locale: cn ? _zh_CN2["default"] : _en_US2["default"],
-	            defaultValue: now,
-	            format: format,
-	            onChange: props.onChange,
-	            disabledDate: props.disabledDate
-	        });
-	
-	        return _react2["default"].createElement(
-	            _Picker2["default"],
-	            {
-	                open: this.props.open,
-	                onOpenChange: this.props.onOpenChange,
-	                calendar: calendar,
-	                value: props.value
-	            },
-	            function () {
-	                return _react2["default"].createElement(
-	                    'span',
-	                    null,
-	                    _react2["default"].createElement(_beeFormControl2["default"], {
-	                        placeholder: _this2.props.placeholder,
-	
-	                        value: showValue && showValue.format(fullFormat) || ''
-	                    })
-	                );
-	            }
-	        );
+	    _this.onHoverChange = function (hoverValue) {
+	      _this.setState({ hoverValue: hoverValue });
 	    };
 	
-	    return Picker;
+	    _this.state = {
+	      hoverValue: []
+	    };
+	    return _this;
+	  }
+	
+	  Picker.prototype.render = function render() {
+	    var _this2 = this;
+	
+	    var props = this.props;
+	    var showValue = props.showValue;
+	
+	    var calendar = _react2["default"].createElement(_RangeCalendar2["default"], {
+	      hoverValue: this.state.hoverValue,
+	      onHoverChange: this.onHoverChange,
+	      type: this.props.type,
+	      locale: cn ? _zh_CN2["default"] : _en_US2["default"],
+	      defaultValue: now,
+	      format: format,
+	      onChange: props.onChange,
+	      disabledDate: props.disabledDate
+	    });
+	
+	    return _react2["default"].createElement(
+	      _Picker2["default"],
+	      {
+	        open: this.props.open,
+	        onOpenChange: this.props.onOpenChange,
+	        calendar: calendar,
+	        value: props.value
+	      },
+	      function () {
+	        return _react2["default"].createElement(
+	          "span",
+	          null,
+	          _react2["default"].createElement(_beeFormControl2["default"], {
+	            placeholder: _this2.props.placeholder,
+	            value: showValue && showValue.format(fullFormat) || ""
+	          })
+	        );
+	      }
+	    );
+	  };
+	
+	  return Picker;
 	}(_react.Component);
 	
 	var RangePicker = function (_Component2) {
-	    _inherits(RangePicker, _Component2);
+	  _inherits(RangePicker, _Component2);
 	
-	    function RangePicker(props, context) {
-	        _classCallCheck(this, RangePicker);
+	  function RangePicker(props, context) {
+	    _classCallCheck(this, RangePicker);
 	
-	        var _this3 = _possibleConstructorReturn(this, _Component2.call(this, props, context));
+	    var _this3 = _possibleConstructorReturn(this, _Component2.call(this, props, context));
 	
-	        _this3.onStartOpenChange = function (startOpen) {
-	            _this3.setState({
-	                startOpen: startOpen
-	            });
-	        };
-	
-	        _this3.onEndOpenChange = function (endOpen) {
-	            _this3.setState({
-	                endOpen: endOpen
-	            });
-	        };
-	
-	        _this3.onStartChange = function (value) {
-	            _this3.setState({
-	                startValue: value[0],
-	                startOpen: false,
-	                endOpen: true
-	            });
-	        };
-	
-	        _this3.onEndChange = function (value) {
-	            _this3.setState({
-	                endValue: value[1]
-	            });
-	        };
-	
-	        _this3.disabledStartDate = function (endValue) {
-	            if (!endValue) {
-	                return false;
-	            }
-	            var startValue = _this3.state.startValue;
-	            if (!startValue) {
-	                return false;
-	            }
-	            return endValue.diff(startValue, 'days') < 0;
-	        };
-	
-	        _this3.state = {
-	            startValue: null,
-	            endValue: null,
-	            startOpen: false,
-	            endOpen: false
-	        };
-	        return _this3;
-	    }
-	
-	    RangePicker.prototype.render = function render() {
-	        var state = this.state;
-	        return _react2["default"].createElement(
-	            'div',
-	            null,
-	            '\u5F00\u59CB\u65F6\u95F4\uFF1A',
-	            _react2["default"].createElement(Picker, {
-	                onOpenChange: this.onStartOpenChange,
-	                type: 'start',
-	                showValue: state.startValue,
-	                open: this.state.startOpen,
-	                value: [state.startValue, state.endValue],
-	                onChange: this.onStartChange,
-	                placeholder: this.props.placeholder
-	            }),
-	            '\u7ED3\u675F\u65F6\u95F4\uFF1A',
-	            _react2["default"].createElement(Picker, {
-	                onOpenChange: this.onEndOpenChange,
-	                open: this.state.endOpen,
-	                type: 'end',
-	                showValue: state.endValue,
-	                disabledDate: this.disabledStartDate,
-	                value: [state.startValue, state.endValue],
-	                onChange: this.onEndChange,
-	                placeholder: this.props.placeholder
-	            })
-	        );
+	    _this3.onStartOpenChange = function (startOpen) {
+	      _this3.setState({
+	        startOpen: startOpen
+	      });
 	    };
 	
-	    return RangePicker;
+	    _this3.onEndOpenChange = function (endOpen) {
+	      _this3.setState({
+	        endOpen: endOpen
+	      });
+	    };
+	
+	    _this3.onStartChange = function (value) {
+	      _this3.setState({
+	        startValue: value[0],
+	        startOpen: false,
+	        endOpen: true
+	      });
+	    };
+	
+	    _this3.onEndChange = function (value) {
+	      _this3.setState({
+	        endValue: value[1]
+	      });
+	    };
+	
+	    _this3.disabledStartDate = function (endValue) {
+	      if (!endValue) {
+	        return false;
+	      }
+	      var startValue = _this3.state.startValue;
+	      if (!startValue) {
+	        return false;
+	      }
+	      return endValue.diff(startValue, "days") < 0;
+	    };
+	
+	    _this3.state = {
+	      startValue: null,
+	      endValue: null,
+	      startOpen: false,
+	      endOpen: false
+	    };
+	    return _this3;
+	  }
+	
+	  RangePicker.prototype.render = function render() {
+	    var state = this.state;
+	    return _react2["default"].createElement(
+	      "div",
+	      null,
+	      "\u5F00\u59CB\u65F6\u95F4\uFF1A",
+	      _react2["default"].createElement(Picker, {
+	        onOpenChange: this.onStartOpenChange,
+	        type: "start",
+	        showValue: state.startValue,
+	        open: this.state.startOpen,
+	        value: [state.startValue, state.endValue],
+	        onChange: this.onStartChange,
+	        placeholder: this.props.placeholder
+	      }),
+	      "\u7ED3\u675F\u65F6\u95F4\uFF1A",
+	      _react2["default"].createElement(Picker, {
+	        onOpenChange: this.onEndOpenChange,
+	        open: this.state.endOpen,
+	        type: "end",
+	        showValue: state.endValue,
+	        disabledDate: this.disabledStartDate,
+	        value: [state.startValue, state.endValue],
+	        onChange: this.onEndChange,
+	        placeholder: this.props.placeholder
+	      })
+	    );
+	  };
+	
+	  return RangePicker;
 	}(_react.Component);
 	
 	exports["default"] = RangePicker;
-	module.exports = exports['default'];
+	module.exports = exports["default"];
 
 /***/ }),
-/* 397 */
+/* 396 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -42435,11 +42257,11 @@
 	
 	var _defineProperty3 = _interopRequireDefault(_defineProperty2);
 	
-	var _toConsumableArray2 = __webpack_require__(398);
+	var _toConsumableArray2 = __webpack_require__(397);
 	
 	var _toConsumableArray3 = _interopRequireDefault(_toConsumableArray2);
 	
-	var _slicedToArray2 = __webpack_require__(408);
+	var _slicedToArray2 = __webpack_require__(407);
 	
 	var _slicedToArray3 = _interopRequireDefault(_slicedToArray2);
 	
@@ -42463,7 +42285,7 @@
 	
 	var _classnames3 = _interopRequireDefault(_classnames2);
 	
-	var _CalendarPart = __webpack_require__(415);
+	var _CalendarPart = __webpack_require__(414);
 	
 	var _CalendarPart2 = _interopRequireDefault(_CalendarPart);
 	
@@ -43043,14 +42865,14 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 398 */
+/* 397 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
 	
 	exports.__esModule = true;
 	
-	var _from = __webpack_require__(399);
+	var _from = __webpack_require__(398);
 	
 	var _from2 = _interopRequireDefault(_from);
 	
@@ -43069,35 +42891,35 @@
 	};
 
 /***/ }),
+/* 398 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	module.exports = { "default": __webpack_require__(399), __esModule: true };
+
+/***/ }),
 /* 399 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	module.exports = { "default": __webpack_require__(400), __esModule: true };
-
-/***/ }),
-/* 400 */
-/***/ (function(module, exports, __webpack_require__) {
-
 	__webpack_require__(189);
-	__webpack_require__(401);
+	__webpack_require__(400);
 	module.exports = __webpack_require__(41).Array.from;
 
 
 /***/ }),
-/* 401 */
+/* 400 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 	var ctx = __webpack_require__(42);
 	var $export = __webpack_require__(39);
 	var toObject = __webpack_require__(177);
-	var call = __webpack_require__(402);
-	var isArrayIter = __webpack_require__(403);
+	var call = __webpack_require__(401);
+	var isArrayIter = __webpack_require__(402);
 	var toLength = __webpack_require__(63);
-	var createProperty = __webpack_require__(404);
-	var getIterFn = __webpack_require__(405);
+	var createProperty = __webpack_require__(403);
+	var getIterFn = __webpack_require__(404);
 	
-	$export($export.S + $export.F * !__webpack_require__(407)(function (iter) { Array.from(iter); }), 'Array', {
+	$export($export.S + $export.F * !__webpack_require__(406)(function (iter) { Array.from(iter); }), 'Array', {
 	  // 22.1.2.1 Array.from(arrayLike, mapfn = undefined, thisArg = undefined)
 	  from: function from(arrayLike /* , mapfn = undefined, thisArg = undefined */) {
 	    var O = toObject(arrayLike);
@@ -43127,7 +42949,7 @@
 
 
 /***/ }),
-/* 402 */
+/* 401 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	// call something on iterator step with safe closing on error
@@ -43145,7 +42967,7 @@
 
 
 /***/ }),
-/* 403 */
+/* 402 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	// check on default Array iterator
@@ -43159,7 +42981,7 @@
 
 
 /***/ }),
-/* 404 */
+/* 403 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -43173,10 +42995,10 @@
 
 
 /***/ }),
-/* 405 */
+/* 404 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var classof = __webpack_require__(406);
+	var classof = __webpack_require__(405);
 	var ITERATOR = __webpack_require__(200)('iterator');
 	var Iterators = __webpack_require__(194);
 	module.exports = __webpack_require__(41).getIteratorMethod = function (it) {
@@ -43187,7 +43009,7 @@
 
 
 /***/ }),
-/* 406 */
+/* 405 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	// getting tag from 19.1.3.6 Object.prototype.toString()
@@ -43216,7 +43038,7 @@
 
 
 /***/ }),
-/* 407 */
+/* 406 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var ITERATOR = __webpack_require__(200)('iterator');
@@ -43244,18 +43066,18 @@
 
 
 /***/ }),
-/* 408 */
+/* 407 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
 	
 	exports.__esModule = true;
 	
-	var _isIterable2 = __webpack_require__(409);
+	var _isIterable2 = __webpack_require__(408);
 	
 	var _isIterable3 = _interopRequireDefault(_isIterable2);
 	
-	var _getIterator2 = __webpack_require__(412);
+	var _getIterator2 = __webpack_require__(411);
 	
 	var _getIterator3 = _interopRequireDefault(_getIterator2);
 	
@@ -43300,25 +43122,25 @@
 	}();
 
 /***/ }),
+/* 408 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	module.exports = { "default": __webpack_require__(409), __esModule: true };
+
+/***/ }),
 /* 409 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	module.exports = { "default": __webpack_require__(410), __esModule: true };
+	__webpack_require__(202);
+	__webpack_require__(189);
+	module.exports = __webpack_require__(410);
+
 
 /***/ }),
 /* 410 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	__webpack_require__(202);
-	__webpack_require__(189);
-	module.exports = __webpack_require__(411);
-
-
-/***/ }),
-/* 411 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	var classof = __webpack_require__(406);
+	var classof = __webpack_require__(405);
 	var ITERATOR = __webpack_require__(200)('iterator');
 	var Iterators = __webpack_require__(194);
 	module.exports = __webpack_require__(41).isIterable = function (it) {
@@ -43331,26 +43153,26 @@
 
 
 /***/ }),
+/* 411 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	module.exports = { "default": __webpack_require__(412), __esModule: true };
+
+/***/ }),
 /* 412 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	module.exports = { "default": __webpack_require__(413), __esModule: true };
+	__webpack_require__(202);
+	__webpack_require__(189);
+	module.exports = __webpack_require__(413);
+
 
 /***/ }),
 /* 413 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	__webpack_require__(202);
-	__webpack_require__(189);
-	module.exports = __webpack_require__(414);
-
-
-/***/ }),
-/* 414 */
-/***/ (function(module, exports, __webpack_require__) {
-
 	var anObject = __webpack_require__(46);
-	var get = __webpack_require__(405);
+	var get = __webpack_require__(404);
 	module.exports = __webpack_require__(41).getIterator = function (it) {
 	  var iterFn = get(it);
 	  if (typeof iterFn != 'function') throw TypeError(it + ' is not iterable!');
@@ -43359,7 +43181,7 @@
 
 
 /***/ }),
-/* 415 */
+/* 414 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -43516,7 +43338,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 416 */
+/* 415 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -43553,13 +43375,13 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 417 */
+/* 416 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	'use strict';
+	"use strict";
 	
 	Object.defineProperty(exports, "__esModule", {
-	    value: true
+	  value: true
 	});
 	
 	var _rcCalendar = __webpack_require__(169);
@@ -43578,7 +43400,7 @@
 	
 	var _beeFormControl2 = _interopRequireDefault(_beeFormControl);
 	
-	var _zh_CN = __webpack_require__(416);
+	var _zh_CN = __webpack_require__(415);
 	
 	var _zh_CN2 = _interopRequireDefault(_zh_CN);
 	
@@ -43606,147 +43428,150 @@
 	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * Created by chief on 17/4/6.
 	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                */
 	
-	var cn = location.search.indexOf('cn') !== -1;
+	var cn = location.search.indexOf("cn") !== -1;
 	
 	var now = (0, _moment2["default"])();
 	if (cn) {
-	    now.locale('zh-cn').utcOffset(8);
+	  now.locale("zh-cn").utcOffset(8);
 	} else {
-	    now.locale('en-gb').utcOffset(0);
+	  now.locale("en-gb").utcOffset(0);
 	}
 	
-	var format = 'YYYY-Wo';
+	var format = "YYYY-Wo";
 	
-	var style = '\n.week-calendar {\n  width: 386px;\n}\n.week-calendar .rc-calendar-tbody > tr:hover\n.rc-calendar-date {\n  background: #ebfaff;\n}\n\n.week-calendar .rc-calendar-tbody > tr:hover\n.rc-calendar-selected-day .rc-calendar-date {\n    background: #3fc7fa;\n}\n\n.week-calendar .week-calendar-sidebar {\n  position:absolute;\n  top:0;\n  left:0;\n  bottom:0;\n  width:100px;\n  border-right: 1px solid #ccc;\n}\n.week-calendar .rc-calendar-panel {\n  margin-left: 100px;\n}\n';
+	var style = "\n.week-calendar {\n  width: 386px;\n}\n.week-calendar .rc-calendar-tbody > tr:hover\n.rc-calendar-date {\n  background: #ebfaff;\n}\n\n.week-calendar .rc-calendar-tbody > tr:hover\n.rc-calendar-selected-day .rc-calendar-date {\n    background: #3fc7fa;\n}\n\n.week-calendar .week-calendar-sidebar {\n  position:absolute;\n  top:0;\n  left:0;\n  bottom:0;\n  width:100px;\n  border-right: 1px solid #ccc;\n}\n.week-calendar .rc-calendar-panel {\n  margin-left: 100px;\n}\n";
 	
 	var WeekPicker = function (_Component) {
-	    _inherits(WeekPicker, _Component);
+	  _inherits(WeekPicker, _Component);
 	
-	    function WeekPicker(props, context) {
-	        _classCallCheck(this, WeekPicker);
+	  function WeekPicker(props, context) {
+	    _classCallCheck(this, WeekPicker);
 	
-	        var _this = _possibleConstructorReturn(this, _Component.call(this, props, context));
+	    var _this = _possibleConstructorReturn(this, _Component.call(this, props, context));
 	
-	        _this.onChange = function (value) {
-	
-	            _this.setState({
-	                value: value
-	            });
-	        };
-	
-	        _this.onOpenChange = function (open) {
-	            _this.setState({
-	                open: open
-	            });
-	        };
-	
-	        _this.dateRender = function (current) {
-	            var selectedValue = _this.state.value;
-	            if (selectedValue && current.year() === selectedValue.year() && current.week() === selectedValue.week()) {
-	                return _react2["default"].createElement(
-	                    'div',
-	                    { className: 'rc-calendar-selected-day' },
-	                    _react2["default"].createElement(
-	                        'div',
-	                        { className: 'rc-calendar-date' },
-	                        current.date()
-	                    )
-	                );
-	            }
-	            return _react2["default"].createElement(
-	                'div',
-	                { className: 'rc-calendar-date' },
-	                current.date()
-	            );
-	        };
-	
-	        _this.lastWeek = function () {
-	            var value = _this.state.value || now;
-	            value.add(-1, 'weeks');
-	            _this.setState({
-	                value: value,
-	                open: false
-	            });
-	        };
-	
-	        _this.renderSidebar = function () {
-	            return _react2["default"].createElement(
-	                'div',
-	                { className: 'week-calendar-sidebar', key: 'sidebar' },
-	                _react2["default"].createElement(
-	                    'button',
-	                    { className: 'week-calendar-sidebar-button', onClick: _this.lastWeek.bind(_this), style: { margin: 8 } },
-	                    '\u4E0A\u4E00\u5468'
-	                )
-	            );
-	        };
-	
-	        _this.onTypeChange = function (type) {
-	            _this.setState({
-	                type: type
-	            });
-	        };
-	
-	        _this.state = {
-	            value: undefined,
-	            open: false
-	        };
-	        return _this;
-	    }
-	
-	    WeekPicker.prototype.render = function render() {
-	        var _this2 = this;
-	
-	        var state = this.state;
-	        var calendar = _react2["default"].createElement(_rcCalendar2["default"], {
-	            className: 'week-calendar',
-	            showWeekNumber: true,
-	            renderSidebar: this.renderSidebar,
-	            dateRender: this.dateRender,
-	            locale: cn ? _zh_CN2["default"] : _en_US2["default"],
-	            format: format,
-	            dateInputPlaceholder: this.props.placeholder,
-	            defaultValue: now,
-	            showDateInput: true
-	        });
-	        return _react2["default"].createElement(
-	            'div',
-	            null,
-	            _react2["default"].createElement('style', { dangerouslySetInnerHTML: { __html: style } }),
-	            _react2["default"].createElement(
-	                _Picker2["default"],
-	                {
-	                    onOpenChange: this.onOpenChange,
-	                    open: this.state.open,
-	                    animation: 'slide-up',
-	                    calendar: calendar,
-	                    value: state.value,
-	                    onChange: this.onChange
-	                },
-	                function (_ref) {
-	                    var value = _ref.value;
-	
-	                    return _react2["default"].createElement(_beeFormControl2["default"], {
-	                        placeholder: _this2.props.placeholder,
-	                        disabled: state.disabled,
-	                        readOnly: true,
-	                        tabIndex: '-1',
-	                        className: _this2.props.className,
-	                        value: value && value.format(format) || ''
-	                    });
-	                }
-	            )
-	        );
+	    _this.onChange = function (value) {
+	      _this.setState({
+	        value: value
+	      });
 	    };
 	
-	    return WeekPicker;
+	    _this.onOpenChange = function (open) {
+	      _this.setState({
+	        open: open
+	      });
+	    };
+	
+	    _this.dateRender = function (current) {
+	      var selectedValue = _this.state.value;
+	      if (selectedValue && current.year() === selectedValue.year() && current.week() === selectedValue.week()) {
+	        return _react2["default"].createElement(
+	          "div",
+	          { className: "rc-calendar-selected-day" },
+	          _react2["default"].createElement(
+	            "div",
+	            { className: "rc-calendar-date" },
+	            current.date()
+	          )
+	        );
+	      }
+	      return _react2["default"].createElement(
+	        "div",
+	        { className: "rc-calendar-date" },
+	        current.date()
+	      );
+	    };
+	
+	    _this.lastWeek = function () {
+	      var value = _this.state.value || now;
+	      value.add(-1, "weeks");
+	      _this.setState({
+	        value: value,
+	        open: false
+	      });
+	    };
+	
+	    _this.renderSidebar = function () {
+	      return _react2["default"].createElement(
+	        "div",
+	        { className: "week-calendar-sidebar", key: "sidebar" },
+	        _react2["default"].createElement(
+	          "button",
+	          {
+	            className: "week-calendar-sidebar-button",
+	            onClick: _this.lastWeek.bind(_this),
+	            style: { margin: 8 }
+	          },
+	          "\u4E0A\u4E00\u5468"
+	        )
+	      );
+	    };
+	
+	    _this.onTypeChange = function (type) {
+	      _this.setState({
+	        type: type
+	      });
+	    };
+	
+	    _this.state = {
+	      value: props.value || props.defaultValue,
+	      open: false
+	    };
+	    return _this;
+	  }
+	
+	  WeekPicker.prototype.render = function render() {
+	    var _this2 = this;
+	
+	    var state = this.state;
+	    var calendar = _react2["default"].createElement(_rcCalendar2["default"], {
+	      className: "week-calendar",
+	      showWeekNumber: true,
+	      renderSidebar: this.renderSidebar,
+	      dateRender: this.dateRender,
+	      locale: cn ? _zh_CN2["default"] : _en_US2["default"],
+	      format: format,
+	      dateInputPlaceholder: this.props.placeholder,
+	      defaultValue: now,
+	      showDateInput: true
+	    });
+	    return _react2["default"].createElement(
+	      "div",
+	      null,
+	      _react2["default"].createElement("style", { dangerouslySetInnerHTML: { __html: style } }),
+	      _react2["default"].createElement(
+	        _Picker2["default"],
+	        {
+	          onOpenChange: this.onOpenChange,
+	          open: this.state.open,
+	          animation: "slide-up",
+	          calendar: calendar,
+	          value: state.value,
+	          onChange: this.onChange
+	        },
+	        function (_ref) {
+	          var value = _ref.value;
+	
+	          return _react2["default"].createElement(_beeFormControl2["default"], {
+	            placeholder: _this2.props.placeholder,
+	            disabled: state.disabled,
+	            readOnly: true,
+	            tabIndex: "-1",
+	            className: _this2.props.className,
+	            value: value && value.format(format) || ""
+	          });
+	        }
+	      )
+	    );
+	  };
+	
+	  return WeekPicker;
 	}(_react.Component);
 	
 	exports["default"] = WeekPicker;
-	module.exports = exports['default'];
+	module.exports = exports["default"];
 
 /***/ }),
-/* 418 */
+/* 417 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -43755,7 +43580,7 @@
 	  value: true
 	});
 	
-	var _Checkbox = __webpack_require__(419);
+	var _Checkbox = __webpack_require__(418);
 	
 	var _Checkbox2 = _interopRequireDefault(_Checkbox);
 	
@@ -43765,7 +43590,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 419 */
+/* 418 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -43922,7 +43747,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 420 */
+/* 419 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -43931,7 +43756,7 @@
 	  value: true
 	});
 	
-	var _Switch = __webpack_require__(421);
+	var _Switch = __webpack_require__(420);
 	
 	var _Switch2 = _interopRequireDefault(_Switch);
 	
@@ -43941,7 +43766,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 421 */
+/* 420 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -43949,6 +43774,8 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 	
 	var _react = __webpack_require__(4);
 	
@@ -43969,6 +43796,8 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 	
 	function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
+	
+	function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
@@ -44006,26 +43835,25 @@
 	    _initialiseProps.call(_this);
 	
 	    var checked = false;
-	    if ("checked" in _this.props) {
-	      checked = !!_this.props.checked;
+	    if ('checked' in props) {
+	      checked = !!props.checked;
+	    } else if ('defaultValue' in props) {
+	      checked = !!props.defaultValue;
 	    } else {
-	      checked = !!_this.props.defaultChecked;
+	      checked = !!props.defaultChecked;
 	    }
-	    _this.state = {
-	      checked: checked
-	    };
+	    _this.state = { checked: checked };
 	    return _this;
 	  }
 	
 	  Switch.prototype.componentWillReceiveProps = function componentWillReceiveProps(nextProps, nextState) {
-	    if (nextProps.checked) {
-	      this.setState({ checked: nextProps.checked });
-	    } else if (nextProps.defaultChecked) {
-	      this.setState({ checked: nextProps.defaultChecked });
+	    if ("checked" in nextProps) {
+	      this.setState({ checked: !!nextProps.checked });
 	    }
 	  };
-	
 	  //点击switch改变状态
+	
+	  // Handle auto focus when click switch in Chrome
 	
 	
 	  Switch.prototype.render = function render() {
@@ -44036,8 +43864,11 @@
 	        size = _props.size,
 	        className = _props.className,
 	        clsPrefix = _props.clsPrefix,
-	        colors = _props.colors;
+	        disabled = _props.disabled,
+	        colors = _props.colors,
+	        others = _objectWithoutProperties(_props, ["checkedChildren", "unCheckedChildren", "onChangeHandler", "size", "className", "clsPrefix", "disabled", "colors"]);
 	    //获取checked
+	
 	
 	    var checked = this.state.checked;
 	    var classes = {
@@ -44049,15 +43880,20 @@
 	    if (colors) {
 	      classes[clsPrefix + "-" + colors] = true;
 	    }
+	    classes[[clsPrefix + "-disabled"]] = disabled;
+	
 	    var classNames = (0, _classnames2["default"])(clsPrefix, classes);
 	
 	    return _react2["default"].createElement(
 	      "span",
-	      {
+	      _extends({}, others, {
+	        ref: this.saveNode,
 	        onClick: this.clickHandler,
+	        onKeyDown: this.handleKeyDown,
+	        onMouseUp: this.handleMouseUp,
 	        className: (0, _classnames2["default"])(className, classNames),
-	        tabIndex: "0"
-	      },
+	        tabIndex: disabled ? -1 : 0
+	      }),
 	      _react2["default"].createElement(
 	        "span",
 	        { className: clsPrefix + "-inner" },
@@ -44072,16 +43908,48 @@
 	var _initialiseProps = function _initialiseProps() {
 	  var _this2 = this;
 	
-	  this.clickHandler = function () {
-	    if (_this2.props.checked != undefined) {
+	  this.setChecked = function (checked) {
+	    if (_this2.props.disabled) {
 	      return;
 	    }
-	    var checked = _this2.state.checked;
-	    _this2.setState({
-	      checked: !checked
-	    });
-	    _this2.props.onChangeHandler(!checked);
-	    _this2.props.onChange(!checked);
+	    if (!('checked' in _this2.props)) {
+	      _this2.setState({
+	        checked: checked
+	      });
+	    }
+	    _this2.props.onChangeHandler(checked);
+	    _this2.props.onChange(checked);
+	  };
+	
+	  this.clickHandler = function () {
+	    var checked = !_this2.state.checked;
+	    _this2.setChecked(checked);
+	  };
+	
+	  this.handleKeyDown = function (e) {
+	    if (e.keyCode === 37) {
+	      // Left
+	      _this2.setChecked(false);
+	    } else if (e.keyCode === 39) {
+	      // Right
+	      _this2.setChecked(true);
+	    } else if (e.keyCode === 32 || e.keyCode === 13) {
+	      // Space, Enter
+	      _this2.clickHandler();
+	    }
+	  };
+	
+	  this.handleMouseUp = function (e) {
+	    if (_this2.node) {
+	      _this2.node.blur();
+	    }
+	    if (_this2.props.onMouseUp) {
+	      _this2.props.onMouseUp(e);
+	    }
+	  };
+	
+	  this.saveNode = function (node) {
+	    _this2.node = node;
 	  };
 	};
 	
@@ -44091,7 +43959,7 @@
 	module.exports = exports["default"];
 
 /***/ }),
-/* 422 */
+/* 421 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
