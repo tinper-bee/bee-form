@@ -239,8 +239,8 @@ class FormItem extends Component {
                                         onChange: this.handleChange,
                                         ref: (e) => {
                                             this.input = e
-                                        },
-                                        value:this.state.value
+                                        }
+                                        //value:this.state.value
                                     })
                                 }
                                 {inputAfter?<InputGroup.Addon>{inputAfter}</InputGroup.Addon>:''}
