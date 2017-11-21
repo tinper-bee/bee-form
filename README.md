@@ -78,9 +78,9 @@ export default Demo1;
 |参数|说明|类型|默认值|
 |:---|:-----|:----|:------|
 |isRequire|是否必填|bool|false|
-|errorMessage|错误提示信息|node|"校验失败"|
+|errorMessage|错误提示信息，可传数组，和正则数组一一对应|node/array|"校验失败"|
 |htmlType|数值类型，目前支持 email/tel/IDCard/chinese/password'类型|string|-|
-|reg|校验正则，注：设置 htmlType 后 reg 无效|regExp|-|
+|reg|校验正则，注：设置 htmlType 后 reg 无效。可传数组，和错误信息数组一一对应|regExp/array|-|
 |method|何时校验 change/blur|string|-|
 |blur|失去焦点的回调函数|function|-|
 |change|改变值的回调函数|function|-|
