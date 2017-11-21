@@ -28,7 +28,6 @@ class Demo5 extends Component {
     render() {
         return (
             <div className="demo5">
-                <Button colors="primary" onClick={this.handClick}>主动校验form</Button>
                 <Form useRow={true} showSubmit={false} submitCallBack={(flag,obj)=>this.checkForm(flag,obj,1)} checkFormNow={this.state.checkFormNow}>
                     <FormItem showMast={true}  inline={true} labelMd={2} md={4} labelName="姓名"  isRequire={true} htmlType="chinese" errorMessage="姓名格式错误" method="blur"  >
                         <FormControl  name="name" placeholder="只能输入中文"  />
@@ -46,6 +45,7 @@ class Demo5 extends Component {
                         <FormControl  name="age" />
                     </FormItem>
                 </Form>
+                <Button colors="primary" onClick={this.handClick}>主动校验form</Button>
             </div>
 
         )
