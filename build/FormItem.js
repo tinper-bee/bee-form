@@ -28,6 +28,10 @@ var _beeLabel = require('bee-label');
 
 var _beeLabel2 = _interopRequireDefault(_beeLabel);
 
+var _beeButton = require('bee-button');
+
+var _beeButton2 = _interopRequireDefault(_beeButton);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
@@ -49,12 +53,12 @@ var propTypes = {
     clsPrefix: _propTypes2["default"].string,
     className: _propTypes2["default"].string,
     isRequire: _propTypes2["default"].bool, //是否必填
-    errorMessage: _propTypes2["default"].node, //错误信息
+    errorMessage: _propTypes2["default"].oneOfType([_propTypes2["default"].node, _propTypes2["default"].array]), //错误信息
     htmlType: _propTypes2["default"].oneOf(['email', 'tel', 'IDCard', 'chinese', 'password', null]), //htmlType有值的时候 reg不生效
-    reg: _propTypes2["default"].instanceOf(RegExp), //校验正则
+    reg: _propTypes2["default"].oneOfType([_propTypes2["default"].instanceOf(RegExp), _propTypes2["default"].array]), //校验正则,可传字符串或者数组，如果是数组，需要和errorMessage数组一一对应
     method: _propTypes2["default"].oneOf(['change', 'blur', null]), //校验方式
     blur: _propTypes2["default"].func, //失去焦点的回调,参数为value
-    change: _propTypes2["default"].func, //值改变的回调,参数为value
+    change: _propTypes2["default"].func, //值改变的回调,参数为value当地售后地址
     check: _propTypes2["default"].func, //验证的回调
     checkItem: _propTypes2["default"].func,
     useRow: _propTypes2["default"].func,
@@ -63,9 +67,12 @@ var propTypes = {
     labelClassName: _propTypes2["default"].string, //label样式名
     inputBefore: _propTypes2["default"].node, //input之前的
     inputAfter: _propTypes2["default"].node, //input之后的
+    // inputBeforeSimple:PropTypes.node,//input之前的(参考输入框组的inputGroup.Button，和inputBefore不能同时使用)
+    // inputAfterSimple:PropTypes.node,//input之后的(参考输入框组的inputGroup.Button，和inputAfter不能同时使用)
     mesClassName: _propTypes2["default"].string, //提示信息样式名
     checkInitialValue: _propTypes2["default"].bool, //是否校验初始值，未开放 ...col.propTypes
     showMast: _propTypes2["default"].bool, //是否显示必填项的 *
+    asyncCheck: _propTypes2["default"].func, //自定义校验，返回true则校验成功，false或无返回值则校验失败。参数为{name:xxx,value:xxx}
     xs: _propTypes2["default"].number, //xs显示列数
     sm: _propTypes2["default"].number, //sm显示列数
     md: _propTypes2["default"].number, //md显示列数
@@ -115,10 +122,29 @@ var defaultProps = {
     labelClassName: '',
     inputBefore: '',
     inputAfter: '',
+    // inputBeforeSimple:'',
+    // inputAfterSimple:'',
     mesClassName: '',
     checkInitialValue: false,
     useRow: false,
     showMast: false
+};
+var getDefaultValue = function getDefaultValue(children) {
+    if (children.props.type === 'text' || children.props.type == 'password' || children.props.type == 'textarea') {
+        return children.props.value;
+    } else if (children.props.defaultValue !== undefined) {
+        //select,自定义组件
+        return children.props.defaultValue;
+    } else if (children.props.defaultChecked !== undefined) {
+        //switch
+        return children.props.defaultChecked;
+    } else if (children.props.selectedValue !== undefined) {
+        //radio
+        return children.props.selectedValue;
+    } else if (children.props.value !== undefined) {
+        //datapicker
+        return children.props.value;
+    }
 };
 
 var FormItem = function (_Component) {
@@ -148,11 +174,7 @@ var FormItem = function (_Component) {
         };
 
         _this.handleChange = function (selectV) {
-            var value = selectV || _reactDom2["default"].findDOMNode(_this.input).value || _this.input.props.defaultValue || _this.input.selectedValue;
-            if (_this.input.props && _this.input.props.defaultChecked != undefined) {
-                //checkbox
-                value = selectV;
-            }
+            var value = selectV;
             var name = _reactDom2["default"].findDOMNode(_this.input).name || _this.input.props.name;
             _this.setState({
                 value: value
@@ -175,38 +197,67 @@ var FormItem = function (_Component) {
         _this.itemCheck = function (value, name) {
             var _this$props = _this.props,
                 isRequire = _this$props.isRequire,
-                htmlType = _this$props.htmlType;
+                htmlType = _this$props.htmlType,
+                check = _this$props.check,
+                asyncCheck = _this$props.asyncCheck,
+                errorMessage = _this$props.errorMessage;
 
             var reg = htmlType ? regs[htmlType] : _this.props.reg;
-            var flag = reg.test(value);
             var obj = {
                 "name": name,
-                "verify": flag,
                 "value": value === undefined ? '' : value
             };
-            if (isRequire) {
-                if (value) {
-                    _this.props.check(flag, obj);
-                    return flag;
-                } else {
-                    _this.props.check(false, obj);
-                    return false;
-                }
+            if (typeof asyncCheck == 'function') {
+                var flag = !!asyncCheck(obj);
+                obj.verify = flag;
+                check(flag, obj);
+                return flag;
             } else {
-                _this.props.check(true, obj);
-                return true;
+                if (reg.length) {
+                    var _flag = true;
+                    for (var i = 0; i < reg.length; i++) {
+                        if (!reg[i].test(value)) {
+                            _this.setState({
+                                errorMessage: errorMessage[i]
+                            });
+                            _flag = false;
+                            break;
+                        }
+                    }
+                    obj.verify = _flag;
+                    if (isRequire) {
+                        if (value) {
+                            check(_flag, obj);
+                            return _flag;
+                        } else {
+                            check(false, obj);
+                            return false;
+                        }
+                    } else {
+                        check(true, obj);
+                        return true;
+                    }
+                } else {
+                    var _flag2 = reg.test(value);
+                    obj.verify = _flag2;
+                    if (isRequire) {
+                        if (value) {
+                            check(_flag2, obj);
+                            return _flag2;
+                        } else {
+                            check(false, obj);
+                            return false;
+                        }
+                    } else {
+                        check(true, obj);
+                        return true;
+                    }
+                }
             }
         };
 
         _this.checkSelf = function () {
-            //this.input.props.defaultValue select
-            //this.input.props.selectedValue radio
-            //this.input.props.value datapick
-            var value = _reactDom2["default"].findDOMNode(_this.input).value || _this.state.value || _this.input.domValue || _this.input.props && _this.input.props.defaultValue || _this.input.props && _this.input.props.selectedValue || _this.input.props && _this.input.props.value;
-            if (_this.input.props && _this.input.props.defaultChecked != undefined) {
-                //checkbox
-                value = !!_this.state.value;
-            }
+            var value = _this.state.value;
             var name = _reactDom2["default"].findDOMNode(_this.input).name || _this.input.props.name;
             var flag = _this.itemCheck(value, name);
             _this.props.checkItem({
@@ -221,9 +272,10 @@ var FormItem = function (_Component) {
 
         _this.state = {
             hasError: false,
-            value: _this.props.children.props.value || '',
+            value: getDefaultValue(props.children),
             width: 0,
-            maxWidth: '100%'
+            maxWidth: '100%',
+            errorMessage: typeof props.errorMessage == 'string' ? props.errorMessage : props.errorMessage[0]
         };
         return _this;
     }
@@ -263,7 +315,6 @@ var FormItem = function (_Component) {
             useRow = _props.useRow,
             children = _props.children,
             inline = _props.inline,
-            errorMessage = _props.errorMessage,
             className = _props.className,
             clsPrefix = _props.clsPrefix,
             inputBefore = _props.inputBefore,
@@ -376,7 +427,7 @@ var FormItem = function (_Component) {
             _react2["default"].createElement(
                 'div',
                 { className: (0, _classnames2["default"])(clsErrObj), style: { 'marginLeft': this.state.width } },
-                errorMessage
+                this.state.errorMessage
             )
         );
     };
