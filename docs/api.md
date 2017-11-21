@@ -32,8 +32,6 @@
 |mesClassName|校验错误信息的class|string|-|
 |inputBefore|input前缀|node|-|
 |inputAfter|input后缀|node|-|
-|inputBeforeSimple|input前缀((参考[输入框组inputGroup.Button](http://bee.tinper.org/bee-input-group)，和inputBefore不能同时使用))|node|-|
-|inputAfterSimple|input后缀((参考[输入框组inputGroup.Button](http://bee.tinper.org/bee-input-group)，和inputAfter不能同时使用))|node|-|
 |xs|移动设备显示列数(<768px)|number|-|
 |sm|小屏幕桌面设备显示列数(≥768px)|number|-|
 |md|中等屏幕设备显示列数(≥992px)|number|-|

@@ -3,15 +3,6 @@ import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import InputGroup from 'bee-input-group';
-import Label from 'bee-label';
-import Button from 'bee-button';
-const regs = {
-    email: /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/,
-    tel: /^1[3|4|5|7|8]\d{9}$/,
-    IDCard: /^(\d{15}$|^\d{18}$|^\d{17}(\d|X|x))$/,//身份证
-    chinese: /^[\u4e00-\u9fa5]+?$/,//中文校验
-    password: /^[0-9a-zA-Z,.!?`~#$%^&*()-=_+<>'"\[\]\{\}\\\|]{6,15}$/,//6-15位数字英文符号
-};
 const propTypes = {
     clsPrefix:PropTypes.string,
     className:PropTypes.string,
@@ -36,8 +27,8 @@ const propTypes = {
     labelClassName:PropTypes.string,//label样式名
     inputBefore:PropTypes.node,//input之前的
     inputAfter:PropTypes.node,//input之后的
-    // inputBeforeSimple:PropTypes.node,//input之前的(参考输入框组的inputGroup.Button，和inputBefore不能同时使用)
-    // inputAfterSimple:PropTypes.node,//input之后的(参考输入框组的inputGroup.Button，和inputAfter不能同时使用)
+    inputBeforeSimple:PropTypes.node,//input之前的(参考输入框组的inputGroup.Button，和inputBefore不能同时使用)
+    inputAfterSimple:PropTypes.node,//input之后的(参考输入框组的inputGroup.Button，和inputAfter不能同时使用)
     mesClassName:PropTypes.string,//提示信息样式名
     checkInitialValue:PropTypes.bool,//是否校验初始值，未开放 ...col.propTypes
     showMast:PropTypes.bool,//是否显示必填项的 *
@@ -91,32 +82,20 @@ const defaultProps = {
     labelClassName:'',
     inputBefore:'',
     inputAfter:'',
-    // inputBeforeSimple:'',
-    // inputAfterSimple:'',
     mesClassName:'',
     checkInitialValue:false,
     useRow:false,
     showMast:false,
 };
-const getDefaultValue=function(children){
-    if(children.props.type==='text'||children.props.type=='password'||children.props.type=='textarea'){
-        return children.props.value;
-    }else if(children.props.defaultValue!==undefined){//select,自定义组件
-        return children.props.defaultValue;
-    }else if(children.props.defaultChecked!==undefined){//switch
-        return children.props.defaultChecked;
-    }else if(children.props.selectedValue!==undefined){//radio
-        return children.props.selectedValue;
-    }else if(children.props.value!==undefined){//datapicker
-        return children.props.value;
-    }
-}
 class FormItem extends Component {
     constructor(props){
         super(props);
         this.state={
             hasError:false,
-            value:getDefaultValue(props.children),
+            value:(this.props.children.props.type=='text'
+            ||this.props.children.props.type=='password'
+            ||this.props.children.props.type=='textarea')?this.props.children.props.value:
+            (this.props.children.props.defaultValue||this.props.children.props.defaultChecked||this.props.children.props.selectedValue||this.props.children.props.value),
             width:0,
             maxWidth:'100%',
             errorMessage:typeof props.errorMessage=='string'?props.errorMessage:props.errorMessage[0]
@@ -243,6 +222,13 @@ class FormItem extends Component {
      * 触发校验
      */
     checkSelf=()=>{
+        //this.input.props.defaultValue select
+        //this.input.props.selectedValue radio
+        //this.input.props.value datapick
+        // let value=ReactDOM.findDOMNode(this.input).value||this.state.value||this.input.domValue||(this.input.props&&this.input.props.defaultValue)||(this.input.props&&this.input.props.selectedValue)||(this.input.props&&this.input.props.value);
+        // if(this.input.props&&this.input.props.defaultChecked!=undefined){//checkbox
+        //     value=!!this.state.value;
+        // }
         let value=this.state.value;
         let name=ReactDOM.findDOMNode(this.input).name||this.input.props.name;
         let flag=this.itemCheck(value,name);
@@ -258,7 +244,7 @@ class FormItem extends Component {
         })
     }
     render() {
-        const {showMast,useRow,children,inline,className,clsPrefix,inputBefore,inputAfter,mesClassName,labelName,labelClassName}=this.props;
+        const {showMast,useRow,children,inline,className,clsPrefix,inputBefore,inputAfter,inputBeforeSimple,inputAfterSimple,mesClassName,labelName,labelClassName}=this.props;
         let clsObj={};
         clsObj[`${clsPrefix}-item`]=true;
         className?clsObj[className]=true:'';
@@ -282,8 +268,9 @@ class FormItem extends Component {
                                 </Label>
                         }
                         <span className="u-input-group-outer"  style={{'maxWidth':this.state.maxWidth}}>
-                            <InputGroup key={index} >
+                            <InputGroup key={index} simple={!!(inputBeforeSimple||inputAfterSimple)}>
                             {inputBefore?<InputGroup.Addon>{inputBefore}</InputGroup.Addon>:''}
+                            {inputBeforeSimple?<InputGroup.Button>{inputBeforeSimple}</InputGroup.Button>:''}
                                 {
                                     React.cloneElement(children, {
                                         onBlur: this.handleBlur,
@@ -294,6 +281,7 @@ class FormItem extends Component {
                                         value:this.state.value
                                     })
                                 }
+                                {inputAfterSimple?<InputGroup.Button>{inputAfterSimple}</InputGroup.Button>:''}
                                 {inputAfter?<InputGroup.Addon>{inputAfter}</InputGroup.Addon>:''}
                            </InputGroup>
                         </span>

@@ -90,8 +90,8 @@ export default Demo1;
 |showMast|是否显示必输项的*|bool|false|
 |labelClassName|输入框label标签的class|string|-|
 |mesClassName|校验错误信息的class|string|-|
-|inputBefore|input前置标签|node|-|
-|inputBefore|input后置标签|node|-|
+|inputBefore|input前缀|node|-|
+|inputAfter|input后缀|node|-|
 |xs|移动设备显示列数(<768px)|number|-|
 |sm|小屏幕桌面设备显示列数(≥768px)|number|-|
 |md|中等屏幕设备显示列数(≥992px)|number|-|

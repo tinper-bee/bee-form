@@ -67,7 +67,7 @@ class Demo4 extends Component {
                        name="fruit">
                    <Radio value="apple" >苹果</Radio>
                    <Radio value="orange" >橘子</Radio>
-                   <Radio value="watermelon" >柠檬</Radio>
+                   <Radio value="lemon" >柠檬</Radio>
                </Radio.RadioGroup>
                </FormItem>
                <FormItem labelName="时间"  method="change" change={this.timeChange}>
@@ -86,7 +86,7 @@ class Demo4 extends Component {
                    <Switch  name="switch"/>
                </FormItem>
                <FormItem labelName="备注"   method="change" change={this.textareaChange}>
-                   <textarea name="textarea" />
+                   <textarea name="textarea"/>
                </FormItem>
            </Form>
 
