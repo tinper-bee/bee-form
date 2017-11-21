@@ -32,7 +32,7 @@ class Demo3 extends Component {
                     <FormItem showMast={true}  labelName="再次输入密码:" isRequire={true} method="blur" errorMessage="请再次输入密码"  inline={true}>
                         <FormControl name="password2" type="password" placeholder="请再次输入密码" />
                     </FormItem>
-                    <FormItem showMast={true}  showMast={true}  labelName="邮箱:" isRequire={true} method="blur" htmlType="email" errorMessage="邮箱格式错误"  inline={true}>
+                    <FormItem showMast={true}  showMast={true}   labelName="邮箱:" isRequire={true} method="blur" htmlType="email" errorMessage="邮箱格式错误"  inline={true}>
                         <FormControl name="email"  placeholder="请输入邮箱" />
                     </FormItem>
                 </Form>

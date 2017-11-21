@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import InputGroup from 'bee-input-group';
 import Label from 'bee-label';
+import { RegExp } from 'core-js/library/web/timers';
 const regs = {
     email: /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/,
     tel: /^1[3|4|5|7|8]\d{9}$/,
@@ -15,12 +16,18 @@ const propTypes = {
     clsPrefix:PropTypes.string,
     className:PropTypes.string,
     isRequire:PropTypes.bool,//是否必填
-    errorMessage:PropTypes.node,//错误信息
+    errorMessage:PropTypes.oneOfType([
+        PropTypes.node,
+        PropTypes.array
+    ]),//错误信息
     htmlType:PropTypes.oneOf(['email','tel','IDCard','chinese','password',null]),//htmlType有值的时候 reg不生效
-    reg:PropTypes.instanceOf(RegExp),//校验正则
+    reg:PropTypes.oneOfType([
+        PropTypes.instanceOf(RegExp),
+        PropTypes.array
+    ]),//校验正则,可传字符串或者数组，如果是数组，需要和errorMessage数组一一对应
     method:PropTypes.oneOf(['change','blur',null]),//校验方式
     blur:PropTypes.func,//失去焦点的回调,参数为value
-    change:PropTypes.func,//值改变的回调,参数为value
+    change:PropTypes.func,//值改变的回调,参数为value当地售后地址
     check:PropTypes.func,//验证的回调
     checkItem:PropTypes.func,
     useRow:PropTypes.func,
@@ -29,9 +36,12 @@ const propTypes = {
     labelClassName:PropTypes.string,//label样式名
     inputBefore:PropTypes.node,//input之前的
     inputAfter:PropTypes.node,//input之后的
+    inputBeforeSimple:PropTypes.node,//input之前的(参考输入框组的inputGroup.Button，和inputBefore不能同时使用)
+    inputAfterSimple:PropTypes.node,//input之后的(参考输入框组的inputGroup.Button，和inputAfter不能同时使用)
     mesClassName:PropTypes.string,//提示信息样式名
     checkInitialValue:PropTypes.bool,//是否校验初始值，未开放 ...col.propTypes
     showMast:PropTypes.bool,//是否显示必填项的 *
+    asyncCheck:PropTypes.func,//自定义校验，返回true则校验成功，false或无返回值则校验失败。参数为{name:xxx,value:xxx}
     xs:PropTypes.number,//xs显示列数
     sm:PropTypes.number,//sm显示列数
     md:PropTypes.number,//md显示列数
@@ -84,7 +94,7 @@ const defaultProps = {
     mesClassName:'',
     checkInitialValue:false,
     useRow:false,
-    showMast:false
+    showMast:false,
 };
 class FormItem extends Component {
     constructor(props){
@@ -93,7 +103,8 @@ class FormItem extends Component {
             hasError:false,
             value:this.props.children.props.value||'',
             width:0,
-            maxWidth:'100%'
+            maxWidth:'100%',
+            errorMessage:typeof props.errorMessage=='string'?props.errorMessage:props.errorMessage[0]
         }
     }
     componentWillReceiveProps(nextProps){
@@ -131,10 +142,7 @@ class FormItem extends Component {
         this.props.children.props.onBlur&&this.props.children.props.onBlur(value);
     }
     handleChange=(selectV)=>{
-        let value=selectV||ReactDOM.findDOMNode(this.input).value||this.input.props.defaultValue||this.input.selectedValue;
-        if(this.input.props&&this.input.props.defaultChecked!=undefined){//checkbox
-            value=selectV;
-        }
+        let value=selectV;
         let name=ReactDOM.findDOMNode(this.input).name||this.input.props.name;
         this.setState({
             value:value
@@ -161,25 +169,59 @@ class FormItem extends Component {
      * @returns {boolean}
      */
     itemCheck=(value,name)=>{
-        let {isRequire,htmlType}=this.props;
+        let {isRequire,htmlType,check,asyncCheck,errorMessage}=this.props;
         let reg=htmlType?regs[htmlType]:this.props.reg;
-        let flag=reg.test(value);
         let obj={
             "name":name,
-            "verify":flag,
             "value":value===undefined?'':value
         };
-        if(isRequire){
-            if(value){
-                this.props.check(flag,obj);
-                return flag;
-            }else{
-                this.props.check(false,obj);
-                return false;
-            }
+        if(typeof asyncCheck=='function'){
+            let flag=!!asyncCheck(obj);
+            obj.verify=flag;
+            check(flag,obj);
+            return flag;
         }else{
-            this.props.check(true,obj);
-            return true;
+            if(reg.length){
+                let flag=true;
+                for(let i=0;i<reg.length;i++){
+                    if(!reg[i].test(value)){
+                        this.setState({
+                            errorMessage:errorMessage[i]
+                        });
+                        flag=false;
+                        break;
+                    }
+                }
+                obj.verify=flag;
+                if(isRequire){
+                    if(value){
+                        check(flag,obj);
+                        return flag;
+                    }else{
+                        check(false,obj);
+                        return false;
+                    }
+                }else{
+                    check(true,obj);
+                    return true;
+                }
+            }else{
+                let flag=reg.test(value);
+                obj.verify=flag;
+                if(isRequire){
+                    if(value){
+                        check(flag,obj);
+                        return flag;
+                    }else{
+                        check(false,obj);
+                        return false;
+                    }
+                }else{
+                    check(true,obj);
+                    return true;
+                }
+            }
+            
         }
     }
     /**
@@ -207,7 +249,7 @@ class FormItem extends Component {
         })
     }
     render() {
-        const {showMast,useRow,children,inline,errorMessage,className,clsPrefix,inputBefore,inputAfter,mesClassName,labelName,labelClassName}=this.props;
+        const {showMast,useRow,children,inline,className,clsPrefix,inputBefore,inputAfter,inputBeforeSimple,inputAfterSimple,mesClassName,labelName,labelClassName}=this.props;
         let clsObj={};
         clsObj[`${clsPrefix}-item`]=true;
         className?clsObj[className]=true:'';
@@ -231,8 +273,9 @@ class FormItem extends Component {
                                 </Label>
                         }
                         <span className="u-input-group-outer"  style={{'maxWidth':this.state.maxWidth}}>
-                            <InputGroup key={index}>
+                            <InputGroup key={index} simple={!!(inputBeforeSimple||inputAfterSimple)}>
                             {inputBefore?<InputGroup.Addon>{inputBefore}</InputGroup.Addon>:''}
+                            {inputBeforeSimple?<InputGroup.Button>{inputBeforeSimple}</InputGroup.Button>:''}
                                 {
                                     React.cloneElement(children, {
                                         onBlur: this.handleBlur,
@@ -243,6 +286,7 @@ class FormItem extends Component {
                                         value:this.state.value
                                     })
                                 }
+                                {inputAfterSimple?<InputGroup.Button>{inputAfterSimple}</InputGroup.Button>:''}
                                 {inputAfter?<InputGroup.Addon>{inputAfter}</InputGroup.Addon>:''}
                            </InputGroup>
                         </span>
@@ -281,7 +325,7 @@ class FormItem extends Component {
             <div className={classnames(clsObj)}>
                 {childs}
                 <div className={classnames(clsErrObj)} style={{'marginLeft':this.state.width}}>
-                    {errorMessage}
+                    {this.state.errorMessage}
                 </div>
             </div> )
     }

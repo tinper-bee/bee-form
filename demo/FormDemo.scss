@@ -10,12 +10,13 @@ textarea{
   min-height: 100px;
   min-width: 300px;
 }
+.u-form-control{
+  max-width: 500px;
+  width: auto!important;
+}
 .demo1 .u-label{
   position: relative;
   bottom: 8px;
-}
-.u-form-control{
-  max-width: 500px;
 }
 .demo2 .u-label{
   min-width: 70px;
@@ -25,6 +26,17 @@ textarea{
 .demo2 .cancel,.demo3 .cancel{
   margin-left: 20px;
 }
+.demo2 .u-form-submit {
+  padding-left: 70px;
+}
+.demo2 .u-input-group-addon{
+  width: auto;
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: #42a5f5;
+}
+
 .demo3 .u-form .u-label{
   width: 120px;
 }
