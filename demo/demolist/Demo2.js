@@ -24,10 +24,10 @@ class Demo2 extends Component {
             <div className="demo2">
                 <Form   submitCallBack={this.checkForm} afterSubmitBtn={cancel()}>
                     <FormItem showMast={true}  labelName="用户名:" isRequire={true}  errorMessage="请输入用户名" method="blur"  inline={true}>
-                        <FormControl name="username" value="用户名"  placeholder="请输入用户名" />
+                        <FormControl name="username"   placeholder="请输入用户名" />
                     </FormItem>
                     <FormItem showMast={true}  labelName="密码:" isRequire={true} method="blur" errorMessage="请输入密码" inputAfter={<span className='forget'>忘记密码？</span>}  inline={true}>
-                        <FormControl name="password" value="密码" type="password" placeholder="请输入密码" />
+                        <FormControl name="password"  type="password" placeholder="请输入密码" />
                     </FormItem>
                 </Form>
             </div>
