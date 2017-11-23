@@ -32,6 +32,8 @@ var _beeButton = require('bee-button');
 
 var _beeButton2 = _interopRequireDefault(_beeButton);
 
+var _os = require('os');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
@@ -281,6 +283,13 @@ var FormItem = function (_Component) {
     }
 
     FormItem.prototype.componentWillReceiveProps = function componentWillReceiveProps(nextProps) {
+        if (this.props.children.props && this.props.children.props.type == 'text' || this.props.children.props && this.props.children.props.type == 'password') {
+            if (this.props.children.props.value != nextProps.children.props.value) {
+                this.setState({
+                    value: nextProps.children.props.value
+                });
+            }
+        }
         if (nextProps.checkNow && !this.props.checkNow) {
             this.checkSelf();
         }

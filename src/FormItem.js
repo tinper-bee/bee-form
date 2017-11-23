@@ -5,6 +5,7 @@ import classnames from 'classnames';
 import InputGroup from 'bee-input-group';
 import Label from 'bee-label';
 import Button from 'bee-button';
+import { networkInterfaces } from 'os';
 const regs = {
     email: /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/,
     tel: /^1[3|4|5|7|8]\d{9}$/,
@@ -123,6 +124,13 @@ class FormItem extends Component {
         }
     }
     componentWillReceiveProps(nextProps){
+        if((this.props.children.props&&this.props.children.props.type=='text')||(this.props.children.props&&this.props.children.props.type=='password')){
+            if(this.props.children.props.value!=nextProps.children.props.value){
+                this.setState({
+                    value:nextProps.children.props.value
+                })
+            }
+        }
         if(nextProps.checkNow&&(!this.props.checkNow)){
             this.checkSelf();
         }
