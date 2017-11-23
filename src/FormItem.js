@@ -225,8 +225,13 @@ class FormItem extends Component {
                         return false;
                     }
                 }else{
-                    check(true,obj);
-                    return true;
+                    if(value){
+                        check(flag,obj);
+                        return flag;
+                    }else{
+                        check(true,obj);
+                        return true;
+                    }
                 }
             }else{
                 let flag=reg.test(value);
@@ -240,8 +245,13 @@ class FormItem extends Component {
                         return false;
                     }
                 }else{
-                    check(true,obj);
-                    return true;
+                    if(value){
+                        check(flag,obj);
+                        return flag;
+                    }else{
+                        check(true,obj);
+                        return true;
+                    }
                 }
             }
             

@@ -236,8 +236,13 @@ var FormItem = function (_Component) {
                             return false;
                         }
                     } else {
-                        check(true, obj);
-                        return true;
+                        if (value) {
+                            check(_flag, obj);
+                            return _flag;
+                        } else {
+                            check(true, obj);
+                            return true;
+                        }
                     }
                 } else {
                     var _flag2 = reg.test(value);
@@ -251,8 +256,13 @@ var FormItem = function (_Component) {
                             return false;
                         }
                     } else {
-                        check(true, obj);
-                        return true;
+                        if (value) {
+                            check(_flag2, obj);
+                            return _flag2;
+                        } else {
+                            check(true, obj);
+                            return true;
+                        }
                     }
                 }
             }

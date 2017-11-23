@@ -19,8 +19,8 @@
 |:---|:-----|:----|:------|
 |isRequire|是否必填|bool|false|
 |errorMessage|错误提示信息，可传数组，和正则数组一一对应|node/array|"校验失败"|
-|htmlType|数值类型，目前支持 email/tel/IDCard/chinese/password'类型|string|-|
-|reg|校验正则，注：设置 htmlType 后 reg 无效。可传数组，和错误信息数组一一对应|regExp/array|-|
+|htmlType|数值类型，目前支持 `email/tel/IDCard/chinese/password` 类型|string|-|
+|reg|校验正则，注：设置 `htmlType` 后 `reg` 无效；当不设置`isRequire`的时候，如果有值，会使用reg校验，如果值为空，则不校验；可传数组，和错误信息数组一一对应|regExp/array|-|
 |method|何时校验 change/blur|string|-|
 |blur|失去焦点的回调函数|function|-|
 |change|改变值的回调函数|function|-|
@@ -28,7 +28,8 @@
 |inline|是否行内显示，须有`Form`才有效，单个`FormItem`无效|bool|false|
 |labelName|输入框label标签内容|node|-|
 |showMast|是否显示必输项的*|bool|false|
-|labelClassName|输入框label标签的class|string|-|
+|asyncCheck|返回`true`则校验成功，`false`或无返回值则校验失败。参数为{name:xxx,value:xxx},如果使用asyncCheck，则其它校验相关`props`不生效|function|-|
+|labelClassName|输入框`label`标签的class|string|-|
 |mesClassName|校验错误信息的class|string|-|
 |inputBefore|input前缀|node|-|
 |inputAfter|input后缀|node|-|
@@ -71,7 +72,7 @@
 
 
 ### 其它说明
-- ~Form`的子元素中如果有`Button`并且此`Button`的`isSubmit=true`，则可以作为提交按钮
+- `Form`的子元素中如果有`Button`并且此`Button`的`isSubmit=true`，则可以作为提交按钮
 - `Form`整体校验时，会触发`FormItem`的校验
 - `FormItem`的子元素，`name`必须存在且不能重复
 - 组件初期，`FormItem`子元素只能存在一个,可以使用 `FormControl` 或者 `Select`
