@@ -1,3 +1,18 @@
+<a name="1.0.14"></a>
+## [1.0.14](https://github.com/tinper-bee/bee-form/compare/1.0.13...1.0.14) (2017-11-23)
+
+
+### Bug Fixes
+
+* **bee-form:** value bug ([64ff26e](https://github.com/tinper-bee/bee-form/commit/64ff26e))
+
+
+### BREAKING CHANGES
+
+* **bee-form:** 使用formControl时，value改变的bug
+
+
+
 <a name="1.0.13"></a>
 ## [1.0.13](https://github.com/tinper-bee/bee-form/compare/1.0.12...1.0.13) (2017-11-21)
 
