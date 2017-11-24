@@ -129,6 +129,7 @@ export default Demo1;
 ### 自定义组件说明
 - 需要有`onChange`方法，并且参数为改变后的值
 - 默认值为`defaultValue`
+- 需要有`type='customer'`属性，来标识此组件为自定义组件
 
 
 ### 其它说明

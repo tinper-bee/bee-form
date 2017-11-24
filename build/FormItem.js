@@ -34,6 +34,8 @@ var _beeButton2 = _interopRequireDefault(_beeButton);
 
 var _os = require('os');
 
+var _util = require('util');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
@@ -297,6 +299,14 @@ var FormItem = function (_Component) {
             if (this.props.children.props.value != nextProps.children.props.value) {
                 this.setState({
                     value: nextProps.children.props.value
+                });
+            }
+        }
+        if (this.props.children.props && this.props.children.props.type == 'customer') {
+            //自定义组件
+            if (this.props.children.props.defaultValue != nextProps.children.props.defaultValue) {
+                this.setState({
+                    value: nextProps.children.props.defaultValue
                 });
             }
         }

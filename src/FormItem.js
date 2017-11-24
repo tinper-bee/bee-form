@@ -6,6 +6,7 @@ import InputGroup from 'bee-input-group';
 import Label from 'bee-label';
 import Button from 'bee-button';
 import { networkInterfaces } from 'os';
+import { debug } from 'util';
 const regs = {
     email: /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/,
     tel: /^1[3|4|5|7|8]\d{9}$/,
@@ -128,6 +129,13 @@ class FormItem extends Component {
             if(this.props.children.props.value!=nextProps.children.props.value){
                 this.setState({
                     value:nextProps.children.props.value
+                })
+            }
+        }
+        if(this.props.children.props&&this.props.children.props.type=='customer'){//自定义组件
+            if(this.props.children.props.defaultValue!=nextProps.children.props.defaultValue){
+                this.setState({
+                    value:nextProps.children.props.defaultValue
                 })
             }
         }
