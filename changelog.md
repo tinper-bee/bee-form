@@ -1,3 +1,13 @@
+<a name="1.0.16"></a>
+## [1.0.16](https://github.com/tinper-bee/bee-form/compare/1.0.15...1.0.16) (2017-11-24)
+
+
+### Features
+
+* **bee-form:** 自定义组件更新value ([79eb721](https://github.com/tinper-bee/bee-form/commit/79eb721))
+
+
+
 <a name="1.0.15"></a>
 ## [1.0.15](https://github.com/tinper-bee/bee-form/compare/1.0.14...1.0.15) (2017-11-23)
 
