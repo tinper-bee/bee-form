@@ -5,8 +5,7 @@ import classnames from 'classnames';
 import InputGroup from 'bee-input-group';
 import Label from 'bee-label';
 import Button from 'bee-button';
-import { networkInterfaces } from 'os';
-import { debug } from 'util';
+import isEqual from 'lodash.isequal';
 const regs = {
     email: /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/,
     tel: /^1[3|4|5|7|8]\d{9}$/,
@@ -133,7 +132,7 @@ class FormItem extends Component {
             }
         }
         if(this.props.children.props&&this.props.children.props.type=='customer'){//自定义组件
-            if(this.props.children.props.defaultValue!=nextProps.children.props.defaultValue){
+            if(!isEqual(this.props.children.props.defaultValue,nextProps.children.props.defaultValue)){
                 this.setState({
                     value:nextProps.children.props.defaultValue
                 })
@@ -245,7 +244,7 @@ class FormItem extends Component {
                 let flag=reg.test(value);
                 obj.verify=flag;
                 if(isRequire){
-                    if(value){
+                    if(value!=''){
                         check(flag,obj);
                         return flag;
                     }else{
@@ -253,7 +252,7 @@ class FormItem extends Component {
                         return false;
                     }
                 }else{
-                    if(value){
+                    if(value!=''){
                         check(flag,obj);
                         return flag;
                     }else{
@@ -344,7 +343,8 @@ class FormItem extends Component {
                                         onChange: this.handleChange,
                                         ref: (e) => {
                                             this.input = e
-                                        }
+                                        },
+                                        value:this.state.value
                                     })
                                 }
                                 {inputAfter?<InputGroup.Addon>{inputAfter}</InputGroup.Addon>:''}

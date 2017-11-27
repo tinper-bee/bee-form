@@ -32,9 +32,9 @@ var _beeButton = require('bee-button');
 
 var _beeButton2 = _interopRequireDefault(_beeButton);
 
-var _os = require('os');
+var _lodash = require('lodash.isequal');
 
-var _util = require('util');
+var _lodash2 = _interopRequireDefault(_lodash);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
@@ -250,7 +250,7 @@ var FormItem = function (_Component) {
                     var _flag2 = reg.test(value);
                     obj.verify = _flag2;
                     if (isRequire) {
-                        if (value) {
+                        if (value != '') {
                             check(_flag2, obj);
                             return _flag2;
                         } else {
@@ -258,7 +258,7 @@ var FormItem = function (_Component) {
                             return false;
                         }
                     } else {
-                        if (value) {
+                        if (value != '') {
                             check(_flag2, obj);
                             return _flag2;
                         } else {
@@ -304,7 +304,7 @@ var FormItem = function (_Component) {
         }
         if (this.props.children.props && this.props.children.props.type == 'customer') {
             //自定义组件
-            if (this.props.children.props.defaultValue != nextProps.children.props.defaultValue) {
+            if (!(0, _lodash2["default"])(this.props.children.props.defaultValue, nextProps.children.props.defaultValue)) {
                 this.setState({
                     value: nextProps.children.props.defaultValue
                 });
@@ -437,7 +437,8 @@ var FormItem = function (_Component) {
                                 onChange: _this2.handleChange,
                                 ref: function ref(e) {
                                     _this2.input = e;
-                                }
+                                },
+                                value: _this2.state.value
                             }),
                             inputAfter ? _react2["default"].createElement(
                                 _beeInputGroup2["default"].Addon,
