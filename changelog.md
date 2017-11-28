@@ -1,3 +1,13 @@
+<a name="1.0.19"></a>
+## [1.0.19](https://github.com/tinper-bee/bee-form/compare/1.0.18...1.0.19) (2017-11-28)
+
+
+### Bug Fixes
+
+* **bee-form:** 自定义组件  加value ([f827fb7](https://github.com/tinper-bee/bee-form/commit/f827fb7))
+
+
+
 <a name="1.0.18"></a>
 ## [1.0.18](https://github.com/tinper-bee/bee-form/compare/1.0.17...1.0.18) (2017-11-28)
 
