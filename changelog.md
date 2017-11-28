@@ -1,3 +1,13 @@
+<a name="1.0.18"></a>
+## [1.0.18](https://github.com/tinper-bee/bee-form/compare/1.0.17...1.0.18) (2017-11-28)
+
+
+### Bug Fixes
+
+* **bee-form:** 必填项0 false校验修改 ([30929ea](https://github.com/tinper-bee/bee-form/commit/30929ea))
+
+
+
 <a name="1.0.17"></a>
 ## [1.0.17](https://github.com/tinper-bee/bee-form/compare/1.0.16...1.0.17) (2017-11-27)
 
