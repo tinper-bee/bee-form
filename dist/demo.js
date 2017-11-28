@@ -8557,7 +8557,7 @@
 	                    }
 	                    obj.verify = _flag;
 	                    if (isRequire) {
-	                        if (value !== '') {
+	                        if (value != undefined && value !== '') {
 	                            check(_flag, obj);
 	                            return _flag;
 	                        } else {
@@ -8565,7 +8565,7 @@
 	                            return false;
 	                        }
 	                    } else {
-	                        if (value !== '') {
+	                        if (value != undefined && value !== '') {
 	                            check(_flag, obj);
 	                            return _flag;
 	                        } else {
@@ -8577,7 +8577,7 @@
 	                    var _flag2 = reg.test(value);
 	                    obj.verify = _flag2;
 	                    if (isRequire) {
-	                        if (value !== '') {
+	                        if (value != undefined && value !== '') {
 	                            check(_flag2, obj);
 	                            return _flag2;
 	                        } else {
@@ -8585,7 +8585,7 @@
 	                            return false;
 	                        }
 	                    } else {
-	                        if (value !== '') {
+	                        if (value != undefined && value !== '') {
 	                            check(_flag2, obj);
 	                            return _flag2;
 	                        } else {
@@ -8634,6 +8634,11 @@
 	            if (!(0, _lodash2['default'])(this.props.children.props.defaultValue, nextProps.children.props.defaultValue)) {
 	                this.setState({
 	                    value: nextProps.children.props.defaultValue
+	                });
+	            }
+	            if (!(0, _lodash2['default'])(this.props.children.props.value, nextProps.children.props.value)) {
+	                this.setState({
+	                    value: nextProps.children.props.value
 	                });
 	            }
 	        }

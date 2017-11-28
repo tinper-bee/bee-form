@@ -137,6 +137,11 @@ class FormItem extends Component {
                     value:nextProps.children.props.defaultValue
                 })
             }
+            if(!isEqual(this.props.children.props.value,nextProps.children.props.value)){
+                this.setState({
+                    value:nextProps.children.props.value
+                })
+            }
         }
         if(nextProps.checkNow&&(!this.props.checkNow)){
             this.checkSelf();
@@ -224,7 +229,7 @@ class FormItem extends Component {
                 }
                 obj.verify=flag;
                 if(isRequire){
-                    if(value!==''){
+                    if((value!=undefined)&&(value!=='')){
                         check(flag,obj);
                         return flag;
                     }else{
@@ -232,7 +237,7 @@ class FormItem extends Component {
                         return false;
                     }
                 }else{
-                    if(value!==''){
+                    if((value!=undefined)&&(value!=='')){
                         check(flag,obj);
                         return flag;
                     }else{
@@ -244,7 +249,7 @@ class FormItem extends Component {
                 let flag=reg.test(value);
                 obj.verify=flag;
                 if(isRequire){
-                    if(value!==''){
+                    if((value!=undefined)&&(value!=='')){
                         check(flag,obj);
                         return flag;
                     }else{
@@ -252,7 +257,7 @@ class FormItem extends Component {
                         return false;
                     }
                 }else{
-                    if(value!==''){
+                    if((value!=undefined)&&(value!=='')){
                         check(flag,obj);
                         return flag;
                     }else{
