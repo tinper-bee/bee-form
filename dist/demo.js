@@ -8557,7 +8557,7 @@
 	                    }
 	                    obj.verify = _flag;
 	                    if (isRequire) {
-	                        if (value) {
+	                        if (value !== '') {
 	                            check(_flag, obj);
 	                            return _flag;
 	                        } else {
@@ -8565,7 +8565,7 @@
 	                            return false;
 	                        }
 	                    } else {
-	                        if (value) {
+	                        if (value !== '') {
 	                            check(_flag, obj);
 	                            return _flag;
 	                        } else {
@@ -8577,7 +8577,7 @@
 	                    var _flag2 = reg.test(value);
 	                    obj.verify = _flag2;
 	                    if (isRequire) {
-	                        if (value != '') {
+	                        if (value !== '') {
 	                            check(_flag2, obj);
 	                            return _flag2;
 	                        } else {
@@ -8585,7 +8585,7 @@
 	                            return false;
 	                        }
 	                    } else {
-	                        if (value != '') {
+	                        if (value !== '') {
 	                            check(_flag2, obj);
 	                            return _flag2;
 	                        } else {

@@ -230,7 +230,7 @@ var FormItem = function (_Component) {
                     }
                     obj.verify = _flag;
                     if (isRequire) {
-                        if (value) {
+                        if (value !== '') {
                             check(_flag, obj);
                             return _flag;
                         } else {
@@ -238,7 +238,7 @@ var FormItem = function (_Component) {
                             return false;
                         }
                     } else {
-                        if (value) {
+                        if (value !== '') {
                             check(_flag, obj);
                             return _flag;
                         } else {
@@ -250,7 +250,7 @@ var FormItem = function (_Component) {
                     var _flag2 = reg.test(value);
                     obj.verify = _flag2;
                     if (isRequire) {
-                        if (value != '') {
+                        if (value !== '') {
                             check(_flag2, obj);
                             return _flag2;
                         } else {
@@ -258,7 +258,7 @@ var FormItem = function (_Component) {
                             return false;
                         }
                     } else {
-                        if (value != '') {
+                        if (value !== '') {
                             check(_flag2, obj);
                             return _flag2;
                         } else {

@@ -224,7 +224,7 @@ class FormItem extends Component {
                 }
                 obj.verify=flag;
                 if(isRequire){
-                    if(value){
+                    if(value!==''){
                         check(flag,obj);
                         return flag;
                     }else{
@@ -232,7 +232,7 @@ class FormItem extends Component {
                         return false;
                     }
                 }else{
-                    if(value){
+                    if(value!==''){
                         check(flag,obj);
                         return flag;
                     }else{
@@ -244,7 +244,7 @@ class FormItem extends Component {
                 let flag=reg.test(value);
                 obj.verify=flag;
                 if(isRequire){
-                    if(value!=''){
+                    if(value!==''){
                         check(flag,obj);
                         return flag;
                     }else{
@@ -252,7 +252,7 @@ class FormItem extends Component {
                         return false;
                     }
                 }else{
-                    if(value!=''){
+                    if(value!==''){
                         check(flag,obj);
                         return flag;
                     }else{
