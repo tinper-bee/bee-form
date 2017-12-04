@@ -8597,8 +8597,8 @@
 	            }
 	        };
 	
-	        _this.checkSelf = function () {
-	            var value = _this.state.value;
+	        _this.checkSelf = function (v) {
+	            var value = v == undefined ? _this.state.value : v;
 	            var name = _reactDom2['default'].findDOMNode(_this.input).name || _this.input.props.name;
 	            var flag = _this.itemCheck(value, name);
 	            _this.props.checkItem({
@@ -8635,6 +8635,7 @@
 	                this.setState({
 	                    value: nextProps.children.props.defaultValue
 	                });
+	                this.checkSelf(nextProps.children.props.defaultValue);
 	            }
 	            if (!(0, _lodash2['default'])(this.props.children.props.value, nextProps.children.props.value)) {
 	                this.setState({
@@ -11040,8 +11041,7 @@
 	var propTypes = {
 	  componentClass: _propTypes2["default"].oneOfType([_propTypes2["default"].element, _propTypes2["default"].string]),
 	  type: _propTypes2["default"].string,
-	  size: _propTypes2["default"].oneOf(['sm', 'md', 'lg']),
-	  id: _propTypes2["default"].string
+	  size: _propTypes2["default"].oneOf(['sm', 'md', 'lg'])
 	};
 	
 	var defaultProps = {
@@ -11059,7 +11059,7 @@
 	
 	    var _this = _possibleConstructorReturn(this, _React$Component.call(this, props));
 	
-	    _this.onChange = function (e) {
+	    _this.handleChange = function (e) {
 	      var value = e.target.value;
 	      var onChange = _this.props.onChange;
 	
@@ -11096,11 +11096,11 @@
 	    var _props = this.props,
 	        Component = _props.componentClass,
 	        type = _props.type,
-	        id = _props.id,
 	        className = _props.className,
 	        size = _props.size,
 	        clsPrefix = _props.clsPrefix,
-	        others = _objectWithoutProperties(_props, ['componentClass', 'type', 'id', 'className', 'size', 'clsPrefix']);
+	        onChange = _props.onChange,
+	        others = _objectWithoutProperties(_props, ['componentClass', 'type', 'className', 'size', 'clsPrefix', 'onChange']);
 	    // input[type="file"] 不应该有类名 .form-control.
 	
 	
@@ -11124,9 +11124,11 @@
 	        { className: 'u-input-search u-input-affix-wrapper' },
 	        _react2["default"].createElement(Component, _extends({}, others, {
 	          type: type,
-	          onChange: this.onChange,
+	          ref: function ref(el) {
+	            return _this2.input = el;
+	          },
+	          onChange: this.handleChange,
 	          value: this.state.value,
-	          id: id,
 	          className: (0, _classnames2["default"])(className, classNames)
 	        })),
 	        _react2["default"].createElement(
@@ -11140,12 +11142,11 @@
 	
 	    return _react2["default"].createElement(Component, _extends({}, others, {
 	      type: type,
-	      id: id,
 	      ref: function ref(el) {
 	        return _this2.input = el;
 	      },
 	      value: this.state.value,
-	      onChange: this.onChange,
+	      onChange: this.handleChange,
 	      className: (0, _classnames2["default"])(className, classNames)
 	    }));
 	  };
@@ -13164,6 +13165,7 @@
 	    _this.state = {
 	      openKeys: []
 	    };
+	    _this.rcMenu = {};
 	    return _this;
 	  }
 	
@@ -13183,6 +13185,8 @@
 	  };
 	
 	  Menu.prototype.render = function render() {
+	    var _this2 = this;
+	
 	    var openAnimation = this.props.openAnimation || this.props.openTransitionName;
 	    if (!openAnimation) {
 	      switch (this.props.mode) {
@@ -13225,7 +13229,9 @@
 	        className: className
 	      };
 	    }
-	    return _react2["default"].createElement(_ExportMenu2["default"], _extends({}, this.props, props));
+	    return _react2["default"].createElement(_ExportMenu2["default"], _extends({ ref: function ref(el) {
+	        return _this2.rcMenu = el;
+	      } }, this.props, props));
 	  };
 	
 	  return Menu;
@@ -13903,12 +13909,6 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _tinperBeeCore = __webpack_require__(26);
-	
-	var _warning = __webpack_require__(31);
-	
-	var _warning2 = _interopRequireDefault(_warning);
-	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 	
 	function noop() {}
@@ -14051,7 +14051,9 @@
 	
 	var _propTypes2 = _interopRequireDefault(_propTypes);
 	
-	var _tinperBeeCore = __webpack_require__(26);
+	var _keyCode = __webpack_require__(72);
+	
+	var _keyCode2 = _interopRequireDefault(_keyCode);
 	
 	var _classnames = __webpack_require__(3);
 	
@@ -14179,7 +14181,7 @@
 	    var menu = this.menuInstance;
 	    var isOpen = this.isOpen();
 	
-	    if (keyCode === _tinperBeeCore.KeyCode.ENTER) {
+	    if (keyCode === _keyCode2["default"].ENTER) {
 	      this.onTitleClick(e);
 	      this.setState({
 	        defaultActiveFirst: true
@@ -14187,7 +14189,7 @@
 	      return true;
 	    }
 	
-	    if (keyCode === _tinperBeeCore.KeyCode.RIGHT) {
+	    if (keyCode === _keyCode2["default"].RIGHT) {
 	      if (isOpen) {
 	        menu.onKeyDown(e);
 	      } else {
@@ -14198,7 +14200,7 @@
 	      }
 	      return true;
 	    }
-	    if (keyCode === _tinperBeeCore.KeyCode.LEFT) {
+	    if (keyCode === _keyCode2["default"].LEFT) {
 	      var handled = void 0;
 	      if (isOpen) {
 	        handled = menu.onKeyDown(e);
@@ -14212,7 +14214,7 @@
 	      return handled;
 	    }
 	
-	    if (isOpen && (keyCode === _tinperBeeCore.KeyCode.UP || keyCode === _tinperBeeCore.KeyCode.DOWN)) {
+	    if (isOpen && (keyCode === _keyCode2["default"].UP || keyCode === _keyCode2["default"].DOWN)) {
 	      return menu.onKeyDown(e);
 	    }
 	  };
@@ -14594,7 +14596,9 @@
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
-	var _tinperBeeCore = __webpack_require__(26);
+	var _createChainedFunction = __webpack_require__(71);
+	
+	var _createChainedFunction2 = _interopRequireDefault(_createChainedFunction);
 	
 	var _util = __webpack_require__(134);
 	
@@ -14662,7 +14666,6 @@
 	  }
 	}
 	
-	//import Animate from 'bee-transition';
 	var propTypes = {
 	  onSelect: _propTypes2["default"].func,
 	  onClick: _propTypes2["default"].func,
@@ -14821,7 +14824,7 @@
 	      rootPrefixCls: props.prefixCls,
 	      index: i,
 	      parentMenu: this,
-	      ref: childProps.disabled ? undefined : (0, _tinperBeeCore.createChainedFunction)(child.ref, saveRef.bind(this, i, subIndex)),
+	      ref: childProps.disabled ? undefined : (0, _createChainedFunction2["default"])(child.ref, saveRef.bind(this, i, subIndex)),
 	      eventKey: key,
 	      closeSubMenuOnMouseLeave: props.closeSubMenuOnMouseLeave,
 	      onItemHover: this.onItemHover,
@@ -15652,7 +15655,9 @@
 	
 	var _propTypes2 = _interopRequireDefault(_propTypes);
 	
-	var _tinperBeeCore = __webpack_require__(26);
+	var _keyCode = __webpack_require__(72);
+	
+	var _keyCode2 = _interopRequireDefault(_keyCode);
 	
 	var _classnames = __webpack_require__(3);
 	
@@ -15733,7 +15738,7 @@
 	
 	  MenuItem.prototype.onKeyDown = function onKeyDown(e) {
 	    var keyCode = e.keyCode;
-	    if (keyCode === _tinperBeeCore.KeyCode.ENTER) {
+	    if (keyCode === _keyCode2["default"].ENTER) {
 	      this.onClick(e);
 	      return true;
 	    }
@@ -16148,7 +16153,9 @@
 	
 	var _propTypes2 = _interopRequireDefault(_propTypes);
 	
-	var _tinperBeeCore = __webpack_require__(26);
+	var _createChainedFunction = __webpack_require__(71);
+	
+	var _createChainedFunction2 = _interopRequireDefault(_createChainedFunction);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 	
@@ -16222,7 +16229,7 @@
 	    var buttonProps = _extends({
 	      type: 'button'
 	    }, props, {
-	      onClick: (0, _tinperBeeCore.createChainedFunction)(onClick, this.handleClick.bind(this)),
+	      onClick: (0, _createChainedFunction2["default"])(onClick, this.handleClick.bind(this)),
 	      className: (0, _classnames2["default"])(className, clsPrefix, show && 'show')
 	      //!this.context.u_navbar.expanded && 'collapsed',
 	    });
@@ -19048,8 +19055,6 @@
 	
 	function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
 	
-	function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
-	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -19074,10 +19079,6 @@
 	  }
 	
 	  RadioButton.prototype.render = function render() {
-	    var _props = this.props,
-	        clsPrefic = _props.clsPrefic,
-	        onthers = _objectWithoutProperties(_props, ['clsPrefic']);
-	
 	    return _react2["default"].createElement(_Radio2["default"], this.props);
 	  };
 	
@@ -19132,10 +19133,10 @@
 /* 170 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	'use strict';
+	"use strict";
 	
 	Object.defineProperty(exports, "__esModule", {
-	    value: true
+	  value: true
 	});
 	
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -19176,88 +19177,118 @@
 	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * Created by chief on 17/4/6.
 	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                */
 	
-	var timePickerElement = _react2["default"].createElement(_Panel2["default"], { defaultValue: (0, _moment2["default"])('00:00:00', 'HH:mm:ss') });
+	var timePickerElement = _react2["default"].createElement(_Panel2["default"], { defaultValue: (0, _moment2["default"])("00:00:00", "HH:mm:ss") });
 	
 	var DatePicker = function (_Component) {
-	    _inherits(DatePicker, _Component);
+	  _inherits(DatePicker, _Component);
 	
-	    function DatePicker(props, context) {
-	        _classCallCheck(this, DatePicker);
+	  function DatePicker(props, context) {
+	    _classCallCheck(this, DatePicker);
 	
-	        var _this = _possibleConstructorReturn(this, _Component.call(this, props, context));
+	    var _this = _possibleConstructorReturn(this, _Component.call(this, props, context));
 	
-	        _this.onChange = function (value) {
-	            _this.setState({
-	                value: value
-	            });
-	        };
+	    _initialiseProps.call(_this);
 	
-	        _this.onOpenChange = function (open) {
-	            _this.setState({
-	                open: open
-	            });
-	        };
+	    _this.state = {
+	      type: "month",
+	      value: props.value || props.defaultValue,
+	      open: false
+	    };
+	    return _this;
+	  }
 	
-	        _this.state = {
-	            type: 'month',
-	            value: props.value,
-	            open: false
-	        };
-	        return _this;
+	  DatePicker.prototype.componentWillReceiveProps = function componentWillReceiveProps(nextProps) {
+	    if ("value" in nextProps) {
+	      this.setState({
+	        value: nextProps.value
+	      });
+	    }
+	  };
+	
+	  DatePicker.prototype.render = function render() {
+	    var _this2 = this;
+	
+	    var state = this.state;
+	    var props = this.props;
+	    var value = state.value;
+	
+	    var pickerChangeHandler = {};
+	    var calendarHandler = {};
+	    if (props.showTime) {
+	      calendarHandler = {
+	        // fix https://github.com/ant-design/ant-design/issues/1902
+	        onSelect: this.handleChange
+	      };
+	    } else {
+	      pickerChangeHandler = {
+	        onChange: this.handleChange
+	      };
 	    }
 	
-	    DatePicker.prototype.render = function render() {
-	        var _this2 = this;
+	    var calendar = _react2["default"].createElement(_rcCalendar2["default"], _extends({
+	      timePicker: props.showTime ? timePickerElement : null
+	    }, props));
 	
-	        var state = this.state;
+	    return _react2["default"].createElement(
+	      "div",
+	      null,
+	      _react2["default"].createElement(
+	        _Picker2["default"],
+	        _extends({}, props, pickerChangeHandler, {
+	          onOpenChange: this.onOpenChange,
+	          animation: "slide-up",
+	          calendar: calendar,
+	          open: this.state.open,
+	          defaultValue: state.value,
+	          onChange: this.onChange
+	        }),
+	        function () {
+	          return _react2["default"].createElement(_beeFormControl2["default"], {
+	            disabled: props.disabled,
+	            readOnly: true,
+	            placeholder: _this2.props.placeholder,
+	            className: _this2.props.className,
+	            value: value && value.format(props.format) || ""
+	          });
+	        }
+	      )
+	    );
+	  };
 	
-	        var props = this.props;
-	
-	        var calendar = _react2["default"].createElement(_rcCalendar2["default"], _extends({
-	            timePicker: props.showTime ? timePickerElement : null
-	        }, props));
-	
-	        return _react2["default"].createElement(
-	            'div',
-	            null,
-	            _react2["default"].createElement(
-	                _Picker2["default"],
-	                {
-	
-	                    onOpenChange: this.onOpenChange,
-	
-	                    animation: 'slide-up',
-	
-	                    calendar: calendar,
-	
-	                    open: this.state.open,
-	
-	                    value: state.value,
-	
-	                    onChange: this.onChange
-	
-	                },
-	                function (_ref) {
-	                    var value = _ref.value;
-	
-	                    return _react2["default"].createElement(_beeFormControl2["default"], {
-	
-	                        placeholder: _this2.props.placeholder,
-	
-	                        className: _this2.props.className,
-	
-	                        value: value && value.format(props.format) || ''
-	                    });
-	                }
-	            )
-	        );
-	    };
-	
-	    return DatePicker;
+	  return DatePicker;
 	}(_react.Component);
 	
+	var _initialiseProps = function _initialiseProps() {
+	  var _this3 = this;
+	
+	  this.onChange = function (value) {
+	    var props = _this3.props;
+	    // // if (!('value' in props)) {
+	    // //   this.setState({ value });
+	    // // }
+	    _this3.setState({
+	      value: value
+	    });
+	    props.onChange(value, value && value.format(props.format) || "");
+	  };
+	
+	  this.onOpenChange = function (open) {
+	    _this3.setState({
+	      open: open
+	    });
+	  };
+	
+	  this.handleChange = function (value) {
+	    var props = _this3.props;
+	    if (!("value" in props)) {
+	      _this3.setState({ value: value });
+	    }
+	    props.onChange(value, value && value.format(props.format) || "");
+	  };
+	};
+	
 	exports["default"] = DatePicker;
-	module.exports = exports['default'];
+	module.exports = exports["default"];
 
 /***/ }),
 /* 171 */
@@ -21554,7 +21585,7 @@
 /***/ (function(module, exports, __webpack_require__) {
 
 	var require;/* WEBPACK VAR INJECTION */(function(module) {//! moment.js
-	//! version : 2.19.1
+	//! version : 2.19.2
 	//! authors : Tim Wood, Iskren Chernev, Moment.js contributors
 	//! license : MIT
 	//! momentjs.com
@@ -22369,7 +22400,7 @@
 	
 	function set$1 (mom, unit, value) {
 	    if (mom.isValid() && !isNaN(value)) {
-	        if (unit === 'FullYear' && isLeapYear(mom.year())) {
+	        if (unit === 'FullYear' && isLeapYear(mom.year()) && mom.month() === 1 && mom.date() === 29) {
 	            mom._d['set' + (mom._isUTC ? 'UTC' : '') + unit](value, mom.month(), daysInMonth(value, mom.month()));
 	        }
 	        else {
@@ -23475,10 +23506,11 @@
 	
 	function updateLocale(name, config) {
 	    if (config != null) {
-	        var locale, parentConfig = baseConfig;
+	        var locale, tmpLocale, parentConfig = baseConfig;
 	        // MERGE
-	        if (locales[name] != null) {
-	            parentConfig = locales[name]._config;
+	        tmpLocale = loadLocale(name);
+	        if (tmpLocale != null) {
+	            parentConfig = tmpLocale._config;
 	        }
 	        config = mergeConfigs(parentConfig, config);
 	        locale = new Locale(config);
@@ -26032,7 +26064,7 @@
 	// Side effect imports
 	
 	
-	hooks.version = '2.19.1';
+	hooks.version = '2.19.2';
 	
 	setHookCallback(createLocal);
 	
@@ -40375,6 +40407,9 @@
 	    isVisible: function isVisible(instance) {
 	      return instance.state.popupVisible;
 	    },
+	    isForceRender: function isForceRender(instance) {
+	      return instance.props.forceRender;
+	    },
 	    getContainer: function getContainer(instance) {
 	      return instance.getContainer();
 	    }
@@ -40406,6 +40441,7 @@
 	    blurDelay: _propTypes2['default'].number,
 	    getPopupContainer: _propTypes2['default'].func,
 	    getDocument: _propTypes2['default'].func,
+	    forceRender: _propTypes2['default'].bool,
 	    destroyPopupOnHide: _propTypes2['default'].bool,
 	    mask: _propTypes2['default'].bool,
 	    maskClosable: _propTypes2['default'].bool,
@@ -40891,7 +40927,7 @@
 	
 	    var portal = void 0;
 	    // prevent unmounting after it's rendered
-	    if (popupVisible || this._component) {
+	    if (popupVisible || this._component || props.forceRender) {
 	      portal = _react2['default'].createElement(
 	        _Portal2['default'],
 	        {
@@ -42735,6 +42771,7 @@
 	      _config$autoDestroy = config.autoDestroy,
 	      autoDestroy = _config$autoDestroy === undefined ? true : _config$autoDestroy,
 	      isVisible = config.isVisible,
+	      isForceRender = config.isForceRender,
 	      getComponent = config.getComponent,
 	      _config$getContainer = config.getContainer,
 	      getContainer = _config$getContainer === undefined ? defaultGetContainer : _config$getContainer;
@@ -42743,7 +42780,7 @@
 	  var mixin = void 0;
 	
 	  function _renderComponent(instance, componentArg, ready) {
-	    if (!isVisible || instance._component || isVisible(instance)) {
+	    if (!isVisible || instance._component || isVisible(instance) || isForceRender && isForceRender(instance)) {
 	      if (!instance._container) {
 	        instance._container = getContainer(instance);
 	      }
@@ -43901,10 +43938,10 @@
 /* 395 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	'use strict';
+	"use strict";
 	
 	Object.defineProperty(exports, "__esModule", {
-	    value: true
+	  value: true
 	});
 	
 	var _MonthCalendar = __webpack_require__(396);
@@ -43936,89 +43973,79 @@
 	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                */
 	
 	var MonthPicker = function (_Component) {
-	    _inherits(MonthPicker, _Component);
+	  _inherits(MonthPicker, _Component);
 	
-	    function MonthPicker(props, context) {
-	        _classCallCheck(this, MonthPicker);
+	  function MonthPicker(props, context) {
+	    _classCallCheck(this, MonthPicker);
 	
-	        var _this = _possibleConstructorReturn(this, _Component.call(this, props, context));
+	    var _this = _possibleConstructorReturn(this, _Component.call(this, props, context));
 	
-	        _this.onChange = function (value) {
-	
-	            _this.setState({
-	                value: value
-	            });
-	        };
-	
-	        _this.onOpenChange = function (open) {
-	            _this.setState({
-	                open: open
-	            });
-	        };
-	
-	        _this.onTypeChange = function (type) {
-	            _this.setState({
-	                type: type
-	            });
-	        };
-	
-	        _this.state = {
-	            type: 'month',
-	            value: props.value,
-	            open: false
-	        };
-	        return _this;
-	    }
-	
-	    MonthPicker.prototype.render = function render() {
-	        var _this2 = this;
-	
-	        var state = this.state;
-	
-	        var props = this.props;
-	
-	        var monthCalendar = _react2["default"].createElement(_MonthCalendar2["default"], props);
-	
-	        return _react2["default"].createElement(
-	            'div',
-	            null,
-	            _react2["default"].createElement(
-	                _Picker2["default"],
-	                {
-	
-	                    onOpenChange: this.onOpenChange,
-	
-	                    animation: 'slide-up',
-	
-	                    calendar: monthCalendar,
-	
-	                    open: this.state.open,
-	
-	                    value: state.value,
-	
-	                    onChange: this.onChange
-	
-	                },
-	                function (_ref) {
-	                    var value = _ref.value;
-	
-	                    return _react2["default"].createElement(_beeFormControl2["default"], {
-	                        placeholder: _this2.props.placeholder,
-	
-	                        className: _this2.props.className,
-	
-	                        value: value && value.format(props.format) || ''
-	                    });
-	                }
-	            )
-	        );
+	    _this.onChange = function (value) {
+	      _this.setState({
+	        value: value
+	      });
 	    };
 	
-	    return MonthPicker;
+	    _this.onOpenChange = function (open) {
+	      _this.setState({
+	        open: open
+	      });
+	    };
+	
+	    _this.onTypeChange = function (type) {
+	      _this.setState({
+	        type: type
+	      });
+	    };
+	
+	    _this.state = {
+	      type: "month",
+	      value: props.value || props.defaultValue,
+	      open: false
+	    };
+	    return _this;
+	  }
+	
+	  MonthPicker.prototype.render = function render() {
+	    var _this2 = this;
+	
+	    var state = this.state;
+	
+	    var props = this.props;
+	
+	    var monthCalendar = _react2["default"].createElement(_MonthCalendar2["default"], props);
+	
+	    return _react2["default"].createElement(
+	      "div",
+	      null,
+	      _react2["default"].createElement(
+	        _Picker2["default"],
+	        {
+	          onOpenChange: this.onOpenChange,
+	          animation: "slide-up",
+	          calendar: monthCalendar,
+	          open: this.state.open,
+	          value: state.value,
+	          onChange: this.onChange
+	        },
+	        function (_ref) {
+	          var value = _ref.value;
+	
+	          return _react2["default"].createElement(_beeFormControl2["default"], {
+	            placeholder: _this2.props.placeholder,
+	            className: _this2.props.className,
+	            value: value && value.format(props.format) || ""
+	          });
+	        }
+	      )
+	    );
+	  };
+	
+	  return MonthPicker;
 	}(_react.Component);
 	
 	exports["default"] = MonthPicker;
-	module.exports = exports['default'];
+	module.exports = exports["default"];
 
 /***/ }),
 /* 396 */
@@ -44142,10 +44169,10 @@
 /* 397 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	'use strict';
+	"use strict";
 	
 	Object.defineProperty(exports, "__esModule", {
-	    value: true
+	  value: true
 	});
 	
 	var _react = __webpack_require__(4);
@@ -44193,168 +44220,166 @@
 	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                */
 	
 	
-	var format = 'YYYY-MM-DD';
+	var format = "YYYY-MM-DD";
 	
-	var fullFormat = 'YYYY-MM-DD';
+	var fullFormat = "YYYY-MM-DD";
 	
-	var cn = location.search.indexOf('cn') !== -1;
+	var cn = location.search.indexOf("cn") !== -1;
 	
 	var now = (0, _moment2["default"])();
 	if (cn) {
-	    now.locale('zh-cn').utcOffset(8);
+	  now.locale("zh-cn").utcOffset(8);
 	} else {
-	    now.locale('en-gb').utcOffset(0);
+	  now.locale("en-gb").utcOffset(0);
 	}
 	
 	var Picker = function (_Component) {
-	    _inherits(Picker, _Component);
+	  _inherits(Picker, _Component);
 	
-	    function Picker(props, context) {
-	        _classCallCheck(this, Picker);
+	  function Picker(props, context) {
+	    _classCallCheck(this, Picker);
 	
-	        var _this = _possibleConstructorReturn(this, _Component.call(this, props, context));
+	    var _this = _possibleConstructorReturn(this, _Component.call(this, props, context));
 	
-	        _this.onHoverChange = function (hoverValue) {
-	
-	            _this.setState({ hoverValue: hoverValue });
-	        };
-	
-	        _this.state = {
-	            hoverValue: []
-	        };
-	        return _this;
-	    }
-	
-	    Picker.prototype.render = function render() {
-	        var _this2 = this;
-	
-	        var props = this.props;
-	        var showValue = props.showValue;
-	
-	        var calendar = _react2["default"].createElement(_RangeCalendar2["default"], {
-	            hoverValue: this.state.hoverValue,
-	            onHoverChange: this.onHoverChange,
-	            type: this.props.type,
-	            locale: cn ? _zh_CN2["default"] : _en_US2["default"],
-	            defaultValue: now,
-	            format: format,
-	            onChange: props.onChange,
-	            disabledDate: props.disabledDate
-	        });
-	
-	        return _react2["default"].createElement(
-	            _Picker2["default"],
-	            {
-	                open: this.props.open,
-	                onOpenChange: this.props.onOpenChange,
-	                calendar: calendar,
-	                value: props.value
-	            },
-	            function () {
-	                return _react2["default"].createElement(
-	                    'span',
-	                    null,
-	                    _react2["default"].createElement(_beeFormControl2["default"], {
-	                        placeholder: _this2.props.placeholder,
-	
-	                        value: showValue && showValue.format(fullFormat) || ''
-	                    })
-	                );
-	            }
-	        );
+	    _this.onHoverChange = function (hoverValue) {
+	      _this.setState({ hoverValue: hoverValue });
 	    };
 	
-	    return Picker;
+	    _this.state = {
+	      hoverValue: []
+	    };
+	    return _this;
+	  }
+	
+	  Picker.prototype.render = function render() {
+	    var _this2 = this;
+	
+	    var props = this.props;
+	    var showValue = props.showValue;
+	
+	    var calendar = _react2["default"].createElement(_RangeCalendar2["default"], {
+	      hoverValue: this.state.hoverValue,
+	      onHoverChange: this.onHoverChange,
+	      type: this.props.type,
+	      locale: cn ? _zh_CN2["default"] : _en_US2["default"],
+	      defaultValue: now,
+	      format: format,
+	      onChange: props.onChange,
+	      disabledDate: props.disabledDate
+	    });
+	
+	    return _react2["default"].createElement(
+	      _Picker2["default"],
+	      {
+	        open: this.props.open,
+	        onOpenChange: this.props.onOpenChange,
+	        calendar: calendar,
+	        value: props.value
+	      },
+	      function () {
+	        return _react2["default"].createElement(
+	          "span",
+	          null,
+	          _react2["default"].createElement(_beeFormControl2["default"], {
+	            placeholder: _this2.props.placeholder,
+	            value: showValue && showValue.format(fullFormat) || ""
+	          })
+	        );
+	      }
+	    );
+	  };
+	
+	  return Picker;
 	}(_react.Component);
 	
 	var RangePicker = function (_Component2) {
-	    _inherits(RangePicker, _Component2);
+	  _inherits(RangePicker, _Component2);
 	
-	    function RangePicker(props, context) {
-	        _classCallCheck(this, RangePicker);
+	  function RangePicker(props, context) {
+	    _classCallCheck(this, RangePicker);
 	
-	        var _this3 = _possibleConstructorReturn(this, _Component2.call(this, props, context));
+	    var _this3 = _possibleConstructorReturn(this, _Component2.call(this, props, context));
 	
-	        _this3.onStartOpenChange = function (startOpen) {
-	            _this3.setState({
-	                startOpen: startOpen
-	            });
-	        };
-	
-	        _this3.onEndOpenChange = function (endOpen) {
-	            _this3.setState({
-	                endOpen: endOpen
-	            });
-	        };
-	
-	        _this3.onStartChange = function (value) {
-	            _this3.setState({
-	                startValue: value[0],
-	                startOpen: false,
-	                endOpen: true
-	            });
-	        };
-	
-	        _this3.onEndChange = function (value) {
-	            _this3.setState({
-	                endValue: value[1]
-	            });
-	        };
-	
-	        _this3.disabledStartDate = function (endValue) {
-	            if (!endValue) {
-	                return false;
-	            }
-	            var startValue = _this3.state.startValue;
-	            if (!startValue) {
-	                return false;
-	            }
-	            return endValue.diff(startValue, 'days') < 0;
-	        };
-	
-	        _this3.state = {
-	            startValue: null,
-	            endValue: null,
-	            startOpen: false,
-	            endOpen: false
-	        };
-	        return _this3;
-	    }
-	
-	    RangePicker.prototype.render = function render() {
-	        var state = this.state;
-	        return _react2["default"].createElement(
-	            'div',
-	            null,
-	            '\u5F00\u59CB\u65F6\u95F4\uFF1A',
-	            _react2["default"].createElement(Picker, {
-	                onOpenChange: this.onStartOpenChange,
-	                type: 'start',
-	                showValue: state.startValue,
-	                open: this.state.startOpen,
-	                value: [state.startValue, state.endValue],
-	                onChange: this.onStartChange,
-	                placeholder: this.props.placeholder
-	            }),
-	            '\u7ED3\u675F\u65F6\u95F4\uFF1A',
-	            _react2["default"].createElement(Picker, {
-	                onOpenChange: this.onEndOpenChange,
-	                open: this.state.endOpen,
-	                type: 'end',
-	                showValue: state.endValue,
-	                disabledDate: this.disabledStartDate,
-	                value: [state.startValue, state.endValue],
-	                onChange: this.onEndChange,
-	                placeholder: this.props.placeholder
-	            })
-	        );
+	    _this3.onStartOpenChange = function (startOpen) {
+	      _this3.setState({
+	        startOpen: startOpen
+	      });
 	    };
 	
-	    return RangePicker;
+	    _this3.onEndOpenChange = function (endOpen) {
+	      _this3.setState({
+	        endOpen: endOpen
+	      });
+	    };
+	
+	    _this3.onStartChange = function (value) {
+	      _this3.setState({
+	        startValue: value[0],
+	        startOpen: false,
+	        endOpen: true
+	      });
+	    };
+	
+	    _this3.onEndChange = function (value) {
+	      _this3.setState({
+	        endValue: value[1]
+	      });
+	    };
+	
+	    _this3.disabledStartDate = function (endValue) {
+	      if (!endValue) {
+	        return false;
+	      }
+	      var startValue = _this3.state.startValue;
+	      if (!startValue) {
+	        return false;
+	      }
+	      return endValue.diff(startValue, "days") < 0;
+	    };
+	
+	    _this3.state = {
+	      startValue: null,
+	      endValue: null,
+	      startOpen: false,
+	      endOpen: false
+	    };
+	    return _this3;
+	  }
+	
+	  RangePicker.prototype.render = function render() {
+	    var state = this.state;
+	    return _react2["default"].createElement(
+	      "div",
+	      null,
+	      "\u5F00\u59CB\u65F6\u95F4\uFF1A",
+	      _react2["default"].createElement(Picker, {
+	        onOpenChange: this.onStartOpenChange,
+	        type: "start",
+	        showValue: state.startValue,
+	        open: this.state.startOpen,
+	        value: [state.startValue, state.endValue],
+	        onChange: this.onStartChange,
+	        placeholder: this.props.placeholder
+	      }),
+	      "\u7ED3\u675F\u65F6\u95F4\uFF1A",
+	      _react2["default"].createElement(Picker, {
+	        onOpenChange: this.onEndOpenChange,
+	        open: this.state.endOpen,
+	        type: "end",
+	        showValue: state.endValue,
+	        disabledDate: this.disabledStartDate,
+	        value: [state.startValue, state.endValue],
+	        onChange: this.onEndChange,
+	        placeholder: this.props.placeholder
+	      })
+	    );
+	  };
+	
+	  return RangePicker;
 	}(_react.Component);
 	
 	exports["default"] = RangePicker;
-	module.exports = exports['default'];
+	module.exports = exports["default"];
 
 /***/ }),
 /* 398 */
@@ -45495,10 +45520,10 @@
 /* 418 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	'use strict';
+	"use strict";
 	
 	Object.defineProperty(exports, "__esModule", {
-	    value: true
+	  value: true
 	});
 	
 	var _rcCalendar = __webpack_require__(171);
@@ -45545,144 +45570,147 @@
 	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * Created by chief on 17/4/6.
 	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                */
 	
-	var cn = location.search.indexOf('cn') !== -1;
+	var cn = location.search.indexOf("cn") !== -1;
 	
 	var now = (0, _moment2["default"])();
 	if (cn) {
-	    now.locale('zh-cn').utcOffset(8);
+	  now.locale("zh-cn").utcOffset(8);
 	} else {
-	    now.locale('en-gb').utcOffset(0);
+	  now.locale("en-gb").utcOffset(0);
 	}
 	
-	var format = 'YYYY-Wo';
+	var format = "YYYY-Wo";
 	
-	var style = '\n.week-calendar {\n  width: 386px;\n}\n.week-calendar .rc-calendar-tbody > tr:hover\n.rc-calendar-date {\n  background: #ebfaff;\n}\n\n.week-calendar .rc-calendar-tbody > tr:hover\n.rc-calendar-selected-day .rc-calendar-date {\n    background: #3fc7fa;\n}\n\n.week-calendar .week-calendar-sidebar {\n  position:absolute;\n  top:0;\n  left:0;\n  bottom:0;\n  width:100px;\n  border-right: 1px solid #ccc;\n}\n.week-calendar .rc-calendar-panel {\n  margin-left: 100px;\n}\n';
+	var style = "\n.week-calendar {\n  width: 386px;\n}\n.week-calendar .rc-calendar-tbody > tr:hover\n.rc-calendar-date {\n  background: #ebfaff;\n}\n\n.week-calendar .rc-calendar-tbody > tr:hover\n.rc-calendar-selected-day .rc-calendar-date {\n    background: #3fc7fa;\n}\n\n.week-calendar .week-calendar-sidebar {\n  position:absolute;\n  top:0;\n  left:0;\n  bottom:0;\n  width:100px;\n  border-right: 1px solid #ccc;\n}\n.week-calendar .rc-calendar-panel {\n  margin-left: 100px;\n}\n";
 	
 	var WeekPicker = function (_Component) {
-	    _inherits(WeekPicker, _Component);
+	  _inherits(WeekPicker, _Component);
 	
-	    function WeekPicker(props, context) {
-	        _classCallCheck(this, WeekPicker);
+	  function WeekPicker(props, context) {
+	    _classCallCheck(this, WeekPicker);
 	
-	        var _this = _possibleConstructorReturn(this, _Component.call(this, props, context));
+	    var _this = _possibleConstructorReturn(this, _Component.call(this, props, context));
 	
-	        _this.onChange = function (value) {
-	
-	            _this.setState({
-	                value: value
-	            });
-	        };
-	
-	        _this.onOpenChange = function (open) {
-	            _this.setState({
-	                open: open
-	            });
-	        };
-	
-	        _this.dateRender = function (current) {
-	            var selectedValue = _this.state.value;
-	            if (selectedValue && current.year() === selectedValue.year() && current.week() === selectedValue.week()) {
-	                return _react2["default"].createElement(
-	                    'div',
-	                    { className: 'rc-calendar-selected-day' },
-	                    _react2["default"].createElement(
-	                        'div',
-	                        { className: 'rc-calendar-date' },
-	                        current.date()
-	                    )
-	                );
-	            }
-	            return _react2["default"].createElement(
-	                'div',
-	                { className: 'rc-calendar-date' },
-	                current.date()
-	            );
-	        };
-	
-	        _this.lastWeek = function () {
-	            var value = _this.state.value || now;
-	            value.add(-1, 'weeks');
-	            _this.setState({
-	                value: value,
-	                open: false
-	            });
-	        };
-	
-	        _this.renderSidebar = function () {
-	            return _react2["default"].createElement(
-	                'div',
-	                { className: 'week-calendar-sidebar', key: 'sidebar' },
-	                _react2["default"].createElement(
-	                    'button',
-	                    { className: 'week-calendar-sidebar-button', onClick: _this.lastWeek.bind(_this), style: { margin: 8 } },
-	                    '\u4E0A\u4E00\u5468'
-	                )
-	            );
-	        };
-	
-	        _this.onTypeChange = function (type) {
-	            _this.setState({
-	                type: type
-	            });
-	        };
-	
-	        _this.state = {
-	            value: undefined,
-	            open: false
-	        };
-	        return _this;
-	    }
-	
-	    WeekPicker.prototype.render = function render() {
-	        var _this2 = this;
-	
-	        var state = this.state;
-	        var calendar = _react2["default"].createElement(_rcCalendar2["default"], {
-	            className: 'week-calendar',
-	            showWeekNumber: true,
-	            renderSidebar: this.renderSidebar,
-	            dateRender: this.dateRender,
-	            locale: cn ? _zh_CN2["default"] : _en_US2["default"],
-	            format: format,
-	            dateInputPlaceholder: this.props.placeholder,
-	            defaultValue: now,
-	            showDateInput: true
-	        });
-	        return _react2["default"].createElement(
-	            'div',
-	            null,
-	            _react2["default"].createElement('style', { dangerouslySetInnerHTML: { __html: style } }),
-	            _react2["default"].createElement(
-	                _Picker2["default"],
-	                {
-	                    onOpenChange: this.onOpenChange,
-	                    open: this.state.open,
-	                    animation: 'slide-up',
-	                    calendar: calendar,
-	                    value: state.value,
-	                    onChange: this.onChange
-	                },
-	                function (_ref) {
-	                    var value = _ref.value;
-	
-	                    return _react2["default"].createElement(_beeFormControl2["default"], {
-	                        placeholder: _this2.props.placeholder,
-	                        disabled: state.disabled,
-	                        readOnly: true,
-	                        tabIndex: '-1',
-	                        className: _this2.props.className,
-	                        value: value && value.format(format) || ''
-	                    });
-	                }
-	            )
-	        );
+	    _this.onChange = function (value) {
+	      _this.setState({
+	        value: value
+	      });
 	    };
 	
-	    return WeekPicker;
+	    _this.onOpenChange = function (open) {
+	      _this.setState({
+	        open: open
+	      });
+	    };
+	
+	    _this.dateRender = function (current) {
+	      var selectedValue = _this.state.value;
+	      if (selectedValue && current.year() === selectedValue.year() && current.week() === selectedValue.week()) {
+	        return _react2["default"].createElement(
+	          "div",
+	          { className: "rc-calendar-selected-day" },
+	          _react2["default"].createElement(
+	            "div",
+	            { className: "rc-calendar-date" },
+	            current.date()
+	          )
+	        );
+	      }
+	      return _react2["default"].createElement(
+	        "div",
+	        { className: "rc-calendar-date" },
+	        current.date()
+	      );
+	    };
+	
+	    _this.lastWeek = function () {
+	      var value = _this.state.value || now;
+	      value.add(-1, "weeks");
+	      _this.setState({
+	        value: value,
+	        open: false
+	      });
+	    };
+	
+	    _this.renderSidebar = function () {
+	      return _react2["default"].createElement(
+	        "div",
+	        { className: "week-calendar-sidebar", key: "sidebar" },
+	        _react2["default"].createElement(
+	          "button",
+	          {
+	            className: "week-calendar-sidebar-button",
+	            onClick: _this.lastWeek.bind(_this),
+	            style: { margin: 8 }
+	          },
+	          "\u4E0A\u4E00\u5468"
+	        )
+	      );
+	    };
+	
+	    _this.onTypeChange = function (type) {
+	      _this.setState({
+	        type: type
+	      });
+	    };
+	
+	    _this.state = {
+	      value: props.value || props.defaultValue,
+	      open: false
+	    };
+	    return _this;
+	  }
+	
+	  WeekPicker.prototype.render = function render() {
+	    var _this2 = this;
+	
+	    var state = this.state;
+	    var calendar = _react2["default"].createElement(_rcCalendar2["default"], {
+	      className: "week-calendar",
+	      showWeekNumber: true,
+	      renderSidebar: this.renderSidebar,
+	      dateRender: this.dateRender,
+	      locale: cn ? _zh_CN2["default"] : _en_US2["default"],
+	      format: format,
+	      dateInputPlaceholder: this.props.placeholder,
+	      defaultValue: now,
+	      showDateInput: true
+	    });
+	    return _react2["default"].createElement(
+	      "div",
+	      null,
+	      _react2["default"].createElement("style", { dangerouslySetInnerHTML: { __html: style } }),
+	      _react2["default"].createElement(
+	        _Picker2["default"],
+	        {
+	          onOpenChange: this.onOpenChange,
+	          open: this.state.open,
+	          animation: "slide-up",
+	          calendar: calendar,
+	          value: state.value,
+	          onChange: this.onChange
+	        },
+	        function (_ref) {
+	          var value = _ref.value;
+	
+	          return _react2["default"].createElement(_beeFormControl2["default"], {
+	            placeholder: _this2.props.placeholder,
+	            disabled: state.disabled,
+	            readOnly: true,
+	            tabIndex: "-1",
+	            className: _this2.props.className,
+	            value: value && value.format(format) || ""
+	          });
+	        }
+	      )
+	    );
+	  };
+	
+	  return WeekPicker;
 	}(_react.Component);
 	
 	exports["default"] = WeekPicker;
-	module.exports = exports['default'];
+	module.exports = exports["default"];
 
 /***/ }),
 /* 419 */
@@ -45889,6 +45917,8 @@
 	  value: true
 	});
 	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
 	var _react = __webpack_require__(4);
 	
 	var _react2 = _interopRequireDefault(_react);
@@ -45908,6 +45938,8 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 	
 	function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
+	
+	function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
@@ -45945,26 +45977,25 @@
 	    _initialiseProps.call(_this);
 	
 	    var checked = false;
-	    if ("checked" in _this.props) {
-	      checked = !!_this.props.checked;
+	    if ('checked' in props) {
+	      checked = !!props.checked;
+	    } else if ('defaultValue' in props) {
+	      checked = !!props.defaultValue;
 	    } else {
-	      checked = !!_this.props.defaultChecked;
+	      checked = !!props.defaultChecked;
 	    }
-	    _this.state = {
-	      checked: checked
-	    };
+	    _this.state = { checked: checked };
 	    return _this;
 	  }
 	
 	  Switch.prototype.componentWillReceiveProps = function componentWillReceiveProps(nextProps, nextState) {
-	    if (nextProps.checked) {
-	      this.setState({ checked: nextProps.checked });
-	    } else if (nextProps.defaultChecked) {
-	      this.setState({ checked: nextProps.defaultChecked });
+	    if ("checked" in nextProps) {
+	      this.setState({ checked: !!nextProps.checked });
 	    }
 	  };
-	
 	  //点击switch改变状态
+	
+	  // Handle auto focus when click switch in Chrome
 	
 	
 	  Switch.prototype.render = function render() {
@@ -45975,8 +46006,11 @@
 	        size = _props.size,
 	        className = _props.className,
 	        clsPrefix = _props.clsPrefix,
-	        colors = _props.colors;
+	        disabled = _props.disabled,
+	        colors = _props.colors,
+	        others = _objectWithoutProperties(_props, ["checkedChildren", "unCheckedChildren", "onChangeHandler", "size", "className", "clsPrefix", "disabled", "colors"]);
 	    //获取checked
+	
 	
 	    var checked = this.state.checked;
 	    var classes = {
@@ -45988,15 +46022,20 @@
 	    if (colors) {
 	      classes[clsPrefix + "-" + colors] = true;
 	    }
+	    classes[[clsPrefix + "-disabled"]] = disabled;
+	
 	    var classNames = (0, _classnames2["default"])(clsPrefix, classes);
 	
 	    return _react2["default"].createElement(
 	      "span",
-	      {
+	      _extends({}, others, {
+	        ref: this.saveNode,
 	        onClick: this.clickHandler,
+	        onKeyDown: this.handleKeyDown,
+	        onMouseUp: this.handleMouseUp,
 	        className: (0, _classnames2["default"])(className, classNames),
-	        tabIndex: "0"
-	      },
+	        tabIndex: disabled ? -1 : 0
+	      }),
 	      _react2["default"].createElement(
 	        "span",
 	        { className: clsPrefix + "-inner" },
@@ -46011,16 +46050,48 @@
 	var _initialiseProps = function _initialiseProps() {
 	  var _this2 = this;
 	
-	  this.clickHandler = function () {
-	    if (_this2.props.checked != undefined) {
+	  this.setChecked = function (checked) {
+	    if (_this2.props.disabled) {
 	      return;
 	    }
-	    var checked = _this2.state.checked;
-	    _this2.setState({
-	      checked: !checked
-	    });
-	    _this2.props.onChangeHandler(!checked);
-	    _this2.props.onChange(!checked);
+	    if (!('checked' in _this2.props)) {
+	      _this2.setState({
+	        checked: checked
+	      });
+	    }
+	    _this2.props.onChangeHandler(checked);
+	    _this2.props.onChange(checked);
+	  };
+	
+	  this.clickHandler = function () {
+	    var checked = !_this2.state.checked;
+	    _this2.setChecked(checked);
+	  };
+	
+	  this.handleKeyDown = function (e) {
+	    if (e.keyCode === 37) {
+	      // Left
+	      _this2.setChecked(false);
+	    } else if (e.keyCode === 39) {
+	      // Right
+	      _this2.setChecked(true);
+	    } else if (e.keyCode === 32 || e.keyCode === 13) {
+	      // Space, Enter
+	      _this2.clickHandler();
+	    }
+	  };
+	
+	  this.handleMouseUp = function (e) {
+	    if (_this2.node) {
+	      _this2.node.blur();
+	    }
+	    if (_this2.props.onMouseUp) {
+	      _this2.props.onMouseUp(e);
+	    }
+	  };
+	
+	  this.saveNode = function (node) {
+	    _this2.node = node;
 	  };
 	};
 	

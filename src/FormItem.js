@@ -128,7 +128,7 @@ class FormItem extends Component {
             if(this.props.children.props.value!=nextProps.children.props.value){
                 this.setState({
                     value:nextProps.children.props.value
-                })
+                });
             }
         }
         if(this.props.children.props&&this.props.children.props.type=='customer'){//自定义组件
@@ -136,6 +136,7 @@ class FormItem extends Component {
                 this.setState({
                     value:nextProps.children.props.defaultValue
                 })
+                this.checkSelf(nextProps.children.props.defaultValue);
             }
             if(!isEqual(this.props.children.props.value,nextProps.children.props.value)){
                 this.setState({
@@ -272,8 +273,8 @@ class FormItem extends Component {
     /**
      * 触发校验
      */
-    checkSelf=()=>{
-        let value=this.state.value;
+    checkSelf=(v)=>{
+        let value=(v==undefined?this.state.value:v);
         let name=ReactDOM.findDOMNode(this.input).name||this.input.props.name;
         let flag=this.itemCheck(value,name);
         this.props.checkItem(

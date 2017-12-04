@@ -270,8 +270,8 @@ var FormItem = function (_Component) {
             }
         };
 
-        _this.checkSelf = function () {
-            var value = _this.state.value;
+        _this.checkSelf = function (v) {
+            var value = v == undefined ? _this.state.value : v;
             var name = _reactDom2["default"].findDOMNode(_this.input).name || _this.input.props.name;
             var flag = _this.itemCheck(value, name);
             _this.props.checkItem({
@@ -308,6 +308,7 @@ var FormItem = function (_Component) {
                 this.setState({
                     value: nextProps.children.props.defaultValue
                 });
+                this.checkSelf(nextProps.children.props.defaultValue);
             }
             if (!(0, _lodash2["default"])(this.props.children.props.value, nextProps.children.props.value)) {
                 this.setState({
