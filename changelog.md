@@ -1,5 +1,15 @@
+<a name="1.0.21"></a>
+## [1.0.21](https://github.com/tinper-bee/bee-form/compare/1.0.20...1.0.21) (2017-12-04)
+
+
+### Features
+
+* **defaultValue 触发check:** defaultValue 触发check ([03d889e](https://github.com/tinper-bee/bee-form/commit/03d889e))
+
+
+
 <a name="1.0.20"></a>
-## 1.0.20 (2017-12-04)
+## [1.0.20](https://github.com/tinper-bee/bee-form/compare/e3ed42b...1.0.20) (2017-12-04)
 
 
 ### Bug Fixes
