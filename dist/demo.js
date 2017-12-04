@@ -8597,7 +8597,7 @@
 	            }
 	        };
 	
-	        _this.checkSelf = function (v) {
+	        _this.checkSelf = function (v, checkFlag) {
 	            var value = v == undefined ? _this.state.value : v;
 	            var name = _reactDom2['default'].findDOMNode(_this.input).name || _this.input.props.name;
 	            var flag = _this.itemCheck(value, name);
@@ -8605,7 +8605,7 @@
 	                "name": name,
 	                "verify": flag,
 	                "value": value
-	            }, true);
+	            }, checkFlag ? false : true);
 	            _this.setState({
 	                hasError: !flag
 	            });
@@ -8635,7 +8635,7 @@
 	                this.setState({
 	                    value: nextProps.children.props.defaultValue
 	                });
-	                this.checkSelf(nextProps.children.props.defaultValue);
+	                this.checkSelf(nextProps.children.props.defaultValue, true);
 	            }
 	            if (!(0, _lodash2['default'])(this.props.children.props.value, nextProps.children.props.value)) {
 	                this.setState({
