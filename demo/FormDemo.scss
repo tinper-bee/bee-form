@@ -5,18 +5,20 @@
 @import "../node_modules/bee-button/src/Button.scss";
 @import "../node_modules/bee-transition/src/Transition.scss";
 @import "../node_modules/bee-radio/src/Radio.scss";
-
+@import "../node_modules/bee-slider/src/Slider.scss";
+@import "../node_modules/bee-rate/src/Rate.scss";
+@import "../node_modules/bee-city-select/src/CitySelect.scss";
 textarea{
   min-height: 100px;
   min-width: 300px;
 }
-.u-form-control{
-  max-width: 500px;
-  width: auto!important;
-}
 .demo1 .u-label{
   position: relative;
   bottom: 8px;
+}
+.demo1 .u-form-control{
+  border-top-left-radius: 0!important;
+  border-bottom-left-radius: 0!important;
 }
 .demo2 .u-label{
   min-width: 70px;
@@ -29,16 +31,34 @@ textarea{
 .demo2 .u-form-submit {
   padding-left: 70px;
 }
-.demo2 .u-input-group-addon{
+.demo2 .u-input-after{
   width: auto;
-  border: none;
-  background: none;
+  border: none!important;
+  background: none!important;
   cursor: pointer;
   color: #42a5f5;
 }
 
 .demo3 .u-form .u-label{
   width: 120px;
+}
+.demo3 .u-form-submit{
+  padding-left: 120px;
+}
+.demo3 .u-input-after{
+  border: none!important;
+  background: none!important;
+}
+.demo3 .u-input-after .u-button{
+  height: 30px;
+  padding: 0;
+}
+.demo4 .u-label{
+  width: 75px;
+  text-align: right;
+}
+.demo4 .province, .demo4 .city,.demo4 .area{
+  width: 90px!important;
 }
 .demo5 .u-form .u-col-md-2{
   text-align: right;

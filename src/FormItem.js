@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
@@ -8,44 +8,49 @@ import Button from 'bee-button';
 import isEqual from 'lodash.isequal';
 const regs = {
     email: /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/,
-    tel: /^1[3|4|5|7|8]\d{9}$/,
+    tel: /^1\d{10}$/,
     IDCard: /^(\d{15}$|^\d{18}$|^\d{17}(\d|X|x))$/,//身份证
     chinese: /^[\u4e00-\u9fa5]+?$/,//中文校验
     password: /^[0-9a-zA-Z,.!?`~#$%^&*()-=_+<>'"\[\]\{\}\\\|]{6,15}$/,//6-15位数字英文符号
+    number:/^\d*$/
 };
 const propTypes = {
-    clsPrefix:PropTypes.string,
-    className:PropTypes.string,
-    isRequire:PropTypes.bool,//是否必填
-    errorMessage:PropTypes.oneOfType([
+    clsPrefix: PropTypes.string,
+    className: PropTypes.string,
+    isRequire: PropTypes.bool,//是否必填
+    errorMessage: PropTypes.oneOfType([
         PropTypes.node,
         PropTypes.array
     ]),//错误信息
-    htmlType:PropTypes.oneOf(['email','tel','IDCard','chinese','password',null]),//htmlType有值的时候 reg不生效
-    reg:PropTypes.oneOfType([
+    htmlType: PropTypes.oneOf(['email', 'tel', 'IDCard', 'chinese', 'password', null]),//htmlType有值的时候 reg不生效
+    reg: PropTypes.oneOfType([
         PropTypes.instanceOf(RegExp),
         PropTypes.array
     ]),//校验正则,可传字符串或者数组，如果是数组，需要和errorMessage数组一一对应
-    method:PropTypes.oneOf(['change','blur',null]),//校验方式
-    blur:PropTypes.func,//失去焦点的回调,参数为value
-    change:PropTypes.func,//值改变的回调,参数为value当地售后地址
-    check:PropTypes.func,//验证的回调
-    checkItem:PropTypes.func,
-    useRow:PropTypes.func,
-    inline:PropTypes.bool,//formItem是否行内
-    labelName:PropTypes.node,//label标签文字或dom
-    labelClassName:PropTypes.string,//label样式名
-    inputBefore:PropTypes.node,//input之前的
-    inputAfter:PropTypes.node,//input之后的
+    method: PropTypes.oneOf(['change', 'blur', null]),//校验方式
+    blur: PropTypes.func,//失去焦点的回调,参数为value
+    change: PropTypes.func,//值改变的回调,参数为value当地售后地址
+    check: PropTypes.func,//验证的回调
+    checkItem: PropTypes.func,
+    useRow: PropTypes.func,
+    inline: PropTypes.bool,//formItem是否行内
+    labelName: PropTypes.node,//label标签文字或dom
+    labelClassName: PropTypes.string,//label样式名
+    inputBefore: PropTypes.node,//input之前的
+    inputAfter: PropTypes.node,//input之后的
     // inputBeforeSimple:PropTypes.node,//input之前的(参考输入框组的inputGroup.Button，和inputBefore不能同时使用)
     // inputAfterSimple:PropTypes.node,//input之后的(参考输入框组的inputGroup.Button，和inputAfter不能同时使用)
-    mesClassName:PropTypes.string,//提示信息样式名
-    checkInitialValue:PropTypes.bool,//是否校验初始值，未开放 ...col.propTypes
-    showMast:PropTypes.bool,//是否显示必填项的 *
-    asyncCheck:PropTypes.func,//自定义校验，返回true则校验成功，false或无返回值则校验失败。参数为{name:xxx,value:xxx}
-    xs:PropTypes.number,//xs显示列数
-    sm:PropTypes.number,//sm显示列数
-    md:PropTypes.number,//md显示列数
+    mesClassName: PropTypes.string,//提示信息样式名
+    checkInitialValue: PropTypes.bool,//是否校验初始值，未开放 ...col.propTypes
+    showMast: PropTypes.bool,//是否显示必填项的 *
+    asyncCheck: PropTypes.func,//自定义校验，返回true则校验成功，false或无返回值则校验失败。参数为{name:xxx,value:xxx}
+
+    valuePropsName: PropTypes.string,//默认值的props属性key。默认为'defaultValue'
+    // valuePropsName: PropTypes.string,//当前值的props属性key。默认为'value'
+
+    xs: PropTypes.number,//xs显示列数
+    sm: PropTypes.number,//sm显示列数
+    md: PropTypes.number,//md显示列数
     lg: PropTypes.number,//lg显示列数
     xsOffset: PropTypes.number,//xs偏移列数
     smOffset: PropTypes.number,//sm偏移列数
@@ -59,9 +64,9 @@ const propTypes = {
     smPull: PropTypes.number,//sm左偏移列数`
     mdPull: PropTypes.number,//md左偏移列数
     lgPull: PropTypes.number,//lg左偏移列数
-    labelXs:PropTypes.number,
-    labelSm:PropTypes.number,
-    labelMd:PropTypes.number,
+    labelXs: PropTypes.number,
+    labelSm: PropTypes.number,
+    labelMd: PropTypes.number,
     labelLg: PropTypes.number,
     labelXsOffset: PropTypes.number,
     labelSmOffset: PropTypes.number,
@@ -77,295 +82,271 @@ const propTypes = {
     labelLgPull: PropTypes.number,
 };
 const defaultProps = {
-    clsPrefix:'u-form',
-    isRequire:false,//是否必填
-    errorMessage:'校验失败',//错误信息
-    reg:/[/w/W]*/,
-    method:'change',
-    blur:()=>{},
-    change:()=>{},
-    isFormItem:true,
-    check:()=>{},
-    checkItem:()=>{},
-    inline:false,
-    labelName:'',
-    labelClassName:'',
-    inputBefore:'',
-    inputAfter:'',
+    clsPrefix: 'u-form',
+    isRequire: false,//是否必填
+    errorMessage: '校验失败',//错误信息
+    reg: /[/w/W]*/,
+    method: 'change',
+    blur: () => { },
+    change: () => { },
+    isFormItem: true,
+    check: () => { },
+    checkItem: () => { },
+    inline: false,
+    labelName: '',
+    labelClassName: '',
+    inputBefore: '',
+    inputAfter: '',
     // inputBeforeSimple:'',
     // inputAfterSimple:'',
-    mesClassName:'',
-    checkInitialValue:false,
-    useRow:false,
-    showMast:false,
+    mesClassName: '',
+    checkInitialValue: false,
+    useRow: false,
+    showMast: false,
+    valuePropsName: 'defaultValue',
 };
-const getDefaultValue=function(children){
-    if(children.props.type==='text'||children.props.type=='password'||children.props.type=='textarea'){
-        return children.props.value;
-    }else if(children.props.defaultValue!==undefined){//select,自定义组件
-        return children.props.defaultValue;
-    }else if(children.props.defaultChecked!==undefined){//switch
-        return children.props.defaultChecked;
-    }else if(children.props.selectedValue!==undefined){//radio
-        return children.props.selectedValue;
-    }else if(children.props.value!==undefined){//datapicker
-        return children.props.value;
-    }
-}
 class FormItem extends Component {
-    constructor(props){
+    constructor(props) {
         super(props);
-        this.state={
-            hasError:false,
-            value:getDefaultValue(props.children),
-            width:0,
-            maxWidth:'100%',
-            errorMessage:typeof props.errorMessage=='string'?props.errorMessage:props.errorMessage[0]
+        this.state = {
+            hasError: false,
+            width: 0,
+            valueNow:props.children.props[props.valuePropsName],
+            maxWidth: '100%',
+            errorMessage: typeof props.errorMessage == 'string' ? props.errorMessage : props.errorMessage[0],
+            childrenWidth:'100%'
         }
     }
-    componentWillReceiveProps(nextProps){
-        if((this.props.children.props&&this.props.children.props.type=='text')||(this.props.children.props&&this.props.children.props.type=='password')){
-            if(this.props.children.props.value!=nextProps.children.props.value){
-                this.setState({
-                    value:nextProps.children.props.value
-                })
-            }
+     getNowValueName=(item)=> {
+        return {
+            value: this.state.valueNow,
+            name: item.props.name//item.localName 例如textarea原生元素
         }
-        if(this.props.children.props&&this.props.children.props.type=='customer'){//自定义组件
-            if(!isEqual(this.props.children.props.defaultValue,nextProps.children.props.defaultValue)){
-                this.setState({
-                    value:nextProps.children.props.defaultValue
-                })
-            }
-            if(!isEqual(this.props.children.props.value,nextProps.children.props.value)){
-                this.setState({
-                    value:nextProps.children.props.value
-                })
-            }
+    }
+    getWidth=(key)=>{
+        return ReactDOM.findDOMNode(this.refs[key]) ? (ReactDOM.findDOMNode(this.refs[key]).clientWidth || ReactDOM.findDOMNode(this.refs[key]).offsetWidth) : 0;
+    }
+    shouldComponentUpdate(nextProps,nextState){
+        if(isEqual(this.props,nextProps)&&isEqual(this.state,nextState)){
+            return false;
+        }else{
+            return true;
         }
-        if(nextProps.checkNow&&(!this.props.checkNow)){
+    }
+    componentWillReceiveProps(nextProps) {
+        let thisValue=this.props.children.props[this.props.valuePropsName];
+        let nextValue=nextProps.children.props[this.props.valuePropsName];
+        if(!isEqual(thisValue,nextValue)){
+            this.checkSelf(nextValue,true);
+            this.setState({
+                valueNow:nextValue
+            })
+        }
+        if (nextProps.checkNow && (!this.props.checkNow)) {
             this.checkSelf();
         }
     }
-    componentDidMount(){
-        if(this.props.inline){
-            let outerWidth=ReactDOM.findDOMNode(this.refs.outer)?(ReactDOM.findDOMNode(this.refs.outer).clientWidth||ReactDOM.findDOMNode(this.refs.outer).offsetWidth):0;
-            let width=ReactDOM.findDOMNode(this.refs.label)?(ReactDOM.findDOMNode(this.refs.label).clientWidth||ReactDOM.findDOMNode(this.refs.label).offsetWidth):0;
+    componentDidMount() {
+        let outerWidth = this.getWidth('outer');
+        let width = this.getWidth('label');
+        let maxWidth=outerWidth ? outerWidth - width - 10 : '100%';
+        if (this.props.inline) {
             this.setState({
                 width,
-                maxWidth:outerWidth?outerWidth-width-10:'100%'
+                maxWidth
             })
         }
+        let before=this.getWidth('before');
+        let after=this.getWidth('after');
+        console.log('outerWidth:'+maxWidth)
+        console.log('before:'+before)
+        this.setState({
+            childrenWidth:maxWidth-before-after-2
+        })
+
     }
-    handleBlur=()=>{
-        let value=ReactDOM.findDOMNode(this.input).value;
-        let name=ReactDOM.findDOMNode(this.input).name;
-        if(this.props.method==='blur') {
-            let flag=this.itemCheck(value,name);
+    handleBlur = () => {
+        let { value, name } = this.getNowValueName(this.props.children);
+        if (this.props.method === 'blur') {
+            let flag = this.itemCheck(value, name);
             this.setState({
                 hasError: !flag
             });
             this.props.checkItem(
                 {
-                    "name": name,
                     "verify": flag,
-                    "value":value
+                    "name": name,
+                    "value": value
                 }
             );
         }
         this.props.blur(value);
-        this.props.children.props.onBlur&&this.props.children.props.onBlur(value);
+        this.props.children.props.onBlur && this.props.children.props.onBlur(value);
     }
-    handleChange=(selectV)=>{
-        let value=selectV;
-        let name=ReactDOM.findDOMNode(this.input).name||this.input.props.name;
+    handleChange = (selectV) => {
+        let value = selectV;
         this.setState({
-            value:value
-        });
-        if(this.props.method==='change') {
-            let flag=this.itemCheck(value,name);
+            valueNow:selectV
+        })
+        let name = this.getNowValueName(this.props.children).name;
+        if (this.props.method === 'change') {
+            let flag = this.itemCheck(value, name);
             this.setState({
-                hasError: !flag
+                hasError: !flag,
+                value
             });
             this.props.checkItem(
                 {
-                    "name": name,
                     "verify": flag,
-                    "value":value
+                    "name": name,
+                    "value": value
                 }
             );
         }
         this.props.change(value);
-        this.props.children.props.onChange&&this.props.children.props.onChange(value);
+        this.props.children.props.onChange && this.props.children.props.onChange(value);
     }
     /**
      * 校验方法
      * @param value
      * @returns {boolean}
      */
-    itemCheck=(value,name)=>{
-        let {isRequire,htmlType,check,asyncCheck,errorMessage}=this.props;
-        let reg=htmlType?regs[htmlType]:this.props.reg;
-        let obj={
-            "name":name,
-            "value":value===undefined?'':value
+    itemCheck = (value, name) => {
+        let { isRequire, htmlType, check, asyncCheck, errorMessage } = this.props;
+        let reg = htmlType ? regs[htmlType] : this.props.reg;
+        let obj = {
+            "name": name,
+            "value": value === undefined ? '' : value
         };
-        if(typeof asyncCheck=='function'){
-            let flag=!!asyncCheck(obj);
-            obj.verify=flag;
-            check(flag,obj);
+        if (typeof asyncCheck == 'function') {
+            let flag = !!asyncCheck(obj);
+            obj.verify = flag;
+            check(flag, obj);
             return flag;
-        }else{
-            if(reg.length){
-                let flag=true;
-                for(let i=0;i<reg.length;i++){
-                    if(!reg[i].test(value)){
+        } else {
+            if (reg.length) {
+                let flag = true;
+                for (let i = 0; i < reg.length; i++) {
+                    if (!reg[i].test(value)) {
                         this.setState({
-                            errorMessage:errorMessage[i]
+                            errorMessage: errorMessage[i]
                         });
-                        flag=false;
+                        flag = false;
                         break;
                     }
                 }
-                obj.verify=flag;
-                if(isRequire){
-                    if((value!=undefined)&&(value!=='')){
-                        check(flag,obj);
+                obj.verify = flag;
+                if (isRequire) {
+                    if ((value != undefined) && (value !== '')) {
+                        check(flag, obj);
                         return flag;
-                    }else{
-                        check(false,obj);
+                    } else {
+                        check(false, obj);
                         return false;
                     }
-                }else{
-                    if((value!=undefined)&&(value!=='')){
-                        check(flag,obj);
+                } else {
+                    if ((value != undefined) && (value !== '')) {
+                        check(flag, obj);
                         return flag;
-                    }else{
-                        check(true,obj);
+                    } else {
+                        check(true, obj);
                         return true;
                     }
                 }
-            }else{
-                let flag=reg.test(value);
-                obj.verify=flag;
-                if(isRequire){
-                    if((value!=undefined)&&(value!=='')){
-                        check(flag,obj);
+            } else {
+                let flag = reg.test(value);
+                obj.verify = flag;
+                if (isRequire) {
+                    if ((value != undefined) && (value !== '')) {
+                        check(flag, obj);
                         return flag;
-                    }else{
-                        check(false,obj);
+                    } else {
+                        check(false, obj);
                         return false;
                     }
-                }else{
-                    if((value!=undefined)&&(value!=='')){
-                        check(flag,obj);
+                } else {
+                    if ((value != undefined) && (value !== '')) {
+                        check(flag, obj);
                         return flag;
-                    }else{
-                        check(true,obj);
+                    } else {
+                        check(true, obj);
                         return true;
                     }
                 }
             }
-            
+
         }
     }
     /**
      * 触发校验
      */
-    checkSelf=()=>{
-        let value=this.state.value;
-        let name=ReactDOM.findDOMNode(this.input).name||this.input.props.name;
-        let flag=this.itemCheck(value,name);
+    checkSelf = (v,checkFlag) => {
+        let value = v==undefined?this.getNowValueName(this.props.children).value:v;
+        let name = this.getNowValueName(this.props.children).name;
+        let flag = this.itemCheck(value, name);
         this.props.checkItem(
             {
-                "name": name,
                 "verify": flag,
-                "value":value
-            },true
+                "name": name,
+                "value": value
+            },checkFlag?false:true
         );
         this.setState({
-            hasError:!flag
+            hasError: !flag
         })
     }
     render() {
-        const {showMast,useRow,children,inline,className,clsPrefix,inputBefore,inputAfter,mesClassName,labelName,labelClassName}=this.props;
-        let clsObj={};
-        clsObj[`${clsPrefix}-item`]=true;
-        className?clsObj[className]=true:'';
-        let clsErrObj={};
-        clsErrObj[`${clsPrefix}-error`]=true;
-        if(inline){
-            clsObj[`${clsPrefix}-inline`]=true;
-            clsErrObj[`${clsPrefix}-error-inline`]=true;
+        const { showMast, useRow, children, inline, className, clsPrefix, inputBefore, inputAfter, mesClassName, labelName, labelClassName } = this.props;
+        let clsObj = {};
+        clsObj[`${clsPrefix}-item`] = true;
+        className ? clsObj[className] = true : '';
+        let clsErrObj = {};
+        clsErrObj[`${clsPrefix}-error`] = true;
+        if (inline) {
+            clsObj[`${clsPrefix}-inline`] = true;
+            clsErrObj[`${clsPrefix}-error-inline`] = true;
         }
-        mesClassName?clsErrObj[mesClassName]=true:'';
-        if(this.state.hasError)clsErrObj['show']=true;
-        let childs=[];
-        React.Children.map(this.props.children,(child,index)=>{
-            if(child.props.type==='text'||child.props.type==='password'){
-                childs.push(
-                    <div ref="outer" key={index}>
-                        {
-                            useRow?'':<Label ref="label" className={labelClassName?labelClassName:''} >
-                                {showMast?(<span className="u-mast">*</span>):''}
-                                {labelName}
-                                </Label>
-                        }
-                        <span className="u-input-group-outer"  style={{'maxWidth':this.state.maxWidth}}>
-                            <InputGroup key={index} >
-                            {inputBefore?<InputGroup.Addon>{inputBefore}</InputGroup.Addon>:''}
-                                {
-                                    React.cloneElement(children, {
-                                        onBlur: this.handleBlur,
-                                        onChange: this.handleChange,
-                                        ref: (e) => {
-                                            this.input = e
-                                        },
-                                        value:this.state.value
-                                    })
-                                }
-                                {inputAfter?<InputGroup.Addon>{inputAfter}</InputGroup.Addon>:''}
-                           </InputGroup>
-                        </span>
-
-                    </div>
-                )
-            }else{
-                childs.push(
-                    <div ref="outer" key={index}>
-                        {
-                            useRow?'':<Label ref="label" className={labelClassName?labelClassName:''} >
-                                {showMast?(<span className="u-mast">*</span>):''}
-                                {labelName}</Label>
-                        }
-                        <span className="u-input-group-outer"  style={{'maxWidth':this.state.maxWidth}}>
-                            <InputGroup >
-                            {inputBefore?<InputGroup.Addon>{inputBefore}</InputGroup.Addon>:''}
-                                {
-                                    React.cloneElement(children, {
-                                        key:{index},
-                                        onBlur: this.handleBlur,
-                                        onChange: this.handleChange,
-                                        ref: (e) => {
-                                            this.input = e
-                                        },
-                                        value:this.state.value
-                                    })
-                                }
-                                {inputAfter?<InputGroup.Addon>{inputAfter}</InputGroup.Addon>:''}
+        mesClassName ? clsErrObj[mesClassName] = true : '';
+        if (this.state.hasError) clsErrObj['show'] = true;
+        let childs = [];
+        let childrenStyles=this.props.children.props.style?this.props.children.props.style:{};
+        let appendObj={
+            onBlur: this.handleBlur,
+            onChange: this.handleChange,
+        }
+        if(this.props.children.props.clsPrefix&&(this.props.children.props.clsPrefix.indexOf('u-form-control')!=-1)){
+            appendObj.style={'width':this.state.childrenWidth,...childrenStyles}
+        }
+        React.Children.map(this.props.children, (child, index) => {
+            childs.push(
+                <div ref="outer" key={index}>
+                    {
+                        useRow ? '' : <Label ref="label" className={labelClassName ? labelClassName : ''} >
+                            {showMast ? (<span className="u-mast">*</span>) : ''}
+                            {labelName}
+                        </Label>
+                    }
+                    <span className="u-input-group-outer" style={{ 'maxWidth': this.state.maxWidth }}>
+                        <InputGroup key={index} >
+                            {inputBefore?(<span className='u-input-before' ref='before'>{inputBefore}</span>):''}
+                            <span className='u-input-inner'>
+                            {
+                                React.cloneElement(children, appendObj)
+                            }
+                            </span>
+                            {inputAfter?(<span className='u-input-after' ref='after'>{inputAfter}</span>):''}
                         </InputGroup>
-                        </span>
-                    </div>
-                );
-            }
+                    </span>
+                </div>
+            )
         });
         return (
             <div className={classnames(clsObj)}>
                 {childs}
-                <div className={classnames(clsErrObj)} style={{'marginLeft':this.state.width}}>
+                <div className={classnames(clsErrObj)} style={{ 'marginLeft': this.state.width }}>
                     {this.state.errorMessage}
                 </div>
-            </div> )
+            </div>)
     }
 };
 FormItem.propTypes = propTypes;

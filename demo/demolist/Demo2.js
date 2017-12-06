@@ -4,6 +4,7 @@
  * @description 登录示例
  */
 import React, {Component} from 'react';
+import ReactDOM from 'react-dom';
 import Form from '../../src/Form';
 const FormItem = Form.FormItem;
 import FormControl from 'bee-form-control';
@@ -22,12 +23,15 @@ class Demo2 extends Component {
         }
         return (
             <div className="demo2">
-                <Form   submitCallBack={this.checkForm} afterSubmitBtn={cancel()}>
-                    <FormItem showMast={true}  labelName="用户名:" isRequire={true}  errorMessage="请输入用户名" method="blur"  inline={true}>
+                <Form  submitCallBack={this.checkForm} afterSubmitBtn={cancel()}>
+                    <FormItem showMast={true}  labelName="用户名:" isRequire={true}  
+                    errorMessage="请输入用户名" method="blur"  inline={true} valuePropsName='value'>
                         <FormControl name="username"   placeholder="请输入用户名" />
                     </FormItem>
-                    <FormItem showMast={true}  labelName="密码:" isRequire={true} method="blur" errorMessage="请输入密码" inputAfter={<span className='forget'>忘记密码？</span>}  inline={true}>
-                        <FormControl name="password"  type="password" placeholder="请输入密码" />
+                    <FormItem showMast={true}  labelName="密码:" isRequire={true} 
+                    method="blur" errorMessage="请输入密码" 
+                    inputAfter={<span className='forget'>忘记密码？</span>}  inline={true} valuePropsName='value'>
+                        <FormControl name="password"  type="password" placeholder="请输入密码"   />
                     </FormItem>
                 </Form>
             </div>

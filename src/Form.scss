@@ -43,9 +43,41 @@
 .u-form .u-row .u-label{
   line-height: 40px;
 }
+.u-form-item .u-input-group-outer .u-input-group .u-form-control:last-child,.u-form-item .u-input-group-outer .u-input-group .u-form-control:first-child{
+  border-bottom-left-radius: 3px;
+  border-top-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+  border-top-right-radius: 3px;
+}
 .u-form-item.u-form-inline .u-input-group-outer{
   display: inline-block;
 }
+.u-form-item .u-input-group-outer .u-input-before,.u-form-item .u-input-group-outer .u-input-after{
+  line-height: 28px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border: 1px solid #bdbdbd;
+  background: #eee;
+  float: left;
+}
+.u-form-item .u-input-group-outer .u-input-inner{
+  float: left;
+}
+.u-form-item .u-input-group-outer .u-input-before{
+  border-right: none;
+  border-bottom-left-radius: 3px;
+  border-top-left-radius: 3px;
+}
+.u-form-item .u-input-group-outer .u-input-before +.u-form-control{
+  border-bottom-left-radius: 0!important;
+  border-top-left-radius: 0!important;
+}
+.u-form-item .u-input-group-outer .u-input-after{
+  border-left: none;
+  border-bottom-right-radius: 3px;
+  border-top-right-radius: 3px;
+}
+
 .u-mast{
   color: #F22C1D;
   position: relative;
