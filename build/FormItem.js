@@ -30,10 +30,6 @@ var _beeLabel = require('bee-label');
 
 var _beeLabel2 = _interopRequireDefault(_beeLabel);
 
-var _beeButton = require('bee-button');
-
-var _beeButton2 = _interopRequireDefault(_beeButton);
-
 var _lodash = require('lodash.isequal');
 
 var _lodash2 = _interopRequireDefault(_lodash);
@@ -68,7 +64,7 @@ var propTypes = {
     change: _propTypes2["default"].func, //值改变的回调,参数为value当地售后地址
     check: _propTypes2["default"].func, //验证的回调
     checkItem: _propTypes2["default"].func,
-    useRow: _propTypes2["default"].func,
+    useRow: _propTypes2["default"].bool,
     inline: _propTypes2["default"].bool, //formItem是否行内
     labelName: _propTypes2["default"].node, //label标签文字或dom
     labelClassName: _propTypes2["default"].string, //label样式名

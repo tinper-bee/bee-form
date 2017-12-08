@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import InputGroup from 'bee-input-group';
 import Label from 'bee-label';
-import Button from 'bee-button';
 import isEqual from 'lodash.isequal';
 const regs = {
     email: /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/,
@@ -32,7 +31,7 @@ const propTypes = {
     change: PropTypes.func,//值改变的回调,参数为value当地售后地址
     check: PropTypes.func,//验证的回调
     checkItem: PropTypes.func,
-    useRow: PropTypes.func,
+    useRow: PropTypes.bool,
     inline: PropTypes.bool,//formItem是否行内
     labelName: PropTypes.node,//label标签文字或dom
     labelClassName: PropTypes.string,//label样式名
