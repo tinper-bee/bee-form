@@ -27,7 +27,7 @@ class Demo1 extends Component {
         return (
             <FormItem className="demo1" showMast={true} labelName="域名" inline={true} 
             inputBefore="http://"  isRequire={true} method="blur"  check={this.check}>
-                <FormControl style={{'paddingLeft':'50px'}} name="url"   placeholder="请输入域名" value={this.state.value} onChange={this.onChange}/>
+                <FormControl  name="url"   placeholder="请输入域名" value={this.state.value} onChange={this.onChange}/>
             </FormItem>
         )
     }

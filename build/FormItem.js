@@ -4,6 +4,8 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
@@ -48,10 +50,11 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 var regs = {
     email: /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/,
-    tel: /^1[3|4|5|7|8]\d{9}$/,
+    tel: /^1\d{10}$/,
     IDCard: /^(\d{15}$|^\d{18}$|^\d{17}(\d|X|x))$/, //身份证
     chinese: /^[\u4e00-\u9fa5]+?$/, //中文校验
-    password: /^[0-9a-zA-Z,.!?`~#$%^&*()-=_+<>'"\[\]\{\}\\\|]{6,15}$/ //6-15位数字英文符号
+    password: /^[0-9a-zA-Z,.!?`~#$%^&*()-=_+<>'"\[\]\{\}\\\|]{6,15}$/, //6-15位数字英文符号
+    number: /^\d*$/
 };
 var propTypes = {
     clsPrefix: _propTypes2["default"].string,
@@ -77,6 +80,10 @@ var propTypes = {
     checkInitialValue: _propTypes2["default"].bool, //是否校验初始值，未开放 ...col.propTypes
     showMast: _propTypes2["default"].bool, //是否显示必填项的 *
     asyncCheck: _propTypes2["default"].func, //自定义校验，返回true则校验成功，false或无返回值则校验失败。参数为{name:xxx,value:xxx}
+
+    valuePropsName: _propTypes2["default"].string, //默认值的props属性key。默认为'defaultValue'
+    // valuePropsName: PropTypes.string,//当前值的props属性key。默认为'value'
+
     xs: _propTypes2["default"].number, //xs显示列数
     sm: _propTypes2["default"].number, //sm显示列数
     md: _propTypes2["default"].number, //md显示列数
@@ -131,24 +138,8 @@ var defaultProps = {
     mesClassName: '',
     checkInitialValue: false,
     useRow: false,
-    showMast: false
-};
-var getDefaultValue = function getDefaultValue(children) {
-    if (children.props.type === 'text' || children.props.type == 'password' || children.props.type == 'textarea') {
-        return children.props.value;
-    } else if (children.props.defaultValue !== undefined) {
-        //select,自定义组件
-        return children.props.defaultValue;
-    } else if (children.props.defaultChecked !== undefined) {
-        //switch
-        return children.props.defaultChecked;
-    } else if (children.props.selectedValue !== undefined) {
-        //radio
-        return children.props.selectedValue;
-    } else if (children.props.value !== undefined) {
-        //datapicker
-        return children.props.value;
-    }
+    showMast: false,
+    valuePropsName: 'defaultValue'
 };
 
 var FormItem = function (_Component) {
@@ -159,17 +150,30 @@ var FormItem = function (_Component) {
 
         var _this = _possibleConstructorReturn(this, _Component.call(this, props));
 
+        _this.getNowValueName = function (item) {
+            return {
+                value: _this.state.valueNow,
+                name: item.props.name //item.localName 例如textarea原生元素
+            };
+        };
+
+        _this.getWidth = function (key) {
+            return _reactDom2["default"].findDOMNode(_this.refs[key]) ? _reactDom2["default"].findDOMNode(_this.refs[key]).clientWidth || _reactDom2["default"].findDOMNode(_this.refs[key]).offsetWidth : 0;
+        };
+
         _this.handleBlur = function () {
-            var value = _reactDom2["default"].findDOMNode(_this.input).value;
-            var name = _reactDom2["default"].findDOMNode(_this.input).name;
+            var _this$getNowValueName = _this.getNowValueName(_this.props.children),
+                value = _this$getNowValueName.value,
+                name = _this$getNowValueName.name;
+
             if (_this.props.method === 'blur') {
                 var flag = _this.itemCheck(value, name);
                 _this.setState({
                     hasError: !flag
                 });
                 _this.props.checkItem({
-                    "name": name,
                     "verify": flag,
+                    "name": name,
                     "value": value
                 });
             }
@@ -179,18 +183,19 @@ var FormItem = function (_Component) {
 
         _this.handleChange = function (selectV) {
             var value = selectV;
-            var name = _reactDom2["default"].findDOMNode(_this.input).name || _this.input.props.name;
             _this.setState({
-                value: value
+                valueNow: selectV
             });
+            var name = _this.getNowValueName(_this.props.children).name;
             if (_this.props.method === 'change') {
                 var flag = _this.itemCheck(value, name);
                 _this.setState({
-                    hasError: !flag
+                    hasError: !flag,
+                    value: value
                 });
                 _this.props.checkItem({
-                    "name": name,
                     "verify": flag,
+                    "name": name,
                     "value": value
                 });
             }
@@ -270,15 +275,15 @@ var FormItem = function (_Component) {
             }
         };
 
-        _this.checkSelf = function () {
-            var value = _this.state.value;
-            var name = _reactDom2["default"].findDOMNode(_this.input).name || _this.input.props.name;
+        _this.checkSelf = function (v, checkFlag) {
+            var value = v == undefined ? _this.getNowValueName(_this.props.children).value : v;
+            var name = _this.getNowValueName(_this.props.children).name;
             var flag = _this.itemCheck(value, name);
             _this.props.checkItem({
-                "name": name,
                 "verify": flag,
+                "name": name,
                 "value": value
-            }, true);
+            }, checkFlag ? false : true);
             _this.setState({
                 hasError: !flag
             });
@@ -286,34 +291,31 @@ var FormItem = function (_Component) {
 
         _this.state = {
             hasError: false,
-            value: getDefaultValue(props.children),
             width: 0,
+            valueNow: props.children.props[props.valuePropsName],
             maxWidth: '100%',
-            errorMessage: typeof props.errorMessage == 'string' ? props.errorMessage : props.errorMessage[0]
+            errorMessage: typeof props.errorMessage == 'string' ? props.errorMessage : props.errorMessage[0],
+            childrenWidth: '100%'
         };
         return _this;
     }
 
-    FormItem.prototype.componentWillReceiveProps = function componentWillReceiveProps(nextProps) {
-        if (this.props.children.props && this.props.children.props.type == 'text' || this.props.children.props && this.props.children.props.type == 'password') {
-            if (this.props.children.props.value != nextProps.children.props.value) {
-                this.setState({
-                    value: nextProps.children.props.value
-                });
-            }
+    FormItem.prototype.shouldComponentUpdate = function shouldComponentUpdate(nextProps, nextState) {
+        if ((0, _lodash2["default"])(this.props, nextProps) && (0, _lodash2["default"])(this.state, nextState)) {
+            return false;
+        } else {
+            return true;
         }
-        if (this.props.children.props && this.props.children.props.type == 'customer') {
-            //自定义组件
-            if (!(0, _lodash2["default"])(this.props.children.props.defaultValue, nextProps.children.props.defaultValue)) {
-                this.setState({
-                    value: nextProps.children.props.defaultValue
-                });
-            }
-            if (!(0, _lodash2["default"])(this.props.children.props.value, nextProps.children.props.value)) {
-                this.setState({
-                    value: nextProps.children.props.value
-                });
-            }
+    };
+
+    FormItem.prototype.componentWillReceiveProps = function componentWillReceiveProps(nextProps) {
+        var thisValue = this.props.children.props[this.props.valuePropsName];
+        var nextValue = nextProps.children.props[this.props.valuePropsName];
+        if (!(0, _lodash2["default"])(thisValue, nextValue)) {
+            this.checkSelf(nextValue, true);
+            this.setState({
+                valueNow: nextValue
+            });
         }
         if (nextProps.checkNow && !this.props.checkNow) {
             this.checkSelf();
@@ -321,14 +323,20 @@ var FormItem = function (_Component) {
     };
 
     FormItem.prototype.componentDidMount = function componentDidMount() {
+        var outerWidth = this.getWidth('outer');
+        var width = this.getWidth('label');
+        var maxWidth = outerWidth ? outerWidth - width - 10 : '100%';
         if (this.props.inline) {
-            var outerWidth = _reactDom2["default"].findDOMNode(this.refs.outer) ? _reactDom2["default"].findDOMNode(this.refs.outer).clientWidth || _reactDom2["default"].findDOMNode(this.refs.outer).offsetWidth : 0;
-            var width = _reactDom2["default"].findDOMNode(this.refs.label) ? _reactDom2["default"].findDOMNode(this.refs.label).clientWidth || _reactDom2["default"].findDOMNode(this.refs.label).offsetWidth : 0;
             this.setState({
                 width: width,
-                maxWidth: outerWidth ? outerWidth - width - 10 : '100%'
+                maxWidth: maxWidth
             });
         }
+        var before = this.getWidth('before');
+        var after = this.getWidth('after');
+        this.setState({
+            childrenWidth: maxWidth - before - after - 2
+        });
     };
     /**
      * 校验方法
@@ -369,91 +377,52 @@ var FormItem = function (_Component) {
         mesClassName ? clsErrObj[mesClassName] = true : '';
         if (this.state.hasError) clsErrObj['show'] = true;
         var childs = [];
+        var childrenStyles = this.props.children.props.style ? this.props.children.props.style : {};
+        var appendObj = {
+            onBlur: this.handleBlur,
+            onChange: this.handleChange
+        };
+        if (this.props.children.props.clsPrefix && this.props.children.props.clsPrefix.indexOf('u-form-control') != -1) {
+            appendObj.style = _extends({ 'width': this.state.childrenWidth }, childrenStyles);
+        }
         _react2["default"].Children.map(this.props.children, function (child, index) {
-            if (child.props.type === 'text' || child.props.type === 'password') {
-                childs.push(_react2["default"].createElement(
-                    'div',
-                    { ref: 'outer', key: index },
-                    useRow ? '' : _react2["default"].createElement(
-                        _beeLabel2["default"],
-                        { ref: 'label', className: labelClassName ? labelClassName : '' },
-                        showMast ? _react2["default"].createElement(
-                            'span',
-                            { className: 'u-mast' },
-                            '*'
-                        ) : '',
-                        labelName
-                    ),
-                    _react2["default"].createElement(
+            childs.push(_react2["default"].createElement(
+                'div',
+                { ref: 'outer', key: index },
+                useRow ? '' : _react2["default"].createElement(
+                    _beeLabel2["default"],
+                    { ref: 'label', className: labelClassName ? labelClassName : '' },
+                    showMast ? _react2["default"].createElement(
                         'span',
-                        { className: 'u-input-group-outer', style: { 'maxWidth': _this2.state.maxWidth } },
-                        _react2["default"].createElement(
-                            _beeInputGroup2["default"],
-                            { key: index },
-                            inputBefore ? _react2["default"].createElement(
-                                _beeInputGroup2["default"].Addon,
-                                null,
-                                inputBefore
-                            ) : '',
-                            _react2["default"].cloneElement(children, {
-                                onBlur: _this2.handleBlur,
-                                onChange: _this2.handleChange,
-                                ref: function ref(e) {
-                                    _this2.input = e;
-                                },
-                                value: _this2.state.value
-                            }),
-                            inputAfter ? _react2["default"].createElement(
-                                _beeInputGroup2["default"].Addon,
-                                null,
-                                inputAfter
-                            ) : ''
-                        )
-                    )
-                ));
-            } else {
-                childs.push(_react2["default"].createElement(
-                    'div',
-                    { ref: 'outer', key: index },
-                    useRow ? '' : _react2["default"].createElement(
-                        _beeLabel2["default"],
-                        { ref: 'label', className: labelClassName ? labelClassName : '' },
-                        showMast ? _react2["default"].createElement(
-                            'span',
-                            { className: 'u-mast' },
-                            '*'
-                        ) : '',
-                        labelName
-                    ),
+                        { className: 'u-mast' },
+                        '*'
+                    ) : '',
+                    labelName
+                ),
+                _react2["default"].createElement(
+                    'span',
+                    { className: 'u-input-group-outer', style: { 'maxWidth': _this2.state.maxWidth } },
                     _react2["default"].createElement(
-                        'span',
-                        { className: 'u-input-group-outer', style: { 'maxWidth': _this2.state.maxWidth } },
+                        _beeInputGroup2["default"],
+                        { key: index },
+                        inputBefore ? _react2["default"].createElement(
+                            'span',
+                            { className: 'u-input-before', ref: 'before' },
+                            inputBefore
+                        ) : '',
                         _react2["default"].createElement(
-                            _beeInputGroup2["default"],
-                            null,
-                            inputBefore ? _react2["default"].createElement(
-                                _beeInputGroup2["default"].Addon,
-                                null,
-                                inputBefore
-                            ) : '',
-                            _react2["default"].cloneElement(children, {
-                                key: { index: index },
-                                onBlur: _this2.handleBlur,
-                                onChange: _this2.handleChange,
-                                ref: function ref(e) {
-                                    _this2.input = e;
-                                },
-                                value: _this2.state.value
-                            }),
-                            inputAfter ? _react2["default"].createElement(
-                                _beeInputGroup2["default"].Addon,
-                                null,
-                                inputAfter
-                            ) : ''
-                        )
+                            'span',
+                            { className: 'u-input-inner' },
+                            _react2["default"].cloneElement(children, appendObj)
+                        ),
+                        inputAfter ? _react2["default"].createElement(
+                            'span',
+                            { className: 'u-input-after', ref: 'after' },
+                            inputAfter
+                        ) : ''
                     )
-                ));
-            }
+                )
+            ));
         });
         return _react2["default"].createElement(
             'div',

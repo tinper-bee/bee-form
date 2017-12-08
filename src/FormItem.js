@@ -158,8 +158,6 @@ class FormItem extends Component {
         }
         let before=this.getWidth('before');
         let after=this.getWidth('after');
-        console.log('outerWidth:'+maxWidth)
-        console.log('before:'+before)
         this.setState({
             childrenWidth:maxWidth-before-after-2
         })

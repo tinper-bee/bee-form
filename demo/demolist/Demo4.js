@@ -73,7 +73,7 @@ class Demo4 extends Component {
                    />
                </FormItem>
                <FormItem showMast={true} labelName="籍贯:"  method="change" isRequire={true} inline={true}>
-                   <CitySelect/>
+                   <CitySelect name='origin'/>
                </FormItem>
                <FormItem  labelName="保密等级:"  method="change"  inline={true}>
                     <Rate name='rate'  value={this.state.rate} onChange={this.rateChange}/>
