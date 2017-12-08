@@ -1,3 +1,23 @@
+<a name="1.1.1"></a>
+## [1.1.1](https://github.com/tinper-bee/bee-form/compare/1.1.0...1.1.1) (2017-12-08)
+
+
+### Bug Fixes
+
+* **bee-form:** PropType校验修改,取消引入 bee-button ([54a98f3](https://github.com/tinper-bee/bee-form/commit/54a98f3))
+
+
+### Features
+
+* **bee-form:** 自定义组件修改，取值方式修改 ([f72f5a2](https://github.com/tinper-bee/bee-form/commit/f72f5a2))
+
+
+### BREAKING CHANGES
+
+* **bee-form:** 自定义组件修改不维护无关属性，取值方式新增valueProspName属性
+
+
+
 <a name="1.1.0"></a>
 # [1.1.0](https://github.com/tinper-bee/bee-form/compare/1.0.19...1.1.0) (2017-12-08)
 
