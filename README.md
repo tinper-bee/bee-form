@@ -77,6 +77,7 @@ export default Demo1;
 ### FormItem 参数说明
 |参数|说明|类型|默认值|
 |:---|:-----|:----|:------|
+|valuePropsName|子元素取值的props|string|defaultValue|
 |isRequire|是否必填|bool|false|
 |errorMessage|错误提示信息，可传数组，和正则数组一一对应|node/array|"校验失败"|
 |htmlType|数值类型，目前支持 `email/tel/IDCard/chinese/password` 类型|string|-|

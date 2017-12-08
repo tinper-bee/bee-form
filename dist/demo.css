@@ -7782,7 +7782,8 @@ textarea {
   color: #42a5f5; }
 
 .demo3 .u-form .u-label {
-  width: 120px; }
+  width: 120px;
+  text-align: right; }
 
 .demo3 .u-form-submit {
   padding-left: 120px; }
@@ -7801,6 +7802,14 @@ textarea {
 
 .demo4 .province, .demo4 .city, .demo4 .area {
   width: 90px !important; }
+
+.demo4 .uf.uf-calendar {
+  position: relative;
+  top: -4px;
+  right: 9px; }
+
+.demo4 .u-form-submit {
+  padding-left: 75px; }
 
 .demo5 .u-form .u-col-md-2 {
   text-align: right; }
