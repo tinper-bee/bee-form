@@ -1,3 +1,6 @@
+<a name="1.1.0"></a>
+# [1.1.0](https://github.com/tinper-bee/bee-form/compare/1.0.19...1.1.0) (2017-12-08)
+
 
 ### Features
 
