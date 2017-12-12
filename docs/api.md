@@ -69,13 +69,10 @@
 
 ### 自定义组件说明
 - 需要有`onChange`方法，并且参数为改变后的值
-- 默认值为`defaultValue`
-- 需要有`type='customer'`属性，来标识此组件为自定义组件
 
 
 ### 其它说明
 - `Form`的子元素中如果有`Button`并且此`Button`的`isSubmit=true`，则可以作为提交按钮
 - `Form`整体校验时，会触发`FormItem`的校验
 - `FormItem`的子元素，`name`必须存在且不能重复
-- 组件初期，`FormItem`子元素只能存在一个,可以使用 `FormControl` 或者 `Select`
-- 尽量不要再`FormItem`的子元素增加`onBlur`或`onChange`方法。如必须写，这两个方法的参数为子元素的值
+- `FormItem`子元素只能存在一个
