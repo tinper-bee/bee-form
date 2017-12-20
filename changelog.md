@@ -1,3 +1,13 @@
+<a name="1.1.3"></a>
+## [1.1.3](https://github.com/tinper-bee/bee-form/compare/1.1.2...1.1.3) (2017-12-20)
+
+
+### Bug Fixes
+
+* **bee-form:** 去掉bee-form-group，删除多余dev ([80f5bc2](https://github.com/tinper-bee/bee-form/commit/80f5bc2))
+
+
+
 <a name="1.1.2"></a>
 ## [1.1.2](https://github.com/tinper-bee/bee-form/compare/1.1.1...1.1.2) (2017-12-12)
 
