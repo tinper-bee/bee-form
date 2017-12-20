@@ -1,8 +1,7 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Button from 'bee-button';
-import FormGroup from 'bee-form-group';
-import {Con, Row, Col} from 'bee-layout';
+import { Con, Row, Col } from 'bee-layout';
 import Label from 'bee-label';
 const propTypes = {
     clsPrefix: PropTypes.string,
@@ -13,8 +12,8 @@ const propTypes = {
     beforeSubmitBtn: PropTypes.node,//提交按钮之前的dom
     afterSubmitBtn: PropTypes.node,//提交按钮之后的dom
     useRow: PropTypes.bool,//是否使用栅格布局
-    checkFormNow:PropTypes.bool,//现在就校验（主动校验参数）
-    showSubmit:PropTypes.bool,//是否显示提交按钮
+    checkFormNow: PropTypes.bool,//现在就校验（主动校验参数）
+    showSubmit: PropTypes.bool,//是否显示提交按钮
 };
 const defaultProps = {
     clsPrefix: 'u-form',
@@ -26,8 +25,8 @@ const defaultProps = {
     beforeSubmitBtn: '',
     afterSubmitBtn: '',
     useRow: false,
-    checkFormNow:false,
-    showSubmit:true
+    checkFormNow: false,
+    showSubmit: true
 };
 class Form extends Component {
     constructor(props) {
@@ -45,7 +44,7 @@ class Form extends Component {
         items.forEach(item => {
             if (item.name === obj.name) {
                 item.verify = obj.verify;
-                item.value = obj.value===undefined? '':obj.value;
+                item.value = obj.value === undefined ? '' : obj.value;
             }
         });
         this.setState({
@@ -85,16 +84,16 @@ class Form extends Component {
         this.setState({
             checkNow: true
         });
-        typeof onClickFn==='function'?onClickFn():'';
+        typeof onClickFn === 'function' ? onClickFn() : '';
     }
-    btnCheck=(onClickFn)=>{
-        let self=this;
-        return function (){
+    btnCheck = (onClickFn) => {
+        let self = this;
+        return function () {
             self.checkNow(onClickFn);
         }
     }
-    componentWillReceiveProps(nextProps){
-        if(nextProps.checkFormNow){
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.checkFormNow) {
             this.checkNow();
         }
     }
@@ -111,63 +110,61 @@ class Form extends Component {
         this.props.submitCallBack(flag, this.state.items);
     }
     render() {
-        const {className,showSubmit,useRow, submitAreaClassName, submitBtnClassName, beforeSubmitBtn, afterSubmitBtn, clsPrefix} = this.props;
+        const { className, showSubmit, useRow, submitAreaClassName, submitBtnClassName, beforeSubmitBtn, afterSubmitBtn, clsPrefix } = this.props;
         let childs = [];
         React.Children.map(this.props.children, (child, index) => {
             let {
-                labelName,labelClassName,xs, sm, md, lg, xsOffset, smOffset, mdOffset, lgOffset, xsPush, smPush, mdPush, lgPush, xsPull, smPull, mdPull, lgPull,
+                labelName, labelClassName, xs, sm, md, lg, xsOffset, smOffset, mdOffset, lgOffset, xsPush, smPush, mdPush, lgPush, xsPull, smPull, mdPull, lgPull,
                 labelXs, labelSm, labelMd, labelLg, labelXsOffset, labelSmOffset, labelMdOffset, labelLgOffset, labelXsPush, labelSmPush, labelMdPush, labelLgPush,
-                labelXsPull, labelSmPull, labelMdPull, labelLgPull,showMast,isSubmit
+                labelXsPull, labelSmPull, labelMdPull, labelLgPull, showMast, isSubmit
             } = child.props;
             if (child.props.isFormItem) {
-                if(useRow){
+                if (useRow) {
                     childs.push(
-                        <Col key={'label'+index} xs={labelXs} sm={labelSm} md={labelMd} lg={labelLg} xsOffset={labelXsOffset} smOffset={labelSmOffset}
-                             mdOffset={labelMdOffset} lgOffset={labelLgOffset} xsPush={labelXsPush} smPush={labelSmPush} mdPush={labelMdPush} lgPush={labelLgPush}
-                             xsPull={labelXsPull} smPull={labelSmPull} mdPull={labelMdPull} lgPull={labelLgPull}>
-                            <Label className={labelClassName?labelClassName:''}>
-                                {showMast?(<span className="u-mast">*</span>):''}
+                        <Col key={'label' + index} xs={labelXs} sm={labelSm} md={labelMd} lg={labelLg} xsOffset={labelXsOffset} smOffset={labelSmOffset}
+                            mdOffset={labelMdOffset} lgOffset={labelLgOffset} xsPush={labelXsPush} smPush={labelSmPush} mdPush={labelMdPush} lgPush={labelLgPush}
+                            xsPull={labelXsPull} smPull={labelSmPull} mdPull={labelMdPull} lgPull={labelLgPull}>
+                            <Label className={labelClassName ? labelClassName : ''}>
+                                {showMast ? (<span className="u-mast">*</span>) : ''}
                                 {labelName}</Label>
                         </Col>
                     );
                     childs.push(
-                        <Col key={'fromGroup'+index} xs={xs} sm={sm} md={md} lg={lg} xsOffset={xsOffset} smOffset={smOffset} mdOffset={mdOffset}
-                              lgOffset={lgOffset} xsPush={xsPush} smPush={smPush} mdPush={mdPush} lgPush={lgPush}
-                              xsPull={xsPull} smPull={smPull} mdPull={mdPull} lgPull={lgPull}>
-                            <FormGroup>
-                                {
-                                    React.cloneElement(child,
-                                        {
-                                            useRow:useRow,
-                                            checkItem: this.checkItem,
-                                            checkNow: this.state.checkNow
-                                        })
-                                }
-                            </FormGroup>
-                        </Col>
-                    )
-                }else{
-                    childs.push(
-                        <FormGroup key={index}>
+                        <Col key={'fromGroup' + index} xs={xs} sm={sm} md={md} lg={lg} xsOffset={xsOffset} smOffset={smOffset} mdOffset={mdOffset}
+                            lgOffset={lgOffset} xsPush={xsPush} smPush={smPush} mdPush={mdPush} lgPush={lgPush}
+                            xsPull={xsPull} smPull={smPull} mdPull={mdPull} lgPull={lgPull}>
                             {
                                 React.cloneElement(child,
                                     {
-                                        useRow:useRow,
+                                        useRow: useRow,
                                         checkItem: this.checkItem,
                                         checkNow: this.state.checkNow
                                     })
                             }
-                        </FormGroup>
+                        </Col>
+                    )
+                } else {
+                    childs.push(
+                        <span key={index}>
+                            {
+                                React.cloneElement(child,
+                                    {
+                                        useRow: useRow,
+                                        checkItem: this.checkItem,
+                                        checkNow: this.state.checkNow
+                                    })
+                            }
+                        </span>
                     )
                 }
-            } else if(child.props.isSubmit){
+            } else if (child.props.isSubmit) {
                 childs.push(
                     <span key={index}>
                         {
                             React.cloneElement(child,
                                 {
-                                    onClick:this.btnCheck(child.props.onClick)
-                        })
+                                    onClick: this.btnCheck(child.props.onClick)
+                                })
                         }
                     </span>
                 )
@@ -181,19 +178,15 @@ class Form extends Component {
                     <Row>
                         {childs}
                     </Row>
-                ) : (
-                    <div>
-                        {childs}
-                    </div>
-                )}
+                ) : childs}
                 {
-                    showSubmit?(
+                    showSubmit ? (
                         <div className={`${clsPrefix}-submit ${submitAreaClassName}`}>
                             {beforeSubmitBtn}
                             <Button onClick={this.checkNow} colors="primary" className={`${clsPrefix}-submit-btn ${submitBtnClassName}`}>提交</Button>
                             {afterSubmitBtn}
                         </div>
-                    ):''
+                    ) : ''
                 }
 
             </form>

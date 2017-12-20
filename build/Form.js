@@ -16,10 +16,6 @@ var _beeButton = require('bee-button');
 
 var _beeButton2 = _interopRequireDefault(_beeButton);
 
-var _beeFormGroup = require('bee-form-group');
-
-var _beeFormGroup2 = _interopRequireDefault(_beeFormGroup);
-
 var _beeLayout = require('bee-layout');
 
 var _beeLabel = require('bee-label');
@@ -232,19 +228,15 @@ var Form = function (_Component) {
                         { key: 'fromGroup' + index, xs: xs, sm: sm, md: md, lg: lg, xsOffset: xsOffset, smOffset: smOffset, mdOffset: mdOffset,
                             lgOffset: lgOffset, xsPush: xsPush, smPush: smPush, mdPush: mdPush, lgPush: lgPush,
                             xsPull: xsPull, smPull: smPull, mdPull: mdPull, lgPull: lgPull },
-                        _react2["default"].createElement(
-                            _beeFormGroup2["default"],
-                            null,
-                            _react2["default"].cloneElement(child, {
-                                useRow: useRow,
-                                checkItem: _this2.checkItem,
-                                checkNow: _this2.state.checkNow
-                            })
-                        )
+                        _react2["default"].cloneElement(child, {
+                            useRow: useRow,
+                            checkItem: _this2.checkItem,
+                            checkNow: _this2.state.checkNow
+                        })
                     ));
                 } else {
                     childs.push(_react2["default"].createElement(
-                        _beeFormGroup2["default"],
+                        'span',
                         { key: index },
                         _react2["default"].cloneElement(child, {
                             useRow: useRow,
@@ -272,11 +264,7 @@ var Form = function (_Component) {
                 _beeLayout.Row,
                 null,
                 childs
-            ) : _react2["default"].createElement(
-                'div',
-                null,
-                childs
-            ),
+            ) : childs,
             showSubmit ? _react2["default"].createElement(
                 'div',
                 { className: clsPrefix + '-submit ' + submitAreaClassName },
