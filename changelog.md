@@ -1,3 +1,13 @@
+<a name="1.1.4"></a>
+## [1.1.4](https://github.com/tinper-bee/bee-form/compare/1.1.3...1.1.4) (2017-12-21)
+
+
+### Bug Fixes
+
+* **bee-form:** 完善文档，发包 ([ceaf6c3](https://github.com/tinper-bee/bee-form/commit/ceaf6c3))
+
+
+
 <a name="1.1.3"></a>
 ## [1.1.3](https://github.com/tinper-bee/bee-form/compare/1.1.2...1.1.3) (2017-12-20)
 
