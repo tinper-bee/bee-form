@@ -5,7 +5,7 @@
  */
 import React ,{Component } from 'react';
 import ReactDOM from 'react-dom';
-import Form from '../../src/Form';
+import Form from '../../src';
 import FormControl from 'bee-form-control';
 import Select from 'bee-select';
 import Radio from 'bee-radio';

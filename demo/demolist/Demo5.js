@@ -4,7 +4,7 @@
  * @description 使用栅格布局，配置 Form：userRow={true}  FormItem 格子数，参照栅格布局
  */
 import React ,{Component } from 'react';
-import Form from '../../src/Form';
+import Form from '../../src';
 const FormItem=Form.FormItem;
 import FormControl from 'bee-form-control';
 import Button from 'bee-button';

@@ -3490,7 +3490,7 @@ a, .mdl-accordion, .mdl-button, .mdl-card, .mdl-checkbox, .mdl-dropdown-menu,
   .vertical-align-middle, .vertical-align-bottom {
     display: inline-block;
     max-width: 100%;
-    font-size: 1.4rem; }
+    font-size: 14px; }
   .vertical-align-middle {
     vertical-align: middle; }
   .vertical-align-bottom {
@@ -3678,7 +3678,6 @@ a, .mdl-accordion, .mdl-button, .mdl-card, .mdl-checkbox, .mdl-dropdown-menu,
   visibility: hidden; }
 
 .text-hide {
-  font: "0/0" a;
   color: transparent;
   text-shadow: none;
   background-color: transparent;
@@ -4951,26 +4950,26 @@ a, .mdl-accordion, .mdl-button, .mdl-card, .mdl-checkbox, .mdl-dropdown-menu,
   box-shadow: none; }
 
 .u-shadow-2dp {
-  box-shadow: 0 0.2rem 0.2rem 0 rgba(0, 0, 0, 0.14), 0 0.3rem 0.1rem -0.2rem rgba(0, 0, 0, 0.2), 0 0.1rem 0.5rem 0 rgba(0, 0, 0, 0.12);
-  box-shadow: 0 0.2rem 0.2rem 0 black, 0 0.3rem 0.1rem -0.2rem black, 0 0.1rem 0.5rem 0 black \9; }
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+  box-shadow: 0 2px 2px 0 black, 0 3px 1px -2px black, 0 1px 5px 0 black \9; }
 
 .u-shadow-3dp {
-  box-shadow: 0 0.3rem 0.4rem 0 rgba(0, 0, 0, 0.14), 0 0.3rem 0.3rem -0.2rem rgba(0, 0, 0, 0.2), 0 0.1rem 0.8rem 0 rgba(0, 0, 0, 0.12); }
+  box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.14), 0 3px 3px -2px rgba(0, 0, 0, 0.2), 0 1px 8px 0 rgba(0, 0, 0, 0.12); }
 
 .u-shadow-4dp {
-  box-shadow: 0 0.4rem 0.5rem 0 rgba(0, 0, 0, 0.14), 0 0.1rem 1rem 0 rgba(0, 0, 0, 0.12), 0 0.2rem 0.4rem -0.1rem rgba(0, 0, 0, 0.2); }
+  box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12), 0 2px 4px -1px rgba(0, 0, 0, 0.2); }
 
 .u-shadow-6dp {
-  box-shadow: 0 0.6rem 1rem 0 rgba(0, 0, 0, 0.14), 0 0.1rem 1.8rem 0 rgba(0, 0, 0, 0.12), 0 0.3rem 0.5rem -0.1rem rgba(0, 0, 0, 0.2); }
+  box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12), 0 3px 5px -1px rgba(0, 0, 0, 0.2); }
 
 .u-shadow-8dp {
-  box-shadow: 0 0.8rem 1rem 0.1rem rgba(0, 0, 0, 0.14), 0 0.3rem 1.4rem 0.2rem rgba(0, 0, 0, 0.12), 0 0.5rem 0.5rem -0.3rem rgba(0, 0, 0, 0.2); }
+  box-shadow: 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12), 0 5px 5px -3px rgba(0, 0, 0, 0.2); }
 
 .u-shadow-16dp {
-  box-shadow: 0 1.6rem 2.4rem 0.2rem rgba(0, 0, 0, 0.14), 0 0.6rem 3rem 0.5rem rgba(0, 0, 0, 0.12), 0 0.8rem 1rem -0.5rem rgba(0, 0, 0, 0.2); }
+  box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.14), 0 6px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2); }
 
 .u-shadow-24dp {
-  box-shadow: 0 0.9rem 4.6rem 0.8rem rgba(0, 0, 0, 0.14), 0 1.1rem 1.5rem -0.7rem rgba(0, 0, 0, 0.12), 0 2.4rem 3.8rem 0.3rem rgba(0, 0, 0, 0.2); }
+  box-shadow: 0 9px 46px 8px rgba(0, 0, 0, 0.14), 0 11px 15px -7px rgba(0, 0, 0, 0.12), 0 24px 38px 3px rgba(0, 0, 0, 0.2); }
 
 /* keyframes 定义 */
 
@@ -5997,15 +5996,14 @@ a, .mdl-accordion, .mdl-button, .mdl-card, .mdl-checkbox, .mdl-dropdown-menu,
 .u-button {
   background: rgb(224,224,224);
   border: none;
-  border-radius: 0.4rem;
+  border-radius: 4px;
   color: rgb(0,0,0);
   position: relative;
-  min-width: 7.2rem;
-  padding: 0.5rem 1.3rem;
-  padding: 5px 13px \9;
+  min-width: 72px;
+  padding: 5px 13px;
   display: inline-block;
   font-family: "Open Sans", "Helvetica Neue", Arial, "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
-  font-size: 1.4rem;
+  font-size: 14px;
   font-weight: 500;
   line-height: 1;
   letter-spacing: 0;
@@ -6039,13 +6037,11 @@ input.u-button[type="submit"] {
 
 .u-button-floating {
   border-radius: 50%;
-  font-size: 1.4rem;
-  height: 3.8rem;
-  height: 38px \9;
+  font-size: 14px;
+  height: 38px;
   margin: auto;
-  min-width: 3.8rem;
-  width: 3.8rem;
-  width: 38px \9;
+  min-width: 38px;
+  width: 38px;
   padding: 0;
   line-height: normal;
   border: 1px solid rgb(224,224,224); }
@@ -6204,26 +6200,26 @@ input.u-button[type="submit"] {
 
 .u-button-icon {
   border-radius: 50%;
-  font-size: 1.4rem;
-  height: 3.2rem;
+  font-size: 14px;
+  height: 32px;
   margin: auto;
-  min-width: 3.2rem;
-  width: 3.2rem;
+  min-width: 32px;
+  width: 32px;
   padding: 0;
   line-height: normal;
   border: 1px solid rgb(224,224,224); }
 
 .u-button-lg {
   padding: 8px 15px;
-  font-size: 1.4rem; }
+  font-size: 14px; }
 
 .u-button-xg {
   padding: 10px 18px;
-  font-size: 1.6rem; }
+  font-size: 16px; }
 
 .u-button-sm {
   padding: 3px 5px;
-  font-size: 1.2rem; }
+  font-size: 12px; }
 
 .u-button-squared {
   border-radius: 0; }
@@ -6793,7 +6789,7 @@ input.u-button[type="submit"] {
   margin: 0;
   padding: 0;
   list-style: none;
-  font-size: 1.6rem;
+  font-size: 16px;
   display: inline-block;
   vertical-align: middle; }
 
@@ -7762,7 +7758,7 @@ ul {
   width: 100%;
   height: 30px;
   cursor: text;
-  font-size: 1.4rem;
+  font-size: 14px;
   line-height: 1.5;
   color: #424242;
   background-color: #fff;
@@ -7782,10 +7778,10 @@ ul {
 
 .u-form-control.lg {
   height: 38px;
-  font-size: 1.4rem; }
+  font-size: 14px; }
 
 .u-form-control.sm {
-  font-size: 1.2rem;
+  font-size: 12px;
   height: 24px; }
 
 .u-input-search-wrapper {
@@ -7828,6 +7824,7 @@ ul {
   z-index: 2;
   line-height: 0;
   right: 7px;
+  margin-top: 5px;
   color: rgba(0, 0, 0, 0.65); }
 
 /* FormGroup */
@@ -7878,14 +7875,10 @@ ul {
   border-top-left-radius: 0; }
 
 .u-input-group-btn:last-child > button, .u-input-group-btn:last-child > .btn-group {
-  z-index: 2;
   margin-left: -1px; }
 
 .u-input-group-btn:first-child > button, .u-input-group-btn:first-child > .btn-group {
   margin-right: -1px; }
-
-.u-input-group-btn > button:active, .u-input-group-btn > .btn:focus, .u-input-group-btn > button:hover {
-  z-index: 2; }
 
 .u-input-group {
   position: relative;
@@ -7897,7 +7890,6 @@ ul {
     line-height: 1.3; }
   .u-input-group .u-form-control {
     position: relative;
-    z-index: 2;
     float: left;
     width: 100%;
     margin-bottom: 0;
@@ -7916,8 +7908,8 @@ ul {
     position: absolute;
     top: 2px;
     bottom: 0;
-    z-index: 2;
-    right: 20px; }
+    right: 5px;
+    min-width: 20px; }
   .u-input-group.simple .u-form-control:not(:last-child) {
     padding-right: 23px; }
 
@@ -9171,10 +9163,6 @@ li.rc-time-picker-panel-select-option-disabled:hover {
 .datepicker-input-group.u-input-group {
   display: block; }
 
-textarea {
-  min-height: 100px;
-  min-width: 300px; }
-
 .demo1 .u-label {
   position: relative;
   bottom: 8px; }
@@ -9188,7 +9176,8 @@ textarea {
   width: 70px;
   text-align: right; }
 
-.demo2 .cancel, .demo3 .cancel {
+.demo2 .cancel,
+.demo3 .cancel {
   margin-left: 20px; }
 
 .demo2 .u-form-submit {
@@ -9220,7 +9209,9 @@ textarea {
   width: 75px;
   text-align: right; }
 
-.demo4 .province, .demo4 .city, .demo4 .area {
+.demo4 .province,
+.demo4 .city,
+.demo4 .area {
   width: 90px !important; }
 
 .demo4 .uf.uf-calendar {
@@ -9230,6 +9221,10 @@ textarea {
 
 .demo4 .u-form-submit {
   padding-left: 75px; }
+
+textarea {
+  min-height: 100px;
+  min-width: 300px; }
 
 .demo5 .u-form .u-col-md-2 {
   text-align: right; }
