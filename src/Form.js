@@ -121,37 +121,39 @@ class Form extends Component {
             if (child.props.isFormItem) {
                 if (useRow) {
                     childs.push(
-                        <Col key={'label' + index} xs={labelXs} sm={labelSm} md={labelMd} lg={labelLg} xsOffset={labelXsOffset} smOffset={labelSmOffset}
-                            mdOffset={labelMdOffset} lgOffset={labelLgOffset} xsPush={labelXsPush} smPush={labelSmPush} mdPush={labelMdPush} lgPush={labelLgPush}
-                            xsPull={labelXsPull} smPull={labelSmPull} mdPull={labelMdPull} lgPull={labelLgPull}>
-                            <Label className={labelClassName ? labelClassName : ''}>
-                                {showMast ? (<span className="u-mast">*</span>) : ''}
-                                {labelName}</Label>
-                        </Col>
+                        <Row className={child.props.className}>
+                            <Col key={'label' + index} xs={labelXs} sm={labelSm} md={labelMd} lg={labelLg} xsOffset={labelXsOffset} smOffset={labelSmOffset}
+                                mdOffset={labelMdOffset} lgOffset={labelLgOffset} xsPush={labelXsPush} smPush={labelSmPush} mdPush={labelMdPush} lgPush={labelLgPush}
+                                xsPull={labelXsPull} smPull={labelSmPull} mdPull={labelMdPull} lgPull={labelLgPull}>
+                                <Label className={labelClassName ? labelClassName : ''}>
+                                    {showMast ? (<span className="u-mast">*</span>) : ''}
+                                    {labelName}</Label>
+                            </Col>
+                            <Col key={'fromGroup' + index} xs={xs} sm={sm} md={md} lg={lg} xsOffset={xsOffset} smOffset={smOffset} mdOffset={mdOffset}
+                                lgOffset={lgOffset} xsPush={xsPush} smPush={smPush} mdPush={mdPush} lgPush={lgPush}
+                                xsPull={xsPull} smPull={smPull} mdPull={mdPull} lgPull={lgPull}>
+                                {
+                                    React.cloneElement(child,
+                                        {
+                                            useRow: useRow,
+                                            checkItem: this.checkItem,
+                                            checkNow: this.state.checkNow,
+                                            className: child.props.className + '-item'
+                                        })
+                                }
+                            </Col>
+                        </Row>
                     );
-                    childs.push(
-                        <Col key={'fromGroup' + index} xs={xs} sm={sm} md={md} lg={lg} xsOffset={xsOffset} smOffset={smOffset} mdOffset={mdOffset}
-                            lgOffset={lgOffset} xsPush={xsPush} smPush={smPush} mdPush={mdPush} lgPush={lgPush}
-                            xsPull={xsPull} smPull={smPull} mdPull={mdPull} lgPull={lgPull}>
-                            {
-                                React.cloneElement(child,
-                                    {
-                                        useRow: useRow,
-                                        checkItem: this.checkItem,
-                                        checkNow: this.state.checkNow
-                                    })
-                            }
-                        </Col>
-                    )
                 } else {
                     childs.push(
-                        <span key={index}>
+                        <span key={index} className={child.props.className} style={{'display':'inline-block'}}>
                             {
                                 React.cloneElement(child,
                                     {
                                         useRow: useRow,
                                         checkItem: this.checkItem,
-                                        checkNow: this.state.checkNow
+                                        checkNow: this.state.checkNow,
+                                        className: child.props.className + '-item'
                                     })
                             }
                         </span>
@@ -174,11 +176,7 @@ class Form extends Component {
         })
         return (
             <form className={`${clsPrefix} ${className}`} onSubmit={this.checkNow}>
-                {useRow ? (
-                    <Row>
-                        {childs}
-                    </Row>
-                ) : childs}
+                {childs}
                 {
                     showSubmit ? (
                         <div className={`${clsPrefix}-submit ${submitAreaClassName}`}>

@@ -76,7 +76,7 @@
 	
 	var CARETUP = _react2['default'].createElement('i', { className: 'uf uf-arrow-up' });
 	
-	var Demo1 = __webpack_require__(64);var Demo2 = __webpack_require__(81);var Demo3 = __webpack_require__(82);var Demo4 = __webpack_require__(87);var Demo5 = __webpack_require__(464);var Demo6 = __webpack_require__(465);var DemoArray = [{ "example": _react2['default'].createElement(Demo1, null), "title": " 单个input校验", "code": "/**\n *\n * @title 单个input校验\n * @description 使用FormItem\n */\nimport React ,{Component } from 'react';\nimport { Form, FormControl } from 'tinper-bee';\n\nconst FormItem=Form.FormItem;\n\nclass Demo1 extends Component {\n    constructor(props){\n        super(props);\n        this.state={\n            value:''\n        }\n    }\n    check=(flag,obj)=>{\n        console.log(flag);\n        console.log(obj);\n    }\n    onChange=(value)=>{\n        this.setState({\n            value\n        })\n    }\n    render() {\n        return (\n            <FormItem className=\"demo1\" showMast={true} labelName=\"域名\" inline={true} \n            inputBefore=\"http://\"  isRequire={true} method=\"blur\"  check={this.check}>\n                <FormControl  name=\"url\"   placeholder=\"请输入域名\" value={this.state.value} onChange={this.onChange}/>\n            </FormItem>\n        )\n    }\n}\n", "desc": " 使用FormItem", "scss_code": ".demo1 .u-label {\n    position: relative;\n    bottom: 8px;\n}\n\n.demo1 .u-form-control {\n    border-top-left-radius: 0!important;\n    border-bottom-left-radius: 0!important;\n}" }, { "example": _react2['default'].createElement(Demo2, null), "title": " 基本form校验", "code": "/**\n *\n * @title 基本form校验\n * @description 登录示例\n */\nimport React, {Component} from 'react';\nimport ReactDOM from 'react-dom';\nimport { Form, Button, FormControl } from 'tinper-bee';\nconst FormItem = Form.FormItem;\n\nclass Demo2 extends Component {\n    checkForm = (flag,obj) => {\n        console.log(flag);\n        console.log(obj);\n    }\n    render() {\n        let cancel=()=>{\n            return (\n                <Button shape=\"border\" className=\"cancel\">取消</Button>\n            )\n        }\n        return (\n            <div className=\"demo2\">\n                <Form  submitCallBack={this.checkForm} afterSubmitBtn={cancel()}>\n                    <FormItem showMast={true}  labelName=\"用户名:\" isRequire={true}  \n                    errorMessage=\"请输入用户名\" method=\"blur\"  inline={true} valuePropsName='value'>\n                        <FormControl name=\"username\"   placeholder=\"请输入用户名\" />\n                    </FormItem>\n                    <FormItem showMast={true}  labelName=\"密码:\" isRequire={true} \n                    method=\"blur\" errorMessage=\"请输入密码\" \n                    inputAfter={<span className='forget'>忘记密码？</span>}  inline={true} valuePropsName='value'>\n                        <FormControl name=\"password\"  type=\"password\" placeholder=\"请输入密码\"   />\n                    </FormItem>\n                </Form>\n            </div>\n        )\n    }\n}\n", "desc": " 登录示例", "scss_code": ".demo2 .u-label {\n    min-width: 70px;\n    width: 70px;\n    text-align: right;\n}\n\n.demo2 .cancel,\n.demo3 .cancel {\n    margin-left: 20px;\n}\n\n.demo2 .u-form-submit {\n    padding-left: 70px;\n}\n\n.demo2 .u-input-after {\n    width: auto;\n    border: none!important;\n    background: none!important;\n    cursor: pointer;\n    color: #42a5f5;\n}" }, { "example": _react2['default'].createElement(Demo3, null), "title": " 基本form校验", "code": "/**\n *\n * @title 基本form校验\n * @description 注册示例\n */\nimport React, {Component} from 'react';\nimport { Form, Checkbox, InputNumber, Button, FormControl } from 'tinper-bee';\nconst FormItem = Form.FormItem;\n\nclass Demo3 extends Component {\n    checkForm = (flag,obj) => {\n        console.log(flag);\n        console.log(obj);\n    }\n    render() {\n        let cancel=()=>{\n            return (\n                <Button shape=\"border\" className=\"cancel\">取消</Button>\n            )\n        }\n        return (\n            <div className=\"demo3\">\n                <Form submitCallBack={this.checkForm} afterSubmitBtn={cancel()}>\n                    <FormItem showMast={true}  labelName=\"用户名:\" isRequire={true} valuePropsName='value' errorMessage=\"请输入用户名\" method=\"blur\"  inline={true}>\n                        <FormControl name=\"username\"  placeholder=\"请输入用户名\"/>\n                    </FormItem>\n                    <FormItem showMast={true}  labelName=\"密码:\" isRequire={true} valuePropsName='value' method=\"blur\" errorMessage=\"请输入密码\"   inline={true}>\n                        <FormControl name=\"password1\" type=\"password\" placeholder=\"请输入密码\" />\n                    </FormItem>\n                    <FormItem showMast={true}  labelName=\"再次输入密码:\" valuePropsName='value' isRequire={true} method=\"blur\" errorMessage=\"请再次输入密码\"  inline={true}>\n                        <FormControl name=\"password2\" type=\"password\" placeholder=\"请再次输入密码\" />\n                    </FormItem>\n                    <FormItem showMast={true} valuePropsName='value'  labelName=\"邮箱:\" isRequire={true} method=\"blur\" htmlType=\"email\" errorMessage=\"邮箱格式错误\"  inline={true}>\n                        <FormControl name=\"email\"  placeholder=\"请输入邮箱\" />\n                    </FormItem>\n                    <FormItem inputBefore=\"+86\" showMast={true}  valuePropsName='value'  labelName=\"手机号:\" isRequire={true} method=\"blur\" htmlType=\"tel\" errorMessage=\"手机号格式错误\"  inline={true}>\n                        <FormControl name=\"phone\"  placeholder=\"请输入手机号\" />\n                    </FormItem>\n                    <FormItem inputAfter={<Button shape=\"border\">获取验证码</Button>} showMast={true} valuePropsName='value'  labelName=\"验证码:\" isRequire={true} method=\"blur\"  errorMessage=\"请输入验证码\"  inline={true}>\n                        <FormControl name=\"verification\"  placeholder=\"请输入验证码\" />\n                    </FormItem>\n                    <FormItem  inputAfter='我已经阅读并同意相关条款' valuePropsName='defaultChecked'  labelName=\"\"  inline={true}>\n                        <Checkbox colors=\"info\" name=\"agree\"/>\n                    </FormItem>\n                </Form>\n            </div>\n        )\n    }\n}\n", "desc": " 注册示例", "scss_code": ".demo3 .u-form .u-label {\n    width: 120px;\n    text-align: right;\n}\n\n.demo3 .u-form-submit {\n    padding-left: 120px;\n}\n\n.demo3 .u-input-after {\n    border: none!important;\n    background: none!important;\n}\n\n.demo3 .u-input-after .u-button {\n    height: 30px;\n    padding: 0;\n}" }, { "example": _react2['default'].createElement(Demo4, null), "title": " 表单校验", "code": "/**\n *\n * @title 表单校验\n * @description 用户信息录入实例\n */\nimport React ,{Component } from 'react';\nimport ReactDOM from 'react-dom';\nimport { Form, CitySelect, Rate, InputNumber, Slider, Switch, Checkbox, DatePicker, Radio, Select, FormControl } from 'tinper-bee';\nimport zhCN from 'rc-calendar/lib/locale/zh_CN';\nimport moment from 'moment';\nconst FormItem=Form.FormItem;\nconst Option = Select.Option;\nconst format = 'YYYY-MM-DD HH:mm:ss';\nconst dateInputPlaceholder = '选择日期';\nclass Demo4 extends Component {\n    constructor(props) {\n        super(props);\n        this.state = {\n            sex:'man',\n            rate:0\n        };\n    }\n    sexChange=sex=>{\n        this.setState({\n            sex\n        })\n    }\n    rateChange=rate=>{\n        this.setState({\n            rate\n        })\n    }\n    checkForm = (flag,obj) => {\n        console.log(flag);\n        console.log(obj);\n    }\n    render() {\n        return (\n           <Form submitCallBack={this.checkForm} className='demo4'>\n               <FormItem showMast={true}  labelName=\"姓名:\" isRequire={true} valuePropsName='value' htmlType='chinese' errorMessage=\"请输入姓名\" method=\"blur\"  inline={true}>\n                    <FormControl name=\"name\"  placeholder=\"请输入姓名\"/>\n                </FormItem>\n                <FormItem showMast={true} labelName=\"身份证号:\" isRequire={true} valuePropsName='value' htmlType='IDCard' errorMessage=\"请输入身份证号\" method=\"blur\"  inline={true}>\n                    <FormControl name=\"idCard\"  placeholder=\"请输入身份证号\"/>\n                </FormItem>\n                <FormItem showMast={true} labelName=\"年龄:\" isRequire={true} htmlType='number' valuePropsName='value' errorMessage=\"年龄格式错误\" method=\"blur\"  inline={true}>\n                    <FormControl name=\"age\"  placeholder=\"请输入年龄\"/>\n                </FormItem>\n                <FormItem showMast={true} labelName=\"性别:\" isRequire={true} method=\"change\" inline={true}>\n                <Radio.RadioGroup\n                    selectedValue={this.state.sex} onChange={this.sexChange}\n                    name=\"sex\">\n                    <Radio value=\"man\" >男</Radio>\n                    <Radio value=\"woman\" >女</Radio>\n                </Radio.RadioGroup>\n               </FormItem>\n               <FormItem showMast={true} labelName=\"出生日期:\" isRequire={true} method=\"change\"  inline={true}>\n                   <DatePicker\n                       name=\"time\"\n                       format={format}\n                       locale={zhCN}\n                       placeholder = {dateInputPlaceholder}\n                   />\n               </FormItem>\n               <FormItem showMast={true} labelName=\"籍贯:\"  method=\"change\" isRequire={true} inline={true}>\n                   <CitySelect name='origin'/>\n               </FormItem>\n               <FormItem  labelName=\"保密等级:\"  method=\"change\"  inline={true}>\n                    <Rate name='rate'  value={this.state.rate} onChange={this.rateChange}/>\n               </FormItem>\n               <FormItem labelName=\"备注:\" inline={true} >\n                   <FormControl componentClass='textarea' name=\"remark\" />\n               </FormItem>\n           </Form>\n        )\n    }\n}\n", "desc": " 用户信息录入实例", "scss_code": ".demo4 .u-label {\n    width: 75px;\n    text-align: right;\n}\n\n.demo4 .province,\n.demo4 .city,\n.demo4 .area {\n    width: 90px!important;\n}\n\n.demo4 .uf.uf-calendar {\n    position: relative;\n    top: -4px;\n    right: 9px;\n}\n\n.demo4 .u-form-submit {\n    padding-left: 75px;\n}\n\ntextarea {\n    min-height: 100px;\n    min-width: 300px;\n}" }, { "example": _react2['default'].createElement(Demo5, null), "title": " 表单校验", "code": "/**\n *\n * @title 表单校验\n * @description 使用栅格布局，配置 Form：userRow={true}  FormItem 格子数，参照栅格布局\n */\nimport React ,{Component } from 'react';\nimport { Form, Button, FormControl } from 'tinper-bee';\nconst FormItem=Form.FormItem;\nclass Demo5 extends Component {\n    constructor(props){\n        super(props);\n        this.state={\n            checkFormNow:false\n        }\n    }\n    checkForm = (flag,obj,num) => {\n        console.log('第'+num+'个');\n        console.log(flag);\n        console.log(obj);\n    }\n    handClick=()=>{\n        this.setState({\n            checkFormNow:true\n        });\n    }\n    render() {\n        return (\n            <div className=\"demo5\">\n                <Form useRow={true} showSubmit={false} submitCallBack={(flag,obj)=>this.checkForm(flag,obj,1)} checkFormNow={this.state.checkFormNow}>\n                    <FormItem showMast={true}  inline={true} labelMd={2} md={4} labelName=\"姓名\"  isRequire={true} htmlType=\"chinese\" errorMessage=\"姓名格式错误\" method=\"blur\"  >\n                        <FormControl  name=\"name\" placeholder=\"只能输入中文\"  />\n                    </FormItem>\n                    <FormItem showMast={true}  inline={true} labelMd={2} md={4} labelName=\"年龄\" isRequire={true} method=\"blur\" errorMessage=\"年龄格式错误\" reg={/^[0-9]+$/}  >\n                        <FormControl  name=\"age\" />\n                    </FormItem>\n                </Form>\n\n                <Form useRow={true} showSubmit={false} submitCallBack={(flag,obj)=>this.checkForm(flag,obj,2)} checkFormNow={this.state.checkFormNow}>\n                    <FormItem showMast={true}  inline={true} labelMd={2} md={4} labelName=\"姓名\"  isRequire={true} htmlType=\"chinese\" errorMessage=\"姓名格式错误\" method=\"blur\"  >\n                        <FormControl  name=\"name\" placeholder=\"只能输入中文\"  />\n                    </FormItem>\n                    <FormItem showMast={true}  inline={true} labelMd={2} md={4} labelName=\"年龄\" isRequire={true} method=\"blur\" errorMessage=\"年龄格式错误\" reg={/^[0-9]+$/}  >\n                        <FormControl  name=\"age\" />\n                    </FormItem>\n                </Form>\n                <Button colors=\"primary\" onClick={this.handClick}>主动校验form</Button>\n            </div>\n\n        )\n    }\n}\n", "desc": " 使用栅格布局，配置 Form：userRow={true}  FormItem 格子数，参照栅格布局", "scss_code": ".demo5 .u-form .u-col-md-2 {\n    text-align: right;\n}" }, { "example": _react2['default'].createElement(Demo6, null), "title": " 自定义组件", "code": "/**\n *\n * @title 自定义组件\n * @description \n */\nimport React ,{Component } from 'react';\nimport { Form, Radio, FormControl } from 'tinper-bee';\nconst FormItem=Form.FormItem;\nclass Customer extends Component {\n    constructor(props) {\n        super(props);     \n        this.state={\n            value:props.defaultValue==undefined?'apple':props.defaultValue\n        }  \n    }\n    onChange=(value)=>{\n        this.setState({\n            value\n        })\n    }\n    render() {\n        return (\n            <Radio.RadioGroup\n                selectedValue={this.state.value}\n                name=\"fruit\"\n                onChange={this.onChange}\n                type='customer'\n                >\n                <Radio value=\"apple\" >苹果</Radio>\n                <Radio value=\"orange\" >橘子</Radio>\n                <Radio value=\"lemon\" >柠檬</Radio>\n            </Radio.RadioGroup>\n\n        )\n    }\n}\nclass Demo6 extends Component {\n    constructor(props){\n        super(props);\n    }\n    check = (flag,obj) => {\n        console.log(flag);\n        console.log(obj);\n    }\n    render() {\n        return (\n                <Form  submitCallBack={this.check}>\n                    <FormItem showMast={true}  inline={true}  labelName=\"喜好:\" isRequire={true} method=\"blur\"  >\n                        <Customer defaultValue='lemon' name='customer'/>    \n                    </FormItem>\n                </Form>\n            \n        )\n    }\n}\n", "desc": " " }];
+	var Demo1 = __webpack_require__(64);var Demo2 = __webpack_require__(81);var Demo3 = __webpack_require__(82);var Demo4 = __webpack_require__(87);var Demo5 = __webpack_require__(464);var Demo6 = __webpack_require__(465);var DemoArray = [{ "example": _react2['default'].createElement(Demo1, null), "title": " 单个input校验", "code": "/**\n *\n * @title 单个input校验\n * @description 使用FormItem\n */\nimport React ,{Component } from 'react';\nimport Form from 'bee-form';\nimport FormControl from 'bee-form-control';\n\nconst FormItem=Form.FormItem;\n\nclass Demo1 extends Component {\n    constructor(props){\n        super(props);\n        this.state={\n            value:''\n        }\n    }\n    check=(flag,obj)=>{\n        console.log(flag);\n        console.log(obj);\n    }\n    onChange=(value)=>{\n        this.setState({\n            value\n        })\n    }\n    render() {\n        return (\n            <FormItem className=\"demo1\" showMast={true} labelName=\"域名\" inline={true} \n            inputBefore=\"http://\"  isRequire={true} method=\"blur\"  check={this.check}>\n                <FormControl  name=\"url\"   placeholder=\"请输入域名\" value={this.state.value} onChange={this.onChange}/>\n            </FormItem>\n        )\n    }\n}\n", "desc": " 使用FormItem" }, { "example": _react2['default'].createElement(Demo2, null), "title": " 基本form校验", "code": "/**\n *\n * @title 基本form校验\n * @description 登录示例\n */\nimport React, {Component} from 'react';\nimport ReactDOM from 'react-dom';\nimport Form from 'bee-form';\nconst FormItem = Form.FormItem;\nimport FormControl from 'bee-form-control';\nimport Button from 'bee-button';\n\nclass Demo2 extends Component {\n    checkForm = (flag,obj) => {\n        console.log(flag);\n        console.log(obj);\n    }\n    render() {\n        let cancel=()=>{\n            return (\n                <Button shape=\"border\" className=\"cancel\">取消</Button>\n            )\n        }\n        return (\n            <div className=\"demo2\">\n                <Form  submitCallBack={this.checkForm} afterSubmitBtn={cancel()}>\n                    <FormItem showMast={true}  labelName=\"用户名:\" isRequire={true}  \n                    errorMessage=\"请输入用户名\" method=\"blur\"  inline={true} valuePropsName='value'>\n                        <FormControl name=\"username\"   placeholder=\"请输入用户名\" />\n                    </FormItem>\n                    <FormItem showMast={true}  labelName=\"密码:\" isRequire={true} \n                    method=\"blur\" errorMessage=\"请输入密码\" \n                    inputAfter={<span className='forget'>忘记密码？</span>}  inline={true} valuePropsName='value'>\n                        <FormControl name=\"password\"  type=\"password\" placeholder=\"请输入密码\"   />\n                    </FormItem>\n                </Form>\n            </div>\n        )\n    }\n}\n", "desc": " 登录示例" }, { "example": _react2['default'].createElement(Demo3, null), "title": " 基本form校验", "code": "/**\n *\n * @title 基本form校验\n * @description 注册示例\n */\nimport React, {Component} from 'react';\nimport Form from 'bee-form';\nconst FormItem = Form.FormItem;\nimport FormControl from 'bee-form-control';\nimport Button from 'bee-button';\nimport InputNumber from 'bee-input-number';\nimport Checkbox from 'bee-checkbox';\n\nclass Demo3 extends Component {\n    checkForm = (flag,obj) => {\n        console.log(flag);\n        console.log(obj);\n    }\n    render() {\n        let cancel=()=>{\n            return (\n                <Button shape=\"border\" className=\"cancel\">取消</Button>\n            )\n        }\n        return (\n            <div className=\"demo3\">\n                <Form submitCallBack={this.checkForm} afterSubmitBtn={cancel()}>\n                    <FormItem showMast={true}  labelName=\"用户名:\" isRequire={true} valuePropsName='value' errorMessage=\"请输入用户名\" method=\"blur\"  inline={true}>\n                        <FormControl name=\"username\"  placeholder=\"请输入用户名\"/>\n                    </FormItem>\n                    <FormItem showMast={true}  labelName=\"密码:\" isRequire={true} valuePropsName='value' method=\"blur\" errorMessage=\"请输入密码\"   inline={true}>\n                        <FormControl name=\"password1\" type=\"password\" placeholder=\"请输入密码\" />\n                    </FormItem>\n                    <FormItem showMast={true}  labelName=\"再次输入密码:\" valuePropsName='value' isRequire={true} method=\"blur\" errorMessage=\"请再次输入密码\"  inline={true}>\n                        <FormControl name=\"password2\" type=\"password\" placeholder=\"请再次输入密码\" />\n                    </FormItem>\n                    <FormItem showMast={true} valuePropsName='value'  labelName=\"邮箱:\" isRequire={true} method=\"blur\" htmlType=\"email\" errorMessage=\"邮箱格式错误\"  inline={true}>\n                        <FormControl name=\"email\"  placeholder=\"请输入邮箱\" />\n                    </FormItem>\n                    <FormItem inputBefore=\"+86\" showMast={true}  valuePropsName='value'  labelName=\"手机号:\" isRequire={true} method=\"blur\" htmlType=\"tel\" errorMessage=\"手机号格式错误\"  inline={true}>\n                        <FormControl name=\"phone\"  placeholder=\"请输入手机号\" />\n                    </FormItem>\n                    <FormItem inputAfter={<Button shape=\"border\">获取验证码</Button>} showMast={true} valuePropsName='value'  labelName=\"验证码:\" isRequire={true} method=\"blur\"  errorMessage=\"请输入验证码\"  inline={true}>\n                        <FormControl name=\"verification\"  placeholder=\"请输入验证码\" />\n                    </FormItem>\n                    <FormItem  inputAfter='我已经阅读并同意相关条款' valuePropsName='defaultChecked'  labelName=\"\"  inline={true}>\n                        <Checkbox colors=\"info\" name=\"agree\"/>\n                    </FormItem>\n                </Form>\n            </div>\n        )\n    }\n}\n", "desc": " 注册示例" }, { "example": _react2['default'].createElement(Demo4, null), "title": " 表单校验", "code": "/**\n *\n * @title 表单校验\n * @description 用户信息录入实例\n */\nimport React ,{Component } from 'react';\nimport ReactDOM from 'react-dom';\nimport Form from 'bee-form';\nimport FormControl from 'bee-form-control';\nimport Select from 'bee-select';\nimport Radio from 'bee-radio';\nimport DatePicker from 'bee-datepicker';\nimport zhCN from 'rc-calendar/lib/locale/zh_CN';\nimport moment from 'moment';\nimport Checkbox from 'bee-checkbox';\nimport Switch from 'bee-switch';\nimport Slider from 'bee-slider';\nimport InputNumber from 'bee-input-number';\nimport Rate from 'bee-rate';\nimport CitySelect from 'bee-city-select';\nconst FormItem=Form.FormItem;\nconst Option = Select.Option;\nconst format = 'YYYY-MM-DD HH:mm:ss';\nconst dateInputPlaceholder = '选择日期';\nclass Demo4 extends Component {\n    constructor(props) {\n        super(props);\n        this.state = {\n            sex:'man',\n            rate:0\n        };\n    }\n    sexChange=sex=>{\n        this.setState({\n            sex\n        })\n    }\n    rateChange=rate=>{\n        this.setState({\n            rate\n        })\n    }\n    checkForm = (flag,obj) => {\n        console.log(flag);\n        console.log(obj);\n    }\n    render() {\n        return (\n           <Form submitCallBack={this.checkForm} className='demo4'>\n               <FormItem showMast={true} className=\"123\"  labelName=\"姓名:\" isRequire={true} valuePropsName='value' htmlType='chinese' errorMessage=\"请输入姓名\" method=\"blur\"  inline={true}>\n                    <FormControl name=\"name\"  placeholder=\"请输入姓名\"/>\n                </FormItem>\n                <FormItem showMast={true} labelName=\"身份证号:\" isRequire={true} valuePropsName='value' htmlType='IDCard' errorMessage=\"请输入身份证号\" method=\"blur\"  inline={true}>\n                    <FormControl name=\"idCard\"  placeholder=\"请输入身份证号\"/>\n                </FormItem>\n                <FormItem showMast={true} labelName=\"年龄:\" isRequire={true} htmlType='number' valuePropsName='value' errorMessage=\"年龄格式错误\" method=\"blur\"  inline={true}>\n                    <FormControl name=\"age\"  placeholder=\"请输入年龄\"/>\n                </FormItem>\n                <FormItem showMast={true} labelName=\"性别:\" isRequire={true} method=\"change\" inline={true}>\n                <Radio.RadioGroup\n                    selectedValue={this.state.sex} onChange={this.sexChange}\n                    name=\"sex\">\n                    <Radio value=\"man\" >男</Radio>\n                    <Radio value=\"woman\" >女</Radio>\n                </Radio.RadioGroup>\n               </FormItem>\n               <FormItem showMast={true} labelName=\"出生日期:\" isRequire={true} method=\"change\"  inline={true}>\n                   <DatePicker\n                       name=\"time\"\n                       format={format}\n                       locale={zhCN}\n                       placeholder = {dateInputPlaceholder}\n                   />\n               </FormItem>\n               <FormItem showMast={true} labelName=\"籍贯:\"  method=\"change\" isRequire={true} inline={true}>\n                   <CitySelect name='origin'/>\n               </FormItem>\n               <FormItem  labelName=\"保密等级:\"  method=\"change\"  inline={true}>\n                    <Rate name='rate'  value={this.state.rate} onChange={this.rateChange}/>\n               </FormItem>\n               <FormItem labelName=\"备注:\" inline={true} >\n                   <FormControl componentClass='textarea' name=\"remark\" />\n               </FormItem>\n           </Form>\n        )\n    }\n}\n", "desc": " 用户信息录入实例" }, { "example": _react2['default'].createElement(Demo5, null), "title": " 表单校验", "code": "/**\n *\n * @title 表单校验\n * @description 使用栅格布局，配置 Form：userRow={true}  FormItem 格子数，参照栅格布局\n */\nimport React ,{Component } from 'react';\nimport Form from 'bee-form';\nconst FormItem=Form.FormItem;\nimport FormControl from 'bee-form-control';\nimport Button from 'bee-button';\nclass Demo5 extends Component {\n    constructor(props){\n        super(props);\n        this.state={\n            checkFormNow:false\n        }\n    }\n    checkForm = (flag,obj,num) => {\n        console.log('第'+num+'个');\n        console.log(flag);\n        console.log(obj);\n    }\n    handClick=()=>{\n        this.setState({\n            checkFormNow:true\n        });\n    }\n    render() {\n        return (\n            <div className=\"demo5\">\n                <Form useRow={true} showSubmit={false} submitCallBack={(flag,obj)=>this.checkForm(flag,obj,1)} checkFormNow={this.state.checkFormNow}>\n                    <FormItem className='row-class' showMast={true}  inline={true} labelMd={2} md={4} labelName=\"姓名\"  isRequire={true} htmlType=\"chinese\" errorMessage=\"姓名格式错误\" method=\"blur\"  >\n                        <FormControl  name=\"name\" placeholder=\"只能输入中文\"  />\n                    </FormItem>\n                    <FormItem showMast={true}  inline={true} labelMd={2} md={4} labelName=\"年龄\" isRequire={true} method=\"blur\" errorMessage=\"年龄格式错误\" reg={/^[0-9]+$/}  >\n                        <FormControl  name=\"age\" />\n                    </FormItem>\n                </Form>\n\n                <Form useRow={true} showSubmit={false} submitCallBack={(flag,obj)=>this.checkForm(flag,obj,2)} checkFormNow={this.state.checkFormNow}>\n                    <FormItem showMast={true}  inline={true} labelMd={2} md={4} labelName=\"姓名\"  isRequire={true} htmlType=\"chinese\" errorMessage=\"姓名格式错误\" method=\"blur\"  >\n                        <FormControl  name=\"name\" placeholder=\"只能输入中文\"  />\n                    </FormItem>\n                    <FormItem showMast={true}  inline={true} labelMd={2} md={4} labelName=\"年龄\" isRequire={true} method=\"blur\" errorMessage=\"年龄格式错误\" reg={/^[0-9]+$/}  >\n                        <FormControl  name=\"age\" />\n                    </FormItem>\n                </Form>\n                <Button colors=\"primary\" onClick={this.handClick}>主动校验form</Button>\n            </div>\n\n        )\n    }\n}\n", "desc": " 使用栅格布局，配置 Form：userRow={true}  FormItem 格子数，参照栅格布局" }, { "example": _react2['default'].createElement(Demo6, null), "title": " 自定义组件", "code": "/**\n *\n * @title 自定义组件\n * @description \n */\nimport React ,{Component } from 'react';\nimport Form from 'bee-form';\nconst FormItem=Form.FormItem;\nimport FormControl from 'bee-form-control';\nimport Radio from 'bee-radio';\nclass Customer extends Component {\n    constructor(props) {\n        super(props);     \n        this.state={\n            value:props.defaultValue==undefined?'apple':props.defaultValue\n        }  \n    }\n    onChange=(value)=>{\n        this.setState({\n            value\n        })\n    }\n    render() {\n        return (\n            <Radio.RadioGroup\n                selectedValue={this.state.value}\n                name=\"fruit\"\n                onChange={this.onChange}\n                type='customer'\n                >\n                <Radio value=\"apple\" >苹果</Radio>\n                <Radio value=\"orange\" >橘子</Radio>\n                <Radio value=\"lemon\" >柠檬</Radio>\n            </Radio.RadioGroup>\n\n        )\n    }\n}\nclass Demo6 extends Component {\n    constructor(props){\n        super(props);\n    }\n    check = (flag,obj) => {\n        console.log(flag);\n        console.log(obj);\n    }\n    render() {\n        return (\n                <Form  submitCallBack={this.check}>\n                    <FormItem showMast={true}  inline={true}  labelName=\"喜好:\" isRequire={true} method=\"blur\"  >\n                        <Customer defaultValue='lemon' name='customer'/>    \n                    </FormItem>\n                </Form>\n            \n        )\n    }\n}\n", "desc": " " }];
 	
 	var Demo = function (_Component) {
 	    _inherits(Demo, _Component);
@@ -6511,40 +6511,46 @@
 	            if (child.props.isFormItem) {
 	                if (useRow) {
 	                    childs.push(_react2['default'].createElement(
-	                        _beeLayout.Col,
-	                        { key: 'label' + index, xs: labelXs, sm: labelSm, md: labelMd, lg: labelLg, xsOffset: labelXsOffset, smOffset: labelSmOffset,
-	                            mdOffset: labelMdOffset, lgOffset: labelLgOffset, xsPush: labelXsPush, smPush: labelSmPush, mdPush: labelMdPush, lgPush: labelLgPush,
-	                            xsPull: labelXsPull, smPull: labelSmPull, mdPull: labelMdPull, lgPull: labelLgPull },
+	                        _beeLayout.Row,
+	                        { className: child.props.className },
 	                        _react2['default'].createElement(
-	                            _beeLabel2['default'],
-	                            { className: labelClassName ? labelClassName : '' },
-	                            showMast ? _react2['default'].createElement(
-	                                'span',
-	                                { className: 'u-mast' },
-	                                '*'
-	                            ) : '',
-	                            labelName
+	                            _beeLayout.Col,
+	                            { key: 'label' + index, xs: labelXs, sm: labelSm, md: labelMd, lg: labelLg, xsOffset: labelXsOffset, smOffset: labelSmOffset,
+	                                mdOffset: labelMdOffset, lgOffset: labelLgOffset, xsPush: labelXsPush, smPush: labelSmPush, mdPush: labelMdPush, lgPush: labelLgPush,
+	                                xsPull: labelXsPull, smPull: labelSmPull, mdPull: labelMdPull, lgPull: labelLgPull },
+	                            _react2['default'].createElement(
+	                                _beeLabel2['default'],
+	                                { className: labelClassName ? labelClassName : '' },
+	                                showMast ? _react2['default'].createElement(
+	                                    'span',
+	                                    { className: 'u-mast' },
+	                                    '*'
+	                                ) : '',
+	                                labelName
+	                            )
+	                        ),
+	                        _react2['default'].createElement(
+	                            _beeLayout.Col,
+	                            { key: 'fromGroup' + index, xs: xs, sm: sm, md: md, lg: lg, xsOffset: xsOffset, smOffset: smOffset, mdOffset: mdOffset,
+	                                lgOffset: lgOffset, xsPush: xsPush, smPush: smPush, mdPush: mdPush, lgPush: lgPush,
+	                                xsPull: xsPull, smPull: smPull, mdPull: mdPull, lgPull: lgPull },
+	                            _react2['default'].cloneElement(child, {
+	                                useRow: useRow,
+	                                checkItem: _this2.checkItem,
+	                                checkNow: _this2.state.checkNow,
+	                                className: child.props.className + '-item'
+	                            })
 	                        )
-	                    ));
-	                    childs.push(_react2['default'].createElement(
-	                        _beeLayout.Col,
-	                        { key: 'fromGroup' + index, xs: xs, sm: sm, md: md, lg: lg, xsOffset: xsOffset, smOffset: smOffset, mdOffset: mdOffset,
-	                            lgOffset: lgOffset, xsPush: xsPush, smPush: smPush, mdPush: mdPush, lgPush: lgPush,
-	                            xsPull: xsPull, smPull: smPull, mdPull: mdPull, lgPull: lgPull },
-	                        _react2['default'].cloneElement(child, {
-	                            useRow: useRow,
-	                            checkItem: _this2.checkItem,
-	                            checkNow: _this2.state.checkNow
-	                        })
 	                    ));
 	                } else {
 	                    childs.push(_react2['default'].createElement(
 	                        'span',
-	                        { key: index },
+	                        { key: index, className: child.props.className, style: { 'display': 'inline-block' } },
 	                        _react2['default'].cloneElement(child, {
 	                            useRow: useRow,
 	                            checkItem: _this2.checkItem,
-	                            checkNow: _this2.state.checkNow
+	                            checkNow: _this2.state.checkNow,
+	                            className: child.props.className + '-item'
 	                        })
 	                    ));
 	                }
@@ -6563,11 +6569,7 @@
 	        return _react2['default'].createElement(
 	            'form',
 	            { className: clsPrefix + ' ' + className, onSubmit: this.checkNow },
-	            useRow ? _react2['default'].createElement(
-	                _beeLayout.Row,
-	                null,
-	                childs
-	            ) : childs,
+	            childs,
 	            showSubmit ? _react2['default'].createElement(
 	                'div',
 	                { className: clsPrefix + '-submit ' + submitAreaClassName },
@@ -9267,7 +9269,7 @@
 	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
-	  value: true
+	    value: true
 	});
 	
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -9301,139 +9303,175 @@
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : _defaults(subClass, superClass); }
 	
 	var propTypes = {
-	  componentClass: _propTypes2["default"].oneOfType([_propTypes2["default"].element, _propTypes2["default"].string]),
-	  type: _propTypes2["default"].string,
-	  size: _propTypes2["default"].oneOf(['sm', 'md', 'lg']),
-	  onSearch: _propTypes2["default"].func,
-	  onChange: _propTypes2["default"].func
+	    componentClass: _propTypes2["default"].oneOfType([_propTypes2["default"].element, _propTypes2["default"].string]),
+	    type: _propTypes2["default"].string,
+	    size: _propTypes2["default"].oneOf(['sm', 'md', 'lg']),
+	    onSearch: _propTypes2["default"].func,
+	    onChange: _propTypes2["default"].func
 	};
 	
 	var defaultProps = {
-	  componentClass: 'input',
-	  clsPrefix: 'u-form-control',
-	  type: 'text',
-	  size: 'md'
+	    componentClass: 'input',
+	    clsPrefix: 'u-form-control',
+	    type: 'text',
+	    size: 'md'
 	};
 	
 	var FormControl = function (_React$Component) {
-	  _inherits(FormControl, _React$Component);
+	    _inherits(FormControl, _React$Component);
 	
-	  function FormControl(props) {
-	    _classCallCheck(this, FormControl);
+	    function FormControl(props) {
+	        _classCallCheck(this, FormControl);
 	
-	    var _this = _possibleConstructorReturn(this, _React$Component.call(this, props));
+	        var _this = _possibleConstructorReturn(this, _React$Component.call(this, props));
 	
-	    _this.handleChange = function (e) {
-	      var value = e.target.value;
-	      var onChange = _this.props.onChange;
+	        _this.handleSearchChange = function (e) {
+	            var onChange = _this.props.onChange;
 	
-	      _this.setState({
-	        value: value,
-	        showSearch: value == null || value === ""
-	      });
-	      if (onChange) {
-	        onChange(value);
-	      }
-	    };
+	            var value = _this.input.value;
+	            _this.setState({
+	                value: value,
+	                showSearch: value == null || value === ""
+	            });
+	            if (onChange) {
+	                onChange(value, e);
+	            }
+	        };
 	
-	    _this.clearValue = function () {
-	      var onChange = _this.props.onChange;
+	        _this.handleChange = function (e) {
+	            var onChange = _this.props.onChange;
 	
-	      _this.setState({ showSearch: true, value: "" });
-	      if (onChange) {
-	        onChange("");
-	      }
-	    };
+	            var value = _this.input.value;
 	
-	    _this.handleKeyDown = function (e) {
-	      var onSearch = _this.props.onSearch;
+	            if (onChange) {
+	                onChange(value, e);
+	            }
+	        };
 	
-	      if (e.keyCode == 13 && _this.props.type == "search") {
-	        if (onSearch) {
-	          onSearch(_this.state.value);
+	        _this.clearValue = function () {
+	            var onChange = _this.props.onChange;
+	
+	            _this.setState({ showSearch: true, value: "" });
+	            if (onChange) {
+	                onChange("");
+	            }
+	            _this.input.focus();
+	        };
+	
+	        _this.handleKeyDown = function (e) {
+	            var _this$props = _this.props,
+	                onSearch = _this$props.onSearch,
+	                value = _this$props.value;
+	
+	            if (e.keyCode === 13 && type === "search") {
+	                if (onSearch) {
+	                    onSearch(value);
+	                }
+	            }
+	        };
+	
+	        _this.renderInput = function () {
+	            var _this$props2 = _this.props,
+	                Component = _this$props2.componentClass,
+	                type = _this$props2.type,
+	                className = _this$props2.className,
+	                size = _this$props2.size,
+	                clsPrefix = _this$props2.clsPrefix,
+	                value = _this$props2.value,
+	                onChange = _this$props2.onChange,
+	                onSearch = _this$props2.onSearch,
+	                others = _objectWithoutProperties(_this$props2, ['componentClass', 'type', 'className', 'size', 'clsPrefix', 'value', 'onChange', 'onSearch']);
+	            // input[type="file"] 不应该有类名 .form-control.
+	
+	
+	            var classes = {};
+	            if (size) {
+	                classes['' + size] = true;
+	            }
+	
+	            var classNames = void 0;
+	            if (type !== 'file') {
+	                classNames = (0, _classnames2["default"])(clsPrefix, classes);
+	            }
+	
+	            return _react2["default"].createElement(Component, _extends({}, others, {
+	                type: type,
+	                ref: function ref(el) {
+	                    return _this.input = el;
+	                },
+	                value: value,
+	                onChange: _this.handleChange,
+	                className: (0, _classnames2["default"])(className, classNames)
+	            }));
+	        };
+	
+	        _this.renderSearch = function () {
+	            var _this$props3 = _this.props,
+	                Component = _this$props3.componentClass,
+	                type = _this$props3.type,
+	                className = _this$props3.className,
+	                size = _this$props3.size,
+	                clsPrefix = _this$props3.clsPrefix,
+	                value = _this$props3.value,
+	                onChange = _this$props3.onChange,
+	                onSearch = _this$props3.onSearch,
+	                others = _objectWithoutProperties(_this$props3, ['componentClass', 'type', 'className', 'size', 'clsPrefix', 'value', 'onChange', 'onSearch']);
+	            // input[type="file"] 不应该有类名 .form-control.
+	
+	
+	            var classes = {};
+	            if (size) {
+	                classes['' + size] = true;
+	            }
+	            classes[clsPrefix + '-search'] = true;
+	
+	            if (type === "search") {
+	                return _react2["default"].createElement(
+	                    'div',
+	                    { className: (0, _classnames2["default"])(clsPrefix + '-search', clsPrefix + '-affix-wrapper', className) },
+	                    _react2["default"].createElement(Component, _extends({}, others, {
+	                        type: type,
+	                        ref: function ref(el) {
+	                            return _this.input = el;
+	                        },
+	                        onChange: _this.handleSearchChange,
+	                        value: value,
+	                        onKeyDown: _this.handleKeyDown,
+	                        className: (0, _classnames2["default"])(className, clsPrefix, classes)
+	                    })),
+	                    _react2["default"].createElement(
+	                        'div',
+	                        { className: clsPrefix + '-suffix' },
+	                        _this.state.showSearch ? _react2["default"].createElement(_beeIcon2["default"], { type: 'uf-search' }) : _react2["default"].createElement(_beeIcon2["default"], { onClick: _this.clearValue, type: 'uf-close-c' })
+	                    )
+	                );
+	            }
+	        };
+	
+	        _this.state = {
+	            showSearch: !props.value,
+	            value: props.value == null ? "" : props.value
+	        };
+	        _this.input = {};
+	        return _this;
+	    }
+	
+	    FormControl.prototype.componentWillReceiveProps = function componentWillReceiveProps(nextProp) {
+	        if (nextProp.value !== this.state.value) {
+	            this.setState({ value: nextProp.value });
 	        }
-	      }
 	    };
 	
-	    _this.state = {
-	      showSearch: true,
-	      value: props.value == null ? "" : props.value
+	    FormControl.prototype.render = function render() {
+	
+	        if (this.props.type === "search") {
+	            return this.renderSearch();
+	        }
+	
+	        return this.renderInput();
 	    };
-	    console.log(props.onSearch1);
-	    _this.input = {};
-	    return _this;
-	  }
 	
-	  FormControl.prototype.componentWillReceiveProps = function componentWillReceiveProps(nextProp) {
-	    if (nextProp.value !== this.state.value) {
-	      this.setState({ value: nextProp.value });
-	    }
-	  };
-	
-	  FormControl.prototype.render = function render() {
-	    var _this2 = this;
-	
-	    var _props = this.props,
-	        Component = _props.componentClass,
-	        type = _props.type,
-	        className = _props.className,
-	        size = _props.size,
-	        clsPrefix = _props.clsPrefix,
-	        onChange = _props.onChange,
-	        onSearch = _props.onSearch,
-	        others = _objectWithoutProperties(_props, ['componentClass', 'type', 'className', 'size', 'clsPrefix', 'onChange', 'onSearch']);
-	    // input[type="file"] 不应该有类名 .form-control.
-	
-	
-	    var classes = {};
-	    if (size) {
-	      classes['' + size] = true;
-	    }
-	    if (type === "search") {
-	      classes['u-input-search'] = true;
-	    }
-	
-	    var classNames = void 0;
-	    if (type !== 'file') {
-	      classNames = (0, _classnames2["default"])(clsPrefix, classes);
-	    }
-	
-	    if (type === "search") {
-	
-	      return _react2["default"].createElement(
-	        'span',
-	        { className: 'u-input-search u-input-affix-wrapper' },
-	        _react2["default"].createElement(Component, _extends({}, others, {
-	          type: type,
-	          ref: function ref(el) {
-	            return _this2.input = el;
-	          },
-	          onChange: this.handleChange,
-	          value: this.state.value,
-	          onKeyDown: this.handleKeyDown,
-	          className: (0, _classnames2["default"])(className, classNames)
-	        })),
-	        _react2["default"].createElement(
-	          'span',
-	          { className: 'u-input-suffix' },
-	          this.state.showSearch && _react2["default"].createElement(_beeIcon2["default"], { type: 'uf-search' }),
-	          !this.state.showSearch && _react2["default"].createElement(_beeIcon2["default"], { onClick: this.clearValue, type: 'uf-close-c' })
-	        )
-	      );
-	    }
-	
-	    return _react2["default"].createElement(Component, _extends({}, others, {
-	      type: type,
-	      ref: function ref(el) {
-	        return _this2.input = el;
-	      },
-	      value: this.state.value,
-	      onChange: this.handleChange,
-	      className: (0, _classnames2["default"])(className, classNames)
-	    }));
-	  };
-	
-	  return FormControl;
+	    return FormControl;
 	}(_react2["default"].Component);
 	
 	FormControl.propTypes = propTypes;
@@ -10337,46 +10375,45 @@
 	        return _this;
 	    }
 	
-	    Checkbox.prototype.componentWillReceiveProps = function componentWillReceiveProps(nextProp) {
-	        if (nextProp.hasOwnProperty('checked')) {
+	    Checkbox.prototype.componentWillReceiveProps = function componentWillReceiveProps(nextProps) {
+	        if ('checked' in nextProps) {
 	            this.setState({
-	                checked: nextProp.checked
+	                checked: nextProps.checked
 	            });
 	        }
 	    };
 	
 	    Checkbox.prototype.changeState = function changeState() {
-	        var _props = this.props,
-	            onChange = _props.onChange,
-	            disabled = _props.disabled;
-	        var checked = this.state.checked;
+	        var props = this.props;
 	
-	        if (disabled == false) {
+	        if (props.disabled) {
+	            return;
+	        }
+	        if (!('checked' in props)) {
 	            this.setState({
-	                checked: !checked
+	                checked: !this.state.checked
 	            });
 	        }
 	
-	        if (onChange instanceof Function) {
-	            onChange(!this.state.checked);
+	        if (props.onChange instanceof Function) {
+	            props.onChange(!this.state.checked);
 	        }
 	    };
 	
 	    Checkbox.prototype.render = function render() {
-	        var _props2 = this.props,
-	            disabled = _props2.disabled,
-	            colors = _props2.colors,
-	            size = _props2.size,
-	            className = _props2.className,
-	            indeterminate = _props2.indeterminate,
-	            children = _props2.children,
-	            checked = _props2.checked,
-	            clsPrefix = _props2.clsPrefix,
-	            onChange = _props2.onChange,
-	            others = _objectWithoutProperties(_props2, ['disabled', 'colors', 'size', 'className', 'indeterminate', 'children', 'checked', 'clsPrefix', 'onChange']);
+	        var _props = this.props,
+	            disabled = _props.disabled,
+	            colors = _props.colors,
+	            size = _props.size,
+	            className = _props.className,
+	            indeterminate = _props.indeterminate,
+	            children = _props.children,
+	            checked = _props.checked,
+	            clsPrefix = _props.clsPrefix,
+	            onChange = _props.onChange,
+	            others = _objectWithoutProperties(_props, ['disabled', 'colors', 'size', 'className', 'indeterminate', 'children', 'checked', 'clsPrefix', 'onChange']);
 	
 	        var input = _react2["default"].createElement('input', _extends({}, others, {
-	            onClick: this.changeState,
 	            type: 'checkbox',
 	            disabled: this.props.disabled
 	        }));
@@ -10402,12 +10439,11 @@
 	
 	        return _react2["default"].createElement(
 	            'label',
-	            { className: (0, _classnames2["default"])(classNames, className) },
+	            { className: (0, _classnames2["default"])(classNames, className), onClick: this.changeState },
 	            input,
-	            _react2["default"].createElement('label', { className: 'u-checkbox-label' }),
 	            _react2["default"].createElement(
-	                'span',
-	                null,
+	                'label',
+	                { className: clsPrefix + '-label' },
 	                children
 	            )
 	        );
@@ -10550,7 +10586,7 @@
 	            { submitCallBack: this.checkForm, className: 'demo4' },
 	            _react2['default'].createElement(
 	                FormItem,
-	                { showMast: true, labelName: '\u59D3\u540D:', isRequire: true, valuePropsName: 'value', htmlType: 'chinese', errorMessage: '\u8BF7\u8F93\u5165\u59D3\u540D', method: 'blur', inline: true },
+	                { showMast: true, className: '123', labelName: '\u59D3\u540D:', isRequire: true, valuePropsName: 'value', htmlType: 'chinese', errorMessage: '\u8BF7\u8F93\u5165\u59D3\u540D', method: 'blur', inline: true },
 	                _react2['default'].createElement(_beeFormControl2['default'], { name: 'name', placeholder: '\u8BF7\u8F93\u5165\u59D3\u540D' })
 	            ),
 	            _react2['default'].createElement(
@@ -17989,7 +18025,8 @@
 	        className = _props.className,
 	        children = _props.children,
 	        clsPrefix = _props.clsPrefix,
-	        others = _objectWithoutProperties(_props, ['disabled', 'colors', 'className', 'children', 'clsPrefix']);
+	        style = _props.style,
+	        others = _objectWithoutProperties(_props, ['disabled', 'colors', 'className', 'children', 'clsPrefix', 'style']);
 	
 	    var optional = {};
 	    /**
@@ -18000,7 +18037,7 @@
 	    }
 	
 	    var classes = {
-	      'is-checked': optional.checked && !disabled,
+	      'is-checked': optional.checked,
 	      disabled: disabled
 	    };
 	
@@ -18018,7 +18055,7 @@
 	    }));
 	    return _react2["default"].createElement(
 	      'label',
-	      { onClick: this.handleClick, className: (0, _classnames2["default"])(className, classNames) },
+	      { style: style, onClick: this.handleClick, className: (0, _classnames2["default"])(className, classNames) },
 	      input,
 	      _react2["default"].createElement(
 	        'label',
@@ -54386,7 +54423,7 @@
 	                    }, checkFormNow: this.state.checkFormNow },
 	                _react2['default'].createElement(
 	                    FormItem,
-	                    { showMast: true, inline: true, labelMd: 2, md: 4, labelName: '\u59D3\u540D', isRequire: true, htmlType: 'chinese', errorMessage: '\u59D3\u540D\u683C\u5F0F\u9519\u8BEF', method: 'blur' },
+	                    { className: 'row-class', showMast: true, inline: true, labelMd: 2, md: 4, labelName: '\u59D3\u540D', isRequire: true, htmlType: 'chinese', errorMessage: '\u59D3\u540D\u683C\u5F0F\u9519\u8BEF', method: 'blur' },
 	                    _react2['default'].createElement(_beeFormControl2['default'], { name: 'name', placeholder: '\u53EA\u80FD\u8F93\u5165\u4E2D\u6587' })
 	                ),
 	                _react2['default'].createElement(

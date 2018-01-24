@@ -208,40 +208,46 @@ var Form = function (_Component) {
             if (child.props.isFormItem) {
                 if (useRow) {
                     childs.push(_react2["default"].createElement(
-                        _beeLayout.Col,
-                        { key: 'label' + index, xs: labelXs, sm: labelSm, md: labelMd, lg: labelLg, xsOffset: labelXsOffset, smOffset: labelSmOffset,
-                            mdOffset: labelMdOffset, lgOffset: labelLgOffset, xsPush: labelXsPush, smPush: labelSmPush, mdPush: labelMdPush, lgPush: labelLgPush,
-                            xsPull: labelXsPull, smPull: labelSmPull, mdPull: labelMdPull, lgPull: labelLgPull },
+                        _beeLayout.Row,
+                        { className: child.props.className },
                         _react2["default"].createElement(
-                            _beeLabel2["default"],
-                            { className: labelClassName ? labelClassName : '' },
-                            showMast ? _react2["default"].createElement(
-                                'span',
-                                { className: 'u-mast' },
-                                '*'
-                            ) : '',
-                            labelName
+                            _beeLayout.Col,
+                            { key: 'label' + index, xs: labelXs, sm: labelSm, md: labelMd, lg: labelLg, xsOffset: labelXsOffset, smOffset: labelSmOffset,
+                                mdOffset: labelMdOffset, lgOffset: labelLgOffset, xsPush: labelXsPush, smPush: labelSmPush, mdPush: labelMdPush, lgPush: labelLgPush,
+                                xsPull: labelXsPull, smPull: labelSmPull, mdPull: labelMdPull, lgPull: labelLgPull },
+                            _react2["default"].createElement(
+                                _beeLabel2["default"],
+                                { className: labelClassName ? labelClassName : '' },
+                                showMast ? _react2["default"].createElement(
+                                    'span',
+                                    { className: 'u-mast' },
+                                    '*'
+                                ) : '',
+                                labelName
+                            )
+                        ),
+                        _react2["default"].createElement(
+                            _beeLayout.Col,
+                            { key: 'fromGroup' + index, xs: xs, sm: sm, md: md, lg: lg, xsOffset: xsOffset, smOffset: smOffset, mdOffset: mdOffset,
+                                lgOffset: lgOffset, xsPush: xsPush, smPush: smPush, mdPush: mdPush, lgPush: lgPush,
+                                xsPull: xsPull, smPull: smPull, mdPull: mdPull, lgPull: lgPull },
+                            _react2["default"].cloneElement(child, {
+                                useRow: useRow,
+                                checkItem: _this2.checkItem,
+                                checkNow: _this2.state.checkNow,
+                                className: child.props.className + '-item'
+                            })
                         )
-                    ));
-                    childs.push(_react2["default"].createElement(
-                        _beeLayout.Col,
-                        { key: 'fromGroup' + index, xs: xs, sm: sm, md: md, lg: lg, xsOffset: xsOffset, smOffset: smOffset, mdOffset: mdOffset,
-                            lgOffset: lgOffset, xsPush: xsPush, smPush: smPush, mdPush: mdPush, lgPush: lgPush,
-                            xsPull: xsPull, smPull: smPull, mdPull: mdPull, lgPull: lgPull },
-                        _react2["default"].cloneElement(child, {
-                            useRow: useRow,
-                            checkItem: _this2.checkItem,
-                            checkNow: _this2.state.checkNow
-                        })
                     ));
                 } else {
                     childs.push(_react2["default"].createElement(
                         'span',
-                        { key: index },
+                        { key: index, className: child.props.className, style: { 'display': 'inline-block' } },
                         _react2["default"].cloneElement(child, {
                             useRow: useRow,
                             checkItem: _this2.checkItem,
-                            checkNow: _this2.state.checkNow
+                            checkNow: _this2.state.checkNow,
+                            className: child.props.className + '-item'
                         })
                     ));
                 }
@@ -260,11 +266,7 @@ var Form = function (_Component) {
         return _react2["default"].createElement(
             'form',
             { className: clsPrefix + ' ' + className, onSubmit: this.checkNow },
-            useRow ? _react2["default"].createElement(
-                _beeLayout.Row,
-                null,
-                childs
-            ) : childs,
+            childs,
             showSubmit ? _react2["default"].createElement(
                 'div',
                 { className: clsPrefix + '-submit ' + submitAreaClassName },
