@@ -1,5 +1,15 @@
+<a name="1.1.6"></a>
+## [1.1.6](https://github.com/tinper-bee/bee-form/compare/v1.1.4...v1.1.6) (2018-01-24)
+
+
+### Bug Fixes
+
+* **bee-form:** className bug ([2e4c800](https://github.com/tinper-bee/bee-form/commit/2e4c800))
+
+
+
 <a name="1.1.4"></a>
-## 1.1.4 (2018-01-16)
+## [1.1.4](https://github.com/tinper-bee/bee-form/compare/e3ed42b...v1.1.4) (2018-01-16)
 
 
 ### Bug Fixes
