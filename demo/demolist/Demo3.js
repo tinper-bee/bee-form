@@ -4,7 +4,7 @@
  * @description 注册示例
  */
 import React, {Component} from 'react';
-import Form from '../../src/Form';
+import Form from '../../src';
 const FormItem = Form.FormItem;
 import FormControl from 'bee-form-control';
 import Button from 'bee-button';

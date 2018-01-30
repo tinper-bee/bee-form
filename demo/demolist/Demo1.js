@@ -4,9 +4,11 @@
  * @description 使用FormItem
  */
 import React ,{Component } from 'react';
-import Form from '../../src/Form';
-const FormItem=Form.FormItem;
+import Form from '../../src';
 import FormControl from 'bee-form-control';
+
+const FormItem=Form.FormItem;
+
 class Demo1 extends Component {
     constructor(props){
         super(props);
