@@ -209,7 +209,7 @@ var Form = function (_Component) {
                 if (useRow) {
                     childs.push(_react2["default"].createElement(
                         _beeLayout.Row,
-                        { className: child.props.className },
+                        { className: child.props.className, key: index },
                         _react2["default"].createElement(
                             _beeLayout.Col,
                             { key: 'label' + index, xs: labelXs, sm: labelSm, md: labelMd, lg: labelLg, xsOffset: labelXsOffset, smOffset: labelSmOffset,
@@ -242,7 +242,7 @@ var Form = function (_Component) {
                 } else {
                     childs.push(_react2["default"].createElement(
                         'span',
-                        { key: index, className: child.props.className, style: { 'display': 'inline-block' } },
+                        { key: index, className: child.props.className },
                         _react2["default"].cloneElement(child, {
                             useRow: useRow,
                             checkItem: _this2.checkItem,
