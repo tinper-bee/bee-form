@@ -1,3 +1,13 @@
+<a name="1.1.8"></a>
+## [1.1.8](https://github.com/tinper-bee/bee-form/compare/1.1.7...1.1.8) (2018-02-01)
+
+
+### Bug Fixes
+
+* **bee-form:** style支持 ([bf9a1cb](https://github.com/tinper-bee/bee-form/commit/bf9a1cb))
+
+
+
 <a name="1.1.7"></a>
 ## [1.1.7](https://github.com/tinper-bee/bee-form/compare/1.1.4...1.1.7) (2018-01-30)
 
