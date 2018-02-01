@@ -121,7 +121,7 @@ class Form extends Component {
             if (child.props.isFormItem) {
                 if (useRow) {
                     childs.push(
-                        <Row className={child.props.className} key={index}>
+                        <span className={child.props.className} key={index} style={child.props.style}>
                             <Col key={'label' + index} xs={labelXs} sm={labelSm} md={labelMd} lg={labelLg} xsOffset={labelXsOffset} smOffset={labelSmOffset}
                                 mdOffset={labelMdOffset} lgOffset={labelLgOffset} xsPush={labelXsPush} smPush={labelSmPush} mdPush={labelMdPush} lgPush={labelLgPush}
                                 xsPull={labelXsPull} smPull={labelSmPull} mdPull={labelMdPull} lgPull={labelLgPull}>
@@ -138,11 +138,12 @@ class Form extends Component {
                                             useRow: useRow,
                                             checkItem: this.checkItem,
                                             checkNow: this.state.checkNow,
-                                            className: child.props.className + '-item'
+                                            className: child.props.className? child.props.className + '-item':'',
+                                            style: child.props.style
                                         })
                                 }
                             </Col>
-                        </Row>
+                        </span>
                     );
                 } else {
                     childs.push(
@@ -153,7 +154,8 @@ class Form extends Component {
                                         useRow: useRow,
                                         checkItem: this.checkItem,
                                         checkNow: this.state.checkNow,
-                                        className: child.props.className + '-item'
+                                        className: child.props.className? child.props.className + '-item':'',
+                                        style: child.props.style
                                     })
                             }
                         </span>
@@ -176,7 +178,11 @@ class Form extends Component {
         })
         return (
             <form className={`${clsPrefix} ${className}`} onSubmit={this.checkNow}>
-                {childs}
+                {useRow ? (
+                    <Row>
+                        {childs}
+                    </Row>
+                ) : childs}
                 {
                     showSubmit ? (
                         <div className={`${clsPrefix}-submit ${submitAreaClassName}`}>

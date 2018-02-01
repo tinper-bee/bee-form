@@ -208,8 +208,8 @@ var Form = function (_Component) {
             if (child.props.isFormItem) {
                 if (useRow) {
                     childs.push(_react2["default"].createElement(
-                        _beeLayout.Row,
-                        { className: child.props.className, key: index },
+                        'span',
+                        { className: child.props.className, key: index, style: child.props.style },
                         _react2["default"].createElement(
                             _beeLayout.Col,
                             { key: 'label' + index, xs: labelXs, sm: labelSm, md: labelMd, lg: labelLg, xsOffset: labelXsOffset, smOffset: labelSmOffset,
@@ -235,7 +235,8 @@ var Form = function (_Component) {
                                 useRow: useRow,
                                 checkItem: _this2.checkItem,
                                 checkNow: _this2.state.checkNow,
-                                className: child.props.className + '-item'
+                                className: child.props.className ? child.props.className + '-item' : '',
+                                style: child.props.style
                             })
                         )
                     ));
@@ -247,7 +248,8 @@ var Form = function (_Component) {
                             useRow: useRow,
                             checkItem: _this2.checkItem,
                             checkNow: _this2.state.checkNow,
-                            className: child.props.className + '-item'
+                            className: child.props.className ? child.props.className + '-item' : '',
+                            style: child.props.style
                         })
                     ));
                 }
@@ -266,7 +268,11 @@ var Form = function (_Component) {
         return _react2["default"].createElement(
             'form',
             { className: clsPrefix + ' ' + className, onSubmit: this.checkNow },
-            childs,
+            useRow ? _react2["default"].createElement(
+                _beeLayout.Row,
+                null,
+                childs
+            ) : childs,
             showSubmit ? _react2["default"].createElement(
                 'div',
                 { className: clsPrefix + '-submit ' + submitAreaClassName },
