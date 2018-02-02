@@ -29,19 +29,19 @@ class Demo5 extends Component {
         return (
             <div className="demo5">
                 <Form useRow={true} showSubmit={false} submitCallBack={(flag,obj)=>this.checkForm(flag,obj,1)} checkFormNow={this.state.checkFormNow}>
-                    <FormItem showMast={true}  inline={true} labelMd={2} md={4} labelName="姓名"  isRequire={true} htmlType="chinese" errorMessage="姓名格式错误" method="blur"  >
+                    <FormItem showMast={true}  inline={true} labelXs={6} xs={6} labelMd={2} md={4} labelName="姓名"  isRequire={true} htmlType="chinese" errorMessage="姓名格式错误" method="blur"  >
                         <FormControl  name="name" placeholder="只能输入中文"  />
                     </FormItem>
-                    <FormItem showMast={true}  inline={true} labelMd={2} md={4} labelName="年龄" isRequire={true} method="blur" errorMessage="年龄格式错误" reg={/^[0-9]+$/}  >
+                    <FormItem showMast={true}  inline={true} labelXs={6} xs={6} labelMd={2} md={4} labelName="年龄" isRequire={true} method="blur" errorMessage="年龄格式错误" reg={/^[0-9]+$/}  >
                         <FormControl  name="age" />
                     </FormItem>
                 </Form>
 
                 <Form useRow={true} showSubmit={false} submitCallBack={(flag,obj)=>this.checkForm(flag,obj,2)} checkFormNow={this.state.checkFormNow}>
-                    <FormItem showMast={true}  inline={true} labelMd={2} md={4} labelName="姓名"  isRequire={true} htmlType="chinese" errorMessage="姓名格式错误" method="blur"  >
+                    <FormItem showMast={true}  inline={true} labelXs={6} xs={6} labelMd={2} md={4} labelName="姓名"  isRequire={true} htmlType="chinese" errorMessage="姓名格式错误" method="blur"  >
                         <FormControl  name="name" placeholder="只能输入中文"  />
                     </FormItem>
-                    <FormItem showMast={true}  inline={true} labelMd={2} md={4} labelName="年龄" isRequire={true} method="blur" errorMessage="年龄格式错误" reg={/^[0-9]+$/}  >
+                    <FormItem showMast={true}  inline={true} labelXs={6} xs={6} labelMd={2} md={4} labelName="年龄" isRequire={true} method="blur" errorMessage="年龄格式错误" reg={/^[0-9]+$/}  >
                         <FormControl  name="age" />
                     </FormItem>
                 </Form>

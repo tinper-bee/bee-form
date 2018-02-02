@@ -157,6 +157,23 @@ var FormItem = function (_Component) {
             return _reactDom2["default"].findDOMNode(_this.refs[key]) ? _reactDom2["default"].findDOMNode(_this.refs[key]).clientWidth || _reactDom2["default"].findDOMNode(_this.refs[key]).offsetWidth : 0;
         };
 
+        _this.setWidth = function () {
+            var outerWidth = _this.getWidth('outer');
+            var width = _this.getWidth('label');
+            var maxWidth = outerWidth ? outerWidth - width - 10 : '100%';
+            if (_this.props.inline) {
+                _this.setState({
+                    width: width,
+                    maxWidth: maxWidth
+                });
+            }
+            var before = _this.getWidth('before');
+            var after = _this.getWidth('after');
+            _this.setState({
+                childrenWidth: maxWidth - before - after - 2
+            });
+        };
+
         _this.handleBlur = function () {
             var _this$getNowValueName = _this.getNowValueName(_this.props.children),
                 value = _this$getNowValueName.value,
@@ -319,20 +336,12 @@ var FormItem = function (_Component) {
     };
 
     FormItem.prototype.componentDidMount = function componentDidMount() {
-        var outerWidth = this.getWidth('outer');
-        var width = this.getWidth('label');
-        var maxWidth = outerWidth ? outerWidth - width - 10 : '100%';
-        if (this.props.inline) {
-            this.setState({
-                width: width,
-                maxWidth: maxWidth
-            });
-        }
-        var before = this.getWidth('before');
-        var after = this.getWidth('after');
-        this.setState({
-            childrenWidth: maxWidth - before - after - 2
-        });
+        this.setWidth();
+        window.addEventListener('resize', this.setWidth);
+    };
+
+    FormItem.prototype.componentWillUnmount = function componentWillUnmount() {
+        window.removeEventListener('resize', this.setWidth);
     };
     /**
      * 校验方法

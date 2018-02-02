@@ -145,7 +145,7 @@ class FormItem extends Component {
             this.checkSelf();
         }
     }
-    componentDidMount() {
+    setWidth=()=>{
         let outerWidth = this.getWidth('outer');
         let width = this.getWidth('label');
         let maxWidth=outerWidth ? outerWidth - width - 10 : '100%';
@@ -161,6 +161,13 @@ class FormItem extends Component {
             childrenWidth:maxWidth-before-after-2
         })
 
+    }
+    componentDidMount() {
+        this.setWidth();
+        window.addEventListener('resize',this.setWidth);
+    }
+    componentWillUnmount(){
+        window.removeEventListener('resize',this.setWidth);
     }
     handleBlur = () => {
         let { value, name } = this.getNowValueName(this.props.children);
