@@ -1,3 +1,23 @@
+<a name="1.1.9"></a>
+## [1.1.9](https://github.com/tinper-bee/bee-form/compare/v1.1.8...v1.1.9) (2018-02-03)
+
+
+### Features
+
+* **bee-form:** 发布 ([0dfe681](https://github.com/tinper-bee/bee-form/commit/0dfe681))
+
+
+
+<a name="1.1.8"></a>
+## [1.1.8](https://github.com/tinper-bee/bee-form/compare/1.1.8...v1.1.8) (2018-02-02)
+
+
+### Bug Fixes
+
+* **bee-form:** form-control升级，bee-tools升级，inline修改 ([dfe1808](https://github.com/tinper-bee/bee-form/commit/dfe1808))
+
+
+
 <a name="1.1.8"></a>
 ## [1.1.8](https://github.com/tinper-bee/bee-form/compare/1.1.7...1.1.8) (2018-02-01)
 
