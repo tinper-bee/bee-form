@@ -5204,89 +5204,8 @@ a, .mdl-accordion, .mdl-button, .mdl-card, .mdl-checkbox, .mdl-dropdown-menu,
 
 /* FormGroup */
 /*  Navlayout  */
-.u-form .u-form-group {
-  margin-top: 0;
-  margin-bottom: 0; }
-
-.u-form .u-form-item {
-  padding-top: 5px;
-  padding-bottom: 5px; }
-
 .u-form-item {
-  min-height: 64px;
-  font-size: 14px; }
-
-.u-form-item .u-select {
-  min-width: 100px; }
-
-.u-form .u-form-item {
-  min-height: 94px; }
-
-.u-form .u-form-item.u-form-inline {
-  min-height: 72px; }
-
-.u-form-error {
-  display: none;
-  margin-top: 5px;
-  margin-bottom: 5px;
-  color: #F22C1D; }
-
-.u-form-error.show {
-  display: block; }
-
-.u-form .u-form-submit {
-  margin-top: 10px; }
-
-.u-form .u-form-item.u-form-inline .u-input-group {
-  display: inline-block;
-  vertical-align: middle;
-  width: auto; }
-
-.u-form-inline .u-label {
-  display: inline-block; }
-
-.u-form .u-row .u-label {
-  line-height: 40px; }
-
-.u-form-item .u-input-group-outer .u-input-group .u-form-control:last-child, .u-form-item .u-input-group-outer .u-input-group .u-form-control:first-child {
-  border-bottom-left-radius: 3px;
-  border-top-left-radius: 3px;
-  border-bottom-right-radius: 3px;
-  border-top-right-radius: 3px; }
-
-.u-form-item.u-form-inline .u-input-group-outer {
-  display: inline-block; }
-
-.u-form-item .u-input-group-outer .u-input-before, .u-form-item .u-input-group-outer .u-input-after {
-  line-height: 28px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border: 1px solid #bdbdbd;
-  background: #eee;
-  float: left; }
-
-.u-form-item .u-input-group-outer .u-input-inner {
-  float: left; }
-
-.u-form-item .u-input-group-outer .u-input-before {
-  border-right: none;
-  border-bottom-left-radius: 3px;
-  border-top-left-radius: 3px; }
-
-.u-form-item .u-input-group-outer .u-input-before + .u-form-control {
-  border-bottom-left-radius: 0 !important;
-  border-top-left-radius: 0 !important; }
-
-.u-form-item .u-input-group-outer .u-input-after {
-  border-left: none;
-  border-bottom-right-radius: 3px;
-  border-top-right-radius: 3px; }
-
-.u-mast {
-  color: #F22C1D;
-  position: relative;
-  top: 2px;
-  margin-right: 2px; }
+  padding: 10px; }
 
 /* FormGroup */
 /*  Navlayout  */
@@ -9159,70 +9078,63 @@ li.rc-time-picker-panel-select-option-disabled:hover {
 .datepicker-input-group.u-input-group {
   display: block; }
 
+.demo1 {
+  font-size: 14px; }
+
 .demo1 .u-label {
-  position: relative;
-  bottom: 8px; }
+  display: inline; }
 
 .demo1 .u-form-control {
-  border-top-left-radius: 0 !important;
-  border-bottom-left-radius: 0 !important; }
+  width: auto; }
+
+.demo1 .error {
+  font-size: 12px;
+  color: red;
+  margin-left: 10px; }
+
+.demo2 {
+  font-size: 14px; }
 
 .demo2 .u-label {
-  min-width: 70px;
-  width: 70px;
+  display: inline-block;
+  min-width: 80px;
   text-align: right; }
 
-.demo2 .cancel,
-.demo3 .cancel {
-  margin-left: 20px; }
+.demo2 .u-form-control {
+  width: auto; }
 
-.demo2 .u-form-submit {
-  padding-left: 70px; }
+.demo2 .error {
+  font-size: 12px;
+  color: red;
+  margin-left: 10px; }
 
-.demo2 .u-input-after {
+.demo2 .submit {
+  padding-left: 90px; }
+
+.demo2 .submit .login {
+  margin-right: 10px; }
+
+.demo3 {
+  font-size: 14px; }
+
+.demo3 .u-label {
+  display: inline-block;
+  min-width: 100px;
+  text-align: right; }
+
+.demo3 .u-form-control {
   width: auto;
-  border: none !important;
-  background: none !important;
-  cursor: pointer;
-  color: #42a5f5; }
-
-.demo3 .u-form .u-label {
-  width: 120px;
-  text-align: right; }
-
-.demo3 .u-form-submit {
-  padding-left: 120px; }
-
-.demo3 .u-input-after {
-  border: none !important;
-  background: none !important; }
-
-.demo3 .u-input-after .u-button {
-  height: 30px;
-  padding: 0; }
-
-.demo4 .u-label {
-  width: 75px;
-  text-align: right; }
-
-.demo4 .province,
-.demo4 .city,
-.demo4 .area {
-  width: 90px !important; }
-
-.demo4 .uf.uf-calendar {
-  position: relative;
-  top: -4px;
-  right: 9px; }
-
-.demo4 .u-form-submit {
-  padding-left: 75px; }
-
-textarea {
-  min-height: 100px;
   min-width: 300px; }
 
-.demo5 .u-form .u-col-md-2 {
-  text-align: right; }
+.demo3 .error {
+  font-size: 12px;
+  color: red;
+  margin-left: 10px; }
+
+.demo3 .submit {
+  padding-left: 90px; }
+
+.demo3 .submit .login {
+  margin-right: 10px; }
 
 /*# sourceMappingURL=demo.css.map */

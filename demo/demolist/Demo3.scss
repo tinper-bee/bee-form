@@ -1,18 +1,23 @@
-.demo3 .u-form .u-label {
-    width: 120px;
+.demo3{
+    font-size: 14px;
+}
+.demo3 .u-label {
+    display: inline-block;
+    min-width: 100px;
     text-align: right;
 }
-
-.demo3 .u-form-submit {
-    padding-left: 120px;
+.demo3 .u-form-control {
+    width: auto;
+    min-width: 300px;
 }
-
-.demo3 .u-input-after {
-    border: none!important;
-    background: none!important;
+.demo3 .error{
+    font-size: 12px;
+    color: red;
+    margin-left: 10px;
 }
-
-.demo3 .u-input-after .u-button {
-    height: 30px;
-    padding: 0;
+.demo3 .submit{
+    padding-left: 90px;
+}
+.demo3 .submit .login{
+    margin-right: 10px;
 }

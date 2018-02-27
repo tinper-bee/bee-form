@@ -6,36 +6,64 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import Form from '../../src';
-const FormItem = Form.FormItem;
 import FormControl from 'bee-form-control';
+import Label from 'bee-label';
 import Button from 'bee-button';
+const FormItem = Form.FormItem;
 
 class Demo2 extends Component {
-    checkForm = (flag,obj) => {
-        console.log(flag);
-        console.log(obj);
+   
+    submit=(e)=>{
+        e.preventDefault();
+        this.props.form.validateFields((err, values) => {
+          if (err) {
+            console.log('校验失败', values);
+          }else{
+            console.log('提交成功',values)
+          }
+        });
     }
     render() {
-        let cancel=()=>{
-            return (
-                <Button shape="border" className="cancel">取消</Button>
-            )
-        }
+        const { getFieldProps, getFieldError } = this.props.form;
         return (
             <div className="demo2">
-                <Form  submitCallBack={this.checkForm} afterSubmitBtn={cancel()}>
-                    <FormItem showMast={true}  labelName="用户名:" isRequire={true}  
-                    errorMessage="请输入用户名" method="blur"  inline={true} valuePropsName='value'>
-                        <FormControl name="username"   placeholder="请输入用户名" />
+                <Form >
+                    <FormItem>
+                    <Label>用户名：</Label>
+                        <FormControl placeholder="请输入用户名" 
+                         {...getFieldProps('username', {
+                            validateTrigger: 'onBlur',
+                            rules: [{
+                                required: true, message: '请输入用户名',
+                            }],
+                        }) } 
+                        />
+                        <span className='error'>
+                        {getFieldError('username')}
+                    </span>   
                     </FormItem>
-                    <FormItem showMast={true}  labelName="密码:" isRequire={true} 
-                    method="blur" errorMessage="请输入密码" 
-                    inputAfter={<span className='forget'>忘记密码？</span>}  inline={true} valuePropsName='value'>
-                        <FormControl name="password"  type="password" placeholder="请输入密码"   />
+                    <FormItem>
+                    <Label>密码：</Label>
+                        <FormControl placeholder="请输入密码" type='password'
+                         {...getFieldProps('password', {
+                            validateTrigger: 'onBlur',
+                            rules: [{
+                                required: true, message: '请输入密码',
+                            }],
+                        }) } 
+                        />
+                        <span className='error'>
+                        {getFieldError('password')}
+                    </span>   
                     </FormItem>
+                    <div className='submit'>
+                    <Button colors="primary" className="login" onClick={this.submit}>登陆</Button>
+                    <Button shape="border" className="reset">取消</Button>
+                    </div>
+                    
                 </Form>
             </div>
         )
     }
 }
-export default Demo2;
+export default Form.createForm()(Demo2);
