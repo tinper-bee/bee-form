@@ -76,7 +76,7 @@
 	
 	var CARETUP = _react2['default'].createElement('i', { className: 'uf uf-arrow-up' });
 	
-	var Demo1 = __webpack_require__(64);var Demo2 = __webpack_require__(81);var Demo3 = __webpack_require__(82);var Demo4 = __webpack_require__(87);var Demo5 = __webpack_require__(464);var Demo6 = __webpack_require__(465);var DemoArray = [{ "example": _react2['default'].createElement(Demo1, null), "title": " 单个input校验", "code": "/**\n *\n * @title 单个input校验\n * @description 使用FormItem\n */\nimport React ,{Component } from 'react';\nimport { Form, FormControl } from 'tinper-bee';\n\nconst FormItem=Form.FormItem;\n\nclass Demo1 extends Component {\n    constructor(props){\n        super(props);\n        this.state={\n            value:''\n        }\n    }\n    check=(flag,obj)=>{\n        console.log(flag);\n        console.log(obj);\n    }\n    onChange=(value)=>{\n        this.setState({\n            value\n        })\n    }\n    render() {\n        return (\n            <FormItem className=\"demo1\" showMast={true} labelName=\"域名\" inline={true} \n            inputBefore=\"http://\"  isRequire={true} method=\"blur\"  check={this.check}>\n                <FormControl  name=\"url\"   placeholder=\"请输入域名\" value={this.state.value} onChange={this.onChange}/>\n            </FormItem>\n        )\n    }\n}\n", "desc": " 使用FormItem", "scss_code": ".demo1 .u-label {\n    position: relative;\n    bottom: 8px;\n}\n\n.demo1 .u-form-control {\n    border-top-left-radius: 0!important;\n    border-bottom-left-radius: 0!important;\n}" }, { "example": _react2['default'].createElement(Demo2, null), "title": " 基本form校验", "code": "/**\n *\n * @title 基本form校验\n * @description 登录示例\n */\nimport React, {Component} from 'react';\nimport ReactDOM from 'react-dom';\nimport { Form, Button, FormControl } from 'tinper-bee';\nconst FormItem = Form.FormItem;\n\nclass Demo2 extends Component {\n    checkForm = (flag,obj) => {\n        console.log(flag);\n        console.log(obj);\n    }\n    render() {\n        let cancel=()=>{\n            return (\n                <Button shape=\"border\" className=\"cancel\">取消</Button>\n            )\n        }\n        return (\n            <div className=\"demo2\">\n                <Form  submitCallBack={this.checkForm} afterSubmitBtn={cancel()}>\n                    <FormItem showMast={true}  labelName=\"用户名:\" isRequire={true}  \n                    errorMessage=\"请输入用户名\" method=\"blur\"  inline={true} valuePropsName='value'>\n                        <FormControl name=\"username\"   placeholder=\"请输入用户名\" />\n                    </FormItem>\n                    <FormItem showMast={true}  labelName=\"密码:\" isRequire={true} \n                    method=\"blur\" errorMessage=\"请输入密码\" \n                    inputAfter={<span className='forget'>忘记密码？</span>}  inline={true} valuePropsName='value'>\n                        <FormControl name=\"password\"  type=\"password\" placeholder=\"请输入密码\"   />\n                    </FormItem>\n                </Form>\n            </div>\n        )\n    }\n}\n", "desc": " 登录示例", "scss_code": ".demo2 .u-label {\n    min-width: 70px;\n    width: 70px;\n    text-align: right;\n}\n\n.demo2 .cancel,\n.demo3 .cancel {\n    margin-left: 20px;\n}\n\n.demo2 .u-form-submit {\n    padding-left: 70px;\n}\n\n.demo2 .u-input-after {\n    width: auto;\n    border: none!important;\n    background: none!important;\n    cursor: pointer;\n    color: #42a5f5;\n}" }, { "example": _react2['default'].createElement(Demo3, null), "title": " 基本form校验", "code": "/**\n *\n * @title 基本form校验\n * @description 注册示例\n */\nimport React, {Component} from 'react';\nimport { Form, Checkbox, InputNumber, Button, FormControl } from 'tinper-bee';\nconst FormItem = Form.FormItem;\n\nclass Demo3 extends Component {\n    checkForm = (flag,obj) => {\n        console.log(flag);\n        console.log(obj);\n    }\n    render() {\n        let cancel=()=>{\n            return (\n                <Button shape=\"border\" className=\"cancel\">取消</Button>\n            )\n        }\n        return (\n            <div className=\"demo3\">\n                <Form submitCallBack={this.checkForm} afterSubmitBtn={cancel()}>\n                    <FormItem showMast={true}  labelName=\"用户名:\" isRequire={true} valuePropsName='value' errorMessage=\"请输入用户名\" method=\"blur\"  inline={true}>\n                        <FormControl name=\"username\"  placeholder=\"请输入用户名\"/>\n                    </FormItem>\n                    <FormItem showMast={true}  labelName=\"密码:\" isRequire={true} valuePropsName='value' method=\"blur\" errorMessage=\"请输入密码\"   inline={true}>\n                        <FormControl name=\"password1\" type=\"password\" placeholder=\"请输入密码\" />\n                    </FormItem>\n                    <FormItem showMast={true}  labelName=\"再次输入密码:\" valuePropsName='value' isRequire={true} method=\"blur\" errorMessage=\"请再次输入密码\"  inline={true}>\n                        <FormControl name=\"password2\" type=\"password\" placeholder=\"请再次输入密码\" />\n                    </FormItem>\n                    <FormItem showMast={true} valuePropsName='value'  labelName=\"邮箱:\" isRequire={true} method=\"blur\" htmlType=\"email\" errorMessage=\"邮箱格式错误\"  inline={true}>\n                        <FormControl name=\"email\"  placeholder=\"请输入邮箱\" />\n                    </FormItem>\n                    <FormItem inputBefore=\"+86\" showMast={true}  valuePropsName='value'  labelName=\"手机号:\" isRequire={true} method=\"blur\" htmlType=\"tel\" errorMessage=\"手机号格式错误\"  inline={true}>\n                        <FormControl name=\"phone\"  placeholder=\"请输入手机号\" />\n                    </FormItem>\n                    <FormItem inputAfter={<Button shape=\"border\">获取验证码</Button>} showMast={true} valuePropsName='value'  labelName=\"验证码:\" isRequire={true} method=\"blur\"  errorMessage=\"请输入验证码\"  inline={true}>\n                        <FormControl name=\"verification\"  placeholder=\"请输入验证码\" />\n                    </FormItem>\n                    <FormItem  inputAfter='我已经阅读并同意相关条款' valuePropsName='defaultChecked'  labelName=\"\"  inline={true}>\n                        <Checkbox colors=\"info\" name=\"agree\"/>\n                    </FormItem>\n                </Form>\n            </div>\n        )\n    }\n}\n", "desc": " 注册示例", "scss_code": ".demo3 .u-form .u-label {\n    width: 120px;\n    text-align: right;\n}\n\n.demo3 .u-form-submit {\n    padding-left: 120px;\n}\n\n.demo3 .u-input-after {\n    border: none!important;\n    background: none!important;\n}\n\n.demo3 .u-input-after .u-button {\n    height: 30px;\n    padding: 0;\n}" }, { "example": _react2['default'].createElement(Demo4, null), "title": " 表单校验", "code": "/**\n *\n * @title 表单校验\n * @description 用户信息录入实例\n */\nimport React ,{Component } from 'react';\nimport ReactDOM from 'react-dom';\nimport { Form, CitySelect, Rate, InputNumber, Slider, Switch, Checkbox, DatePicker, Radio, Select, FormControl } from 'tinper-bee';\nimport zhCN from 'rc-calendar/lib/locale/zh_CN';\nimport moment from 'moment';\nconst FormItem=Form.FormItem;\nconst Option = Select.Option;\nconst format = 'YYYY-MM-DD HH:mm:ss';\nconst dateInputPlaceholder = '选择日期';\nclass Demo4 extends Component {\n    constructor(props) {\n        super(props);\n        this.state = {\n            sex:'man',\n            rate:0\n        };\n    }\n    sexChange=sex=>{\n        this.setState({\n            sex\n        })\n    }\n    rateChange=rate=>{\n        this.setState({\n            rate\n        })\n    }\n    checkForm = (flag,obj) => {\n        console.log(flag);\n        console.log(obj);\n    }\n    render() {\n        return (\n           <Form submitCallBack={this.checkForm} className='demo4'>\n               <FormItem showMast={true}  labelName=\"姓名:\" isRequire={true} valuePropsName='value' htmlType='chinese' errorMessage=\"请输入姓名\" method=\"blur\"  inline={true}>\n                    <FormControl name=\"name\"  placeholder=\"请输入姓名\"/>\n                </FormItem>\n                <FormItem showMast={true} labelName=\"身份证号:\" isRequire={true} valuePropsName='value' htmlType='IDCard' errorMessage=\"请输入身份证号\" method=\"blur\"  inline={true}>\n                    <FormControl name=\"idCard\"  placeholder=\"请输入身份证号\"/>\n                </FormItem>\n                <FormItem showMast={true} labelName=\"年龄:\" isRequire={true} htmlType='number' valuePropsName='value' errorMessage=\"年龄格式错误\" method=\"blur\"  inline={true}>\n                    <FormControl name=\"age\"  placeholder=\"请输入年龄\"/>\n                </FormItem>\n                <FormItem showMast={true} labelName=\"性别:\" isRequire={true} method=\"change\" inline={true}>\n                <Radio.RadioGroup\n                    selectedValue={this.state.sex} onChange={this.sexChange}\n                    name=\"sex\">\n                    <Radio value=\"man\" >男</Radio>\n                    <Radio value=\"woman\" >女</Radio>\n                </Radio.RadioGroup>\n               </FormItem>\n               <FormItem showMast={true} labelName=\"出生日期:\" isRequire={true} method=\"change\"  inline={true}>\n                   <DatePicker\n                       name=\"time\"\n                       format={format}\n                       locale={zhCN}\n                       placeholder = {dateInputPlaceholder}\n                   />\n               </FormItem>\n               <FormItem showMast={true} labelName=\"籍贯:\"  method=\"change\" isRequire={true} inline={true}>\n                   <CitySelect name='origin'/>\n               </FormItem>\n               <FormItem  labelName=\"保密等级:\"  method=\"change\"  inline={true}>\n                    <Rate name='rate'  value={this.state.rate} onChange={this.rateChange}/>\n               </FormItem>\n               <FormItem labelName=\"备注:\" inline={true} >\n                   <FormControl componentClass='textarea' name=\"remark\" />\n               </FormItem>\n           </Form>\n        )\n    }\n}\n", "desc": " 用户信息录入实例", "scss_code": ".demo4 .u-label {\n    width: 75px;\n    text-align: right;\n}\n\n.demo4 .province,\n.demo4 .city,\n.demo4 .area {\n    width: 90px!important;\n}\n\n.demo4 .uf.uf-calendar {\n    position: relative;\n    top: -4px;\n    right: 9px;\n}\n\n.demo4 .u-form-submit {\n    padding-left: 75px;\n}\n\ntextarea {\n    min-height: 100px;\n    min-width: 300px;\n}" }, { "example": _react2['default'].createElement(Demo5, null), "title": " 表单校验", "code": "/**\n *\n * @title 表单校验\n * @description 使用栅格布局，配置 Form：userRow={true}  FormItem 格子数，参照栅格布局\n */\nimport React ,{Component } from 'react';\nimport { Form, Button, FormControl } from 'tinper-bee';\nconst FormItem=Form.FormItem;\nclass Demo5 extends Component {\n    constructor(props){\n        super(props);\n        this.state={\n            checkFormNow:false\n        }\n    }\n    checkForm = (flag,obj,num) => {\n        console.log('第'+num+'个');\n        console.log(flag);\n        console.log(obj);\n    }\n    handClick=()=>{\n        this.setState({\n            checkFormNow:true\n        });\n    }\n    render() {\n        return (\n            <div className=\"demo5\">\n                <Form useRow={true} showSubmit={false} submitCallBack={(flag,obj)=>this.checkForm(flag,obj,1)} checkFormNow={this.state.checkFormNow}>\n                    <FormItem showMast={true}  inline={true} labelXs={6} xs={6} labelMd={2} md={4} labelName=\"姓名\"  isRequire={true} htmlType=\"chinese\" errorMessage=\"姓名格式错误\" method=\"blur\"  >\n                        <FormControl  name=\"name\" placeholder=\"只能输入中文\"  />\n                    </FormItem>\n                    <FormItem showMast={true}  inline={true} labelXs={6} xs={6} labelMd={2} md={4} labelName=\"年龄\" isRequire={true} method=\"blur\" errorMessage=\"年龄格式错误\" reg={/^[0-9]+$/}  >\n                        <FormControl  name=\"age\" />\n                    </FormItem>\n                </Form>\n\n                <Form useRow={true} showSubmit={false} submitCallBack={(flag,obj)=>this.checkForm(flag,obj,2)} checkFormNow={this.state.checkFormNow}>\n                    <FormItem showMast={true}  inline={true} labelXs={6} xs={6} labelMd={2} md={4} labelName=\"姓名\"  isRequire={true} htmlType=\"chinese\" errorMessage=\"姓名格式错误\" method=\"blur\"  >\n                        <FormControl  name=\"name\" placeholder=\"只能输入中文\"  />\n                    </FormItem>\n                    <FormItem showMast={true}  inline={true} labelXs={6} xs={6} labelMd={2} md={4} labelName=\"年龄\" isRequire={true} method=\"blur\" errorMessage=\"年龄格式错误\" reg={/^[0-9]+$/}  >\n                        <FormControl  name=\"age\" />\n                    </FormItem>\n                </Form>\n                <Button colors=\"primary\" onClick={this.handClick}>主动校验form</Button>\n            </div>\n\n        )\n    }\n}\n", "desc": " 使用栅格布局，配置 Form：userRow={true}  FormItem 格子数，参照栅格布局", "scss_code": ".demo5 .u-form .u-col-md-2 {\n    text-align: right;\n}" }, { "example": _react2['default'].createElement(Demo6, null), "title": " 自定义组件", "code": "/**\n *\n * @title 自定义组件\n * @description \n */\nimport React ,{Component } from 'react';\nimport { Form, Radio, FormControl } from 'tinper-bee';\nconst FormItem=Form.FormItem;\nclass Customer extends Component {\n    constructor(props) {\n        super(props);     \n        this.state={\n            value:props.defaultValue==undefined?'apple':props.defaultValue\n        }  \n    }\n    onChange=(value)=>{\n        this.setState({\n            value\n        })\n    }\n    render() {\n        return (\n            <Radio.RadioGroup\n                selectedValue={this.state.value}\n                name=\"fruit\"\n                onChange={this.onChange}\n                type='customer'\n                >\n                <Radio value=\"apple\" >苹果</Radio>\n                <Radio value=\"orange\" >橘子</Radio>\n                <Radio value=\"lemon\" >柠檬</Radio>\n            </Radio.RadioGroup>\n\n        )\n    }\n}\nclass Demo6 extends Component {\n    constructor(props){\n        super(props);\n    }\n    check = (flag,obj) => {\n        console.log(flag);\n        console.log(obj);\n    }\n    render() {\n        return (\n                <Form  submitCallBack={this.check}>\n                    <FormItem showMast={true}  inline={true}  labelName=\"喜好:\" isRequire={true} method=\"blur\"  >\n                        <Customer defaultValue='lemon' name='customer'/>    \n                    </FormItem>\n                </Form>\n            \n        )\n    }\n}\n", "desc": " " }];
+	var Demo1 = __webpack_require__(64);var Demo2 = __webpack_require__(81);var Demo3 = __webpack_require__(82);var Demo4 = __webpack_require__(87);var Demo5 = __webpack_require__(464);var DemoArray = [{ "example": _react2['default'].createElement(Demo1, null), "title": " 单个input校验", "code": "/**\n *\n * @title 单个input校验\n * @description 使用FormItem\n */\nimport React ,{Component } from 'react';\nimport { Form, FormControl } from 'tinper-bee';\n\nconst FormItem=Form.FormItem;\n\nclass Demo1 extends Component {\n    constructor(props){\n        super(props);\n        this.state={\n            value:''\n        }\n    }\n    check=(flag,obj)=>{\n        console.log(flag);\n        console.log(obj);\n    }\n    onChange=(value)=>{\n        this.setState({\n            value\n        })\n    }\n    render() {\n        return (\n            <FormItem className=\"demo1\" showMast={true} labelName=\"域名\" inline={true} \n            inputBefore=\"http://\"  isRequire={true} method=\"blur\"  check={this.check}>\n                <FormControl  name=\"url\"   placeholder=\"请输入域名\" value={this.state.value} onChange={this.onChange}/>\n            </FormItem>\n        )\n    }\n}\n", "desc": " 使用FormItem", "scss_code": ".demo1 .u-label {\n    position: relative;\n    bottom: 8px;\n}\n\n.demo1 .u-form-control {\n    border-top-left-radius: 0!important;\n    border-bottom-left-radius: 0!important;\n}" }, { "example": _react2['default'].createElement(Demo2, null), "title": " 基本form校验", "code": "/**\n *\n * @title 基本form校验\n * @description 登录示例\n */\nimport React, {Component} from 'react';\nimport ReactDOM from 'react-dom';\nimport { Form, Button, FormControl } from 'tinper-bee';\nconst FormItem = Form.FormItem;\n\nclass Demo2 extends Component {\n    checkForm = (flag,obj) => {\n        console.log(flag);\n        console.log(obj);\n    }\n    render() {\n        let cancel=()=>{\n            return (\n                <Button shape=\"border\" className=\"cancel\">取消</Button>\n            )\n        }\n        return (\n            <div className=\"demo2\">\n                <Form  submitCallBack={this.checkForm} afterSubmitBtn={cancel()}>\n                    <FormItem showMast={true}  labelName=\"用户名:\" isRequire={true}  \n                    errorMessage=\"请输入用户名\" method=\"blur\"  inline={true} valuePropsName='value'>\n                        <FormControl name=\"username\"   placeholder=\"请输入用户名\" />\n                    </FormItem>\n                    <FormItem showMast={true}  labelName=\"密码:\" isRequire={true} \n                    method=\"blur\" errorMessage=\"请输入密码\" \n                    inputAfter={<span className='forget'>忘记密码？</span>}  inline={true} valuePropsName='value'>\n                        <FormControl name=\"password\"  type=\"password\" placeholder=\"请输入密码\"   />\n                    </FormItem>\n                </Form>\n            </div>\n        )\n    }\n}\n", "desc": " 登录示例", "scss_code": ".demo2 .u-label {\n    min-width: 70px;\n    width: 70px;\n    text-align: right;\n}\n\n.demo2 .cancel,\n.demo3 .cancel {\n    margin-left: 20px;\n}\n\n.demo2 .u-form-submit {\n    padding-left: 70px;\n}\n\n.demo2 .u-input-after {\n    width: auto;\n    border: none!important;\n    background: none!important;\n    cursor: pointer;\n    color: #42a5f5;\n}" }, { "example": _react2['default'].createElement(Demo3, null), "title": " 基本form校验", "code": "/**\n *\n * @title 基本form校验\n * @description 注册示例\n */\nimport React, {Component} from 'react';\nimport { Form, Checkbox, InputNumber, Button, FormControl } from 'tinper-bee';\nconst FormItem = Form.FormItem;\n\nclass Demo3 extends Component {\n    checkForm = (flag,obj) => {\n        console.log(flag);\n        console.log(obj);\n    }\n    render() {\n        let cancel=()=>{\n            return (\n                <Button shape=\"border\" className=\"cancel\">取消</Button>\n            )\n        }\n        return (\n            <div className=\"demo3\">\n                <Form submitCallBack={this.checkForm} afterSubmitBtn={cancel()}>\n                    <FormItem showMast={true}  labelName=\"用户名:\" isRequire={true} valuePropsName='value' errorMessage=\"请输入用户名\" method=\"blur\"  inline={true}>\n                        <FormControl name=\"username\"  placeholder=\"请输入用户名\"/>\n                    </FormItem>\n                    <FormItem showMast={true}  labelName=\"密码:\" isRequire={true} valuePropsName='value' method=\"blur\" errorMessage=\"请输入密码\"   inline={true}>\n                        <FormControl name=\"password1\" type=\"password\" placeholder=\"请输入密码\" />\n                    </FormItem>\n                    <FormItem showMast={true}  labelName=\"再次输入密码:\" valuePropsName='value' isRequire={true} method=\"blur\" errorMessage=\"请再次输入密码\"  inline={true}>\n                        <FormControl name=\"password2\" type=\"password\" placeholder=\"请再次输入密码\" />\n                    </FormItem>\n                    <FormItem showMast={true} valuePropsName='value'  labelName=\"邮箱:\" isRequire={true} method=\"blur\" htmlType=\"email\" errorMessage=\"邮箱格式错误\"  inline={true}>\n                        <FormControl name=\"email\"  placeholder=\"请输入邮箱\" />\n                    </FormItem>\n                    <FormItem inputBefore=\"+86\" showMast={true}  valuePropsName='value'  labelName=\"手机号:\" isRequire={true} method=\"blur\" htmlType=\"tel\" errorMessage=\"手机号格式错误\"  inline={true}>\n                        <FormControl name=\"phone\"  placeholder=\"请输入手机号\" />\n                    </FormItem>\n                    <FormItem inputAfter={<Button shape=\"border\">获取验证码</Button>} showMast={true} valuePropsName='value'  labelName=\"验证码:\" isRequire={true} method=\"blur\"  errorMessage=\"请输入验证码\"  inline={true}>\n                        <FormControl name=\"verification\"  placeholder=\"请输入验证码\" />\n                    </FormItem>\n                    <FormItem  inputAfter='我已经阅读并同意相关条款' valuePropsName='defaultChecked'  labelName=\"\"  inline={true}>\n                        <Checkbox colors=\"info\" name=\"agree\"/>\n                    </FormItem>\n                </Form>\n            </div>\n        )\n    }\n}\n", "desc": " 注册示例", "scss_code": ".demo3 .u-form .u-label {\n    width: 120px;\n    text-align: right;\n}\n\n.demo3 .u-form-submit {\n    padding-left: 120px;\n}\n\n.demo3 .u-input-after {\n    border: none!important;\n    background: none!important;\n}\n\n.demo3 .u-input-after .u-button {\n    height: 30px;\n    padding: 0;\n}" }, { "example": _react2['default'].createElement(Demo4, null), "title": " 表单校验", "code": "/**\n *\n * @title 表单校验\n * @description 用户信息录入实例\n */\nimport React ,{Component } from 'react';\nimport ReactDOM from 'react-dom';\nimport { Form, CitySelect, Rate, InputNumber, Slider, Switch, Checkbox, DatePicker, Radio, Select, FormControl } from 'tinper-bee';\nimport zhCN from 'rc-calendar/lib/locale/zh_CN';\nimport moment from 'moment';\nconst FormItem=Form.FormItem;\nconst Option = Select.Option;\nconst format = 'YYYY-MM-DD HH:mm:ss';\nconst dateInputPlaceholder = '选择日期';\nclass Demo4 extends Component {\n    constructor(props) {\n        super(props);\n        this.state = {\n            sex:'man',\n            rate:0\n        };\n    }\n    sexChange=sex=>{\n        this.setState({\n            sex\n        })\n    }\n    rateChange=rate=>{\n        this.setState({\n            rate\n        })\n    }\n    checkForm = (flag,obj) => {\n        console.log(flag);\n        console.log(obj);\n    }\n    render() {\n        return (\n           <Form submitCallBack={this.checkForm} className='demo4'>\n               <FormItem showMast={true}  labelName=\"姓名:\" isRequire={true} valuePropsName='value' htmlType='chinese' errorMessage=\"请输入姓名\" method=\"blur\"  inline={true}>\n                    <FormControl name=\"name\"  placeholder=\"请输入姓名\"/>\n                </FormItem>\n                <FormItem showMast={true} labelName=\"身份证号:\" isRequire={true} valuePropsName='value' htmlType='IDCard' errorMessage=\"请输入身份证号\" method=\"blur\"  inline={true}>\n                    <FormControl name=\"idCard\"  placeholder=\"请输入身份证号\"/>\n                </FormItem>\n                <FormItem showMast={true} labelName=\"年龄:\" isRequire={true} htmlType='number' valuePropsName='value' errorMessage=\"年龄格式错误\" method=\"blur\"  inline={true}>\n                    <FormControl name=\"age\"  placeholder=\"请输入年龄\"/>\n                </FormItem>\n                <FormItem showMast={true} labelName=\"性别:\" isRequire={true} method=\"change\" inline={true}>\n                <Radio.RadioGroup\n                    selectedValue={this.state.sex} onChange={this.sexChange}\n                    name=\"sex\">\n                    <Radio value=\"man\" >男</Radio>\n                    <Radio value=\"woman\" >女</Radio>\n                </Radio.RadioGroup>\n               </FormItem>\n               <FormItem showMast={true} labelName=\"出生日期:\" isRequire={true} method=\"change\"  inline={true}>\n                   <DatePicker\n                       name=\"time\"\n                       format={format}\n                       locale={zhCN}\n                       placeholder = {dateInputPlaceholder}\n                   />\n               </FormItem>\n               <FormItem showMast={true} labelName=\"籍贯:\"  method=\"change\" isRequire={true} inline={true}>\n                   <CitySelect name='origin'/>\n               </FormItem>\n               <FormItem  labelName=\"保密等级:\"  method=\"change\"  inline={true}>\n                    <Rate name='rate'  value={this.state.rate} onChange={this.rateChange}/>\n               </FormItem>\n               <FormItem labelName=\"备注:\" inline={true} >\n                   <FormControl componentClass='textarea' name=\"remark\" />\n               </FormItem>\n           </Form>\n        )\n    }\n}\n", "desc": " 用户信息录入实例", "scss_code": ".demo4 .u-label {\n    width: 75px;\n    text-align: right;\n}\n\n.demo4 .province,\n.demo4 .city,\n.demo4 .area {\n    width: 90px!important;\n}\n\n.demo4 .uf.uf-calendar {\n    position: relative;\n    top: -4px;\n    right: 9px;\n}\n\n.demo4 .u-form-submit {\n    padding-left: 75px;\n}\n\ntextarea {\n    min-height: 100px;\n    min-width: 300px;\n}" }, { "example": _react2['default'].createElement(Demo5, null), "title": " 表单校验", "code": "/**\n *\n * @title 表单校验\n * @description 使用栅格布局，配置 Form：userRow={true}  FormItem 格子数，参照栅格布局\n */\nimport React ,{Component } from 'react';\nimport { Form, Button, FormControl } from 'tinper-bee';\nconst FormItem=Form.FormItem;\nclass Demo5 extends Component {\n    constructor(props){\n        super(props);\n        this.state={\n            checkFormNow:false\n        }\n    }\n    checkForm = (flag,obj,num) => {\n        console.log('第'+num+'个');\n        console.log(flag);\n        console.log(obj);\n    }\n    handClick=()=>{\n        this.setState({\n            checkFormNow:true\n        });\n    }\n    render() {\n        return (\n            <div className=\"demo5\">\n                <Form useRow={true} showSubmit={false} submitCallBack={(flag,obj)=>this.checkForm(flag,obj,1)} checkFormNow={this.state.checkFormNow}>\n                    <FormItem showMast={true}  inline={true} labelXs={6} xs={6} labelMd={2} md={4} labelName=\"姓名\"  isRequire={true} htmlType=\"chinese\" errorMessage=\"姓名格式错误\" method=\"blur\"  >\n                        <FormControl  name=\"name\" placeholder=\"只能输入中文\"  />\n                    </FormItem>\n                    <FormItem showMast={true}  inline={true} labelXs={6} xs={6} labelMd={2} md={4} labelName=\"年龄\" isRequire={true} method=\"blur\" errorMessage=\"年龄格式错误\" reg={/^[0-9]+$/}  >\n                        <FormControl  name=\"age\" />\n                    </FormItem>\n                </Form>\n\n                <Form useRow={true} showSubmit={false} submitCallBack={(flag,obj)=>this.checkForm(flag,obj,2)} checkFormNow={this.state.checkFormNow}>\n                    <FormItem showMast={true}  inline={true} labelXs={6} xs={6} labelMd={2} md={4} labelName=\"姓名\"  isRequire={true} htmlType=\"chinese\" errorMessage=\"姓名格式错误\" method=\"blur\"  >\n                        <FormControl  name=\"name\" placeholder=\"只能输入中文\"  />\n                    </FormItem>\n                    <FormItem showMast={true}  inline={true} labelXs={6} xs={6} labelMd={2} md={4} labelName=\"年龄\" isRequire={true} method=\"blur\" errorMessage=\"年龄格式错误\" reg={/^[0-9]+$/}  >\n                        <FormControl  name=\"age\" />\n                    </FormItem>\n                </Form>\n                <Button colors=\"primary\" onClick={this.handClick}>主动校验form</Button>\n            </div>\n\n        )\n    }\n}\n", "desc": " 使用栅格布局，配置 Form：userRow={true}  FormItem 格子数，参照栅格布局", "scss_code": ".demo5 .u-form .u-col-md-2 {\n    text-align: right;\n}" }];
 	
 	var Demo = function (_Component) {
 	    _inherits(Demo, _Component);
@@ -6707,8 +6707,6 @@
 	    value: true
 	});
 	
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-	
 	var _react = __webpack_require__(4);
 	
 	var _react2 = _interopRequireDefault(_react);
@@ -7091,7 +7089,10 @@
 	            onChange: this.handleChange
 	        };
 	        if (this.props.children.props.clsPrefix && this.props.children.props.clsPrefix.indexOf('u-form-control') != -1) {
-	            appendObj.style = _extends({ 'width': this.state.childrenWidth }, childrenStyles);
+	            appendObj.style = childrenStyles;
+	            if (this.state.childrenWidth) {
+	                appendObj.style.width = this.state.childrenWidth;
+	            }
 	        }
 	        _react2['default'].Children.map(this.props.children, function (child, index) {
 	            childs.push(_react2['default'].createElement(
@@ -9376,8 +9377,7 @@
 	        _this.handleKeyDown = function (e) {
 	            var _this$props = _this.props,
 	                onSearch = _this$props.onSearch,
-	                value = _this$props.value,
-	                type = _this$props.type;
+	                value = _this$props.value;
 	
 	            if (e.keyCode === 13 && type === "search") {
 	                if (onSearch) {
@@ -18342,12 +18342,13 @@
 	
 	  this.onChange = function (value) {
 	    var props = _this3.props;
-	
-	    if (!('value' in props)) {
-	      _this3.setState({ value: value });
-	    }
-	
-	    //props.onChange(value, (value && value.format(props.format)) || "");
+	    // // if (!('value' in props)) {
+	    // //   this.setState({ value });
+	    // // }
+	    _this3.setState({
+	      value: value
+	    });
+	    props.onChange(value, value && value.format(props.format) || "");
 	  };
 	
 	  this.onOpenChange = function (open) {
@@ -18361,7 +18362,7 @@
 	    if (!("value" in props)) {
 	      _this3.setState({ value: value });
 	    }
-	    //props.onChange(value, (value && value.format(props.format)) || "");
+	    props.onChange(value, value && value.format(props.format) || "");
 	  };
 	};
 	
@@ -19644,27 +19645,6 @@
 	     */
 	    componentWillUnmount: 'DEFINE_MANY',
 	
-	    /**
-	     * Replacement for (deprecated) `componentWillMount`.
-	     *
-	     * @optional
-	     */
-	    UNSAFE_componentWillMount: 'DEFINE_MANY',
-	
-	    /**
-	     * Replacement for (deprecated) `componentWillReceiveProps`.
-	     *
-	     * @optional
-	     */
-	    UNSAFE_componentWillReceiveProps: 'DEFINE_MANY',
-	
-	    /**
-	     * Replacement for (deprecated) `componentWillUpdate`.
-	     *
-	     * @optional
-	     */
-	    UNSAFE_componentWillUpdate: 'DEFINE_MANY',
-	
 	    // ==== Advanced methods ====
 	
 	    /**
@@ -19678,23 +19658,6 @@
 	     * @overridable
 	     */
 	    updateComponent: 'OVERRIDE_BASE'
-	  };
-	
-	  /**
-	   * Similar to ReactClassInterface but for static methods.
-	   */
-	  var ReactClassStaticInterface = {
-	    /**
-	     * This method is invoked after a component is instantiated and when it
-	     * receives new props. Return an object to update state in response to
-	     * prop changes. Return null to indicate no change to state.
-	     *
-	     * If an object is returned, its keys will be merged into the existing state.
-	     *
-	     * @return {object || null}
-	     * @optional
-	     */
-	    getDerivedStateFromProps: 'DEFINE_MANY_MERGED'
 	  };
 	
 	  /**
@@ -19931,7 +19894,6 @@
 	    if (!statics) {
 	      return;
 	    }
-	
 	    for (var name in statics) {
 	      var property = statics[name];
 	      if (!statics.hasOwnProperty(name)) {
@@ -19948,25 +19910,14 @@
 	        name
 	      );
 	
-	      var isAlreadyDefined = name in Constructor;
-	      if (isAlreadyDefined) {
-	        var specPolicy = ReactClassStaticInterface.hasOwnProperty(name)
-	          ? ReactClassStaticInterface[name]
-	          : null;
-	
-	        _invariant(
-	          specPolicy === 'DEFINE_MANY_MERGED',
-	          'ReactClass: You are attempting to define ' +
-	            '`%s` on your component more than once. This conflict may be ' +
-	            'due to a mixin.',
-	          name
-	        );
-	
-	        Constructor[name] = createMergedResultFunction(Constructor[name], property);
-	
-	        return;
-	      }
-	
+	      var isInherited = name in Constructor;
+	      _invariant(
+	        !isInherited,
+	        'ReactClass: You are attempting to define ' +
+	          '`%s` on your component more than once. This conflict may be ' +
+	          'due to a mixin.',
+	        name
+	      );
 	      Constructor[name] = property;
 	    }
 	  }
@@ -20274,12 +20225,6 @@
 	        !Constructor.prototype.componentWillRecieveProps,
 	        '%s has a method called ' +
 	          'componentWillRecieveProps(). Did you mean componentWillReceiveProps()?',
-	        spec.displayName || 'A component'
-	      );
-	      warning(
-	        !Constructor.prototype.UNSAFE_componentWillRecieveProps,
-	        '%s has a method called UNSAFE_componentWillRecieveProps(). ' +
-	          'Did you mean UNSAFE_componentWillReceiveProps()?',
 	        spec.displayName || 'A component'
 	      );
 	    }
@@ -45173,6 +45118,15 @@
 	
 	var now = (0, _moment2["default"])();
 	
+	function onStandaloneChange(value) {
+	    console.log('onChange');
+	    console.log(value[0] && format(value[0]), value[1] && format(value[1]));
+	}
+	
+	function onStandaloneSelect(value) {
+	    console.log('onSelect');
+	    console.log(format(value[0]), format(value[1]));
+	}
 	function isValidRange(v) {
 	    return v && v[0] && v[1];
 	}
@@ -45200,30 +45154,18 @@
 	            _this.setState({ hoverValue: hoverValue });
 	        };
 	
-	        _this.remove = function (e) {
-	            console.log(e);
-	            _this.setState({ value: '' });
-	        };
-	
 	        _this.state = {
 	            hoverValue: [],
-	            value: props.defaultValue || []
+	            value: []
 	        };
 	        return _this;
 	    }
-	
-	    Picker.prototype.componentWillReceiveProps = function componentWillReceiveProps(nextProps) {
-	        this.setState({
-	            value: nextProps.defaultValue || []
-	        });
-	    };
 	
 	    Picker.prototype.render = function render() {
 	        var _this2 = this;
 	
 	        var props = this.props;
-	        var showValue = props.showValue,
-	            value = props.value;
+	        var showValue = props.showValue;
 	
 	        var calendar = _react2["default"].createElement(_RangeCalendar2["default"], _extends({}, props, {
 	            hoverValue: this.state.hoverValue,
@@ -45239,18 +45181,18 @@
 	
 	        return _react2["default"].createElement(
 	            _Picker2["default"],
-	            _extends({}, props, {
+	            {
 	                value: this.state.value,
 	                onChange: this.onChange,
 	                animation: "slide-up",
 	                calendar: calendar
-	            }),
+	            },
 	            function (_ref) {
 	                var value = _ref.value;
 	
 	                return _react2["default"].createElement(
 	                    "div",
-	                    { className: 'calendar-picker  u-input-group simple' },
+	                    { className: 'calendar-picker' },
 	                    _react2["default"].createElement(_beeFormControl2["default"], {
 	                        placeholder: _this2.props.placeholder ? _this2.props.placeholder : 'start ~ end',
 	                        value: isValidRange(value) && format(value[0]) + " ~ " + format(value[1]) || ''
@@ -54534,133 +54476,6 @@
 	}(_react.Component);
 	
 	exports['default'] = Demo5;
-	module.exports = exports['default'];
-
-/***/ }),
-/* 465 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-	
-	var _react = __webpack_require__(4);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _src = __webpack_require__(65);
-	
-	var _src2 = _interopRequireDefault(_src);
-	
-	var _beeFormControl = __webpack_require__(77);
-	
-	var _beeFormControl2 = _interopRequireDefault(_beeFormControl);
-	
-	var _beeRadio = __webpack_require__(126);
-	
-	var _beeRadio2 = _interopRequireDefault(_beeRadio);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-	
-	function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : _defaults(subClass, superClass); } /**
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @title 自定义组件
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @description 
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                */
-	
-	
-	var FormItem = _src2['default'].FormItem;
-	
-	var Customer = function (_Component) {
-	    _inherits(Customer, _Component);
-	
-	    function Customer(props) {
-	        _classCallCheck(this, Customer);
-	
-	        var _this = _possibleConstructorReturn(this, _Component.call(this, props));
-	
-	        _this.onChange = function (value) {
-	            _this.setState({
-	                value: value
-	            });
-	        };
-	
-	        _this.state = {
-	            value: props.defaultValue == undefined ? 'apple' : props.defaultValue
-	        };
-	        return _this;
-	    }
-	
-	    Customer.prototype.render = function render() {
-	        return _react2['default'].createElement(
-	            _beeRadio2['default'].RadioGroup,
-	            {
-	                selectedValue: this.state.value,
-	                name: 'fruit',
-	                onChange: this.onChange,
-	                type: 'customer'
-	            },
-	            _react2['default'].createElement(
-	                _beeRadio2['default'],
-	                { value: 'apple' },
-	                '\u82F9\u679C'
-	            ),
-	            _react2['default'].createElement(
-	                _beeRadio2['default'],
-	                { value: 'orange' },
-	                '\u6A58\u5B50'
-	            ),
-	            _react2['default'].createElement(
-	                _beeRadio2['default'],
-	                { value: 'lemon' },
-	                '\u67E0\u6AAC'
-	            )
-	        );
-	    };
-	
-	    return Customer;
-	}(_react.Component);
-	
-	var Demo6 = function (_Component2) {
-	    _inherits(Demo6, _Component2);
-	
-	    function Demo6(props) {
-	        _classCallCheck(this, Demo6);
-	
-	        var _this2 = _possibleConstructorReturn(this, _Component2.call(this, props));
-	
-	        _this2.check = function (flag, obj) {
-	            console.log(flag);
-	            console.log(obj);
-	        };
-	
-	        return _this2;
-	    }
-	
-	    Demo6.prototype.render = function render() {
-	        return _react2['default'].createElement(
-	            _src2['default'],
-	            { submitCallBack: this.check },
-	            _react2['default'].createElement(
-	                FormItem,
-	                { showMast: true, inline: true, labelName: '\u559C\u597D:', isRequire: true, method: 'blur' },
-	                _react2['default'].createElement(Customer, { defaultValue: 'lemon', name: 'customer' })
-	            )
-	        );
-	    };
-	
-	    return Demo6;
-	}(_react.Component);
-	
-	exports['default'] = Demo6;
 	module.exports = exports['default'];
 
 /***/ })

@@ -127,8 +127,7 @@ export default Demo1;
 |labelMdOffset|label中等屏幕设备偏移列数|number|-|
 |labelLgOffset|label大屏幕设备偏移列数|number|-|
 
-### 自定义组件说明
-- 需要有`onChange`方法，并且参数为改变后的值
+
 
 
 ### 其它说明

@@ -319,7 +319,10 @@ class FormItem extends Component {
             onChange: this.handleChange,
         }
         if(this.props.children.props.clsPrefix&&(this.props.children.props.clsPrefix.indexOf('u-form-control')!=-1)){
-            appendObj.style={'width':this.state.childrenWidth,...childrenStyles}
+            appendObj.style=childrenStyles;
+            if(this.state.childrenWidth){
+                appendObj.style.width=this.state.childrenWidth;
+            }
         }
         React.Children.map(this.props.children, (child, index) => {
             childs.push(
