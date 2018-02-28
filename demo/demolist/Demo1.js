@@ -32,6 +32,7 @@ class Demo1 extends Component {
                         validateTrigger: 'onBlur',
                         rules: [{
                             required: true, message: '请输入姓名',
+                            max:5,message:'最大长度为5'
                         },{
                             pattern: /[\u4e00-\u9fa5]/, message: '请输入中文字符',
                         }],

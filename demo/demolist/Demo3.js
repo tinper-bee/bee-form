@@ -137,7 +137,7 @@ class Demo3 extends Component {
                         <span>我已经阅读并同意相关条款</span>
                     </FormItem>
                     <div className='submit'>
-                        <Button colors="primary" className="login" onClick={this.submit}>登陆</Button>
+                        <Button colors="primary" className="login" onClick={this.submit}>注册</Button>
                         <Button shape="border" className="reset">取消</Button>
                     </div>
                 </Form>
