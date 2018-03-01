@@ -60,7 +60,7 @@ class Demo3 extends Component {
 
                     <FormItem>
                         <Label>密码：</Label>
-                        <FormControl placeholder="请输入密码"
+                        <FormControl placeholder="请输入密码" type='password'
                             {...getFieldProps('password', {
                                 validateTrigger: 'onBlur',
                                 rules: [{
@@ -75,7 +75,7 @@ class Demo3 extends Component {
 
                     <FormItem>
                         <Label>再次输入密码：</Label>
-                        <FormControl placeholder="请输入密码"
+                        <FormControl placeholder="请输入密码" type='password'
                             {...getFieldProps('password2', {
                                 validateTrigger: 'onBlur',
                                 rules: [{
