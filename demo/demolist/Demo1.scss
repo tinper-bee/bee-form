@@ -1,9 +1,14 @@
-.demo1 .u-label {
-    position: relative;
-    bottom: 8px;
+.demo1{
+    font-size: 14px;
 }
-
+.demo1 .u-label {
+    display: inline;
+}
 .demo1 .u-form-control {
-    border-top-left-radius: 0!important;
-    border-bottom-left-radius: 0!important;
+    width: auto;
+}
+.demo1 .error{
+    font-size: 12px;
+    color: red;
+    margin-left: 10px;
 }

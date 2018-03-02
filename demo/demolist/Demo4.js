@@ -3,7 +3,7 @@
  * @title 表单校验
  * @description 用户信息录入实例
  */
-import React ,{Component } from 'react';
+import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import Form from '../../src';
 import FormControl from 'bee-form-control';
@@ -18,7 +18,9 @@ import Slider from 'bee-slider';
 import InputNumber from 'bee-input-number';
 import Rate from 'bee-rate';
 import CitySelect from 'bee-city-select';
-const FormItem=Form.FormItem;
+import Label from 'bee-label';
+import Button from 'bee-button';
+const FormItem = Form.FormItem;
 const Option = Select.Option;
 const format = 'YYYY-MM-DD HH:mm:ss';
 const dateInputPlaceholder = '选择日期';
@@ -26,63 +28,155 @@ class Demo4 extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            sex:'man',
-            rate:0
+            selectedValue: 'man',
         };
     }
-    sexChange=sex=>{
-        this.setState({
-            sex
-        })
-    }
-    rateChange=rate=>{
-        this.setState({
-            rate
-        })
-    }
-    checkForm = (flag,obj) => {
-        console.log(flag);
-        console.log(obj);
+    submit = (e) => {
+        e.preventDefault();
+        this.props.form.validateFields((err, values) => {
+            if (err) {
+                console.log('校验失败', values);
+            } else {
+                console.log('提交成功', values)
+            }
+        });
     }
     render() {
+        const { getFieldProps, getFieldError } = this.props.form;
+        const self = this;
         return (
-           <Form submitCallBack={this.checkForm} className='demo4'>
-               <FormItem showMast={true}  labelName="姓名:" isRequire={true} valuePropsName='value' htmlType='chinese' errorMessage="请输入姓名" method="blur"  inline={true}>
-                    <FormControl name="name"  placeholder="请输入姓名"/>
-                </FormItem>
-                <FormItem showMast={true} labelName="身份证号:" isRequire={true} valuePropsName='value' htmlType='IDCard' errorMessage="请输入身份证号" method="blur"  inline={true}>
-                    <FormControl name="idCard"  placeholder="请输入身份证号"/>
-                </FormItem>
-                <FormItem showMast={true} labelName="年龄:" isRequire={true} htmlType='number' valuePropsName='value' errorMessage="年龄格式错误" method="blur"  inline={true}>
-                    <FormControl name="age"  placeholder="请输入年龄"/>
-                </FormItem>
-                <FormItem showMast={true} labelName="性别:" isRequire={true} method="change" inline={true}>
-                <Radio.RadioGroup
-                    selectedValue={this.state.sex} onChange={this.sexChange}
-                    name="sex">
-                    <Radio value="man" >男</Radio>
-                    <Radio value="woman" >女</Radio>
-                </Radio.RadioGroup>
-               </FormItem>
-               <FormItem showMast={true} labelName="出生日期:" isRequire={true} method="change"  inline={true}>
-                   <DatePicker
-                       name="time"
-                       format={format}
-                       locale={zhCN}
-                       placeholder = {dateInputPlaceholder}
-                   />
-               </FormItem>
-               <FormItem showMast={true} labelName="籍贯:"  method="change" isRequire={true} inline={true}>
-                   <CitySelect name='origin'/>
-               </FormItem>
-               <FormItem  labelName="保密等级:"  method="change"  inline={true}>
-                    <Rate name='rate'  value={this.state.rate} onChange={this.rateChange}/>
-               </FormItem>
-               <FormItem labelName="备注:" inline={true} >
-                   <FormControl componentClass='textarea' name="remark" />
-               </FormItem>
-           </Form>
+            <div>
+                <Form className='demo4'>
+                    <FormItem>
+                        <Label>姓名：</Label>
+                        <FormControl placeholder="请输入姓名"
+                            {...getFieldProps('name', {
+                                validateTrigger: 'onBlur',
+                                rules: [{
+                                    required: true, message: '请输入姓名',
+                                }],
+                            }) }
+                        />
+                        <span className='error'>
+                            {getFieldError('name')}
+                        </span>
+                    </FormItem>
+                    <FormItem>
+                        <Label>身份证号：</Label>
+                        <FormControl placeholder="请输入身份证号"
+                            {...getFieldProps('id', {
+                                validateTrigger: 'onBlur',
+                                rules: [{
+                                    required: true, message: '请输入身份证号',
+                                }],
+                            }) }
+                        />
+                        <span className='error'>
+                            {getFieldError('id')}
+                        </span>
+                    </FormItem>
+                    <FormItem className='time'>
+                        <Label>出生日期：</Label>
+                        <DatePicker
+                            {
+                            ...getFieldProps('time', {}
+                            ) }
+                            format={format}
+                            locale={zhCN}
+                            placeholder={dateInputPlaceholder}
+                        />
+                    </FormItem>
+                    <FormItem>
+                        <Label>年龄：</Label>
+                        <FormControl placeholder="请输入年龄"
+                            {...getFieldProps('age', {
+                                validateTrigger: 'onBlur',
+                                rules: [{
+                                    required: true, message: '请输入年龄',
+                                }],
+                            }) }
+                        />
+                        <span className='error'>
+                            {getFieldError('age')}
+                        </span>
+                    </FormItem>
+                    <FormItem>
+                        <Label>性别：</Label>
+                        <Radio.RadioGroup
+                            selectedValue={this.state.selectedValue}
+                            {
+                            ...getFieldProps('sex', {
+                                initialValue: 'man',
+                                onChange(value) {
+                                    self.setState({ selectedValue: value });
+                                },
+                                rules: [{ required: true }]
+                            }
+                            ) }
+                        >
+                            <Radio value="man" >男</Radio>
+                            <Radio value="woman" >女</Radio>
+                        </Radio.RadioGroup>
+                    </FormItem>
+                    <FormItem>
+                        <Label>学历：</Label>
+                        <Select
+                            {
+                            ...getFieldProps('education', {
+                                initialValue: '',
+                                rules: [{ required: true }]
+                            }
+                            ) }
+                        >
+                            <Option value="">请选择</Option>
+                            <Option value="nothing">无</Option>
+                            <Option value="middle">初中</Option>
+                            <Option value="senior">高中</Option>
+                            <Option value="college1">专科</Option>
+                            <Option value="college2">本科</Option>
+                            <Option value="graduate">研究生及以上</Option>
+                            <Option value="other">其它</Option>
+                        </Select>
+                    </FormItem>
+                    <FormItem>
+                        <Label>籍贯：</Label>
+                        <CitySelect 
+                        {
+                            ...getFieldProps('origin',{
+                                initialValue:{province: "北京", city: "北京", area: "东城区"}, 
+                            })
+                        }
+                        />
+                    </FormItem>
+                    <FormItem>
+                        <Label>保密等级：</Label>
+                        <Rate
+                            {
+                            ...getFieldProps('rate', {
+                                initialValue: 0,
+                                rules: [{ required: true }]
+                            }
+                            ) }
+                        />
+                    </FormItem>
+                    <FormItem >
+                        <Label>备注：</Label>
+                        <FormControl componentClass='textarea'
+                            {
+                            ...getFieldProps('remark', {}
+                            ) }
+                        />
+                    </FormItem>
+                    
+
+
+                    <div className='submit'>
+                        <Button colors="primary" className="login" onClick={this.submit}>提交</Button>
+                        <Button shape="border" className="reset">取消</Button>
+                    </div>
+                </Form>
+            </div>
         )
     }
 }
-export default Demo4;
+export default Form.createForm()(Demo4);

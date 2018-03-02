@@ -1,25 +1,44 @@
+@import '../../node_modules/bee-checkbox/src/Checkbox.scss';
+.demo4{
+    font-size: 14px;
+}
 .demo4 .u-label {
-    width: 75px;
+    display: inline-block;
+    min-width: 100px;
     text-align: right;
 }
-
-.demo4 .province,
-.demo4 .city,
-.demo4 .area {
-    width: 90px!important;
+.demo4 .u-form-control {
+    width: auto;
+    min-width: 380px;
 }
-
-.demo4 .uf.uf-calendar {
-    position: relative;
-    top: -4px;
-    right: 9px;
+.demo4 .error{
+    font-size: 12px;
+    color: red;
+    margin-left: 10px;
 }
-
-.demo4 .u-form-submit {
-    padding-left: 75px;
+.demo4 .submit{
+    padding-left: 110px;
 }
-
-textarea {
+.demo4 .submit .login{
+    margin-right: 10px;
+}
+.demo4 .u-select {
+    max-width: 380px;
+}
+.demo4 textarea{
     min-height: 100px;
-    min-width: 300px;
+    resize: none;
+}
+.demo4 .time>div{
+    display: inline-block;
+}
+.demo4 .time .u-label{
+    position: relative;
+    bottom: 10px;
+}
+.demo4 .u-city-select{
+    display: inline-block;
+}
+.demo4 .u-city-select .province,.demo4 .u-city-select .city,.demo4 .u-city-select .area{
+    width: 120px;
 }
