@@ -1,3 +1,23 @@
+<a name="2.0.0"></a>
+# [2.0.0](https://github.com/tinper-bee/bee-form/compare/v1.1.10...v2.0.0) (2018-03-02)
+
+
+### Bug Fixes
+
+* **bee-form:** 动态width加判断，防止警告 ([d09ff2a](https://github.com/tinper-bee/bee-form/commit/d09ff2a))
+
+
+### Features
+
+* **bee-form:** 新版form ([529a798](https://github.com/tinper-bee/bee-form/commit/529a798))
+
+
+### BREAKING CHANGES
+
+* **bee-form:** 原form重构
+
+
+
 <a name="1.1.10"></a>
 ## [1.1.10](https://github.com/tinper-bee/bee-form/compare/v1.1.9...v1.1.10) (2018-02-28)
 
@@ -19,24 +39,15 @@
 
 
 <a name="1.1.8"></a>
-## [1.1.8](https://github.com/tinper-bee/bee-form/compare/1.1.6...v1.1.8) (2018-02-02)
-
-
-### Bug Fixes
-
-* **bee-form:** form-control升级，bee-tools升级，inline修改 ([dfe1808](https://github.com/tinper-bee/bee-form/commit/dfe1808))
-* **bee-form:** style支持 ([bf9a1cb](https://github.com/tinper-bee/bee-form/commit/bf9a1cb))
-* **bee-form:** 适配panel的font-size ([d4144f0](https://github.com/tinper-bee/bee-form/commit/d4144f0))
-
-
-
-<a name="1.1.6"></a>
-## [1.1.6](https://github.com/tinper-bee/bee-form/compare/v1.1.4...1.1.6) (2018-01-24)
+## [1.1.8](https://github.com/tinper-bee/bee-form/compare/v1.1.4...v1.1.8) (2018-02-02)
 
 
 ### Bug Fixes
 
 * **bee-form:** className bug ([2e4c800](https://github.com/tinper-bee/bee-form/commit/2e4c800))
+* **bee-form:** form-control升级，bee-tools升级，inline修改 ([dfe1808](https://github.com/tinper-bee/bee-form/commit/dfe1808))
+* **bee-form:** style支持 ([bf9a1cb](https://github.com/tinper-bee/bee-form/commit/bf9a1cb))
+* **bee-form:** 适配panel的font-size ([d4144f0](https://github.com/tinper-bee/bee-form/commit/d4144f0))
 
 
 
