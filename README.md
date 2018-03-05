@@ -102,6 +102,7 @@ export default Form.createForm()(Demo2);
 > 参见 [rc-form](http://react-component.github.io/form/)。
 
 ### Form 
+
 |参数|说明|类型|默认值|
 |:---|:-----|:----|:------|
 |form|经过`Form.createForm`包装后的组件，都带有`this.props.form`属性|Object|-|
@@ -112,6 +113,7 @@ export default Form.createForm()(Demo2);
 
 
 ### FormItem 
+
 |参数|说明|类型|默认值|
 |:---|:-----|:----|:------|
 |prefixCls|类名前缀|String|u-form|
@@ -120,6 +122,7 @@ export default Form.createForm()(Demo2);
 
 ### 校验规则
 > 参见 [async-validator](https://github.com/yiminghe/async-validator)
+
 | 参数 | 说明 | 类型 | 默认值 |
 |:---|:-----|:----|:------|
 | enum | 枚举类型 | string | - |
