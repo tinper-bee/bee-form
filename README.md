@@ -97,9 +97,12 @@ export default Form.createForm()(Demo2);
 ## API
 
 # Form
+
 ## 代码演示
+
 ## API
-> 参见 [rc-form](http://react-component.github.io/form/)。
+
+> 参考 [rc-form](http://react-component.github.io/form/)。
 
 ### Form 
 
@@ -121,7 +124,8 @@ export default Form.createForm()(Demo2);
 |style|样式|Object|-|
 
 ### 校验规则
-> 参见 [async-validator](https://github.com/yiminghe/async-validator)
+
+> 参考 [async-validator](https://github.com/yiminghe/async-validator)
 
 | 参数 | 说明 | 类型 | 默认值 |
 |:---|:-----|:----|:------|

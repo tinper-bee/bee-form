@@ -11,8 +11,7 @@ import Label from 'bee-label';
 import Button from 'bee-button';
 const FormItem = Form.FormItem;
 
-class Demo2 extends Component {
-
+const Demo2 = Form.createForm()(class Demo2 extends Component {
     submit = (e) => {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
@@ -64,5 +63,5 @@ class Demo2 extends Component {
             </div>
         )
     }
-}
-export default Form.createForm()(Demo2);
+})
+export default Demo2;

@@ -10,8 +10,6 @@ import FormControl from 'bee-form-control';
 import Select from 'bee-select';
 import Radio from 'bee-radio';
 import DatePicker from 'bee-datepicker';
-import zhCN from 'rc-calendar/lib/locale/zh_CN';
-import moment from 'moment';
 import Checkbox from 'bee-checkbox';
 import Switch from 'bee-switch';
 import Slider from 'bee-slider';
@@ -22,9 +20,8 @@ import Label from 'bee-label';
 import Button from 'bee-button';
 const FormItem = Form.FormItem;
 const Option = Select.Option;
-const format = 'YYYY-MM-DD HH:mm:ss';
-const dateInputPlaceholder = '选择日期';
-class Demo4 extends Component {
+
+const Demo4 = Form.createForm()(class Demo4 extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -32,7 +29,6 @@ class Demo4 extends Component {
         };
     }
     submit = (e) => {
-        e.preventDefault();
         this.props.form.validateFields((err, values) => {
             if (err) {
                 console.log('校验失败', values);
@@ -79,11 +75,11 @@ class Demo4 extends Component {
                         <Label>出生日期：</Label>
                         <DatePicker
                             {
-                            ...getFieldProps('time', {}
+                            ...getFieldProps('time', {
+
+                            }
                             ) }
-                            format={format}
-                            locale={zhCN}
-                            placeholder={dateInputPlaceholder}
+                            placeholder={'请选择出生日期'}
                         />
                     </FormItem>
                     <FormItem>
@@ -100,7 +96,7 @@ class Demo4 extends Component {
                             {getFieldError('age')}
                         </span>
                     </FormItem>
-                    <FormItem>
+                     <FormItem>
                         <Label>性别：</Label>
                         <Radio.RadioGroup
                             selectedValue={this.state.selectedValue}
@@ -139,16 +135,6 @@ class Demo4 extends Component {
                         </Select>
                     </FormItem>
                     <FormItem>
-                        <Label>籍贯：</Label>
-                        <CitySelect 
-                        {
-                            ...getFieldProps('origin',{
-                                initialValue:{province: "北京", city: "北京", area: "东城区"}, 
-                            })
-                        }
-                        />
-                    </FormItem>
-                    <FormItem>
                         <Label>保密等级：</Label>
                         <Rate
                             {
@@ -166,7 +152,7 @@ class Demo4 extends Component {
                             ...getFieldProps('remark', {}
                             ) }
                         />
-                    </FormItem>
+                    </FormItem>  
                     
 
 
@@ -178,5 +164,5 @@ class Demo4 extends Component {
             </div>
         )
     }
-}
-export default Form.createForm()(Demo4);
+})
+export default Demo4;

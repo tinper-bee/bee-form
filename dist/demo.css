@@ -7031,7 +7031,7 @@ ul {
     zoom: 1; }
     .u-select .u-select-arrow:before {
       display: block;
-      font-family: "uf" !important;
+      font-family: "uf";
       content: "\e609";
       transition: transform 0.2s ease; }
   .u-select .u-select-selection {
@@ -7240,7 +7240,7 @@ ul {
     width: auto;
     padding: 0; }
     .u-select-selection--multiple .u-select-search--inline .u-select-search-field {
-      width: 0.75em !important; }
+      width: 0.75em; }
   .u-select-selection--multiple .u-select-selection-rendered {
     margin-left: 5px;
     margin-bottom: -3px;
@@ -7297,7 +7297,7 @@ ul {
     padding: 0 0 0 8px; }
   .u-select-selection--multiple .u-select-selection-choice-remove:before {
     display: block;
-    font-family: "uf" !important; }
+    font-family: "uf"; }
   .u-select-selection--multiple .u-select-selection-choice-remove {
     filter: none; }
   .u-select-selection--multiple .u-select-selection-choice-remove {
@@ -7305,7 +7305,7 @@ ul {
   .u-select-selection--multiple .u-select-selection-choice-remove:hover {
     color: #404040; }
   .u-select-selection--multiple .u-select-selection-choice-remove:before {
-    font-family: 'uf' !important;
+    font-family: 'uf';
     content: "\e602"; }
 
 .u-select-open .u-select-arrow {
@@ -7689,6 +7689,8 @@ ul {
   .u-form-control:focus {
     border-color: #66afe9;
     outline: 0; }
+  .u-form-control::-ms-clear, .u-form-control ::-ms-reveal {
+    display: none; }
 
 .u-form-control[disabled] {
   background: #eee;
@@ -9118,7 +9120,11 @@ li.rc-time-picker-panel-select-option-disabled:hover {
 /*  Navlayout  */
 .u-checkbox {
   display: inline-block;
-  position: relative; }
+  position: relative;
+  margin: 0 5px;
+  height: 18px;
+  line-height: 18px;
+  font-size: 14px; }
   .u-checkbox.disabled .u-checkbox-label {
     cursor: not-allowed;
     opacity: 0.5; }
@@ -9150,7 +9156,7 @@ li.rc-time-picker-panel-select-option-disabled:hover {
       width: 18px;
       height: 18px;
       left: 0;
-      top: 4px;
+      top: 0;
       text-align: center;
       position: absolute; }
     .u-checkbox .u-checkbox-label:after {
@@ -9160,7 +9166,7 @@ li.rc-time-picker-panel-select-option-disabled:hover {
       width: 18px;
       height: 18px;
       left: 0;
-      top: 4px;
+      top: 0;
       text-align: center;
       position: absolute; }
 
@@ -9221,7 +9227,11 @@ li.rc-time-picker-panel-select-option-disabled:hover {
 /*  Navlayout  */
 .u-checkbox {
   display: inline-block;
-  position: relative; }
+  position: relative;
+  margin: 0 5px;
+  height: 18px;
+  line-height: 18px;
+  font-size: 14px; }
   .u-checkbox.disabled .u-checkbox-label {
     cursor: not-allowed;
     opacity: 0.5; }
@@ -9253,7 +9263,7 @@ li.rc-time-picker-panel-select-option-disabled:hover {
       width: 18px;
       height: 18px;
       left: 0;
-      top: 4px;
+      top: 0;
       text-align: center;
       position: absolute; }
     .u-checkbox .u-checkbox-label:after {
@@ -9263,7 +9273,7 @@ li.rc-time-picker-panel-select-option-disabled:hover {
       width: 18px;
       height: 18px;
       left: 0;
-      top: 4px;
+      top: 0;
       text-align: center;
       position: absolute; }
 

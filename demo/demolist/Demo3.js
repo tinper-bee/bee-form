@@ -11,7 +11,7 @@ import Button from 'bee-button';
 import Checkbox from 'bee-checkbox';
 import Label from 'bee-label';
 
-class Demo3 extends Component {
+const Demo3 = Form.createForm()( class Demo extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -144,5 +144,5 @@ class Demo3 extends Component {
             </div>
         )
     }
-}
-export default Form.createForm()(Demo3);
+})
+export default Demo3;

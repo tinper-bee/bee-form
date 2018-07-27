@@ -10,7 +10,7 @@ import Label from 'bee-label';
 const FormItem = Form.FormItem;
 
 
-class Demo1 extends Component {
+const Demo1 = Form.createForm()(class Demo extends Component {
     constructor(props) {
         super(props);
     }
@@ -37,5 +37,6 @@ class Demo1 extends Component {
                 </FormItem>
         )
     }
-}
-export default Form.createForm()(Demo1);
+})
+
+export default Demo1;

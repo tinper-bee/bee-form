@@ -1,9 +1,13 @@
 # Form
+
 ## 代码演示
+
 ## API
-> 参见 [rc-form](http://react-component.github.io/form/)。
+
+> 参考 [rc-form](http://react-component.github.io/form/)。
 
 ### Form 
+
 |参数|说明|类型|默认值|
 |:---|:-----|:----|:------|
 |form|经过`Form.createForm`包装后的组件，都带有`this.props.form`属性|Object|-|
@@ -14,6 +18,7 @@
 
 
 ### FormItem 
+
 |参数|说明|类型|默认值|
 |:---|:-----|:----|:------|
 |prefixCls|类名前缀|String|u-form|
@@ -21,7 +26,9 @@
 |style|样式|Object|-|
 
 ### 校验规则
-> 参见 [async-validator](https://github.com/yiminghe/async-validator)
+
+> 参考 [async-validator](https://github.com/yiminghe/async-validator)
+
 | 参数 | 说明 | 类型 | 默认值 |
 |:---|:-----|:----|:------|
 | enum | 枚举类型 | string | - |
