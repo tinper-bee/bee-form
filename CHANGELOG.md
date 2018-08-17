@@ -1,3 +1,13 @@
+<a name="2.0.5"></a>
+## [2.0.5](https://github.com/tinper-bee/bee-form/compare/v2.0.1...v2.0.5) (2018-08-17)
+
+
+### Features
+
+* **bee-form:** 新增demo和文档 ([db26bb0](https://github.com/tinper-bee/bee-form/commit/db26bb0))
+
+
+
 <a name="2.0.1"></a>
 ## [2.0.1](https://github.com/tinper-bee/bee-form/compare/v2.0.0...v2.0.1) (2018-07-27)
 
