@@ -76,7 +76,7 @@
 	
 	var CARETUP = _react2['default'].createElement('i', { className: 'uf uf-arrow-up' });
 	
-	var Demo1 = __webpack_require__(67);var Demo2 = __webpack_require__(263);var Demo3 = __webpack_require__(264);var Demo4 = __webpack_require__(267);var DemoArray = [{ "example": _react2['default'].createElement(Demo1, null), "title": " 单个input校验", "code": '/**\n *\n * @title \u5355\u4E2Ainput\u6821\u9A8C\n * @description \u4F7F\u7528FormItem\n */\nimport React, { Component } from \'react\';\nimport { Form, Label, FormControl } from \'tinper-bee\';\nconst FormItem = Form.FormItem;\n\n\nconst Demo1 = Form.createForm()(class Demo extends Component {\n    constructor(props) {\n        super(props);\n    }\n    render() {\n        const self=this;\n        const { getFieldProps, getFieldError } = this.props.form;\n        return (\n                <FormItem className=\'demo1\'>\n                    <Label>\u59D3\u540D\uFF1A</Label>\n                    <FormControl placeholder=\'\u8BF7\u8F93\u5165\u59D3\u540D\'\n                     {...getFieldProps(\'name\', {\n                        validateTrigger: \'onBlur\',\n                        rules: [{\n                            required: true, message: \'\u8BF7\u8F93\u5165\u59D3\u540D\'\n                        },{\n                            max:5,message:\'\u6700\u5927\u957F\u5EA6\u4E3A10\'\n                        },{\n                            pattern: /[\\u4e00-\\u9fa5]/, message: \'\u8BF7\u8F93\u5165\u4E2D\u6587\u5B57\u7B26\',\n                        }],\n                    }) } />\n                    <span className=\'error\'>\n                        {getFieldError(\'name\')}\n                    </span>   \n                </FormItem>\n        )\n    }\n})\n\n', "desc": " 使用FormItem", "scss_code": ".demo1{\n    font-size: 14px;\n}\n.demo1 .u-label {\n    display: inline;\n}\n.demo1 .u-form-control {\n    width: auto;\n}\n.demo1 .error{\n    font-size: 12px;\n    color: red;\n    margin-left: 10px;\n}" }, { "example": _react2['default'].createElement(Demo2, null), "title": " 基本form校验", "code": "/**\n *\n * @title 基本form校验\n * @description 登录示例\n */\nimport React, { Component } from 'react';\nimport ReactDOM from 'react-dom';\nimport { Form, Button, Label, FormControl } from 'tinper-bee';\nconst FormItem = Form.FormItem;\n\nconst Demo2 = Form.createForm()(class Demo2 extends Component {\n    submit = (e) => {\n        e.preventDefault();\n        this.props.form.validateFields((err, values) => {\n            if (err) {\n                console.log('校验失败', values);\n            } else {\n                console.log('提交成功', values)\n            }\n        });\n    }\n    render() {\n        const { getFieldProps, getFieldError } = this.props.form;\n        return (\n            <div className=\"demo2\">\n                <Form >\n                    <FormItem>\n                        <Label>用户名：</Label>\n                        <FormControl placeholder=\"请输入用户名\"\n                            {...getFieldProps('username', {\n                                validateTrigger: 'onBlur',\n                                rules: [{\n                                    required: true, message: '请输入用户名',\n                                }],\n                            }) }\n                        />\n                        <span className='error'>\n                            {getFieldError('username')}\n                        </span>\n                    </FormItem>\n                    <FormItem>\n                        <Label>密码：</Label>\n                        <FormControl placeholder=\"请输入密码\" type='password'\n                            {...getFieldProps('password', {\n                                validateTrigger: 'onBlur',\n                                rules: [{\n                                    required: true, message: '请输入密码',\n                                }],\n                            }) }\n                        />\n                        <span className='error'>\n                            {getFieldError('password')}\n                        </span>\n                    </FormItem>\n                    <div className='submit'>\n                        <Button colors=\"primary\" className=\"login\" onClick={this.submit}>登陆</Button>\n                        <Button shape=\"border\" className=\"reset\">取消</Button>\n                    </div>\n                </Form>\n            </div>\n        )\n    }\n})\n", "desc": " 登录示例", "scss_code": ".demo2{\n    font-size: 14px;\n}\n.demo2 .u-label {\n    display: inline-block;\n    min-width: 80px;\n    text-align: right;\n}\n.demo2 .u-form-control {\n    width: auto;\n}\n.demo2 .error{\n    font-size: 12px;\n    color: red;\n    margin-left: 10px;\n}\n.demo2 .submit{\n    padding-left: 90px;\n}\n.demo2 .submit .login{\n    margin-right: 10px;\n}" }, { "example": _react2['default'].createElement(Demo3, null), "title": " 基本form校验", "code": "/**\n *\n * @title 基本form校验\n * @description 注册示例\n */\nimport React, { Component } from 'react';\nimport { Form, Label, Checkbox, Button, FormControl } from 'tinper-bee';\nconst FormItem = Form.FormItem;\n\nconst Demo3 = Form.createForm()( class Demo extends Component {\n    constructor(props) {\n        super(props);\n        this.state = {\n            checkbox: false\n        }\n    }\n    submit = (e) => {\n        e.preventDefault();\n        this.props.form.validateFields((err, values) => {\n            if (err) {\n                console.log('校验失败', values);\n            } else {\n                console.log('提交成功', values)\n            }\n        });\n    }\n    handleConfirmPassword = (rule, value, callback) => {\n        const { getFieldValue } = this.props.form;\n        if (value && value !== getFieldValue('password')) {\n            callback('两次输入不一致！')\n        }\n        callback();\n    }\n    render() {\n        const self = this;\n        const { getFieldProps, getFieldError } = this.props.form;\n        return (\n            <div className=\"demo3\">\n                <Form>\n                    <FormItem>\n                        <Label>用户名：</Label>\n                        <FormControl placeholder=\"请输入用户名(包含数字和字母，8-15位)\"\n                            {...getFieldProps('username', {\n                                validateTrigger: 'onBlur',\n                                rules: [{\n                                    required: true, message: '请输入用户名',\n                                }, {\n                                    pattern: /^(?!\\d+$)(?![a-zA-Z]+$)[a-zA-Z0-9]{8,15}$/, message: '用户名格式错误',\n                                }],\n                            }) }\n                        />\n                        <span className='error'>\n                            {getFieldError('username')}\n                        </span>\n                    </FormItem>\n\n                    <FormItem>\n                        <Label>密码：</Label>\n                        <FormControl placeholder=\"请输入密码\" type='password'\n                            {...getFieldProps('password', {\n                                validateTrigger: 'onBlur',\n                                rules: [{\n                                    required: true, message: '请输入密码',\n                                }],\n                            }) }\n                        />\n                        <span className='error'>\n                            {getFieldError('password')}\n                        </span>\n                    </FormItem>\n\n                    <FormItem>\n                        <Label>再次输入密码：</Label>\n                        <FormControl placeholder=\"请输入密码\" type='password'\n                            {...getFieldProps('password2', {\n                                validateTrigger: 'onBlur',\n                                rules: [{\n                                    required: true, message: '请输入密码',\n                                }, {\n                                    validator: this.handleConfirmPassword\n                                }],\n                            }) }\n                        />\n                        <span className='error'>\n                            {getFieldError('password2')}\n                        </span>\n                    </FormItem>\n\n                    <FormItem>\n                        <Label>邮箱：</Label>\n                        <FormControl placeholder=\"请输入邮箱\"\n                            {...getFieldProps('email', {\n                                validateTrigger: 'onBlur',\n                                rules: [{\n                                    required: true, message: '请输入邮箱',\n                                }, {\n                                    type: 'email', message: '邮箱格式不正确'\n                                }],\n                            }) }\n                        />\n                        <span className='error'>\n                            {getFieldError('email')}\n                        </span>\n                    </FormItem>\n                    <FormItem>\n                        <Label>手机号：</Label>\n\n                        <FormControl placeholder=\"请输入手机号\"\n                            {...getFieldProps('phone', {\n                                validateTrigger: 'onBlur',\n                                rules: [{\n                                    required: true, message: '请输入手机号',\n                                }, {\n                                    pattern: /^\\d{11}$/, message: '手机号格式不正确'\n                                }],\n                            }) }\n                        />\n\n                        <span className='error'>\n                            {getFieldError('phone')}\n                        </span>\n                    </FormItem>\n\n                    <FormItem style={{'paddingLeft':'110px'}}>\n                        <Checkbox colors=\"info\"\n                            defaultChecked={this.state.checkbox}\n                            {\n                            ...getFieldProps('checkbox', {\n                                initialValue: false,\n                            }\n                            ) }\n                        />\n                        <span>我已经阅读并同意相关条款</span>\n                    </FormItem>\n                    <div className='submit'>\n                        <Button colors=\"primary\" className=\"login\" onClick={this.submit}>注册</Button>\n                        <Button shape=\"border\" className=\"reset\">取消</Button>\n                    </div>\n                </Form>\n            </div>\n        )\n    }\n})\n", "desc": " 注册示例", "scss_code": "@import '../../node_modules/bee-checkbox/src/Checkbox.scss';\n.demo3{\n    font-size: 14px;\n}\n.demo3 .u-label {\n    display: inline-block;\n    min-width: 100px;\n    text-align: right;\n}\n.demo3 .u-form-control {\n    width: auto;\n    min-width: 300px;\n}\n.demo3 .error{\n    font-size: 12px;\n    color: red;\n    margin-left: 10px;\n}\n.demo3 .submit{\n    padding-left: 110px;\n}\n.demo3 .submit .login{\n    margin-right: 10px;\n}" }, { "example": _react2['default'].createElement(Demo4, null), "title": " 表单校验", "code": "/**\n *\n * @title 表单校验\n * @description 用户信息录入实例\n */\nimport React, { Component } from 'react';\nimport ReactDOM from 'react-dom';\nimport { Form, Button, Label, CitySelect, Rate, InputNumber, Slider, Switch, Checkbox, DatePicker, Radio, Select, FormControl } from 'tinper-bee';\nconst FormItem = Form.FormItem;\nconst Option = Select.Option;\n\nconst Demo4 = Form.createForm()(class Demo4 extends Component {\n    constructor(props) {\n        super(props);\n        this.state = {\n            selectedValue: 'man',\n        };\n    }\n    submit = (e) => {\n        this.props.form.validateFields((err, values) => {\n            if (err) {\n                console.log('校验失败', values);\n            } else {\n                console.log('提交成功', values)\n            }\n        });\n    }\n    render() {\n        const { getFieldProps, getFieldError } = this.props.form;\n        const self = this;\n        return (\n            <div>\n                <Form className='demo4'>\n                    <FormItem>\n                        <Label>姓名：</Label>\n                        <FormControl placeholder=\"请输入姓名\"\n                            {...getFieldProps('name', {\n                                validateTrigger: 'onBlur',\n                                rules: [{\n                                    required: true, message: '请输入姓名',\n                                }],\n                            }) }\n                        />\n                        <span className='error'>\n                            {getFieldError('name')}\n                        </span>\n                    </FormItem>\n                    <FormItem>\n                        <Label>身份证号：</Label>\n                        <FormControl placeholder=\"请输入身份证号\"\n                            {...getFieldProps('id', {\n                                validateTrigger: 'onBlur',\n                                rules: [{\n                                    required: true, message: '请输入身份证号',\n                                }],\n                            }) }\n                        />\n                        <span className='error'>\n                            {getFieldError('id')}\n                        </span>\n                    </FormItem>\n                    <FormItem className='time'>\n                        <Label>出生日期：</Label>\n                        <DatePicker\n                            {\n                            ...getFieldProps('time', {\n\n                            }\n                            ) }\n                            placeholder={'请选择出生日期'}\n                        />\n                    </FormItem>\n                    <FormItem>\n                        <Label>年龄：</Label>\n                        <FormControl placeholder=\"请输入年龄\"\n                            {...getFieldProps('age', {\n                                validateTrigger: 'onBlur',\n                                rules: [{\n                                    required: true, message: '请输入年龄',\n                                }],\n                            }) }\n                        />\n                        <span className='error'>\n                            {getFieldError('age')}\n                        </span>\n                    </FormItem>\n                     <FormItem>\n                        <Label>性别：</Label>\n                        <Radio.RadioGroup\n                            selectedValue={this.state.selectedValue}\n                            {\n                            ...getFieldProps('sex', {\n                                initialValue: 'man',\n                                onChange(value) {\n                                    self.setState({ selectedValue: value });\n                                },\n                                rules: [{ required: true }]\n                            }\n                            ) }\n                        >\n                            <Radio value=\"man\" >男</Radio>\n                            <Radio value=\"woman\" >女</Radio>\n                        </Radio.RadioGroup>\n                    </FormItem>\n                    <FormItem>\n                        <Label>学历：</Label>\n                        <Select\n                            {\n                            ...getFieldProps('education', {\n                                initialValue: '',\n                                rules: [{ required: true }]\n                            }\n                            ) }\n                        >\n                            <Option value=\"\">请选择</Option>\n                            <Option value=\"nothing\">无</Option>\n                            <Option value=\"middle\">初中</Option>\n                            <Option value=\"senior\">高中</Option>\n                            <Option value=\"college1\">专科</Option>\n                            <Option value=\"college2\">本科</Option>\n                            <Option value=\"graduate\">研究生及以上</Option>\n                            <Option value=\"other\">其它</Option>\n                        </Select>\n                    </FormItem>\n                    <FormItem>\n                        <Label>保密等级：</Label>\n                        <Rate\n                            {\n                            ...getFieldProps('rate', {\n                                initialValue: 0,\n                                rules: [{ required: true }]\n                            }\n                            ) }\n                        />\n                    </FormItem>\n                    <FormItem >\n                        <Label>备注：</Label>\n                        <FormControl componentClass='textarea'\n                            {\n                            ...getFieldProps('remark', {}\n                            ) }\n                        />\n                    </FormItem>  \n                    \n\n\n                    <div className='submit'>\n                        <Button colors=\"primary\" className=\"login\" onClick={this.submit}>提交</Button>\n                        <Button shape=\"border\" className=\"reset\">取消</Button>\n                    </div>\n                </Form>\n            </div>\n        )\n    }\n})\n", "desc": " 用户信息录入实例", "scss_code": "@import '../../node_modules/bee-checkbox/src/Checkbox.scss';\n.demo4{\n    font-size: 14px;\n}\n.demo4 .u-label {\n    display: inline-block;\n    min-width: 100px;\n    text-align: right;\n}\n.demo4 .u-form-control {\n    width: auto;\n    min-width: 380px;\n}\n.demo4 .error{\n    font-size: 12px;\n    color: red;\n    margin-left: 10px;\n}\n.demo4 .submit{\n    padding-left: 110px;\n}\n.demo4 .submit .login{\n    margin-right: 10px;\n}\n.demo4 .u-select {\n    max-width: 380px;\n}\n.demo4 textarea{\n    min-height: 100px;\n    resize: none;\n}\n.demo4 .time>div{\n    display: inline-block;\n}\n.demo4 .time .u-label{\n    position: relative;\n    bottom: 10px;\n}\n.demo4 .u-city-select{\n    display: inline-block;\n}\n.demo4 .u-city-select .province,.demo4 .u-city-select .city,.demo4 .u-city-select .area{\n    width: 120px;\n}" }];
+	var Demo1 = __webpack_require__(67);var Demo2 = __webpack_require__(263);var Demo3 = __webpack_require__(264);var Demo4 = __webpack_require__(267);var Demo5 = __webpack_require__(561);var Demo6 = __webpack_require__(562);var DemoArray = [{ "example": _react2['default'].createElement(Demo1, null), "title": " 单个input校验", "code": '/**\n *\n * @title \u5355\u4E2Ainput\u6821\u9A8C\n * @description \u4F7F\u7528FormItem\n */\nimport React, { Component } from \'react\';\nimport { Form, Label, FormControl } from \'tinper-bee\';\nconst FormItem = Form.FormItem;\n\n\nconst Demo1 = Form.createForm()(class Demo extends Component {\n    constructor(props) {\n        super(props);\n    }\n    render() {\n        const self=this;\n        const { getFieldProps, getFieldError } = this.props.form;\n        return (\n                <FormItem className=\'demo1\'>\n                    <Label>\u59D3\u540D\uFF1A</Label>\n                    <FormControl placeholder=\'\u8BF7\u8F93\u5165\u59D3\u540D\'\n                     {...getFieldProps(\'name\', {\n                        validateTrigger: \'onBlur\',\n                        rules: [{\n                            required: true, message: \'\u8BF7\u8F93\u5165\u59D3\u540D\'\n                        },{\n                            max:5,message:\'\u6700\u5927\u957F\u5EA6\u4E3A10\'\n                        },{\n                            pattern: /[\\u4e00-\\u9fa5]/, message: \'\u8BF7\u8F93\u5165\u4E2D\u6587\u5B57\u7B26\',\n                        }],\n                    }) } />\n                    <span className=\'error\'>\n                        {getFieldError(\'name\')}\n                    </span>   \n                </FormItem>\n        )\n    }\n})\n\n', "desc": " 使用FormItem", "scss_code": ".demo1{\n    font-size: 14px;\n}\n.demo1 .u-label {\n    display: inline;\n}\n.demo1 .u-form-control {\n    width: auto;\n}\n.demo1 .error{\n    font-size: 12px;\n    color: red;\n    margin-left: 10px;\n}" }, { "example": _react2['default'].createElement(Demo2, null), "title": " 基本form校验", "code": "/**\n *\n * @title 基本form校验\n * @description 登录示例\n */\nimport React, { Component } from 'react';\nimport ReactDOM from 'react-dom';\nimport { Form, Button, Label, FormControl } from 'tinper-bee';\nconst FormItem = Form.FormItem;\n\nconst Demo2 = Form.createForm()(class Demo2 extends Component {\n    submit = (e) => {\n        e.preventDefault();\n        this.props.form.validateFields((err, values) => {\n            if (err) {\n                console.log('校验失败', values);\n            } else {\n                console.log('提交成功', values)\n            }\n        });\n    }\n    render() {\n        const { getFieldProps, getFieldError } = this.props.form;\n        return (\n            <div className=\"demo2\">\n                <Form >\n                    <FormItem>\n                        <Label>用户名：</Label>\n                        <FormControl placeholder=\"请输入用户名\"\n                            {...getFieldProps('username', {\n                                validateTrigger: 'onBlur',\n                                rules: [{\n                                    required: true, message: '请输入用户名',\n                                }],\n                            }) }\n                        />\n                        <span className='error'>\n                            {getFieldError('username')}\n                        </span>\n                    </FormItem>\n                    <FormItem>\n                        <Label>密码：</Label>\n                        <FormControl placeholder=\"请输入密码\" type='password'\n                            {...getFieldProps('password', {\n                                validateTrigger: 'onBlur',\n                                rules: [{\n                                    required: true, message: '请输入密码',\n                                }],\n                            }) }\n                        />\n                        <span className='error'>\n                            {getFieldError('password')}\n                        </span>\n                    </FormItem>\n                    <div className='submit'>\n                        <Button colors=\"primary\" className=\"login\" onClick={this.submit}>登陆</Button>\n                        <Button shape=\"border\" className=\"reset\">取消</Button>\n                    </div>\n                </Form>\n            </div>\n        )\n    }\n})\n", "desc": " 登录示例", "scss_code": ".demo2{\n    font-size: 14px;\n}\n.demo2 .u-label {\n    display: inline-block;\n    min-width: 80px;\n    text-align: right;\n}\n.demo2 .u-form-control {\n    width: auto;\n}\n.demo2 .error{\n    font-size: 12px;\n    color: red;\n    margin-left: 10px;\n}\n.demo2 .submit{\n    padding-left: 90px;\n}\n.demo2 .submit .login{\n    margin-right: 10px;\n}" }, { "example": _react2['default'].createElement(Demo3, null), "title": " 基本form校验", "code": "/**\n *\n * @title 基本form校验\n * @description 注册示例\n */\nimport React, { Component } from 'react';\nimport { Form, Label, Checkbox, Button, FormControl } from 'tinper-bee';\nconst FormItem = Form.FormItem;\n\nconst Demo3 = Form.createForm()( class Demo extends Component {\n    constructor(props) {\n        super(props);\n        this.state = {\n            checkbox: false\n        }\n    }\n    submit = (e) => {\n        e.preventDefault();\n        this.props.form.validateFields((err, values) => {\n            if (err) {\n                console.log('校验失败', values);\n            } else {\n                console.log('提交成功', values)\n            }\n        });\n    }\n    handleConfirmPassword = (rule, value, callback) => {\n        const { getFieldValue } = this.props.form;\n        if (value && value !== getFieldValue('password')) {\n            callback('两次输入不一致！')\n        }\n        callback();\n    }\n    render() {\n        const self = this;\n        const { getFieldProps, getFieldError } = this.props.form;\n        return (\n            <div className=\"demo3\">\n                <Form>\n                    <FormItem>\n                        <Label>用户名：</Label>\n                        <FormControl placeholder=\"请输入用户名(包含数字和字母，8-15位)\"\n                            {...getFieldProps('username', {\n                                validateTrigger: 'onBlur',\n                                rules: [{\n                                    required: true, message: '请输入用户名',\n                                }, {\n                                    pattern: /^(?!\\d+$)(?![a-zA-Z]+$)[a-zA-Z0-9]{8,15}$/, message: '用户名格式错误',\n                                }],\n                            }) }\n                        />\n                        <span className='error'>\n                            {getFieldError('username')}\n                        </span>\n                    </FormItem>\n\n                    <FormItem>\n                        <Label>密码：</Label>\n                        <FormControl placeholder=\"请输入密码\" type='password'\n                            {...getFieldProps('password', {\n                                validateTrigger: 'onBlur',\n                                rules: [{\n                                    required: true, message: '请输入密码',\n                                }],\n                            }) }\n                        />\n                        <span className='error'>\n                            {getFieldError('password')}\n                        </span>\n                    </FormItem>\n\n                    <FormItem>\n                        <Label>再次输入密码：</Label>\n                        <FormControl placeholder=\"请输入密码\" type='password'\n                            {...getFieldProps('password2', {\n                                validateTrigger: 'onBlur',\n                                rules: [{\n                                    required: true, message: '请输入密码',\n                                }, {\n                                    validator: this.handleConfirmPassword\n                                }],\n                            }) }\n                        />\n                        <span className='error'>\n                            {getFieldError('password2')}\n                        </span>\n                    </FormItem>\n\n                    <FormItem>\n                        <Label>邮箱：</Label>\n                        <FormControl placeholder=\"请输入邮箱\"\n                            {...getFieldProps('email', {\n                                validateTrigger: 'onBlur',\n                                rules: [{\n                                    required: true, message: '请输入邮箱',\n                                }, {\n                                    type: 'email', message: '邮箱格式不正确'\n                                }],\n                            }) }\n                        />\n                        <span className='error'>\n                            {getFieldError('email')}\n                        </span>\n                    </FormItem>\n                    <FormItem>\n                        <Label>手机号：</Label>\n\n                        <FormControl placeholder=\"请输入手机号\"\n                            {...getFieldProps('phone', {\n                                validateTrigger: 'onBlur',\n                                rules: [{\n                                    required: true, message: '请输入手机号',\n                                }, {\n                                    pattern: /^\\d{11}$/, message: '手机号格式不正确'\n                                }],\n                            }) }\n                        />\n\n                        <span className='error'>\n                            {getFieldError('phone')}\n                        </span>\n                    </FormItem>\n\n                    <FormItem style={{'paddingLeft':'110px'}}>\n                        <Checkbox colors=\"info\"\n                            defaultChecked={this.state.checkbox}\n                            {\n                            ...getFieldProps('checkbox', {\n                                initialValue: false,\n                            }\n                            ) }\n                        />\n                        <span>我已经阅读并同意相关条款</span>\n                    </FormItem>\n                    <div className='submit'>\n                        <Button colors=\"primary\" className=\"login\" onClick={this.submit}>注册</Button>\n                        <Button shape=\"border\" className=\"reset\">取消</Button>\n                    </div>\n                </Form>\n            </div>\n        )\n    }\n})\n", "desc": " 注册示例", "scss_code": "@import '../../node_modules/bee-checkbox/src/Checkbox.scss';\n.demo3{\n    font-size: 14px;\n}\n.demo3 .u-label {\n    display: inline-block;\n    min-width: 100px;\n    text-align: right;\n}\n.demo3 .u-form-control {\n    width: auto;\n    min-width: 300px;\n}\n.demo3 .error{\n    font-size: 12px;\n    color: red;\n    margin-left: 10px;\n}\n.demo3 .submit{\n    padding-left: 110px;\n}\n.demo3 .submit .login{\n    margin-right: 10px;\n}" }, { "example": _react2['default'].createElement(Demo4, null), "title": " 表单校验", "code": "/**\n *\n * @title 表单校验\n * @description 用户信息录入实例\n */\nimport React, { Component } from 'react';\nimport ReactDOM from 'react-dom';\nimport { Form, Button, Label, CitySelect, Rate, InputNumber, Slider, Switch, Checkbox, DatePicker, Radio, Select, FormControl } from 'tinper-bee';\nconst FormItem = Form.FormItem;\nconst Option = Select.Option;\n\nconst Demo4 = Form.createForm()(class Demo extends Component {\n    constructor(props) {\n        super(props);\n        this.state = {\n            selectedValue: 'man',\n        };\n    }\n    submit = (e) => {\n        this.props.form.validateFields((err, values) => {\n            if (err) {\n                console.log('校验失败', values);\n            } else {\n                console.log('提交成功', values)\n            }\n        });\n    }\n    render() {\n        const { getFieldProps, getFieldError } = this.props.form;\n        const self = this;\n        return (\n            <div>\n                <Form className='demo4'>\n                    <FormItem>\n                        <Label>姓名：</Label>\n                        <FormControl placeholder=\"请输入姓名\"\n                            {...getFieldProps('name', {\n                                validateTrigger: 'onBlur',\n                                rules: [{\n                                    required: true, message: '请输入姓名',\n                                }],\n                            }) }\n                        />\n                        <span className='error'>\n                            {getFieldError('name')}\n                        </span>\n                    </FormItem>\n                    <FormItem>\n                        <Label>身份证号：</Label>\n                        <FormControl placeholder=\"请输入身份证号\"\n                            {...getFieldProps('id', {\n                                validateTrigger: 'onBlur',\n                                rules: [{\n                                    required: true, message: '请输入身份证号',\n                                }],\n                            }) }\n                        />\n                        <span className='error'>\n                            {getFieldError('id')}\n                        </span>\n                    </FormItem>\n                    <FormItem className='time'>\n                        <Label>出生日期：</Label>\n                        <DatePicker\n                            {\n                            ...getFieldProps('time', {\n\n                            }\n                            ) }\n                            placeholder={'请选择出生日期'}\n                        />\n                    </FormItem>\n                    <FormItem>\n                        <Label>年龄：</Label>\n                        <FormControl placeholder=\"请输入年龄\"\n                            {...getFieldProps('age', {\n                                validateTrigger: 'onBlur',\n                                rules: [{\n                                    required: true, message: '请输入年龄',\n                                }],\n                            }) }\n                        />\n                        <span className='error'>\n                            {getFieldError('age')}\n                        </span>\n                    </FormItem>\n                     <FormItem>\n                        <Label>性别：</Label>\n                        <Radio.RadioGroup\n                            selectedValue={this.state.selectedValue}\n                            {\n                            ...getFieldProps('sex', {\n                                initialValue: 'man',\n                                onChange(value) {\n                                    self.setState({ selectedValue: value });\n                                },\n                                rules: [{ required: true }]\n                            }\n                            ) }\n                        >\n                            <Radio value=\"man\" >男</Radio>\n                            <Radio value=\"woman\" >女</Radio>\n                        </Radio.RadioGroup>\n                    </FormItem>\n                    <FormItem>\n                        <Label>学历：</Label>\n                        <Select\n                            {\n                            ...getFieldProps('education', {\n                                initialValue: '',\n                                rules: [{ required: true }]\n                            }\n                            ) }\n                        >\n                            <Option value=\"\">请选择</Option>\n                            <Option value=\"nothing\">无</Option>\n                            <Option value=\"middle\">初中</Option>\n                            <Option value=\"senior\">高中</Option>\n                            <Option value=\"college1\">专科</Option>\n                            <Option value=\"college2\">本科</Option>\n                            <Option value=\"graduate\">研究生及以上</Option>\n                            <Option value=\"other\">其它</Option>\n                        </Select>\n                    </FormItem>\n                    <FormItem>\n                        <Label>保密等级：</Label>\n                        <Rate\n                            {\n                            ...getFieldProps('rate', {\n                                initialValue: 0,\n                                rules: [{ required: true }]\n                            }\n                            ) }\n                        />\n                    </FormItem>\n                    <FormItem >\n                        <Label>备注：</Label>\n                        <FormControl componentClass='textarea'\n                            {\n                            ...getFieldProps('remark', {}\n                            ) }\n                        />\n                    </FormItem>  \n                    \n\n\n                    <div className='submit'>\n                        <Button colors=\"primary\" className=\"login\" onClick={this.submit}>提交</Button>\n                        <Button shape=\"border\" className=\"reset\">取消</Button>\n                    </div>\n                </Form>\n            </div>\n        )\n    }\n})\n", "desc": " 用户信息录入实例", "scss_code": "@import '../../node_modules/bee-checkbox/src/Checkbox.scss';\n.demo4{\n    font-size: 14px;\n}\n.demo4 .u-label {\n    display: inline-block;\n    min-width: 100px;\n    text-align: right;\n}\n.demo4 .u-form-control {\n    width: auto;\n    min-width: 380px;\n}\n.demo4 .error{\n    font-size: 12px;\n    color: red;\n    margin-left: 10px;\n}\n.demo4 .submit{\n    padding-left: 110px;\n}\n.demo4 .submit .login{\n    margin-right: 10px;\n}\n.demo4 .u-select {\n    max-width: 380px;\n}\n.demo4 textarea{\n    min-height: 100px;\n    resize: none;\n}\n.demo4 .time>div{\n    display: inline-block;\n}\n.demo4 .time .u-label{\n    position: relative;\n    bottom: 10px;\n}\n.demo4 .u-city-select{\n    display: inline-block;\n}\n.demo4 .u-city-select .province,.demo4 .u-city-select .city,.demo4 .u-city-select .area{\n    width: 120px;\n}" }, { "example": _react2['default'].createElement(Demo5, null), "title": " 多种表单元素示例", "code": "/**\n *\n * @title 多种表单元素示例\n * @description 查询面板\n */\nimport React, { Component } from 'react';\nimport ReactDOM from 'react-dom';\nimport { Form, Button, Label, Switch, Checkbox, DatePicker, Radio, Select,  Col , Row , FormControl } from 'tinper-bee';\nimport moment from \"moment/moment\";\nconst FormItem = Form.FormItem;\nconst Option = Select.Option;\nconst { RangePicker } = DatePicker;\n\nconst Demo5 = Form.createForm()(class Demo extends Component {\n    constructor(props) {\n        super(props);\n        this.state = {\n            approvalState: '',\n            closeState: '',\n            confirmState: '',\n            voucherDate: [],\n            orderTypes:[\n                {\n                    'code':'001',\n                    'name':'类型1'\n                },\n                {\n                    'code':'002',\n                    'name':'类型2'\n                },\n                {\n                    'code':'003',\n                    'name':'类型3'\n                },\n            ]\n        };\n    }\n    submit = (e) => {\n        this.props.form.validateFields((err, values) => {\n            if (err) {\n                console.log('校验失败', values);\n            } else {\n                console.log('提交成功', values)\n            }\n        });\n    }\n    reset = () =>{\n        this.props.form.resetFields();\n        this.setState({\n            approvalState: '',\n            closeState: '',\n            confirmState: '',\n            voucherDate: []\n        })\n    }\n    render() {\n        const { getFieldProps, getFieldError } = this.props.form;\n        const self = this;\n        return (\n            <div>\n                <Form className='demo5'>\n                <Row>\n                        <Col lg={4} md={6} xs={12}>\n                            <FormItem>\n                                <Label>订单编号：</Label>\n                                <FormControl\n                                    {\n                                    ...getFieldProps('orderCode', {\n                                        initialValue: '',\n                                    })\n                                    }\n                                />\n                            </FormItem>\n                        </Col>\n                        <Col  lg={4} md={6} xs={12}>\n                            <FormItem>\n                                <Label>供应商名称：</Label>\n                                <FormControl\n                                    {\n                                    ...getFieldProps('supplierName', {\n                                        initialValue: '',\n                                    })\n                                    }\n                                />\n                            </FormItem>\n                        </Col>\n                        <Col lg={4} md={6} xs={4}>\n                            <FormItem>\n                                <Label className='time'>凭证日期：</Label>\n                                <RangePicker\n                                    defaultValue={this.state.voucherDate}\n                                    placeholder={'开始 ~ 结束'}\n                                    dateInputPlaceholder={['开始', '结束']}\n                                    {\n                                    ...getFieldProps('voucherDate', {\n                                        onChange: function (v) {\n                                            self.setState({\n                                                voucherDate: v\n                                            })\n                                        }\n                                    })\n                                    }\n                                />\n                            </FormItem>\n                        </Col>\n                        <Col  lg={4} md={6} xs={12}>\n                            <FormItem>\n                                <Label>订单类型：</Label>\n                                <Select {\n                                    ...getFieldProps('type', {\n                                        initialValue: '',\n                                    }\n                                    )}>\n                                    <Option value=\"\">请选择</Option>\n                                    {\n                                        self.state.orderTypes.map((item, index) => {\n                                            return (\n                                                <Option key={index} value={item.code}>{item.name}</Option>\n                                            )\n                                        })\n                                    }\n                                </Select>\n                            </FormItem>\n                        </Col>\n                        <Col  lg={4} md={6} xs={12}>\n                            <FormItem>\n                                <Label>采购组：</Label>\n                                <FormControl\n                                    {\n                                    ...getFieldProps('purchasingGroup', {\n                                        initialValue: '',\n                                    })\n                                    }\n                                />\n                            </FormItem>\n                        </Col>\n                        <Col  lg={4} md={6} xs={12}>\n                            <FormItem>\n                                <Label>审批状态：</Label>\n                                <Radio.RadioGroup\n                                    selectedValue={this.state.approvalState}\n                                    {\n                                    ...getFieldProps('approvalState', {\n                                        initialValue: '',\n                                        onChange(value) {\n                                            self.setState({ approvalState: value });\n                                        },\n                                    }\n                                    )}\n                                >\n                                    <Radio value=\"0\" >未审批</Radio>\n                                    <Radio value=\"1\" >已审批</Radio>\n                                    <Radio value=\"\" >全部</Radio>\n                                </Radio.RadioGroup>\n                            </FormItem>\n                        </Col>\n                        <Col  lg={4} md={6} xs={12}>\n                            <FormItem>\n                                <Label>关闭状态：</Label>\n                                <Radio.RadioGroup\n                                    selectedValue={this.state.closeState}\n                                    {\n                                    ...getFieldProps('closeState', {\n                                        initialValue: '',\n                                        onChange(value) {\n                                            self.setState({ closeState: value });\n                                        },\n                                    }\n                                    )}\n                                >\n                                    <Radio value=\"0\" >未关闭</Radio>\n                                    <Radio value=\"1\" >已关闭</Radio>\n                                    <Radio value=\"\" >全部</Radio>\n                                </Radio.RadioGroup>\n                            </FormItem>\n                        </Col>\n                        <Col  lg={4} md={6} xs={12}>\n                            <FormItem>\n                                <Label>确认状态：</Label>\n                                <Radio.RadioGroup\n                                    selectedValue={this.state.confirmState}\n                                    {\n                                    ...getFieldProps('confirmState', {\n                                        initialValue: '',\n                                        onChange(value) {\n                                            self.setState({ confirmState: value });\n                                        },\n                                    }\n                                    )}\n                                >\n                                    <Radio value=\"0\" >未确认</Radio>\n                                    <Radio value=\"1\" >已确认</Radio>\n                                    <Radio value=\"\" >全部</Radio>\n                                </Radio.RadioGroup>\n                            </FormItem>\n                        </Col>\n                        <Col  lg={4} md={6} xs={12}>\n                            <FormItem>\n                                <Label>未分配：</Label>\n                                <Checkbox colors=\"primary\"></Checkbox>\n                            </FormItem>\n                        </Col>\n                    </Row>\n                    <div className='submit'>\n                        <Button colors=\"primary\" className=\"login\" onClick={this.submit}>查询</Button>\n                        <Button shape=\"border\" className=\"reset\" onClick={this.reset}>重置</Button>\n                    </div>\n                </Form>\n            </div>\n        )\n    }\n})\n", "desc": " 查询面板", "scss_code": "@import '../../node_modules/bee-checkbox/src/Checkbox.scss';\n\n.demo5 {\n    .submit{\n        padding-left:90px\n    }\n    .reset{\n        margin-left:10px;\n    }\n    .u-form-item {\n        min-width: 100%;\n        min-height: 50px;\n        padding: 0;\n        .u-label{\n            min-width: 90px;\n            display: inline-block;\n            text-align:right;\n        }\n        .u-label.time{\n            position: relative;\n            bottom: 10px;\n        }\n        .u-label + *{\n            min-width: 200px;\n            display: inline-block;\n        }\n        .datepicker-input-group{\n            .u-input-group-btn{\n                .uf-calendar{\n                    padding: 0;\n                }\n            }\n        }\n        .u-switch{\n            min-width: auto;\n        }\n        .u-select{\n            width: auto;\n        }\n        .u-form-control{\n            width: auto;\n        }\n        .calendar-picker{\n            display: inline-block;\n            min-width:200px;\n            width: auto;\n            input{\n                width: 100%;\n                text-align: center;\n            }\n        }\n        .u-radio .u-radio-label{\n            font-size:14px;\n        }\n    }\n}\n" }, { "example": _react2['default'].createElement(Demo6, null), "title": " 多种布局示例", "code": "/**\n *\n * @title 多种布局示例\n * @description \n */\nimport React, { Component } from 'react';\nimport ReactDOM from 'react-dom';\nimport { Form, Button, Label, Switch, Checkbox, DatePicker, Radio, Select,  Col , Row , FormControl } from 'tinper-bee';\nimport moment from \"moment/moment\";\nconst FormItem = Form.FormItem;\nconst Option = Select.Option;\nconst { RangePicker } = DatePicker;\n\nconst Demo6 = Form.createForm()(class Demo extends Component {\n    constructor(props) {\n        super(props);\n        this.state = {\n            approvalState: '',\n            closeState: '',\n            confirmState: '',\n            voucherDate: [],\n            orderTypes:[\n                {\n                    'code':'001',\n                    'name':'类型1'\n                },\n                {\n                    'code':'002',\n                    'name':'类型2'\n                },\n                {\n                    'code':'003',\n                    'name':'类型3'\n                },\n            ]\n        };\n    }\n    render() {\n        const { getFieldProps, getFieldError } = this.props.form;\n        const self = this;\n        const orderTypes= [{\n            \"code\":\"D001\",\n            \"name\":\"D001\"\n          },{\n            \"code\":\"D002\",\n            \"name\":\"D002\"\n          },{\n            \"code\":\"D003\",\n            \"name\":\"D003\"\n          },{\n            \"code\":\"D004\",\n            \"name\":\"D004\"\n          }];\n        return (\n            <div>\n                <Form className='demo6'>\n                    {/* 普通栅格布局 */}\n                    <h4>\n                        普通栅格布局\n                    </h4>\n                    <Row className = 'edit-panel'>\n                        <Col lg={4} md={6} xs={12}>\n                            <FormItem>\n                                <Label>订单编号：\n                                    <span className='mast'>*</span>\n                                </Label>\n                                <FormControl\n                                    {\n                                    ...getFieldProps('orderCode1', {\n                                        initialValue: '',\n                                        rules: [{\n                                            required: true, message: '请输入订单编号',\n                                        }],\n                                    })\n                                    }\n                                />\n                                <span className='error'>\n                                    {\n                                        getFieldError('orderCode1')\n                                    }\n                                </span>\n                            </FormItem>\n                        </Col>\n                        <Col lg={4} md={6} xs={12}>\n                            <FormItem>\n                                <Label>供应商名称：\n                                    <span className='mast'>*</span>\n                                </Label>\n                                <FormControl\n                                    {\n                                        ...getFieldProps('supplierName1', {\n                                            initialValue: '',\n                                            rules: [{\n                                                required: true, message: '请输入供应商名称',\n                                            }],\n                                        })\n                                    }\n                                />\n                                <span className='error'>\n                                    {\n                                        getFieldError('supplierName1')\n                                    }\n                                </span>\n                            </FormItem>\n                            \n                        </Col>\n                        <Col lg={4} md={6} xs={12}>\n                            <FormItem>\n                                <Label className='time'>凭证日期：</Label>\n                                <RangePicker\n                                    defaultValue={this.state.voucherDate}\n                                    placeholder={'开始 ~ 结束'}\n                                    dateInputPlaceholder={['开始', '结束']}\n                                    {\n                                    ...getFieldProps('voucherDate1', {\n                                        onChange: function (v) {\n                                            self.setState({\n                                                voucherDate1: v\n                                            })\n                                        }\n                                    })\n                                    }\n                                />\n                            </FormItem>\n                        </Col>\n                    </Row>\n\n                    <div className='split'></div>\n                    \n                    \n                     {/* 单列铺满 */}\n                     <h4>\n                        单列铺满\n                     </h4>\n                     <Row className = 'edit-panel edit-panel-all'>\n                        <FormItem>\n                            <Col md={2}>\n                                <Label>订单编号：\n                                    <span className='mast'>*</span>\n                                </Label>\n                            </Col>\n                            <Col md={10}>\n                                <FormControl\n                                    {\n                                    ...getFieldProps('orderCode2', {\n                                        initialValue: '',\n                                        rules: [{\n                                            required: true, message: '请输入订单编号',\n                                        }],\n                                    })\n                                    }\n                                />\n                                <span className='error'>\n                                    {\n                                        getFieldError('orderCode2')\n                                    }\n                                </span>\n                            </Col>\n                        </FormItem>\n\n                        <FormItem>\n                            <Col md={2}>\n                                <Label>供应商名称：\n                                    <span className='mast'>*</span>\n                                </Label>\n                            </Col>\n                            <Col md={10}>\n                                <FormControl\n                                    {\n                                        ...getFieldProps('supplierName2', {\n                                            initialValue: '',\n                                            rules: [{\n                                                required: true, message: '请输入供应商名称',\n                                            }],\n                                        })\n                                    }\n                                />\n                                <span className='error'>\n                                    {\n                                        getFieldError('supplierName2')\n                                    }\n                                </span>\n                            </Col>\n                        </FormItem>\n\n                        <FormItem>\n                            <Col md={2}>\n                                <Label>凭证日期：</Label>\n                            </Col>\n                            <Col md={10}>\n                                <RangePicker\n                                    defaultValue={this.state.voucherDate}\n                                    placeholder={'开始 ~ 结束'}\n                                    dateInputPlaceholder={['开始', '结束']}\n                                    {\n                                    ...getFieldProps('voucherDate2', {\n                                        onChange: function (v) {\n                                            self.setState({\n                                                voucherDate2: v\n                                            })\n                                        }\n                                    })\n                                    }\n                                />\n                            </Col>\n                        </FormItem>\n                        <FormItem>\n                            <Col md={2}>\n                                <Label>订单类型：</Label>\n                            </Col>\n                            <Col md={10}>\n                                <Select {\n                                    ...getFieldProps('type', {\n                                        initialValue: '',\n                                    }\n                                    )}>\n                                    <Option value=\"\">请选择</Option>\n                                    {\n                                        orderTypes.map((item, index) => {\n                                            return (\n                                                <Option key={index} value={item.code}>{item.name}</Option>\n                                            )\n                                        })\n                                    }\n                                </Select>\n                            </Col>\n                        </FormItem>\n                        \n                    </Row>\n\n                    <div className='split'></div>\n\n                    {/* 单列居中 */}\n                    <h4>\n                        单列居中\n                     </h4>\n                    <Row className = 'edit-panel edit-panel-center'>\n                        <Col md={12}>\n                            <FormItem>\n                                <Label>订单编号：\n                                    <span className='mast'>*</span>\n                                </Label>\n                                <FormControl\n                                    {\n                                    ...getFieldProps('orderCode3', {\n                                        initialValue: '',\n                                        rules: [{\n                                            required: true, message: '请输入订单编号',\n                                        }],\n                                    })\n                                    }\n                                />\n                                <span className='error'>\n                                    {\n                                        getFieldError('orderCode3')\n                                    }\n                                </span>\n                            </FormItem>\n                        </Col>\n                        <Col md={12}>\n                            <FormItem>\n                                <Label>供应商名称：\n                                    <span className='mast'>*</span>\n                                </Label>\n                                <FormControl\n                                    {\n                                        ...getFieldProps('supplierName3', {\n                                            initialValue: '',\n                                            rules: [{\n                                                required: true, message: '请输入供应商名称',\n                                            }],\n                                        })\n                                    }\n                                />\n                                <span className='error'>\n                                    {\n                                        getFieldError('supplierName3')\n                                    }\n                                </span>\n                            </FormItem>\n                            \n                        </Col>\n                        <Col md={12}>\n                            <FormItem>\n                                <Label className='time'>凭证日期：</Label>\n                                <RangePicker\n                                    defaultValue={this.state.voucherDate}\n                                    placeholder={'开始 ~ 结束'}\n                                    dateInputPlaceholder={['开始', '结束']}\n                                    {\n                                    ...getFieldProps('voucherDate3', {\n                                        onChange: function (v) {\n                                            self.setState({\n                                                voucherDate3: v\n                                            })\n                                        }\n                                    })\n                                    }\n                                />\n                            </FormItem>\n                        </Col>\n                        \n                    </Row>\n\n                     <div className='split'></div>\n\n                    {/* 三列带textarea */}\n                    <h4>\n                    三列带textarea\n                     </h4>\n                    <Row className = 'edit-panel edit-panel-textarea'>\n\n                            <Col md={1}>\n                                <Label>订单编号：\n                                    <span className='mast'>*</span>\n                                </Label>\n                            </Col>\n                            <Col md={3}>\n                                <FormControl\n                                    {\n                                    ...getFieldProps('orderCode4', {\n                                        initialValue: '',\n                                        rules: [{\n                                            required: true, message: '请输入订单编号',\n                                        }],\n                                    })\n                                    }\n                                />\n                                <span className='error'>\n                                    {\n                                        getFieldError('orderCode4')\n                                    }\n                                </span>\n                            </Col>\n                            <Col md={1}>\n                                <Label>供应商名称：\n                                    <span className='mast'>*</span>\n                                </Label>\n                            </Col>\n                            <Col md={3}>\n                            <FormControl\n                                {\n                                    ...getFieldProps('supplierName4', {\n                                        initialValue: '',\n                                        rules: [{\n                                            required: true, message: '请输入供应商名称',\n                                        }],\n                                    })\n                                }\n                                />\n                                <span className='error'>\n                                    {\n                                        getFieldError('supplierName4')\n                                    }\n                                </span>\n                            </Col>\n                            <Col md={1}>\n                                <Label className='time'>凭证日期：</Label>\n                            </Col>\n                            <Col md={3}>\n                            <RangePicker\n                                    defaultValue={this.state.voucherDate}\n                                    placeholder={'开始 ~ 结束'}\n                                    dateInputPlaceholder={['开始', '结束']}\n                                    {\n                                    ...getFieldProps('voucherDate4', {\n                                        onChange: function (v) {\n                                            self.setState({\n                                                voucherDate3: v\n                                            })\n                                        }\n                                    })\n                                    }\n                                />\n                            </Col>\n                            <Col md={1}>\n                                <Label className='time'>备注：</Label>\n                            </Col>\n                            <Col md={11}>\n                            <textarea className='u-form-control'\n                                {\n                                    ...getFieldProps('mark', {\n                                        initialValue: '',\n                                    })\n                                }\n                                />\n                            </Col>\n\n                       \n                    </Row>\n                    \n                </Form>\n            </div>\n        )\n    }\n})\n", "desc": " ", "scss_code": "@import '../../node_modules/bee-checkbox/src/Checkbox.scss';\n.demo6 {\n    .edit-panel {\n        background: #FFF;\n        padding: 15px 15px 15px 15px;\n        .reset-btn,\n        .reset-btn:hover {\n            background: #fff;\n            border: 1px solid #1E7BE2;\n            color: #1E7BE2;\n            margin-right: 15px;\n        }\n        .submit-btn,\n        .submit-btn:hover {\n            background: #1E7BE2;\n            color: #fff;\n        }\n        .btn-group {\n            text-align: right;\n        }\n        .u-form-item {\n            min-width: 100%;\n            margin-bottom: 10px;\n            min-height: 50px;\n            .error {\n                margin-left: 100px;\n                color: red;\n                display: block;\n            }\n            .u-label {\n                min-width: 100px;\n                display: inline-block;\n            }\n            .u-label.time {\n                position: relative;\n                bottom: 10px;\n            }\n            .u-label+* {\n                min-width: 200px;\n                display: inline-block;\n            }\n            .mast {\n                width: 5px;\n                min-width: auto;\n                margin-right: 5px;\n                color: red;\n            }\n            .datepicker-input-group {\n                .u-input-group-btn {\n                    .uf-calendar {\n                        padding: 0;\n                    }\n                }\n            }\n            .u-switch {\n                min-width: auto;\n            }\n            .u-select {\n                width: auto;\n            }\n            .u-form-control {\n                width: auto;\n            }\n            .calendar-picker {\n                display: inline-block;\n                min-width: 200px;\n                width: auto;\n                input {\n                    width: 100%;\n                }\n            }\n            .u-form-control-close {\n                width: auto;\n                .u-form-control {\n                    width: 100%\n                }\n            }\n        }\n        .search-panel-btn {\n            text-align: right;\n            padding: 10px 0;\n        }\n    }\n    .edit-panel-center {\n        text-align: center;\n        .u-form-item {\n            min-width: auto;\n            display: inline-block;\n            .error {\n                text-align: left;\n            }\n        }\n    }\n    .edit-panel-all {\n        .u-form-item {\n            padding: 0;\n            .u-label {\n                width: 100%;\n                text-align: right;\n                height: 30px;\n                line-height: 30px;\n            }\n            .u-form-control {\n                width: 100%;\n            }\n            .calendar-picker {\n                width: 100%;\n                position: relative;\n            }\n            .u-select {\n                width: 100%;\n            }\n            .error {\n                margin-left: 0;\n            }\n        }\n    }\n    .split {\n        height: 5px;\n        background: #e0e0e0;\n    }\n    .edit-panel-textarea {\n        >div {\n            margin-bottom: 10px;\n            min-height: 50px;\n            .u-label {\n                height: 30px;\n                line-height: 30px;\n                text-align: right;\n                display: block;\n            }\n            .error {\n                margin-left: 100px;\n                color: red;\n                display: block;\n            }\n            .mast {\n                color: red;\n            }\n            textarea {\n                width: 100%;\n                resize: none;\n                min-height: 50px;\n            }\n            .calendar-picker,\n            .u-select {\n                width: 100%;\n            }\n        }\n    }\n}" }];
 	
 	var Demo = function (_Component) {
 	    _inherits(Demo, _Component);
@@ -14339,14 +14339,18 @@
 	    size: _propTypes2["default"].oneOf(['sm', 'md', 'lg']),
 	    onSearch: _propTypes2["default"].func,
 	    onChange: _propTypes2["default"].func,
-	    onBlur: _propTypes2["default"].func
+	    onBlur: _propTypes2["default"].func,
+	    showClose: _propTypes2["default"].bool,
+	    showPop: _propTypes2["default"].bool
 	};
 	
 	var defaultProps = {
 	    componentClass: 'input',
 	    clsPrefix: 'u-form-control',
 	    type: 'text',
-	    size: 'md'
+	    size: 'md',
+	    showClose: false,
+	    showPop: false
 	};
 	
 	var FormControl = function (_React$Component) {
@@ -14374,7 +14378,9 @@
 	            var onChange = _this.props.onChange;
 	
 	            var value = _this.input.value;
-	
+	            _this.setState({
+	                showClose: true
+	            });
 	            if (onChange) {
 	                onChange(value, e);
 	            }
@@ -14383,7 +14389,11 @@
 	        _this.clearValue = function () {
 	            var onChange = _this.props.onChange;
 	
-	            _this.setState({ showSearch: true, value: "" });
+	            _this.setState({
+	                showSearch: true,
+	                value: "",
+	                showClose: false
+	            });
 	            if (onChange) {
 	                onChange("");
 	            }
@@ -14413,6 +14423,19 @@
 	            }
 	        };
 	
+	        _this.handleFocus = function (e) {
+	            var value = _this.state.value;
+	            var onFocus = _this.props.onFocus;
+	
+	            if (onFocus) {
+	                onFocus(value, e);
+	            }
+	        };
+	
+	        _this.handleClick = function (e) {
+	            alert();
+	        };
+	
 	        _this.renderInput = function () {
 	            var _this$props2 = _this.props,
 	                Component = _this$props2.componentClass,
@@ -14438,7 +14461,26 @@
 	                classNames = (0, _classnames2["default"])(clsPrefix, classes);
 	            }
 	
-	            return _react2["default"].createElement(Component, _extends({}, others, {
+	            return _this.props.showClose ? _react2["default"].createElement(
+	                'div',
+	                { className: (0, _classnames2["default"])(clsPrefix + '-close', clsPrefix + '-affix-wrapper', className) },
+	                _react2["default"].createElement(Component, _extends({}, others, {
+	                    type: type,
+	                    ref: function ref(el) {
+	                        return _this.input = el;
+	                    },
+	                    value: value,
+	                    onChange: _this.handleChange,
+	                    onBlur: _this.handleBlur,
+	                    onFocus: _this.handleFocus,
+	                    className: (0, _classnames2["default"])(className, classNames)
+	                })),
+	                _react2["default"].createElement(
+	                    'div',
+	                    { className: clsPrefix + '-suffix' },
+	                    _this.state.showClose ? _react2["default"].createElement(_beeIcon2["default"], { onClick: _this.clearValue, type: 'uf-close-c' }) : ''
+	                )
+	            ) : _react2["default"].createElement(Component, _extends({}, others, {
 	                type: type,
 	                ref: function ref(el) {
 	                    return _this.input = el;
@@ -14497,7 +14539,8 @@
 	
 	        _this.state = {
 	            showSearch: !props.value,
-	            value: props.value == null ? "" : props.value
+	            value: props.value == null ? "" : props.value,
+	            showClose: false
 	        };
 	        _this.input = {};
 	        return _this;
@@ -15422,10 +15465,10 @@
 	var Option = _beeSelect2['default'].Option;
 	
 	var Demo4 = _src2['default'].createForm()(function (_Component) {
-	    _inherits(Demo4, _Component);
+	    _inherits(Demo, _Component);
 	
-	    function Demo4(props) {
-	        _classCallCheck(this, Demo4);
+	    function Demo(props) {
+	        _classCallCheck(this, Demo);
 	
 	        var _this = _possibleConstructorReturn(this, _Component.call(this, props));
 	
@@ -15445,7 +15488,7 @@
 	        return _this;
 	    }
 	
-	    Demo4.prototype.render = function render() {
+	    Demo.prototype.render = function render() {
 	        var _props$form = this.props.form,
 	            getFieldProps = _props$form.getFieldProps,
 	            getFieldError = _props$form.getFieldError;
@@ -15662,7 +15705,7 @@
 	        );
 	    };
 	
-	    return Demo4;
+	    return Demo;
 	}(_react.Component));
 	exports['default'] = Demo4;
 	module.exports = exports['default'];
@@ -23309,7 +23352,7 @@
 	    _this.state = {
 	      type: "month",
 	      value: props.value || props.defaultValue || _moment2["default"].Moment,
-	      open: false
+	      open: props.open || false
 	
 	    };
 	    return _this;
@@ -23321,6 +23364,10 @@
 	        value: nextProps.value
 	      });
 	    }
+	    this.setState({
+	      renderIcon: nextProps.renderIcon,
+	      open: nextProps.open
+	    });
 	  };
 	
 	  DatePicker.prototype.render = function render() {
@@ -23404,7 +23451,9 @@
 	  };
 	
 	  this.handleCalendarChange = function (value) {
+	    var props = _this3.props;
 	    _this3.setState({ value: value });
+	    props.onChange(value, value && value.format(props.format) || '');
 	  };
 	
 	  this.handleChange = function (value) {
@@ -23412,7 +23461,7 @@
 	    if (!("value" in props)) {
 	      _this3.setState({ value: value });
 	    }
-	    props.onChange(value, value && value.format(props.format) || '');
+	    //props.onChange(value, (value && value.format(props.format)) || '');
 	  };
 	};
 	
@@ -46899,7 +46948,8 @@
 	          hourStep = _props.hourStep,
 	          minuteStep = _props.minuteStep,
 	          secondStep = _props.secondStep,
-	          inputReadOnly = _props.inputReadOnly;
+	          inputReadOnly = _props.inputReadOnly,
+	          clearIcon = _props.clearIcon;
 	      var _state = this.state,
 	          value = _state.value,
 	          currentSelectPanel = _state.currentSelectPanel;
@@ -46934,7 +46984,8 @@
 	          allowEmpty: allowEmpty,
 	          focusOnOpen: focusOnOpen,
 	          onKeyDown: onKeyDown,
-	          inputReadOnly: inputReadOnly
+	          inputReadOnly: inputReadOnly,
+	          clearIcon: clearIcon
 	        }),
 	        _react2['default'].createElement(_Combobox2['default'], {
 	          prefixCls: prefixCls,
@@ -46988,7 +47039,8 @@
 	  secondStep: _propTypes2['default'].number,
 	  addon: _propTypes2['default'].func,
 	  focusOnOpen: _propTypes2['default'].bool,
-	  onKeyDown: _propTypes2['default'].func
+	  onKeyDown: _propTypes2['default'].func,
+	  clearIcon: _propTypes2['default'].node
 	};
 	Panel.defaultProps = {
 	  prefixCls: 'rc-time-picker-panel',
@@ -47096,17 +47148,22 @@
 	    value: function getClearButton() {
 	      var _props = this.props,
 	          prefixCls = _props.prefixCls,
-	          allowEmpty = _props.allowEmpty;
+	          allowEmpty = _props.allowEmpty,
+	          clearIcon = _props.clearIcon;
 	
 	      if (!allowEmpty) {
 	        return null;
 	      }
-	      return _react2['default'].createElement('a', {
-	        className: prefixCls + '-clear-btn',
-	        role: 'button',
-	        title: this.props.clearText,
-	        onMouseDown: this.onClear
-	      });
+	      return _react2['default'].createElement(
+	        'a',
+	        {
+	          role: 'button',
+	          className: prefixCls + '-clear-btn',
+	          title: this.props.clearText,
+	          onMouseDown: this.onClear
+	        },
+	        clearIcon || _react2['default'].createElement('i', { className: prefixCls + '-clear-btn-icon' })
+	      );
 	    }
 	  }, {
 	    key: 'getProtoValue',
@@ -47172,7 +47229,8 @@
 	  defaultOpenValue: _propTypes2['default'].object,
 	  currentSelectPanel: _propTypes2['default'].string,
 	  focusOnOpen: _propTypes2['default'].bool,
-	  onKeyDown: _propTypes2['default'].func
+	  onKeyDown: _propTypes2['default'].func,
+	  clearIcon: _propTypes2['default'].node
 	};
 	Header.defaultProps = {
 	  inputReadOnly: false
@@ -51738,7 +51796,7 @@
 	
 	        return _react2["default"].createElement(
 	            _OverlayTrigger2["default"],
-	            _extends({ placement: placement }, others, { overlay: overlayNode }),
+	            _extends({ shouldUpdatePosition: true, placement: placement }, others, { overlay: overlayNode }),
 	            children
 	        );
 	    };
@@ -52994,7 +53052,8 @@
 	        var _state = this.state,
 	            positionLeft = _state.positionLeft,
 	            positionTop = _state.positionTop,
-	            arrowPosition = _objectWithoutProperties(_state, ['positionLeft', 'positionTop']);
+	            inverseArrow = _state.inverseArrow,
+	            arrowPosition = _objectWithoutProperties(_state, ['positionLeft', 'positionTop', 'inverseArrow']);
 	
 	        // These should not be forwarded to the child.
 	
@@ -53006,7 +53065,7 @@
 	
 	        var child = _react2["default"].Children.only(children);
 	        return (0, _react.cloneElement)(child, {
-	            className: (0, _classnames2["default"])(className, child.props.className),
+	            className: (0, _classnames2["default"])(className, child.props.className, { 'inverse-arrow': inverseArrow }),
 	            style: _extends({}, child.props.style, {
 	                left: positionLeft,
 	                top: positionTop
@@ -53117,7 +53176,8 @@
 	    var positionLeft = void 0,
 	        positionTop = void 0,
 	        arrowOffsetLeft = void 0,
-	        arrowOffsetTop = void 0;
+	        arrowOffsetTop = void 0,
+	        inverseArrow = void 0;
 	
 	    if (/^left|^right/.test(placement)) {
 	        positionTop = childOffset.top + (childOffset.height - overlayHeight) / 2;
@@ -53135,7 +53195,17 @@
 	        }
 	
 	        var topDelta = getTopDelta(positionTop, overlayHeight, container, padding);
-	
+	        var leftDelta = getLeftDelta(positionLeft, overlayWidth, container, padding);
+	        //内容超出
+	        if (leftDelta > 0) {
+	            inverseArrow = true;
+	            positionLeft = childOffset.left + childOffset.width + 6;
+	        } else if (leftDelta < 0) {
+	            inverseArrow = true;
+	            positionLeft = childOffset.left - overlayWidth - 6;
+	        } else {
+	            positionLeft += leftDelta;
+	        }
 	        positionTop += topDelta;
 	        arrowOffsetTop = 50 * (1 - 2 * topDelta / overlayHeight) + '%';
 	        arrowOffsetLeft = void 0;
@@ -53154,16 +53224,37 @@
 	            positionLeft = childOffset.left + (childOffset.width - overlayWidth);
 	        }
 	
-	        var leftDelta = getLeftDelta(positionLeft, overlayWidth, container, padding);
-	
-	        positionLeft += leftDelta;
-	        arrowOffsetLeft = 50 * (1 - 2 * leftDelta / overlayWidth) + '%';
+	        var _leftDelta = getLeftDelta(positionLeft, overlayWidth, container, padding);
+	        var _topDelta = getTopDelta(positionTop, overlayHeight, container, padding);
+	        positionLeft += _leftDelta;
+	        arrowOffsetLeft = 50 * (1 - 2 * _leftDelta / overlayWidth) + '%';
 	        arrowOffsetTop = void 0;
+	        if (_topDelta > 0) {
+	            inverseArrow = true;
+	            positionTop = childOffset.top + childOffset.height + 6;
+	        } else if (_topDelta < 0) {
+	            inverseArrow = true;
+	            positionTop = childOffset.top - overlayHeight - 6;
+	        } else {
+	            positionTop += _topDelta;
+	        }
+	
+	        // if((positionLeft + panelWidth) > docWidth)
+	        //         left = docWidth - panelWidth - 10;
+	        //     if(left < 0)
+	        //         left = 0;
+	
+	        //      if((top + panelHeight) > docHeight) {
+	        //  top = docHeight - panelHeight - 10;
+	        //  }
+	
+	        //      if(top < 0)
+	        //          top = 0;
 	    } else {
 	        throw new Error('calcOverlayPosition(): No such placement of "' + placement + '" found.');
 	    }
 	
-	    return { positionLeft: positionLeft, positionTop: positionTop, arrowOffsetLeft: arrowOffsetLeft, arrowOffsetTop: arrowOffsetTop };
+	    return { positionLeft: positionLeft, positionTop: positionTop, arrowOffsetLeft: arrowOffsetLeft, arrowOffsetTop: arrowOffsetTop, inverseArrow: inverseArrow };
 	}
 	module.exports = exports['default'];
 
@@ -54879,6 +54970,7 @@
 	      stars.push(_react2['default'].createElement(_Star2['default'], {
 	        ref: this.saveRef(index),
 	        index: index,
+	        count: count,
 	        disabled: disabled,
 	        prefixCls: prefixCls + '-star',
 	        allowHalf: allowHalf,
@@ -54900,7 +54992,8 @@
 	        onFocus: disabled ? null : this.onFocus,
 	        onBlur: disabled ? null : this.onBlur,
 	        onKeyDown: disabled ? null : this.onKeyDown,
-	        ref: this.saveRate
+	        ref: this.saveRate,
+	        role: 'radiogroup'
 	      },
 	      stars
 	    );
@@ -55141,6 +55234,14 @@
 	          index = _this$props2.index;
 	
 	      onClick(e, index);
+	    }, _this.onKeyDown = function (e) {
+	      var _this$props3 = _this.props,
+	          onClick = _this$props3.onClick,
+	          index = _this$props3.index;
+	
+	      if (e.keyCode === 13) {
+	        onClick(e, index);
+	      }
 	    }, _temp), _possibleConstructorReturn(_this, _ret);
 	  }
 	
@@ -55172,18 +55273,28 @@
 	
 	  Star.prototype.render = function render() {
 	    var onHover = this.onHover,
-	        onClick = this.onClick;
+	        onClick = this.onClick,
+	        onKeyDown = this.onKeyDown;
 	    var _props2 = this.props,
 	        disabled = _props2.disabled,
 	        prefixCls = _props2.prefixCls,
-	        character = _props2.character;
+	        character = _props2.character,
+	        index = _props2.index,
+	        count = _props2.count,
+	        value = _props2.value;
 	
 	    return _react2['default'].createElement(
 	      'li',
 	      {
 	        className: this.getClassName(),
 	        onClick: disabled ? null : onClick,
-	        onMouseMove: disabled ? null : onHover
+	        onKeyDown: disabled ? null : onKeyDown,
+	        onMouseMove: disabled ? null : onHover,
+	        role: 'radio',
+	        'aria-checked': value > index ? 'true' : 'false',
+	        'aria-posinset': index + 1,
+	        'aria-setsize': count,
+	        tabIndex: 0
 	      },
 	      _react2['default'].createElement(
 	        'div',
@@ -55210,7 +55321,8 @@
 	  onHover: _propTypes2['default'].func,
 	  onClick: _propTypes2['default'].func,
 	  character: _propTypes2['default'].node,
-	  focused: _propTypes2['default'].bool
+	  focused: _propTypes2['default'].bool,
+	  count: _propTypes2['default'].number
 	};
 	exports['default'] = Star;
 	module.exports = exports['default'];
@@ -57864,6 +57976,982 @@
 	module.exports = findIndex;
 	
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }()), __webpack_require__(328)(module)))
+
+/***/ }),
+/* 561 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(4);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactDom = __webpack_require__(12);
+	
+	var _reactDom2 = _interopRequireDefault(_reactDom);
+	
+	var _src = __webpack_require__(68);
+	
+	var _src2 = _interopRequireDefault(_src);
+	
+	var _beeFormControl = __webpack_require__(257);
+	
+	var _beeFormControl2 = _interopRequireDefault(_beeFormControl);
+	
+	var _beeLayout = __webpack_require__(1);
+	
+	var _beeSelect = __webpack_require__(268);
+	
+	var _beeSelect2 = _interopRequireDefault(_beeSelect);
+	
+	var _beeRadio = __webpack_require__(306);
+	
+	var _beeRadio2 = _interopRequireDefault(_beeRadio);
+	
+	var _beeDatepicker = __webpack_require__(310);
+	
+	var _beeDatepicker2 = _interopRequireDefault(_beeDatepicker);
+	
+	var _beeCheckbox = __webpack_require__(265);
+	
+	var _beeCheckbox2 = _interopRequireDefault(_beeCheckbox);
+	
+	var _beeSwitch = __webpack_require__(513);
+	
+	var _beeSwitch2 = _interopRequireDefault(_beeSwitch);
+	
+	var _beeLabel = __webpack_require__(261);
+	
+	var _beeLabel2 = _interopRequireDefault(_beeLabel);
+	
+	var _beeButton = __webpack_require__(65);
+	
+	var _beeButton2 = _interopRequireDefault(_beeButton);
+	
+	var _moment = __webpack_require__(327);
+	
+	var _moment2 = _interopRequireDefault(_moment);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+	
+	function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : _defaults(subClass, superClass); } /**
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @title 多种表单元素示例
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @description 查询面板
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                */
+	
+	
+	var FormItem = _src2['default'].FormItem;
+	var Option = _beeSelect2['default'].Option;
+	var RangePicker = _beeDatepicker2['default'].RangePicker;
+	
+	
+	var Demo5 = _src2['default'].createForm()(function (_Component) {
+	    _inherits(Demo, _Component);
+	
+	    function Demo(props) {
+	        _classCallCheck(this, Demo);
+	
+	        var _this = _possibleConstructorReturn(this, _Component.call(this, props));
+	
+	        _this.submit = function (e) {
+	            _this.props.form.validateFields(function (err, values) {
+	                if (err) {
+	                    console.log('校验失败', values);
+	                } else {
+	                    console.log('提交成功', values);
+	                }
+	            });
+	        };
+	
+	        _this.reset = function () {
+	            _this.props.form.resetFields();
+	            _this.setState({
+	                approvalState: '',
+	                closeState: '',
+	                confirmState: '',
+	                voucherDate: []
+	            });
+	        };
+	
+	        _this.state = {
+	            approvalState: '',
+	            closeState: '',
+	            confirmState: '',
+	            voucherDate: [],
+	            orderTypes: [{
+	                'code': '001',
+	                'name': '类型1'
+	            }, {
+	                'code': '002',
+	                'name': '类型2'
+	            }, {
+	                'code': '003',
+	                'name': '类型3'
+	            }]
+	        };
+	        return _this;
+	    }
+	
+	    Demo.prototype.render = function render() {
+	        var _props$form = this.props.form,
+	            getFieldProps = _props$form.getFieldProps,
+	            getFieldError = _props$form.getFieldError;
+	
+	        var self = this;
+	        return _react2['default'].createElement(
+	            'div',
+	            null,
+	            _react2['default'].createElement(
+	                _src2['default'],
+	                { className: 'demo5' },
+	                _react2['default'].createElement(
+	                    _beeLayout.Row,
+	                    null,
+	                    _react2['default'].createElement(
+	                        _beeLayout.Col,
+	                        { lg: 4, md: 6, xs: 12 },
+	                        _react2['default'].createElement(
+	                            FormItem,
+	                            null,
+	                            _react2['default'].createElement(
+	                                _beeLabel2['default'],
+	                                null,
+	                                '\u8BA2\u5355\u7F16\u53F7\uFF1A'
+	                            ),
+	                            _react2['default'].createElement(_beeFormControl2['default'], getFieldProps('orderCode', {
+	                                initialValue: ''
+	                            }))
+	                        )
+	                    ),
+	                    _react2['default'].createElement(
+	                        _beeLayout.Col,
+	                        { lg: 4, md: 6, xs: 12 },
+	                        _react2['default'].createElement(
+	                            FormItem,
+	                            null,
+	                            _react2['default'].createElement(
+	                                _beeLabel2['default'],
+	                                null,
+	                                '\u4F9B\u5E94\u5546\u540D\u79F0\uFF1A'
+	                            ),
+	                            _react2['default'].createElement(_beeFormControl2['default'], getFieldProps('supplierName', {
+	                                initialValue: ''
+	                            }))
+	                        )
+	                    ),
+	                    _react2['default'].createElement(
+	                        _beeLayout.Col,
+	                        { lg: 4, md: 6, xs: 4 },
+	                        _react2['default'].createElement(
+	                            FormItem,
+	                            null,
+	                            _react2['default'].createElement(
+	                                _beeLabel2['default'],
+	                                { className: 'time' },
+	                                '\u51ED\u8BC1\u65E5\u671F\uFF1A'
+	                            ),
+	                            _react2['default'].createElement(RangePicker, _extends({
+	                                defaultValue: this.state.voucherDate,
+	                                placeholder: '开始 ~ 结束',
+	                                dateInputPlaceholder: ['开始', '结束']
+	                            }, getFieldProps('voucherDate', {
+	                                onChange: function onChange(v) {
+	                                    self.setState({
+	                                        voucherDate: v
+	                                    });
+	                                }
+	                            })))
+	                        )
+	                    ),
+	                    _react2['default'].createElement(
+	                        _beeLayout.Col,
+	                        { lg: 4, md: 6, xs: 12 },
+	                        _react2['default'].createElement(
+	                            FormItem,
+	                            null,
+	                            _react2['default'].createElement(
+	                                _beeLabel2['default'],
+	                                null,
+	                                '\u8BA2\u5355\u7C7B\u578B\uFF1A'
+	                            ),
+	                            _react2['default'].createElement(
+	                                _beeSelect2['default'],
+	                                getFieldProps('type', {
+	                                    initialValue: ''
+	                                }),
+	                                _react2['default'].createElement(
+	                                    Option,
+	                                    { value: '' },
+	                                    '\u8BF7\u9009\u62E9'
+	                                ),
+	                                self.state.orderTypes.map(function (item, index) {
+	                                    return _react2['default'].createElement(
+	                                        Option,
+	                                        { key: index, value: item.code },
+	                                        item.name
+	                                    );
+	                                })
+	                            )
+	                        )
+	                    ),
+	                    _react2['default'].createElement(
+	                        _beeLayout.Col,
+	                        { lg: 4, md: 6, xs: 12 },
+	                        _react2['default'].createElement(
+	                            FormItem,
+	                            null,
+	                            _react2['default'].createElement(
+	                                _beeLabel2['default'],
+	                                null,
+	                                '\u91C7\u8D2D\u7EC4\uFF1A'
+	                            ),
+	                            _react2['default'].createElement(_beeFormControl2['default'], getFieldProps('purchasingGroup', {
+	                                initialValue: ''
+	                            }))
+	                        )
+	                    ),
+	                    _react2['default'].createElement(
+	                        _beeLayout.Col,
+	                        { lg: 4, md: 6, xs: 12 },
+	                        _react2['default'].createElement(
+	                            FormItem,
+	                            null,
+	                            _react2['default'].createElement(
+	                                _beeLabel2['default'],
+	                                null,
+	                                '\u5BA1\u6279\u72B6\u6001\uFF1A'
+	                            ),
+	                            _react2['default'].createElement(
+	                                _beeRadio2['default'].RadioGroup,
+	                                _extends({
+	                                    selectedValue: this.state.approvalState
+	                                }, getFieldProps('approvalState', {
+	                                    initialValue: '',
+	                                    onChange: function onChange(value) {
+	                                        self.setState({ approvalState: value });
+	                                    }
+	                                })),
+	                                _react2['default'].createElement(
+	                                    _beeRadio2['default'],
+	                                    { value: '0' },
+	                                    '\u672A\u5BA1\u6279'
+	                                ),
+	                                _react2['default'].createElement(
+	                                    _beeRadio2['default'],
+	                                    { value: '1' },
+	                                    '\u5DF2\u5BA1\u6279'
+	                                ),
+	                                _react2['default'].createElement(
+	                                    _beeRadio2['default'],
+	                                    { value: '' },
+	                                    '\u5168\u90E8'
+	                                )
+	                            )
+	                        )
+	                    ),
+	                    _react2['default'].createElement(
+	                        _beeLayout.Col,
+	                        { lg: 4, md: 6, xs: 12 },
+	                        _react2['default'].createElement(
+	                            FormItem,
+	                            null,
+	                            _react2['default'].createElement(
+	                                _beeLabel2['default'],
+	                                null,
+	                                '\u5173\u95ED\u72B6\u6001\uFF1A'
+	                            ),
+	                            _react2['default'].createElement(
+	                                _beeRadio2['default'].RadioGroup,
+	                                _extends({
+	                                    selectedValue: this.state.closeState
+	                                }, getFieldProps('closeState', {
+	                                    initialValue: '',
+	                                    onChange: function onChange(value) {
+	                                        self.setState({ closeState: value });
+	                                    }
+	                                })),
+	                                _react2['default'].createElement(
+	                                    _beeRadio2['default'],
+	                                    { value: '0' },
+	                                    '\u672A\u5173\u95ED'
+	                                ),
+	                                _react2['default'].createElement(
+	                                    _beeRadio2['default'],
+	                                    { value: '1' },
+	                                    '\u5DF2\u5173\u95ED'
+	                                ),
+	                                _react2['default'].createElement(
+	                                    _beeRadio2['default'],
+	                                    { value: '' },
+	                                    '\u5168\u90E8'
+	                                )
+	                            )
+	                        )
+	                    ),
+	                    _react2['default'].createElement(
+	                        _beeLayout.Col,
+	                        { lg: 4, md: 6, xs: 12 },
+	                        _react2['default'].createElement(
+	                            FormItem,
+	                            null,
+	                            _react2['default'].createElement(
+	                                _beeLabel2['default'],
+	                                null,
+	                                '\u786E\u8BA4\u72B6\u6001\uFF1A'
+	                            ),
+	                            _react2['default'].createElement(
+	                                _beeRadio2['default'].RadioGroup,
+	                                _extends({
+	                                    selectedValue: this.state.confirmState
+	                                }, getFieldProps('confirmState', {
+	                                    initialValue: '',
+	                                    onChange: function onChange(value) {
+	                                        self.setState({ confirmState: value });
+	                                    }
+	                                })),
+	                                _react2['default'].createElement(
+	                                    _beeRadio2['default'],
+	                                    { value: '0' },
+	                                    '\u672A\u786E\u8BA4'
+	                                ),
+	                                _react2['default'].createElement(
+	                                    _beeRadio2['default'],
+	                                    { value: '1' },
+	                                    '\u5DF2\u786E\u8BA4'
+	                                ),
+	                                _react2['default'].createElement(
+	                                    _beeRadio2['default'],
+	                                    { value: '' },
+	                                    '\u5168\u90E8'
+	                                )
+	                            )
+	                        )
+	                    ),
+	                    _react2['default'].createElement(
+	                        _beeLayout.Col,
+	                        { lg: 4, md: 6, xs: 12 },
+	                        _react2['default'].createElement(
+	                            FormItem,
+	                            null,
+	                            _react2['default'].createElement(
+	                                _beeLabel2['default'],
+	                                null,
+	                                '\u672A\u5206\u914D\uFF1A'
+	                            ),
+	                            _react2['default'].createElement(_beeCheckbox2['default'], { colors: 'primary' })
+	                        )
+	                    )
+	                ),
+	                _react2['default'].createElement(
+	                    'div',
+	                    { className: 'submit' },
+	                    _react2['default'].createElement(
+	                        _beeButton2['default'],
+	                        { colors: 'primary', className: 'login', onClick: this.submit },
+	                        '\u67E5\u8BE2'
+	                    ),
+	                    _react2['default'].createElement(
+	                        _beeButton2['default'],
+	                        { shape: 'border', className: 'reset', onClick: this.reset },
+	                        '\u91CD\u7F6E'
+	                    )
+	                )
+	            )
+	        );
+	    };
+	
+	    return Demo;
+	}(_react.Component));
+	exports['default'] = Demo5;
+	module.exports = exports['default'];
+
+/***/ }),
+/* 562 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(4);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactDom = __webpack_require__(12);
+	
+	var _reactDom2 = _interopRequireDefault(_reactDom);
+	
+	var _src = __webpack_require__(68);
+	
+	var _src2 = _interopRequireDefault(_src);
+	
+	var _beeFormControl = __webpack_require__(257);
+	
+	var _beeFormControl2 = _interopRequireDefault(_beeFormControl);
+	
+	var _beeLayout = __webpack_require__(1);
+	
+	var _beeSelect = __webpack_require__(268);
+	
+	var _beeSelect2 = _interopRequireDefault(_beeSelect);
+	
+	var _beeRadio = __webpack_require__(306);
+	
+	var _beeRadio2 = _interopRequireDefault(_beeRadio);
+	
+	var _beeDatepicker = __webpack_require__(310);
+	
+	var _beeDatepicker2 = _interopRequireDefault(_beeDatepicker);
+	
+	var _beeCheckbox = __webpack_require__(265);
+	
+	var _beeCheckbox2 = _interopRequireDefault(_beeCheckbox);
+	
+	var _beeSwitch = __webpack_require__(513);
+	
+	var _beeSwitch2 = _interopRequireDefault(_beeSwitch);
+	
+	var _beeLabel = __webpack_require__(261);
+	
+	var _beeLabel2 = _interopRequireDefault(_beeLabel);
+	
+	var _beeButton = __webpack_require__(65);
+	
+	var _beeButton2 = _interopRequireDefault(_beeButton);
+	
+	var _moment = __webpack_require__(327);
+	
+	var _moment2 = _interopRequireDefault(_moment);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+	
+	function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : _defaults(subClass, superClass); } /**
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @title 多种布局示例
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @description 
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                */
+	
+	
+	var FormItem = _src2['default'].FormItem;
+	var Option = _beeSelect2['default'].Option;
+	var RangePicker = _beeDatepicker2['default'].RangePicker;
+	
+	
+	var Demo6 = _src2['default'].createForm()(function (_Component) {
+	    _inherits(Demo, _Component);
+	
+	    function Demo(props) {
+	        _classCallCheck(this, Demo);
+	
+	        var _this = _possibleConstructorReturn(this, _Component.call(this, props));
+	
+	        _this.state = {
+	            approvalState: '',
+	            closeState: '',
+	            confirmState: '',
+	            voucherDate: [],
+	            orderTypes: [{
+	                'code': '001',
+	                'name': '类型1'
+	            }, {
+	                'code': '002',
+	                'name': '类型2'
+	            }, {
+	                'code': '003',
+	                'name': '类型3'
+	            }]
+	        };
+	        return _this;
+	    }
+	
+	    Demo.prototype.render = function render() {
+	        var _props$form = this.props.form,
+	            getFieldProps = _props$form.getFieldProps,
+	            getFieldError = _props$form.getFieldError;
+	
+	        var self = this;
+	        var orderTypes = [{
+	            "code": "D001",
+	            "name": "D001"
+	        }, {
+	            "code": "D002",
+	            "name": "D002"
+	        }, {
+	            "code": "D003",
+	            "name": "D003"
+	        }, {
+	            "code": "D004",
+	            "name": "D004"
+	        }];
+	        return _react2['default'].createElement(
+	            'div',
+	            null,
+	            _react2['default'].createElement(
+	                _src2['default'],
+	                { className: 'demo6' },
+	                _react2['default'].createElement(
+	                    'h4',
+	                    null,
+	                    '\u666E\u901A\u6805\u683C\u5E03\u5C40'
+	                ),
+	                _react2['default'].createElement(
+	                    _beeLayout.Row,
+	                    { className: 'edit-panel' },
+	                    _react2['default'].createElement(
+	                        _beeLayout.Col,
+	                        { lg: 4, md: 6, xs: 12 },
+	                        _react2['default'].createElement(
+	                            FormItem,
+	                            null,
+	                            _react2['default'].createElement(
+	                                _beeLabel2['default'],
+	                                null,
+	                                '\u8BA2\u5355\u7F16\u53F7\uFF1A',
+	                                _react2['default'].createElement(
+	                                    'span',
+	                                    { className: 'mast' },
+	                                    '*'
+	                                )
+	                            ),
+	                            _react2['default'].createElement(_beeFormControl2['default'], getFieldProps('orderCode1', {
+	                                initialValue: '',
+	                                rules: [{
+	                                    required: true, message: '请输入订单编号'
+	                                }]
+	                            })),
+	                            _react2['default'].createElement(
+	                                'span',
+	                                { className: 'error' },
+	                                getFieldError('orderCode1')
+	                            )
+	                        )
+	                    ),
+	                    _react2['default'].createElement(
+	                        _beeLayout.Col,
+	                        { lg: 4, md: 6, xs: 12 },
+	                        _react2['default'].createElement(
+	                            FormItem,
+	                            null,
+	                            _react2['default'].createElement(
+	                                _beeLabel2['default'],
+	                                null,
+	                                '\u4F9B\u5E94\u5546\u540D\u79F0\uFF1A',
+	                                _react2['default'].createElement(
+	                                    'span',
+	                                    { className: 'mast' },
+	                                    '*'
+	                                )
+	                            ),
+	                            _react2['default'].createElement(_beeFormControl2['default'], getFieldProps('supplierName1', {
+	                                initialValue: '',
+	                                rules: [{
+	                                    required: true, message: '请输入供应商名称'
+	                                }]
+	                            })),
+	                            _react2['default'].createElement(
+	                                'span',
+	                                { className: 'error' },
+	                                getFieldError('supplierName1')
+	                            )
+	                        )
+	                    ),
+	                    _react2['default'].createElement(
+	                        _beeLayout.Col,
+	                        { lg: 4, md: 6, xs: 12 },
+	                        _react2['default'].createElement(
+	                            FormItem,
+	                            null,
+	                            _react2['default'].createElement(
+	                                _beeLabel2['default'],
+	                                { className: 'time' },
+	                                '\u51ED\u8BC1\u65E5\u671F\uFF1A'
+	                            ),
+	                            _react2['default'].createElement(RangePicker, _extends({
+	                                defaultValue: this.state.voucherDate,
+	                                placeholder: '开始 ~ 结束',
+	                                dateInputPlaceholder: ['开始', '结束']
+	                            }, getFieldProps('voucherDate1', {
+	                                onChange: function onChange(v) {
+	                                    self.setState({
+	                                        voucherDate1: v
+	                                    });
+	                                }
+	                            })))
+	                        )
+	                    )
+	                ),
+	                _react2['default'].createElement('div', { className: 'split' }),
+	                _react2['default'].createElement(
+	                    'h4',
+	                    null,
+	                    '\u5355\u5217\u94FA\u6EE1'
+	                ),
+	                _react2['default'].createElement(
+	                    _beeLayout.Row,
+	                    { className: 'edit-panel edit-panel-all' },
+	                    _react2['default'].createElement(
+	                        FormItem,
+	                        null,
+	                        _react2['default'].createElement(
+	                            _beeLayout.Col,
+	                            { md: 2 },
+	                            _react2['default'].createElement(
+	                                _beeLabel2['default'],
+	                                null,
+	                                '\u8BA2\u5355\u7F16\u53F7\uFF1A',
+	                                _react2['default'].createElement(
+	                                    'span',
+	                                    { className: 'mast' },
+	                                    '*'
+	                                )
+	                            )
+	                        ),
+	                        _react2['default'].createElement(
+	                            _beeLayout.Col,
+	                            { md: 10 },
+	                            _react2['default'].createElement(_beeFormControl2['default'], getFieldProps('orderCode2', {
+	                                initialValue: '',
+	                                rules: [{
+	                                    required: true, message: '请输入订单编号'
+	                                }]
+	                            })),
+	                            _react2['default'].createElement(
+	                                'span',
+	                                { className: 'error' },
+	                                getFieldError('orderCode2')
+	                            )
+	                        )
+	                    ),
+	                    _react2['default'].createElement(
+	                        FormItem,
+	                        null,
+	                        _react2['default'].createElement(
+	                            _beeLayout.Col,
+	                            { md: 2 },
+	                            _react2['default'].createElement(
+	                                _beeLabel2['default'],
+	                                null,
+	                                '\u4F9B\u5E94\u5546\u540D\u79F0\uFF1A',
+	                                _react2['default'].createElement(
+	                                    'span',
+	                                    { className: 'mast' },
+	                                    '*'
+	                                )
+	                            )
+	                        ),
+	                        _react2['default'].createElement(
+	                            _beeLayout.Col,
+	                            { md: 10 },
+	                            _react2['default'].createElement(_beeFormControl2['default'], getFieldProps('supplierName2', {
+	                                initialValue: '',
+	                                rules: [{
+	                                    required: true, message: '请输入供应商名称'
+	                                }]
+	                            })),
+	                            _react2['default'].createElement(
+	                                'span',
+	                                { className: 'error' },
+	                                getFieldError('supplierName2')
+	                            )
+	                        )
+	                    ),
+	                    _react2['default'].createElement(
+	                        FormItem,
+	                        null,
+	                        _react2['default'].createElement(
+	                            _beeLayout.Col,
+	                            { md: 2 },
+	                            _react2['default'].createElement(
+	                                _beeLabel2['default'],
+	                                null,
+	                                '\u51ED\u8BC1\u65E5\u671F\uFF1A'
+	                            )
+	                        ),
+	                        _react2['default'].createElement(
+	                            _beeLayout.Col,
+	                            { md: 10 },
+	                            _react2['default'].createElement(RangePicker, _extends({
+	                                defaultValue: this.state.voucherDate,
+	                                placeholder: '开始 ~ 结束',
+	                                dateInputPlaceholder: ['开始', '结束']
+	                            }, getFieldProps('voucherDate2', {
+	                                onChange: function onChange(v) {
+	                                    self.setState({
+	                                        voucherDate2: v
+	                                    });
+	                                }
+	                            })))
+	                        )
+	                    ),
+	                    _react2['default'].createElement(
+	                        FormItem,
+	                        null,
+	                        _react2['default'].createElement(
+	                            _beeLayout.Col,
+	                            { md: 2 },
+	                            _react2['default'].createElement(
+	                                _beeLabel2['default'],
+	                                null,
+	                                '\u8BA2\u5355\u7C7B\u578B\uFF1A'
+	                            )
+	                        ),
+	                        _react2['default'].createElement(
+	                            _beeLayout.Col,
+	                            { md: 10 },
+	                            _react2['default'].createElement(
+	                                _beeSelect2['default'],
+	                                getFieldProps('type', {
+	                                    initialValue: ''
+	                                }),
+	                                _react2['default'].createElement(
+	                                    Option,
+	                                    { value: '' },
+	                                    '\u8BF7\u9009\u62E9'
+	                                ),
+	                                orderTypes.map(function (item, index) {
+	                                    return _react2['default'].createElement(
+	                                        Option,
+	                                        { key: index, value: item.code },
+	                                        item.name
+	                                    );
+	                                })
+	                            )
+	                        )
+	                    )
+	                ),
+	                _react2['default'].createElement('div', { className: 'split' }),
+	                _react2['default'].createElement(
+	                    'h4',
+	                    null,
+	                    '\u5355\u5217\u5C45\u4E2D'
+	                ),
+	                _react2['default'].createElement(
+	                    _beeLayout.Row,
+	                    { className: 'edit-panel edit-panel-center' },
+	                    _react2['default'].createElement(
+	                        _beeLayout.Col,
+	                        { md: 12 },
+	                        _react2['default'].createElement(
+	                            FormItem,
+	                            null,
+	                            _react2['default'].createElement(
+	                                _beeLabel2['default'],
+	                                null,
+	                                '\u8BA2\u5355\u7F16\u53F7\uFF1A',
+	                                _react2['default'].createElement(
+	                                    'span',
+	                                    { className: 'mast' },
+	                                    '*'
+	                                )
+	                            ),
+	                            _react2['default'].createElement(_beeFormControl2['default'], getFieldProps('orderCode3', {
+	                                initialValue: '',
+	                                rules: [{
+	                                    required: true, message: '请输入订单编号'
+	                                }]
+	                            })),
+	                            _react2['default'].createElement(
+	                                'span',
+	                                { className: 'error' },
+	                                getFieldError('orderCode3')
+	                            )
+	                        )
+	                    ),
+	                    _react2['default'].createElement(
+	                        _beeLayout.Col,
+	                        { md: 12 },
+	                        _react2['default'].createElement(
+	                            FormItem,
+	                            null,
+	                            _react2['default'].createElement(
+	                                _beeLabel2['default'],
+	                                null,
+	                                '\u4F9B\u5E94\u5546\u540D\u79F0\uFF1A',
+	                                _react2['default'].createElement(
+	                                    'span',
+	                                    { className: 'mast' },
+	                                    '*'
+	                                )
+	                            ),
+	                            _react2['default'].createElement(_beeFormControl2['default'], getFieldProps('supplierName3', {
+	                                initialValue: '',
+	                                rules: [{
+	                                    required: true, message: '请输入供应商名称'
+	                                }]
+	                            })),
+	                            _react2['default'].createElement(
+	                                'span',
+	                                { className: 'error' },
+	                                getFieldError('supplierName3')
+	                            )
+	                        )
+	                    ),
+	                    _react2['default'].createElement(
+	                        _beeLayout.Col,
+	                        { md: 12 },
+	                        _react2['default'].createElement(
+	                            FormItem,
+	                            null,
+	                            _react2['default'].createElement(
+	                                _beeLabel2['default'],
+	                                { className: 'time' },
+	                                '\u51ED\u8BC1\u65E5\u671F\uFF1A'
+	                            ),
+	                            _react2['default'].createElement(RangePicker, _extends({
+	                                defaultValue: this.state.voucherDate,
+	                                placeholder: '开始 ~ 结束',
+	                                dateInputPlaceholder: ['开始', '结束']
+	                            }, getFieldProps('voucherDate3', {
+	                                onChange: function onChange(v) {
+	                                    self.setState({
+	                                        voucherDate3: v
+	                                    });
+	                                }
+	                            })))
+	                        )
+	                    )
+	                ),
+	                _react2['default'].createElement('div', { className: 'split' }),
+	                _react2['default'].createElement(
+	                    'h4',
+	                    null,
+	                    '\u4E09\u5217\u5E26textarea'
+	                ),
+	                _react2['default'].createElement(
+	                    _beeLayout.Row,
+	                    { className: 'edit-panel edit-panel-textarea' },
+	                    _react2['default'].createElement(
+	                        _beeLayout.Col,
+	                        { md: 1 },
+	                        _react2['default'].createElement(
+	                            _beeLabel2['default'],
+	                            null,
+	                            '\u8BA2\u5355\u7F16\u53F7\uFF1A',
+	                            _react2['default'].createElement(
+	                                'span',
+	                                { className: 'mast' },
+	                                '*'
+	                            )
+	                        )
+	                    ),
+	                    _react2['default'].createElement(
+	                        _beeLayout.Col,
+	                        { md: 3 },
+	                        _react2['default'].createElement(_beeFormControl2['default'], getFieldProps('orderCode4', {
+	                            initialValue: '',
+	                            rules: [{
+	                                required: true, message: '请输入订单编号'
+	                            }]
+	                        })),
+	                        _react2['default'].createElement(
+	                            'span',
+	                            { className: 'error' },
+	                            getFieldError('orderCode4')
+	                        )
+	                    ),
+	                    _react2['default'].createElement(
+	                        _beeLayout.Col,
+	                        { md: 1 },
+	                        _react2['default'].createElement(
+	                            _beeLabel2['default'],
+	                            null,
+	                            '\u4F9B\u5E94\u5546\u540D\u79F0\uFF1A',
+	                            _react2['default'].createElement(
+	                                'span',
+	                                { className: 'mast' },
+	                                '*'
+	                            )
+	                        )
+	                    ),
+	                    _react2['default'].createElement(
+	                        _beeLayout.Col,
+	                        { md: 3 },
+	                        _react2['default'].createElement(_beeFormControl2['default'], getFieldProps('supplierName4', {
+	                            initialValue: '',
+	                            rules: [{
+	                                required: true, message: '请输入供应商名称'
+	                            }]
+	                        })),
+	                        _react2['default'].createElement(
+	                            'span',
+	                            { className: 'error' },
+	                            getFieldError('supplierName4')
+	                        )
+	                    ),
+	                    _react2['default'].createElement(
+	                        _beeLayout.Col,
+	                        { md: 1 },
+	                        _react2['default'].createElement(
+	                            _beeLabel2['default'],
+	                            { className: 'time' },
+	                            '\u51ED\u8BC1\u65E5\u671F\uFF1A'
+	                        )
+	                    ),
+	                    _react2['default'].createElement(
+	                        _beeLayout.Col,
+	                        { md: 3 },
+	                        _react2['default'].createElement(RangePicker, _extends({
+	                            defaultValue: this.state.voucherDate,
+	                            placeholder: '开始 ~ 结束',
+	                            dateInputPlaceholder: ['开始', '结束']
+	                        }, getFieldProps('voucherDate4', {
+	                            onChange: function onChange(v) {
+	                                self.setState({
+	                                    voucherDate3: v
+	                                });
+	                            }
+	                        })))
+	                    ),
+	                    _react2['default'].createElement(
+	                        _beeLayout.Col,
+	                        { md: 1 },
+	                        _react2['default'].createElement(
+	                            _beeLabel2['default'],
+	                            { className: 'time' },
+	                            '\u5907\u6CE8\uFF1A'
+	                        )
+	                    ),
+	                    _react2['default'].createElement(
+	                        _beeLayout.Col,
+	                        { md: 11 },
+	                        _react2['default'].createElement('textarea', _extends({ className: 'u-form-control'
+	                        }, getFieldProps('mark', {
+	                            initialValue: ''
+	                        })))
+	                    )
+	                )
+	            )
+	        );
+	    };
+	
+	    return Demo;
+	}(_react.Component));
+	exports['default'] = Demo6;
+	module.exports = exports['default'];
 
 /***/ })
 /******/ ]);

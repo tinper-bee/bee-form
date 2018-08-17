@@ -21,7 +21,7 @@ import Button from 'bee-button';
 const FormItem = Form.FormItem;
 const Option = Select.Option;
 
-const Demo4 = Form.createForm()(class Demo4 extends Component {
+const Demo4 = Form.createForm()(class Demo extends Component {
     constructor(props) {
         super(props);
         this.state = {
