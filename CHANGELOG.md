@@ -1,3 +1,13 @@
+<a name="2.0.6"></a>
+## [2.0.6](https://github.com/tinper-bee/bee-form/compare/v2.0.5...v2.0.6) (2018-08-17)
+
+
+### Bug Fixes
+
+* **bee-form:** 去掉bee-checkbox.scss ([2f6e638](https://github.com/tinper-bee/bee-form/commit/2f6e638))
+
+
+
 <a name="2.0.5"></a>
 ## [2.0.5](https://github.com/tinper-bee/bee-form/compare/v2.0.1...v2.0.5) (2018-08-17)
 
