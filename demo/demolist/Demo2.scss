@@ -1,22 +1,25 @@
-.demo2{
+.demo2 {
     font-size: 14px;
-}
-.demo2 .u-label {
-    display: inline-block;
-    min-width: 80px;
-    text-align: right;
-}
-.demo2 .u-form-control {
-    width: auto;
-}
-.demo2 .error{
-    font-size: 12px;
-    color: red;
-    margin-left: 10px;
-}
-.demo2 .submit{
-    padding-left: 90px;
-}
-.demo2 .submit .login{
-    margin-right: 10px;
+    .u-label {
+        display: inline-block;
+        min-width: 80px;
+        text-align: right;
+    }
+    .u-form-control {
+        width: auto;
+    }
+    .error {
+        font-size: 12px;
+        color: red;
+        margin-left: 10px;
+    }
+    .submit {
+        padding-left: 90px;
+    }
+    .submit .login {
+        margin-right: 10px;
+    }
+    .u-form-item {
+        min-height: auto!important;
+    }
 }

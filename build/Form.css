@@ -2,3 +2,6 @@
 /*  Navlayout  */
 .u-form-item {
   padding: 10px; }
+
+.u-form .u-form-item {
+  min-height: auto; }

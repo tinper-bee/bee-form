@@ -1,4 +1,3 @@
-@import '../../node_modules/bee-checkbox/src/Checkbox.scss';
 .demo6 {
     .edit-panel {
         background: #FFF;
@@ -21,7 +20,7 @@
         .u-form-item {
             min-width: 100%;
             margin-bottom: 10px;
-            min-height: 50px;
+            min-height: 50px!important;
             .error {
                 margin-left: 100px;
                 color: red;

@@ -1,5 +1,3 @@
-@import '../../node_modules/bee-checkbox/src/Checkbox.scss';
-
 .demo5 {
     .submit{
         padding-left:90px
@@ -9,7 +7,7 @@
     }
     .u-form-item {
         min-width: 100%;
-        min-height: 50px;
+        min-height: 50px!important;
         padding: 0;
         .u-label{
             min-width: 90px;

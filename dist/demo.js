@@ -76,7 +76,7 @@
 	
 	var CARETUP = _react2['default'].createElement('i', { className: 'uf uf-arrow-up' });
 	
-	var Demo1 = __webpack_require__(67);var Demo2 = __webpack_require__(263);var Demo3 = __webpack_require__(264);var Demo4 = __webpack_require__(267);var Demo5 = __webpack_require__(561);var Demo6 = __webpack_require__(562);var DemoArray = [{ "example": _react2['default'].createElement(Demo1, null), "title": " 单个input校验", "code": '/**\n *\n * @title \u5355\u4E2Ainput\u6821\u9A8C\n * @description \u4F7F\u7528FormItem\n */\nimport React, { Component } from \'react\';\nimport { Form, Label, FormControl } from \'tinper-bee\';\nconst FormItem = Form.FormItem;\n\n\nconst Demo1 = Form.createForm()(class Demo extends Component {\n    constructor(props) {\n        super(props);\n    }\n    render() {\n        const self=this;\n        const { getFieldProps, getFieldError } = this.props.form;\n        return (\n                <FormItem className=\'demo1\'>\n                    <Label>\u59D3\u540D\uFF1A</Label>\n                    <FormControl placeholder=\'\u8BF7\u8F93\u5165\u59D3\u540D\'\n                     {...getFieldProps(\'name\', {\n                        validateTrigger: \'onBlur\',\n                        rules: [{\n                            required: true, message: \'\u8BF7\u8F93\u5165\u59D3\u540D\'\n                        },{\n                            max:5,message:\'\u6700\u5927\u957F\u5EA6\u4E3A10\'\n                        },{\n                            pattern: /[\\u4e00-\\u9fa5]/, message: \'\u8BF7\u8F93\u5165\u4E2D\u6587\u5B57\u7B26\',\n                        }],\n                    }) } />\n                    <span className=\'error\'>\n                        {getFieldError(\'name\')}\n                    </span>   \n                </FormItem>\n        )\n    }\n})\n\n', "desc": " 使用FormItem", "scss_code": ".demo1{\n    font-size: 14px;\n}\n.demo1 .u-label {\n    display: inline;\n}\n.demo1 .u-form-control {\n    width: auto;\n}\n.demo1 .error{\n    font-size: 12px;\n    color: red;\n    margin-left: 10px;\n}" }, { "example": _react2['default'].createElement(Demo2, null), "title": " 基本form校验", "code": "/**\n *\n * @title 基本form校验\n * @description 登录示例\n */\nimport React, { Component } from 'react';\nimport ReactDOM from 'react-dom';\nimport { Form, Button, Label, FormControl } from 'tinper-bee';\nconst FormItem = Form.FormItem;\n\nconst Demo2 = Form.createForm()(class Demo2 extends Component {\n    submit = (e) => {\n        e.preventDefault();\n        this.props.form.validateFields((err, values) => {\n            if (err) {\n                console.log('校验失败', values);\n            } else {\n                console.log('提交成功', values)\n            }\n        });\n    }\n    render() {\n        const { getFieldProps, getFieldError } = this.props.form;\n        return (\n            <div className=\"demo2\">\n                <Form >\n                    <FormItem>\n                        <Label>用户名：</Label>\n                        <FormControl placeholder=\"请输入用户名\"\n                            {...getFieldProps('username', {\n                                validateTrigger: 'onBlur',\n                                rules: [{\n                                    required: true, message: '请输入用户名',\n                                }],\n                            }) }\n                        />\n                        <span className='error'>\n                            {getFieldError('username')}\n                        </span>\n                    </FormItem>\n                    <FormItem>\n                        <Label>密码：</Label>\n                        <FormControl placeholder=\"请输入密码\" type='password'\n                            {...getFieldProps('password', {\n                                validateTrigger: 'onBlur',\n                                rules: [{\n                                    required: true, message: '请输入密码',\n                                }],\n                            }) }\n                        />\n                        <span className='error'>\n                            {getFieldError('password')}\n                        </span>\n                    </FormItem>\n                    <div className='submit'>\n                        <Button colors=\"primary\" className=\"login\" onClick={this.submit}>登陆</Button>\n                        <Button shape=\"border\" className=\"reset\">取消</Button>\n                    </div>\n                </Form>\n            </div>\n        )\n    }\n})\n", "desc": " 登录示例", "scss_code": ".demo2{\n    font-size: 14px;\n}\n.demo2 .u-label {\n    display: inline-block;\n    min-width: 80px;\n    text-align: right;\n}\n.demo2 .u-form-control {\n    width: auto;\n}\n.demo2 .error{\n    font-size: 12px;\n    color: red;\n    margin-left: 10px;\n}\n.demo2 .submit{\n    padding-left: 90px;\n}\n.demo2 .submit .login{\n    margin-right: 10px;\n}" }, { "example": _react2['default'].createElement(Demo3, null), "title": " 基本form校验", "code": "/**\n *\n * @title 基本form校验\n * @description 注册示例\n */\nimport React, { Component } from 'react';\nimport { Form, Label, Checkbox, Button, FormControl } from 'tinper-bee';\nconst FormItem = Form.FormItem;\n\nconst Demo3 = Form.createForm()( class Demo extends Component {\n    constructor(props) {\n        super(props);\n        this.state = {\n            checkbox: false\n        }\n    }\n    submit = (e) => {\n        e.preventDefault();\n        this.props.form.validateFields((err, values) => {\n            if (err) {\n                console.log('校验失败', values);\n            } else {\n                console.log('提交成功', values)\n            }\n        });\n    }\n    handleConfirmPassword = (rule, value, callback) => {\n        const { getFieldValue } = this.props.form;\n        if (value && value !== getFieldValue('password')) {\n            callback('两次输入不一致！')\n        }\n        callback();\n    }\n    render() {\n        const self = this;\n        const { getFieldProps, getFieldError } = this.props.form;\n        return (\n            <div className=\"demo3\">\n                <Form>\n                    <FormItem>\n                        <Label>用户名：</Label>\n                        <FormControl placeholder=\"请输入用户名(包含数字和字母，8-15位)\"\n                            {...getFieldProps('username', {\n                                validateTrigger: 'onBlur',\n                                rules: [{\n                                    required: true, message: '请输入用户名',\n                                }, {\n                                    pattern: /^(?!\\d+$)(?![a-zA-Z]+$)[a-zA-Z0-9]{8,15}$/, message: '用户名格式错误',\n                                }],\n                            }) }\n                        />\n                        <span className='error'>\n                            {getFieldError('username')}\n                        </span>\n                    </FormItem>\n\n                    <FormItem>\n                        <Label>密码：</Label>\n                        <FormControl placeholder=\"请输入密码\" type='password'\n                            {...getFieldProps('password', {\n                                validateTrigger: 'onBlur',\n                                rules: [{\n                                    required: true, message: '请输入密码',\n                                }],\n                            }) }\n                        />\n                        <span className='error'>\n                            {getFieldError('password')}\n                        </span>\n                    </FormItem>\n\n                    <FormItem>\n                        <Label>再次输入密码：</Label>\n                        <FormControl placeholder=\"请输入密码\" type='password'\n                            {...getFieldProps('password2', {\n                                validateTrigger: 'onBlur',\n                                rules: [{\n                                    required: true, message: '请输入密码',\n                                }, {\n                                    validator: this.handleConfirmPassword\n                                }],\n                            }) }\n                        />\n                        <span className='error'>\n                            {getFieldError('password2')}\n                        </span>\n                    </FormItem>\n\n                    <FormItem>\n                        <Label>邮箱：</Label>\n                        <FormControl placeholder=\"请输入邮箱\"\n                            {...getFieldProps('email', {\n                                validateTrigger: 'onBlur',\n                                rules: [{\n                                    required: true, message: '请输入邮箱',\n                                }, {\n                                    type: 'email', message: '邮箱格式不正确'\n                                }],\n                            }) }\n                        />\n                        <span className='error'>\n                            {getFieldError('email')}\n                        </span>\n                    </FormItem>\n                    <FormItem>\n                        <Label>手机号：</Label>\n\n                        <FormControl placeholder=\"请输入手机号\"\n                            {...getFieldProps('phone', {\n                                validateTrigger: 'onBlur',\n                                rules: [{\n                                    required: true, message: '请输入手机号',\n                                }, {\n                                    pattern: /^\\d{11}$/, message: '手机号格式不正确'\n                                }],\n                            }) }\n                        />\n\n                        <span className='error'>\n                            {getFieldError('phone')}\n                        </span>\n                    </FormItem>\n\n                    <FormItem style={{'paddingLeft':'110px'}}>\n                        <Checkbox colors=\"info\"\n                            defaultChecked={this.state.checkbox}\n                            {\n                            ...getFieldProps('checkbox', {\n                                initialValue: false,\n                            }\n                            ) }\n                        />\n                        <span>我已经阅读并同意相关条款</span>\n                    </FormItem>\n                    <div className='submit'>\n                        <Button colors=\"primary\" className=\"login\" onClick={this.submit}>注册</Button>\n                        <Button shape=\"border\" className=\"reset\">取消</Button>\n                    </div>\n                </Form>\n            </div>\n        )\n    }\n})\n", "desc": " 注册示例", "scss_code": "@import '../../node_modules/bee-checkbox/src/Checkbox.scss';\n.demo3{\n    font-size: 14px;\n}\n.demo3 .u-label {\n    display: inline-block;\n    min-width: 100px;\n    text-align: right;\n}\n.demo3 .u-form-control {\n    width: auto;\n    min-width: 300px;\n}\n.demo3 .error{\n    font-size: 12px;\n    color: red;\n    margin-left: 10px;\n}\n.demo3 .submit{\n    padding-left: 110px;\n}\n.demo3 .submit .login{\n    margin-right: 10px;\n}" }, { "example": _react2['default'].createElement(Demo4, null), "title": " 表单校验", "code": "/**\n *\n * @title 表单校验\n * @description 用户信息录入实例\n */\nimport React, { Component } from 'react';\nimport ReactDOM from 'react-dom';\nimport { Form, Button, Label, CitySelect, Rate, InputNumber, Slider, Switch, Checkbox, DatePicker, Radio, Select, FormControl } from 'tinper-bee';\nconst FormItem = Form.FormItem;\nconst Option = Select.Option;\n\nconst Demo4 = Form.createForm()(class Demo extends Component {\n    constructor(props) {\n        super(props);\n        this.state = {\n            selectedValue: 'man',\n        };\n    }\n    submit = (e) => {\n        this.props.form.validateFields((err, values) => {\n            if (err) {\n                console.log('校验失败', values);\n            } else {\n                console.log('提交成功', values)\n            }\n        });\n    }\n    render() {\n        const { getFieldProps, getFieldError } = this.props.form;\n        const self = this;\n        return (\n            <div>\n                <Form className='demo4'>\n                    <FormItem>\n                        <Label>姓名：</Label>\n                        <FormControl placeholder=\"请输入姓名\"\n                            {...getFieldProps('name', {\n                                validateTrigger: 'onBlur',\n                                rules: [{\n                                    required: true, message: '请输入姓名',\n                                }],\n                            }) }\n                        />\n                        <span className='error'>\n                            {getFieldError('name')}\n                        </span>\n                    </FormItem>\n                    <FormItem>\n                        <Label>身份证号：</Label>\n                        <FormControl placeholder=\"请输入身份证号\"\n                            {...getFieldProps('id', {\n                                validateTrigger: 'onBlur',\n                                rules: [{\n                                    required: true, message: '请输入身份证号',\n                                }],\n                            }) }\n                        />\n                        <span className='error'>\n                            {getFieldError('id')}\n                        </span>\n                    </FormItem>\n                    <FormItem className='time'>\n                        <Label>出生日期：</Label>\n                        <DatePicker\n                            {\n                            ...getFieldProps('time', {\n\n                            }\n                            ) }\n                            placeholder={'请选择出生日期'}\n                        />\n                    </FormItem>\n                    <FormItem>\n                        <Label>年龄：</Label>\n                        <FormControl placeholder=\"请输入年龄\"\n                            {...getFieldProps('age', {\n                                validateTrigger: 'onBlur',\n                                rules: [{\n                                    required: true, message: '请输入年龄',\n                                }],\n                            }) }\n                        />\n                        <span className='error'>\n                            {getFieldError('age')}\n                        </span>\n                    </FormItem>\n                     <FormItem>\n                        <Label>性别：</Label>\n                        <Radio.RadioGroup\n                            selectedValue={this.state.selectedValue}\n                            {\n                            ...getFieldProps('sex', {\n                                initialValue: 'man',\n                                onChange(value) {\n                                    self.setState({ selectedValue: value });\n                                },\n                                rules: [{ required: true }]\n                            }\n                            ) }\n                        >\n                            <Radio value=\"man\" >男</Radio>\n                            <Radio value=\"woman\" >女</Radio>\n                        </Radio.RadioGroup>\n                    </FormItem>\n                    <FormItem>\n                        <Label>学历：</Label>\n                        <Select\n                            {\n                            ...getFieldProps('education', {\n                                initialValue: '',\n                                rules: [{ required: true }]\n                            }\n                            ) }\n                        >\n                            <Option value=\"\">请选择</Option>\n                            <Option value=\"nothing\">无</Option>\n                            <Option value=\"middle\">初中</Option>\n                            <Option value=\"senior\">高中</Option>\n                            <Option value=\"college1\">专科</Option>\n                            <Option value=\"college2\">本科</Option>\n                            <Option value=\"graduate\">研究生及以上</Option>\n                            <Option value=\"other\">其它</Option>\n                        </Select>\n                    </FormItem>\n                    <FormItem>\n                        <Label>保密等级：</Label>\n                        <Rate\n                            {\n                            ...getFieldProps('rate', {\n                                initialValue: 0,\n                                rules: [{ required: true }]\n                            }\n                            ) }\n                        />\n                    </FormItem>\n                    <FormItem >\n                        <Label>备注：</Label>\n                        <FormControl componentClass='textarea'\n                            {\n                            ...getFieldProps('remark', {}\n                            ) }\n                        />\n                    </FormItem>  \n                    \n\n\n                    <div className='submit'>\n                        <Button colors=\"primary\" className=\"login\" onClick={this.submit}>提交</Button>\n                        <Button shape=\"border\" className=\"reset\">取消</Button>\n                    </div>\n                </Form>\n            </div>\n        )\n    }\n})\n", "desc": " 用户信息录入实例", "scss_code": "@import '../../node_modules/bee-checkbox/src/Checkbox.scss';\n.demo4{\n    font-size: 14px;\n}\n.demo4 .u-label {\n    display: inline-block;\n    min-width: 100px;\n    text-align: right;\n}\n.demo4 .u-form-control {\n    width: auto;\n    min-width: 380px;\n}\n.demo4 .error{\n    font-size: 12px;\n    color: red;\n    margin-left: 10px;\n}\n.demo4 .submit{\n    padding-left: 110px;\n}\n.demo4 .submit .login{\n    margin-right: 10px;\n}\n.demo4 .u-select {\n    max-width: 380px;\n}\n.demo4 textarea{\n    min-height: 100px;\n    resize: none;\n}\n.demo4 .time>div{\n    display: inline-block;\n}\n.demo4 .time .u-label{\n    position: relative;\n    bottom: 10px;\n}\n.demo4 .u-city-select{\n    display: inline-block;\n}\n.demo4 .u-city-select .province,.demo4 .u-city-select .city,.demo4 .u-city-select .area{\n    width: 120px;\n}" }, { "example": _react2['default'].createElement(Demo5, null), "title": " 多种表单元素示例", "code": "/**\n *\n * @title 多种表单元素示例\n * @description 查询面板\n */\nimport React, { Component } from 'react';\nimport ReactDOM from 'react-dom';\nimport { Form, Button, Label, Switch, Checkbox, DatePicker, Radio, Select,  Col , Row , FormControl } from 'tinper-bee';\nimport moment from \"moment/moment\";\nconst FormItem = Form.FormItem;\nconst Option = Select.Option;\nconst { RangePicker } = DatePicker;\n\nconst Demo5 = Form.createForm()(class Demo extends Component {\n    constructor(props) {\n        super(props);\n        this.state = {\n            approvalState: '',\n            closeState: '',\n            confirmState: '',\n            voucherDate: [],\n            orderTypes:[\n                {\n                    'code':'001',\n                    'name':'类型1'\n                },\n                {\n                    'code':'002',\n                    'name':'类型2'\n                },\n                {\n                    'code':'003',\n                    'name':'类型3'\n                },\n            ]\n        };\n    }\n    submit = (e) => {\n        this.props.form.validateFields((err, values) => {\n            if (err) {\n                console.log('校验失败', values);\n            } else {\n                console.log('提交成功', values)\n            }\n        });\n    }\n    reset = () =>{\n        this.props.form.resetFields();\n        this.setState({\n            approvalState: '',\n            closeState: '',\n            confirmState: '',\n            voucherDate: []\n        })\n    }\n    render() {\n        const { getFieldProps, getFieldError } = this.props.form;\n        const self = this;\n        return (\n            <div>\n                <Form className='demo5'>\n                <Row>\n                        <Col lg={4} md={6} xs={12}>\n                            <FormItem>\n                                <Label>订单编号：</Label>\n                                <FormControl\n                                    {\n                                    ...getFieldProps('orderCode', {\n                                        initialValue: '',\n                                    })\n                                    }\n                                />\n                            </FormItem>\n                        </Col>\n                        <Col  lg={4} md={6} xs={12}>\n                            <FormItem>\n                                <Label>供应商名称：</Label>\n                                <FormControl\n                                    {\n                                    ...getFieldProps('supplierName', {\n                                        initialValue: '',\n                                    })\n                                    }\n                                />\n                            </FormItem>\n                        </Col>\n                        <Col lg={4} md={6} xs={4}>\n                            <FormItem>\n                                <Label className='time'>凭证日期：</Label>\n                                <RangePicker\n                                    defaultValue={this.state.voucherDate}\n                                    placeholder={'开始 ~ 结束'}\n                                    dateInputPlaceholder={['开始', '结束']}\n                                    {\n                                    ...getFieldProps('voucherDate', {\n                                        onChange: function (v) {\n                                            self.setState({\n                                                voucherDate: v\n                                            })\n                                        }\n                                    })\n                                    }\n                                />\n                            </FormItem>\n                        </Col>\n                        <Col  lg={4} md={6} xs={12}>\n                            <FormItem>\n                                <Label>订单类型：</Label>\n                                <Select {\n                                    ...getFieldProps('type', {\n                                        initialValue: '',\n                                    }\n                                    )}>\n                                    <Option value=\"\">请选择</Option>\n                                    {\n                                        self.state.orderTypes.map((item, index) => {\n                                            return (\n                                                <Option key={index} value={item.code}>{item.name}</Option>\n                                            )\n                                        })\n                                    }\n                                </Select>\n                            </FormItem>\n                        </Col>\n                        <Col  lg={4} md={6} xs={12}>\n                            <FormItem>\n                                <Label>采购组：</Label>\n                                <FormControl\n                                    {\n                                    ...getFieldProps('purchasingGroup', {\n                                        initialValue: '',\n                                    })\n                                    }\n                                />\n                            </FormItem>\n                        </Col>\n                        <Col  lg={4} md={6} xs={12}>\n                            <FormItem>\n                                <Label>审批状态：</Label>\n                                <Radio.RadioGroup\n                                    selectedValue={this.state.approvalState}\n                                    {\n                                    ...getFieldProps('approvalState', {\n                                        initialValue: '',\n                                        onChange(value) {\n                                            self.setState({ approvalState: value });\n                                        },\n                                    }\n                                    )}\n                                >\n                                    <Radio value=\"0\" >未审批</Radio>\n                                    <Radio value=\"1\" >已审批</Radio>\n                                    <Radio value=\"\" >全部</Radio>\n                                </Radio.RadioGroup>\n                            </FormItem>\n                        </Col>\n                        <Col  lg={4} md={6} xs={12}>\n                            <FormItem>\n                                <Label>关闭状态：</Label>\n                                <Radio.RadioGroup\n                                    selectedValue={this.state.closeState}\n                                    {\n                                    ...getFieldProps('closeState', {\n                                        initialValue: '',\n                                        onChange(value) {\n                                            self.setState({ closeState: value });\n                                        },\n                                    }\n                                    )}\n                                >\n                                    <Radio value=\"0\" >未关闭</Radio>\n                                    <Radio value=\"1\" >已关闭</Radio>\n                                    <Radio value=\"\" >全部</Radio>\n                                </Radio.RadioGroup>\n                            </FormItem>\n                        </Col>\n                        <Col  lg={4} md={6} xs={12}>\n                            <FormItem>\n                                <Label>确认状态：</Label>\n                                <Radio.RadioGroup\n                                    selectedValue={this.state.confirmState}\n                                    {\n                                    ...getFieldProps('confirmState', {\n                                        initialValue: '',\n                                        onChange(value) {\n                                            self.setState({ confirmState: value });\n                                        },\n                                    }\n                                    )}\n                                >\n                                    <Radio value=\"0\" >未确认</Radio>\n                                    <Radio value=\"1\" >已确认</Radio>\n                                    <Radio value=\"\" >全部</Radio>\n                                </Radio.RadioGroup>\n                            </FormItem>\n                        </Col>\n                        <Col  lg={4} md={6} xs={12}>\n                            <FormItem>\n                                <Label>未分配：</Label>\n                                <Checkbox colors=\"primary\"></Checkbox>\n                            </FormItem>\n                        </Col>\n                    </Row>\n                    <div className='submit'>\n                        <Button colors=\"primary\" className=\"login\" onClick={this.submit}>查询</Button>\n                        <Button shape=\"border\" className=\"reset\" onClick={this.reset}>重置</Button>\n                    </div>\n                </Form>\n            </div>\n        )\n    }\n})\n", "desc": " 查询面板", "scss_code": "@import '../../node_modules/bee-checkbox/src/Checkbox.scss';\n\n.demo5 {\n    .submit{\n        padding-left:90px\n    }\n    .reset{\n        margin-left:10px;\n    }\n    .u-form-item {\n        min-width: 100%;\n        min-height: 50px;\n        padding: 0;\n        .u-label{\n            min-width: 90px;\n            display: inline-block;\n            text-align:right;\n        }\n        .u-label.time{\n            position: relative;\n            bottom: 10px;\n        }\n        .u-label + *{\n            min-width: 200px;\n            display: inline-block;\n        }\n        .datepicker-input-group{\n            .u-input-group-btn{\n                .uf-calendar{\n                    padding: 0;\n                }\n            }\n        }\n        .u-switch{\n            min-width: auto;\n        }\n        .u-select{\n            width: auto;\n        }\n        .u-form-control{\n            width: auto;\n        }\n        .calendar-picker{\n            display: inline-block;\n            min-width:200px;\n            width: auto;\n            input{\n                width: 100%;\n                text-align: center;\n            }\n        }\n        .u-radio .u-radio-label{\n            font-size:14px;\n        }\n    }\n}\n" }, { "example": _react2['default'].createElement(Demo6, null), "title": " 多种布局示例", "code": "/**\n *\n * @title 多种布局示例\n * @description \n */\nimport React, { Component } from 'react';\nimport ReactDOM from 'react-dom';\nimport { Form, Button, Label, Switch, Checkbox, DatePicker, Radio, Select,  Col , Row , FormControl } from 'tinper-bee';\nimport moment from \"moment/moment\";\nconst FormItem = Form.FormItem;\nconst Option = Select.Option;\nconst { RangePicker } = DatePicker;\n\nconst Demo6 = Form.createForm()(class Demo extends Component {\n    constructor(props) {\n        super(props);\n        this.state = {\n            approvalState: '',\n            closeState: '',\n            confirmState: '',\n            voucherDate: [],\n            orderTypes:[\n                {\n                    'code':'001',\n                    'name':'类型1'\n                },\n                {\n                    'code':'002',\n                    'name':'类型2'\n                },\n                {\n                    'code':'003',\n                    'name':'类型3'\n                },\n            ]\n        };\n    }\n    render() {\n        const { getFieldProps, getFieldError } = this.props.form;\n        const self = this;\n        const orderTypes= [{\n            \"code\":\"D001\",\n            \"name\":\"D001\"\n          },{\n            \"code\":\"D002\",\n            \"name\":\"D002\"\n          },{\n            \"code\":\"D003\",\n            \"name\":\"D003\"\n          },{\n            \"code\":\"D004\",\n            \"name\":\"D004\"\n          }];\n        return (\n            <div>\n                <Form className='demo6'>\n                    {/* 普通栅格布局 */}\n                    <h4>\n                        普通栅格布局\n                    </h4>\n                    <Row className = 'edit-panel'>\n                        <Col lg={4} md={6} xs={12}>\n                            <FormItem>\n                                <Label>订单编号：\n                                    <span className='mast'>*</span>\n                                </Label>\n                                <FormControl\n                                    {\n                                    ...getFieldProps('orderCode1', {\n                                        initialValue: '',\n                                        rules: [{\n                                            required: true, message: '请输入订单编号',\n                                        }],\n                                    })\n                                    }\n                                />\n                                <span className='error'>\n                                    {\n                                        getFieldError('orderCode1')\n                                    }\n                                </span>\n                            </FormItem>\n                        </Col>\n                        <Col lg={4} md={6} xs={12}>\n                            <FormItem>\n                                <Label>供应商名称：\n                                    <span className='mast'>*</span>\n                                </Label>\n                                <FormControl\n                                    {\n                                        ...getFieldProps('supplierName1', {\n                                            initialValue: '',\n                                            rules: [{\n                                                required: true, message: '请输入供应商名称',\n                                            }],\n                                        })\n                                    }\n                                />\n                                <span className='error'>\n                                    {\n                                        getFieldError('supplierName1')\n                                    }\n                                </span>\n                            </FormItem>\n                            \n                        </Col>\n                        <Col lg={4} md={6} xs={12}>\n                            <FormItem>\n                                <Label className='time'>凭证日期：</Label>\n                                <RangePicker\n                                    defaultValue={this.state.voucherDate}\n                                    placeholder={'开始 ~ 结束'}\n                                    dateInputPlaceholder={['开始', '结束']}\n                                    {\n                                    ...getFieldProps('voucherDate1', {\n                                        onChange: function (v) {\n                                            self.setState({\n                                                voucherDate1: v\n                                            })\n                                        }\n                                    })\n                                    }\n                                />\n                            </FormItem>\n                        </Col>\n                    </Row>\n\n                    <div className='split'></div>\n                    \n                    \n                     {/* 单列铺满 */}\n                     <h4>\n                        单列铺满\n                     </h4>\n                     <Row className = 'edit-panel edit-panel-all'>\n                        <FormItem>\n                            <Col md={2}>\n                                <Label>订单编号：\n                                    <span className='mast'>*</span>\n                                </Label>\n                            </Col>\n                            <Col md={10}>\n                                <FormControl\n                                    {\n                                    ...getFieldProps('orderCode2', {\n                                        initialValue: '',\n                                        rules: [{\n                                            required: true, message: '请输入订单编号',\n                                        }],\n                                    })\n                                    }\n                                />\n                                <span className='error'>\n                                    {\n                                        getFieldError('orderCode2')\n                                    }\n                                </span>\n                            </Col>\n                        </FormItem>\n\n                        <FormItem>\n                            <Col md={2}>\n                                <Label>供应商名称：\n                                    <span className='mast'>*</span>\n                                </Label>\n                            </Col>\n                            <Col md={10}>\n                                <FormControl\n                                    {\n                                        ...getFieldProps('supplierName2', {\n                                            initialValue: '',\n                                            rules: [{\n                                                required: true, message: '请输入供应商名称',\n                                            }],\n                                        })\n                                    }\n                                />\n                                <span className='error'>\n                                    {\n                                        getFieldError('supplierName2')\n                                    }\n                                </span>\n                            </Col>\n                        </FormItem>\n\n                        <FormItem>\n                            <Col md={2}>\n                                <Label>凭证日期：</Label>\n                            </Col>\n                            <Col md={10}>\n                                <RangePicker\n                                    defaultValue={this.state.voucherDate}\n                                    placeholder={'开始 ~ 结束'}\n                                    dateInputPlaceholder={['开始', '结束']}\n                                    {\n                                    ...getFieldProps('voucherDate2', {\n                                        onChange: function (v) {\n                                            self.setState({\n                                                voucherDate2: v\n                                            })\n                                        }\n                                    })\n                                    }\n                                />\n                            </Col>\n                        </FormItem>\n                        <FormItem>\n                            <Col md={2}>\n                                <Label>订单类型：</Label>\n                            </Col>\n                            <Col md={10}>\n                                <Select {\n                                    ...getFieldProps('type', {\n                                        initialValue: '',\n                                    }\n                                    )}>\n                                    <Option value=\"\">请选择</Option>\n                                    {\n                                        orderTypes.map((item, index) => {\n                                            return (\n                                                <Option key={index} value={item.code}>{item.name}</Option>\n                                            )\n                                        })\n                                    }\n                                </Select>\n                            </Col>\n                        </FormItem>\n                        \n                    </Row>\n\n                    <div className='split'></div>\n\n                    {/* 单列居中 */}\n                    <h4>\n                        单列居中\n                     </h4>\n                    <Row className = 'edit-panel edit-panel-center'>\n                        <Col md={12}>\n                            <FormItem>\n                                <Label>订单编号：\n                                    <span className='mast'>*</span>\n                                </Label>\n                                <FormControl\n                                    {\n                                    ...getFieldProps('orderCode3', {\n                                        initialValue: '',\n                                        rules: [{\n                                            required: true, message: '请输入订单编号',\n                                        }],\n                                    })\n                                    }\n                                />\n                                <span className='error'>\n                                    {\n                                        getFieldError('orderCode3')\n                                    }\n                                </span>\n                            </FormItem>\n                        </Col>\n                        <Col md={12}>\n                            <FormItem>\n                                <Label>供应商名称：\n                                    <span className='mast'>*</span>\n                                </Label>\n                                <FormControl\n                                    {\n                                        ...getFieldProps('supplierName3', {\n                                            initialValue: '',\n                                            rules: [{\n                                                required: true, message: '请输入供应商名称',\n                                            }],\n                                        })\n                                    }\n                                />\n                                <span className='error'>\n                                    {\n                                        getFieldError('supplierName3')\n                                    }\n                                </span>\n                            </FormItem>\n                            \n                        </Col>\n                        <Col md={12}>\n                            <FormItem>\n                                <Label className='time'>凭证日期：</Label>\n                                <RangePicker\n                                    defaultValue={this.state.voucherDate}\n                                    placeholder={'开始 ~ 结束'}\n                                    dateInputPlaceholder={['开始', '结束']}\n                                    {\n                                    ...getFieldProps('voucherDate3', {\n                                        onChange: function (v) {\n                                            self.setState({\n                                                voucherDate3: v\n                                            })\n                                        }\n                                    })\n                                    }\n                                />\n                            </FormItem>\n                        </Col>\n                        \n                    </Row>\n\n                     <div className='split'></div>\n\n                    {/* 三列带textarea */}\n                    <h4>\n                    三列带textarea\n                     </h4>\n                    <Row className = 'edit-panel edit-panel-textarea'>\n\n                            <Col md={1}>\n                                <Label>订单编号：\n                                    <span className='mast'>*</span>\n                                </Label>\n                            </Col>\n                            <Col md={3}>\n                                <FormControl\n                                    {\n                                    ...getFieldProps('orderCode4', {\n                                        initialValue: '',\n                                        rules: [{\n                                            required: true, message: '请输入订单编号',\n                                        }],\n                                    })\n                                    }\n                                />\n                                <span className='error'>\n                                    {\n                                        getFieldError('orderCode4')\n                                    }\n                                </span>\n                            </Col>\n                            <Col md={1}>\n                                <Label>供应商名称：\n                                    <span className='mast'>*</span>\n                                </Label>\n                            </Col>\n                            <Col md={3}>\n                            <FormControl\n                                {\n                                    ...getFieldProps('supplierName4', {\n                                        initialValue: '',\n                                        rules: [{\n                                            required: true, message: '请输入供应商名称',\n                                        }],\n                                    })\n                                }\n                                />\n                                <span className='error'>\n                                    {\n                                        getFieldError('supplierName4')\n                                    }\n                                </span>\n                            </Col>\n                            <Col md={1}>\n                                <Label className='time'>凭证日期：</Label>\n                            </Col>\n                            <Col md={3}>\n                            <RangePicker\n                                    defaultValue={this.state.voucherDate}\n                                    placeholder={'开始 ~ 结束'}\n                                    dateInputPlaceholder={['开始', '结束']}\n                                    {\n                                    ...getFieldProps('voucherDate4', {\n                                        onChange: function (v) {\n                                            self.setState({\n                                                voucherDate3: v\n                                            })\n                                        }\n                                    })\n                                    }\n                                />\n                            </Col>\n                            <Col md={1}>\n                                <Label className='time'>备注：</Label>\n                            </Col>\n                            <Col md={11}>\n                            <textarea className='u-form-control'\n                                {\n                                    ...getFieldProps('mark', {\n                                        initialValue: '',\n                                    })\n                                }\n                                />\n                            </Col>\n\n                       \n                    </Row>\n                    \n                </Form>\n            </div>\n        )\n    }\n})\n", "desc": " ", "scss_code": "@import '../../node_modules/bee-checkbox/src/Checkbox.scss';\n.demo6 {\n    .edit-panel {\n        background: #FFF;\n        padding: 15px 15px 15px 15px;\n        .reset-btn,\n        .reset-btn:hover {\n            background: #fff;\n            border: 1px solid #1E7BE2;\n            color: #1E7BE2;\n            margin-right: 15px;\n        }\n        .submit-btn,\n        .submit-btn:hover {\n            background: #1E7BE2;\n            color: #fff;\n        }\n        .btn-group {\n            text-align: right;\n        }\n        .u-form-item {\n            min-width: 100%;\n            margin-bottom: 10px;\n            min-height: 50px;\n            .error {\n                margin-left: 100px;\n                color: red;\n                display: block;\n            }\n            .u-label {\n                min-width: 100px;\n                display: inline-block;\n            }\n            .u-label.time {\n                position: relative;\n                bottom: 10px;\n            }\n            .u-label+* {\n                min-width: 200px;\n                display: inline-block;\n            }\n            .mast {\n                width: 5px;\n                min-width: auto;\n                margin-right: 5px;\n                color: red;\n            }\n            .datepicker-input-group {\n                .u-input-group-btn {\n                    .uf-calendar {\n                        padding: 0;\n                    }\n                }\n            }\n            .u-switch {\n                min-width: auto;\n            }\n            .u-select {\n                width: auto;\n            }\n            .u-form-control {\n                width: auto;\n            }\n            .calendar-picker {\n                display: inline-block;\n                min-width: 200px;\n                width: auto;\n                input {\n                    width: 100%;\n                }\n            }\n            .u-form-control-close {\n                width: auto;\n                .u-form-control {\n                    width: 100%\n                }\n            }\n        }\n        .search-panel-btn {\n            text-align: right;\n            padding: 10px 0;\n        }\n    }\n    .edit-panel-center {\n        text-align: center;\n        .u-form-item {\n            min-width: auto;\n            display: inline-block;\n            .error {\n                text-align: left;\n            }\n        }\n    }\n    .edit-panel-all {\n        .u-form-item {\n            padding: 0;\n            .u-label {\n                width: 100%;\n                text-align: right;\n                height: 30px;\n                line-height: 30px;\n            }\n            .u-form-control {\n                width: 100%;\n            }\n            .calendar-picker {\n                width: 100%;\n                position: relative;\n            }\n            .u-select {\n                width: 100%;\n            }\n            .error {\n                margin-left: 0;\n            }\n        }\n    }\n    .split {\n        height: 5px;\n        background: #e0e0e0;\n    }\n    .edit-panel-textarea {\n        >div {\n            margin-bottom: 10px;\n            min-height: 50px;\n            .u-label {\n                height: 30px;\n                line-height: 30px;\n                text-align: right;\n                display: block;\n            }\n            .error {\n                margin-left: 100px;\n                color: red;\n                display: block;\n            }\n            .mast {\n                color: red;\n            }\n            textarea {\n                width: 100%;\n                resize: none;\n                min-height: 50px;\n            }\n            .calendar-picker,\n            .u-select {\n                width: 100%;\n            }\n        }\n    }\n}" }];
+	var Demo1 = __webpack_require__(67);var Demo2 = __webpack_require__(263);var Demo3 = __webpack_require__(264);var Demo4 = __webpack_require__(267);var Demo5 = __webpack_require__(560);var Demo6 = __webpack_require__(561);var DemoArray = [{ "example": _react2['default'].createElement(Demo1, null), "title": " 单个input校验", "code": '/**\n *\n * @title \u5355\u4E2Ainput\u6821\u9A8C\n * @description \u4F7F\u7528FormItem\n */\nimport React, { Component } from \'react\';\nimport { Form, Label, FormControl } from \'tinper-bee\';\nconst FormItem = Form.FormItem;\n\n\nconst Demo1 = Form.createForm()(class Demo extends Component {\n    constructor(props) {\n        super(props);\n    }\n    render() {\n        const self=this;\n        const { getFieldProps, getFieldError } = this.props.form;\n        return (\n                <FormItem className=\'demo1\'>\n                    <Label>\u59D3\u540D\uFF1A</Label>\n                    <FormControl placeholder=\'\u8BF7\u8F93\u5165\u59D3\u540D\'\n                     {...getFieldProps(\'name\', {\n                        validateTrigger: \'onBlur\',\n                        rules: [{\n                            required: true, message: \'\u8BF7\u8F93\u5165\u59D3\u540D\'\n                        },{\n                            max:5,message:\'\u6700\u5927\u957F\u5EA6\u4E3A10\'\n                        },{\n                            pattern: /[\\u4e00-\\u9fa5]/, message: \'\u8BF7\u8F93\u5165\u4E2D\u6587\u5B57\u7B26\',\n                        }],\n                    }) } />\n                    <span className=\'error\'>\n                        {getFieldError(\'name\')}\n                    </span>   \n                </FormItem>\n        )\n    }\n})\n\n', "desc": " 使用FormItem", "scss_code": ".demo1 {\n    font-size: 14px;\n    .u-form .u-form-item {\n        min-height: auto;\n    }\n    .u-label {\n        display: inline;\n    }\n    .u-form-control {\n        width: auto;\n    }\n    .error {\n        font-size: 12px;\n        color: red;\n        margin-left: 10px;\n    }\n}" }, { "example": _react2['default'].createElement(Demo2, null), "title": " 基本form校验", "code": "/**\n *\n * @title 基本form校验\n * @description 登录示例\n */\nimport React, { Component } from 'react';\nimport ReactDOM from 'react-dom';\nimport { Form, Button, Label, FormControl } from 'tinper-bee';\nconst FormItem = Form.FormItem;\n\nconst Demo2 = Form.createForm()(class Demo2 extends Component {\n    submit = (e) => {\n        e.preventDefault();\n        this.props.form.validateFields((err, values) => {\n            if (err) {\n                console.log('校验失败', values);\n            } else {\n                console.log('提交成功', values)\n            }\n        });\n    }\n    render() {\n        const { getFieldProps, getFieldError } = this.props.form;\n        return (\n            <div className=\"demo2\">\n                <Form >\n                    <FormItem>\n                        <Label>用户名：</Label>\n                        <FormControl placeholder=\"请输入用户名\"\n                            {...getFieldProps('username', {\n                                validateTrigger: 'onBlur',\n                                rules: [{\n                                    required: true, message: '请输入用户名',\n                                }],\n                            }) }\n                        />\n                        <span className='error'>\n                            {getFieldError('username')}\n                        </span>\n                    </FormItem>\n                    <FormItem>\n                        <Label>密码：</Label>\n                        <FormControl placeholder=\"请输入密码\" type='password'\n                            {...getFieldProps('password', {\n                                validateTrigger: 'onBlur',\n                                rules: [{\n                                    required: true, message: '请输入密码',\n                                }],\n                            }) }\n                        />\n                        <span className='error'>\n                            {getFieldError('password')}\n                        </span>\n                    </FormItem>\n                    <div className='submit'>\n                        <Button colors=\"primary\" className=\"login\" onClick={this.submit}>登陆</Button>\n                        <Button shape=\"border\" className=\"reset\">取消</Button>\n                    </div>\n                </Form>\n            </div>\n        )\n    }\n})\n", "desc": " 登录示例", "scss_code": ".demo2 {\n    font-size: 14px;\n    .u-label {\n        display: inline-block;\n        min-width: 80px;\n        text-align: right;\n    }\n    .u-form-control {\n        width: auto;\n    }\n    .error {\n        font-size: 12px;\n        color: red;\n        margin-left: 10px;\n    }\n    .submit {\n        padding-left: 90px;\n    }\n    .submit .login {\n        margin-right: 10px;\n    }\n    .u-form .u-form-item {\n        min-height: auto;\n    }\n}" }, { "example": _react2['default'].createElement(Demo3, null), "title": " 基本form校验", "code": "/**\n *\n * @title 基本form校验\n * @description 注册示例\n */\nimport React, { Component } from 'react';\nimport { Form, Label, Checkbox, Button, FormControl } from 'tinper-bee';\nconst FormItem = Form.FormItem;\n\nconst Demo3 = Form.createForm()( class Demo extends Component {\n    constructor(props) {\n        super(props);\n        this.state = {\n            checkbox: false\n        }\n    }\n    submit = (e) => {\n        e.preventDefault();\n        this.props.form.validateFields((err, values) => {\n            if (err) {\n                console.log('校验失败', values);\n            } else {\n                console.log('提交成功', values)\n            }\n        });\n    }\n    handleConfirmPassword = (rule, value, callback) => {\n        const { getFieldValue } = this.props.form;\n        if (value && value !== getFieldValue('password')) {\n            callback('两次输入不一致！')\n        }\n        callback();\n    }\n    render() {\n        const self = this;\n        const { getFieldProps, getFieldError } = this.props.form;\n        return (\n            <div className=\"demo3\">\n                <Form>\n                    <FormItem>\n                        <Label>用户名：</Label>\n                        <FormControl placeholder=\"请输入用户名(包含数字和字母，8-15位)\"\n                            {...getFieldProps('username', {\n                                validateTrigger: 'onBlur',\n                                rules: [{\n                                    required: true, message: '请输入用户名',\n                                }, {\n                                    pattern: /^(?!\\d+$)(?![a-zA-Z]+$)[a-zA-Z0-9]{8,15}$/, message: '用户名格式错误',\n                                }],\n                            }) }\n                        />\n                        <span className='error'>\n                            {getFieldError('username')}\n                        </span>\n                    </FormItem>\n\n                    <FormItem>\n                        <Label>密码：</Label>\n                        <FormControl placeholder=\"请输入密码\" type='password'\n                            {...getFieldProps('password', {\n                                validateTrigger: 'onBlur',\n                                rules: [{\n                                    required: true, message: '请输入密码',\n                                }],\n                            }) }\n                        />\n                        <span className='error'>\n                            {getFieldError('password')}\n                        </span>\n                    </FormItem>\n\n                    <FormItem>\n                        <Label>再次输入密码：</Label>\n                        <FormControl placeholder=\"请输入密码\" type='password'\n                            {...getFieldProps('password2', {\n                                validateTrigger: 'onBlur',\n                                rules: [{\n                                    required: true, message: '请输入密码',\n                                }, {\n                                    validator: this.handleConfirmPassword\n                                }],\n                            }) }\n                        />\n                        <span className='error'>\n                            {getFieldError('password2')}\n                        </span>\n                    </FormItem>\n\n                    <FormItem>\n                        <Label>邮箱：</Label>\n                        <FormControl placeholder=\"请输入邮箱\"\n                            {...getFieldProps('email', {\n                                validateTrigger: 'onBlur',\n                                rules: [{\n                                    required: true, message: '请输入邮箱',\n                                }, {\n                                    type: 'email', message: '邮箱格式不正确'\n                                }],\n                            }) }\n                        />\n                        <span className='error'>\n                            {getFieldError('email')}\n                        </span>\n                    </FormItem>\n                    <FormItem>\n                        <Label>手机号：</Label>\n\n                        <FormControl placeholder=\"请输入手机号\"\n                            {...getFieldProps('phone', {\n                                validateTrigger: 'onBlur',\n                                rules: [{\n                                    required: true, message: '请输入手机号',\n                                }, {\n                                    pattern: /^\\d{11}$/, message: '手机号格式不正确'\n                                }],\n                            }) }\n                        />\n\n                        <span className='error'>\n                            {getFieldError('phone')}\n                        </span>\n                    </FormItem>\n\n                    <FormItem style={{'paddingLeft':'110px'}}>\n                        <Checkbox colors=\"info\"\n                            defaultChecked={this.state.checkbox}\n                            {\n                            ...getFieldProps('checkbox', {\n                                initialValue: false,\n                            }\n                            ) }\n                        />\n                        <span>我已经阅读并同意相关条款</span>\n                    </FormItem>\n                    <div className='submit'>\n                        <Button colors=\"primary\" className=\"login\" onClick={this.submit}>注册</Button>\n                        <Button shape=\"border\" className=\"reset\">取消</Button>\n                    </div>\n                </Form>\n            </div>\n        )\n    }\n})\n", "desc": " 注册示例", "scss_code": ".demo3 {\n    font-size: 14px;\n    .u-label {\n        display: inline-block;\n        min-width: 100px;\n        text-align: right;\n    }\n    .u-form-control {\n        width: auto;\n        min-width: 300px;\n    }\n    .error {\n        font-size: 12px;\n        color: red;\n        margin-left: 10px;\n    }\n    .submit {\n        padding-left: 110px;\n    }\n    .submit .login {\n        margin-right: 10px;\n    }\n    .u-form .u-form-item {\n        min-height: auto;\n    }\n}" }, { "example": _react2['default'].createElement(Demo4, null), "title": " 表单校验", "code": "/**\n *\n * @title 表单校验\n * @description 用户信息录入实例\n */\nimport React, { Component } from 'react';\nimport ReactDOM from 'react-dom';\nimport { Form, Button, Label, CitySelect, Rate, InputNumber, Slider, Switch, Checkbox, DatePicker, Radio, Select, FormControl } from 'tinper-bee';\nconst FormItem = Form.FormItem;\nconst Option = Select.Option;\n\nconst Demo4 = Form.createForm()(class Demo extends Component {\n    constructor(props) {\n        super(props);\n        this.state = {\n            selectedValue: 'man',\n        };\n    }\n    submit = (e) => {\n        this.props.form.validateFields((err, values) => {\n            if (err) {\n                console.log('校验失败', values);\n            } else {\n                console.log('提交成功', values)\n            }\n        });\n    }\n    render() {\n        const { getFieldProps, getFieldError } = this.props.form;\n        const self = this;\n        return (\n            <div>\n                <Form className='demo4'>\n                    <FormItem>\n                        <Label>姓名：</Label>\n                        <FormControl placeholder=\"请输入姓名\"\n                            {...getFieldProps('name', {\n                                validateTrigger: 'onBlur',\n                                rules: [{\n                                    required: true, message: '请输入姓名',\n                                }],\n                            }) }\n                        />\n                        <span className='error'>\n                            {getFieldError('name')}\n                        </span>\n                    </FormItem>\n                    <FormItem>\n                        <Label>身份证号：</Label>\n                        <FormControl placeholder=\"请输入身份证号\"\n                            {...getFieldProps('id', {\n                                validateTrigger: 'onBlur',\n                                rules: [{\n                                    required: true, message: '请输入身份证号',\n                                }],\n                            }) }\n                        />\n                        <span className='error'>\n                            {getFieldError('id')}\n                        </span>\n                    </FormItem>\n                    <FormItem className='time'>\n                        <Label>出生日期：</Label>\n                        <DatePicker\n                            {\n                            ...getFieldProps('time', {\n\n                            }\n                            ) }\n                            placeholder={'请选择出生日期'}\n                        />\n                    </FormItem>\n                    <FormItem>\n                        <Label>年龄：</Label>\n                        <FormControl placeholder=\"请输入年龄\"\n                            {...getFieldProps('age', {\n                                validateTrigger: 'onBlur',\n                                rules: [{\n                                    required: true, message: '请输入年龄',\n                                }],\n                            }) }\n                        />\n                        <span className='error'>\n                            {getFieldError('age')}\n                        </span>\n                    </FormItem>\n                     <FormItem>\n                        <Label>性别：</Label>\n                        <Radio.RadioGroup\n                            selectedValue={this.state.selectedValue}\n                            {\n                            ...getFieldProps('sex', {\n                                initialValue: 'man',\n                                onChange(value) {\n                                    self.setState({ selectedValue: value });\n                                },\n                                rules: [{ required: true }]\n                            }\n                            ) }\n                        >\n                            <Radio value=\"man\" >男</Radio>\n                            <Radio value=\"woman\" >女</Radio>\n                        </Radio.RadioGroup>\n                    </FormItem>\n                    <FormItem>\n                        <Label>学历：</Label>\n                        <Select\n                            {\n                            ...getFieldProps('education', {\n                                initialValue: '',\n                                rules: [{ required: true }]\n                            }\n                            ) }\n                        >\n                            <Option value=\"\">请选择</Option>\n                            <Option value=\"nothing\">无</Option>\n                            <Option value=\"middle\">初中</Option>\n                            <Option value=\"senior\">高中</Option>\n                            <Option value=\"college1\">专科</Option>\n                            <Option value=\"college2\">本科</Option>\n                            <Option value=\"graduate\">研究生及以上</Option>\n                            <Option value=\"other\">其它</Option>\n                        </Select>\n                    </FormItem>\n                    <FormItem>\n                        <Label>保密等级：</Label>\n                        <Rate\n                            {\n                            ...getFieldProps('rate', {\n                                initialValue: 0,\n                                rules: [{ required: true }]\n                            }\n                            ) }\n                        />\n                    </FormItem>\n                    <FormItem >\n                        <Label>备注：</Label>\n                        <FormControl componentClass='textarea'\n                            {\n                            ...getFieldProps('remark', {}\n                            ) }\n                        />\n                    </FormItem>  \n                    \n\n\n                    <div className='submit'>\n                        <Button colors=\"primary\" className=\"login\" onClick={this.submit}>提交</Button>\n                        <Button shape=\"border\" className=\"reset\">取消</Button>\n                    </div>\n                </Form>\n            </div>\n        )\n    }\n})\n", "desc": " 用户信息录入实例", "scss_code": ".demo4 {\n    font-size: 14px;\n    .u-label {\n        display: inline-block;\n        min-width: 100px;\n        text-align: right;\n    }\n    .u-form-control {\n        width: auto;\n        min-width: 380px;\n    }\n    .error {\n        font-size: 12px;\n        color: red;\n        margin-left: 10px;\n    }\n    .submit {\n        padding-left: 110px;\n    }\n    .submit .login {\n        margin-right: 10px;\n    }\n    .u-select {\n        max-width: 380px;\n    }\n    textarea {\n        min-height: 100px;\n        resize: none;\n    }\n    .time>div {\n        display: inline-block;\n    }\n    .time .u-label {\n        position: relative;\n        bottom: 10px;\n    }\n    .u-city-select {\n        display: inline-block;\n    }\n    .u-city-select .province,\n    .u-city-select .city,\n    .u-city-select .area {\n        width: 120px;\n    }\n    .u-form .u-form-item {\n        min-height: auto;\n    }\n}" }, { "example": _react2['default'].createElement(Demo5, null), "title": " 多种表单元素示例", "code": "/**\n *\n * @title 多种表单元素示例\n * @description 查询面板\n */\nimport React, { Component } from 'react';\nimport ReactDOM from 'react-dom';\nimport { Form, Button, Label, Switch, Checkbox, DatePicker, Radio, Select,  Col , Row , FormControl } from 'tinper-bee';\nimport moment from \"moment/moment\";\nconst FormItem = Form.FormItem;\nconst Option = Select.Option;\nconst { RangePicker } = DatePicker;\n\nconst Demo5 = Form.createForm()(class Demo extends Component {\n    constructor(props) {\n        super(props);\n        this.state = {\n            approvalState: '',\n            closeState: '',\n            confirmState: '',\n            voucherDate: [],\n            orderTypes:[\n                {\n                    'code':'001',\n                    'name':'类型1'\n                },\n                {\n                    'code':'002',\n                    'name':'类型2'\n                },\n                {\n                    'code':'003',\n                    'name':'类型3'\n                },\n            ]\n        };\n    }\n    submit = (e) => {\n        this.props.form.validateFields((err, values) => {\n            if (err) {\n                console.log('校验失败', values);\n            } else {\n                console.log('提交成功', values)\n            }\n        });\n    }\n    reset = () =>{\n        this.props.form.resetFields();\n        //部分表单元素无法通过this.props.form.resetFields重置，需要手动重置，如下\n        this.setState({\n            approvalState: '',\n            closeState: '',\n            confirmState: '',\n            voucherDate: []\n        })\n    }\n    render() {\n        const { getFieldProps, getFieldError } = this.props.form;\n        const self = this;\n        return (\n            <div>\n                <Form className='demo5'>\n                <Row>\n                        <Col lg={4} md={6} xs={12}>\n                            <FormItem>\n                                <Label>订单编号：</Label>\n                                <FormControl\n                                    {\n                                    ...getFieldProps('orderCode', {\n                                        initialValue: '',\n                                    })\n                                    }\n                                />\n                            </FormItem>\n                        </Col>\n                        <Col  lg={4} md={6} xs={12}>\n                            <FormItem>\n                                <Label>供应商名称：</Label>\n                                <FormControl\n                                    {\n                                    ...getFieldProps('supplierName', {\n                                        initialValue: '',\n                                    })\n                                    }\n                                />\n                            </FormItem>\n                        </Col>\n                        <Col lg={4} md={6} xs={4}>\n                            <FormItem>\n                                <Label className='time'>凭证日期：</Label>\n                                <RangePicker\n                                    defaultValue={this.state.voucherDate}\n                                    placeholder={'开始 ~ 结束'}\n                                    dateInputPlaceholder={['开始', '结束']}\n                                    {\n                                    ...getFieldProps('voucherDate', {\n                                        onChange: function (v) {\n                                            self.setState({\n                                                voucherDate: v\n                                            })\n                                        }\n                                    })\n                                    }\n                                />\n                            </FormItem>\n                        </Col>\n                        <Col  lg={4} md={6} xs={12}>\n                            <FormItem>\n                                <Label>订单类型：</Label>\n                                <Select {\n                                    ...getFieldProps('type', {\n                                        initialValue: '',\n                                    }\n                                    )}>\n                                    <Option value=\"\">请选择</Option>\n                                    {\n                                        self.state.orderTypes.map((item, index) => {\n                                            return (\n                                                <Option key={index} value={item.code}>{item.name}</Option>\n                                            )\n                                        })\n                                    }\n                                </Select>\n                            </FormItem>\n                        </Col>\n                        <Col  lg={4} md={6} xs={12}>\n                            <FormItem>\n                                <Label>采购组：</Label>\n                                <FormControl\n                                    {\n                                    ...getFieldProps('purchasingGroup', {\n                                        initialValue: '',\n                                    })\n                                    }\n                                />\n                            </FormItem>\n                        </Col>\n                        <Col  lg={4} md={6} xs={12}>\n                            <FormItem>\n                                <Label>审批状态：</Label>\n                                <Radio.RadioGroup\n                                    selectedValue={this.state.approvalState}\n                                    {\n                                    ...getFieldProps('approvalState', {\n                                        initialValue: '',\n                                        onChange(value) {\n                                            self.setState({ approvalState: value });\n                                        },\n                                    }\n                                    )}\n                                >\n                                    <Radio value=\"0\" >未审批</Radio>\n                                    <Radio value=\"1\" >已审批</Radio>\n                                    <Radio value=\"\" >全部</Radio>\n                                </Radio.RadioGroup>\n                            </FormItem>\n                        </Col>\n                        <Col  lg={4} md={6} xs={12}>\n                            <FormItem>\n                                <Label>关闭状态：</Label>\n                                <Radio.RadioGroup\n                                    selectedValue={this.state.closeState}\n                                    {\n                                    ...getFieldProps('closeState', {\n                                        initialValue: '',\n                                        onChange(value) {\n                                            self.setState({ closeState: value });\n                                        },\n                                    }\n                                    )}\n                                >\n                                    <Radio value=\"0\" >未关闭</Radio>\n                                    <Radio value=\"1\" >已关闭</Radio>\n                                    <Radio value=\"\" >全部</Radio>\n                                </Radio.RadioGroup>\n                            </FormItem>\n                        </Col>\n                        <Col  lg={4} md={6} xs={12}>\n                            <FormItem>\n                                <Label>确认状态：</Label>\n                                <Radio.RadioGroup\n                                    selectedValue={this.state.confirmState}\n                                    {\n                                    ...getFieldProps('confirmState', {\n                                        initialValue: '',\n                                        onChange(value) {\n                                            self.setState({ confirmState: value });\n                                        },\n                                    }\n                                    )}\n                                >\n                                    <Radio value=\"0\" >未确认</Radio>\n                                    <Radio value=\"1\" >已确认</Radio>\n                                    <Radio value=\"\" >全部</Radio>\n                                </Radio.RadioGroup>\n                            </FormItem>\n                        </Col>\n                        <Col  lg={4} md={6} xs={12}>\n                            <FormItem>\n                                <Label>未分配：</Label>\n                                <Checkbox colors=\"primary\"></Checkbox>\n                            </FormItem>\n                        </Col>\n                    </Row>\n                    <div className='submit'>\n                        <Button colors=\"primary\" className=\"login\" onClick={this.submit}>查询</Button>\n                        <Button shape=\"border\" className=\"reset\" onClick={this.reset}>重置</Button>\n                    </div>\n                </Form>\n            </div>\n        )\n    }\n})\n", "desc": " 查询面板", "scss_code": ".demo5 {\n    .submit{\n        padding-left:90px\n    }\n    .reset{\n        margin-left:10px;\n    }\n    .u-form-item {\n        min-width: 100%;\n        min-height: 50px;\n        padding: 0;\n        .u-label{\n            min-width: 90px;\n            display: inline-block;\n            text-align:right;\n        }\n        .u-label.time{\n            position: relative;\n            bottom: 10px;\n        }\n        .u-label + *{\n            min-width: 200px;\n            display: inline-block;\n        }\n        .datepicker-input-group{\n            .u-input-group-btn{\n                .uf-calendar{\n                    padding: 0;\n                }\n            }\n        }\n        .u-switch{\n            min-width: auto;\n        }\n        .u-select{\n            width: auto;\n        }\n        .u-form-control{\n            width: auto;\n        }\n        .calendar-picker{\n            display: inline-block;\n            min-width:200px;\n            width: auto;\n            input{\n                width: 100%;\n                text-align: center;\n            }\n        }\n        .u-radio .u-radio-label{\n            font-size:14px;\n        }\n    }\n    .u-form .u-form-item {\n        min-height: auto;\n    }\n}\n" }, { "example": _react2['default'].createElement(Demo6, null), "title": " 多种布局示例", "code": "/**\n *\n * @title 多种布局示例\n * @description \n */\nimport React, { Component } from 'react';\nimport ReactDOM from 'react-dom';\nimport { Form, Button, Label, Switch, Checkbox, DatePicker, Radio, Select,  Col , Row , FormControl } from 'tinper-bee';\nimport moment from \"moment/moment\";\nconst FormItem = Form.FormItem;\nconst Option = Select.Option;\nconst { RangePicker } = DatePicker;\n\nconst Demo6 = Form.createForm()(class Demo extends Component {\n    constructor(props) {\n        super(props);\n        this.state = {\n            approvalState: '',\n            closeState: '',\n            confirmState: '',\n            voucherDate: [],\n            orderTypes:[\n                {\n                    'code':'001',\n                    'name':'类型1'\n                },\n                {\n                    'code':'002',\n                    'name':'类型2'\n                },\n                {\n                    'code':'003',\n                    'name':'类型3'\n                },\n            ]\n        };\n    }\n    render() {\n        const { getFieldProps, getFieldError } = this.props.form;\n        const self = this;\n        const orderTypes= [{\n            \"code\":\"D001\",\n            \"name\":\"D001\"\n          },{\n            \"code\":\"D002\",\n            \"name\":\"D002\"\n          },{\n            \"code\":\"D003\",\n            \"name\":\"D003\"\n          },{\n            \"code\":\"D004\",\n            \"name\":\"D004\"\n          }];\n        return (\n            <div>\n                <Form className='demo6'>\n                    {/* 普通栅格布局 */}\n                    <h4>\n                        普通栅格布局\n                    </h4>\n                    <Row className = 'edit-panel'>\n                        <Col lg={4} md={6} xs={12}>\n                            <FormItem>\n                                <Label>订单编号：\n                                    <span className='mast'>*</span>\n                                </Label>\n                                <FormControl\n                                    {\n                                    ...getFieldProps('orderCode1', {\n                                        initialValue: '',\n                                        rules: [{\n                                            required: true, message: '请输入订单编号',\n                                        }],\n                                    })\n                                    }\n                                />\n                                <span className='error'>\n                                    {\n                                        getFieldError('orderCode1')\n                                    }\n                                </span>\n                            </FormItem>\n                        </Col>\n                        <Col lg={4} md={6} xs={12}>\n                            <FormItem>\n                                <Label>供应商名称：\n                                    <span className='mast'>*</span>\n                                </Label>\n                                <FormControl\n                                    {\n                                        ...getFieldProps('supplierName1', {\n                                            initialValue: '',\n                                            rules: [{\n                                                required: true, message: '请输入供应商名称',\n                                            }],\n                                        })\n                                    }\n                                />\n                                <span className='error'>\n                                    {\n                                        getFieldError('supplierName1')\n                                    }\n                                </span>\n                            </FormItem>\n                            \n                        </Col>\n                        <Col lg={4} md={6} xs={12}>\n                            <FormItem>\n                                <Label className='time'>凭证日期：</Label>\n                                <RangePicker\n                                    defaultValue={this.state.voucherDate}\n                                    placeholder={'开始 ~ 结束'}\n                                    dateInputPlaceholder={['开始', '结束']}\n                                    {\n                                    ...getFieldProps('voucherDate1', {\n                                        onChange: function (v) {\n                                            self.setState({\n                                                voucherDate1: v\n                                            })\n                                        }\n                                    })\n                                    }\n                                />\n                            </FormItem>\n                        </Col>\n                    </Row>\n\n                    <div className='split'></div>\n                    \n                    \n                     {/* 单列铺满 */}\n                     <h4>\n                        单列铺满\n                     </h4>\n                     <Row className = 'edit-panel edit-panel-all'>\n                        <FormItem>\n                            <Col md={2}>\n                                <Label>订单编号：\n                                    <span className='mast'>*</span>\n                                </Label>\n                            </Col>\n                            <Col md={10}>\n                                <FormControl\n                                    {\n                                    ...getFieldProps('orderCode2', {\n                                        initialValue: '',\n                                        rules: [{\n                                            required: true, message: '请输入订单编号',\n                                        }],\n                                    })\n                                    }\n                                />\n                                <span className='error'>\n                                    {\n                                        getFieldError('orderCode2')\n                                    }\n                                </span>\n                            </Col>\n                        </FormItem>\n\n                        <FormItem>\n                            <Col md={2}>\n                                <Label>供应商名称：\n                                    <span className='mast'>*</span>\n                                </Label>\n                            </Col>\n                            <Col md={10}>\n                                <FormControl\n                                    {\n                                        ...getFieldProps('supplierName2', {\n                                            initialValue: '',\n                                            rules: [{\n                                                required: true, message: '请输入供应商名称',\n                                            }],\n                                        })\n                                    }\n                                />\n                                <span className='error'>\n                                    {\n                                        getFieldError('supplierName2')\n                                    }\n                                </span>\n                            </Col>\n                        </FormItem>\n\n                        <FormItem>\n                            <Col md={2}>\n                                <Label>凭证日期：</Label>\n                            </Col>\n                            <Col md={10}>\n                                <RangePicker\n                                    defaultValue={this.state.voucherDate}\n                                    placeholder={'开始 ~ 结束'}\n                                    dateInputPlaceholder={['开始', '结束']}\n                                    {\n                                    ...getFieldProps('voucherDate2', {\n                                        onChange: function (v) {\n                                            self.setState({\n                                                voucherDate2: v\n                                            })\n                                        }\n                                    })\n                                    }\n                                />\n                            </Col>\n                        </FormItem>\n                        <FormItem>\n                            <Col md={2}>\n                                <Label>订单类型：</Label>\n                            </Col>\n                            <Col md={10}>\n                                <Select {\n                                    ...getFieldProps('type', {\n                                        initialValue: '',\n                                    }\n                                    )}>\n                                    <Option value=\"\">请选择</Option>\n                                    {\n                                        orderTypes.map((item, index) => {\n                                            return (\n                                                <Option key={index} value={item.code}>{item.name}</Option>\n                                            )\n                                        })\n                                    }\n                                </Select>\n                            </Col>\n                        </FormItem>\n                        \n                    </Row>\n\n                    <div className='split'></div>\n\n                    {/* 单列居中 */}\n                    <h4>\n                        单列居中\n                     </h4>\n                    <Row className = 'edit-panel edit-panel-center'>\n                        <Col md={12}>\n                            <FormItem>\n                                <Label>订单编号：\n                                    <span className='mast'>*</span>\n                                </Label>\n                                <FormControl\n                                    {\n                                    ...getFieldProps('orderCode3', {\n                                        initialValue: '',\n                                        rules: [{\n                                            required: true, message: '请输入订单编号',\n                                        }],\n                                    })\n                                    }\n                                />\n                                <span className='error'>\n                                    {\n                                        getFieldError('orderCode3')\n                                    }\n                                </span>\n                            </FormItem>\n                        </Col>\n                        <Col md={12}>\n                            <FormItem>\n                                <Label>供应商名称：\n                                    <span className='mast'>*</span>\n                                </Label>\n                                <FormControl\n                                    {\n                                        ...getFieldProps('supplierName3', {\n                                            initialValue: '',\n                                            rules: [{\n                                                required: true, message: '请输入供应商名称',\n                                            }],\n                                        })\n                                    }\n                                />\n                                <span className='error'>\n                                    {\n                                        getFieldError('supplierName3')\n                                    }\n                                </span>\n                            </FormItem>\n                            \n                        </Col>\n                        <Col md={12}>\n                            <FormItem>\n                                <Label className='time'>凭证日期：</Label>\n                                <RangePicker\n                                    defaultValue={this.state.voucherDate}\n                                    placeholder={'开始 ~ 结束'}\n                                    dateInputPlaceholder={['开始', '结束']}\n                                    {\n                                    ...getFieldProps('voucherDate3', {\n                                        onChange: function (v) {\n                                            self.setState({\n                                                voucherDate3: v\n                                            })\n                                        }\n                                    })\n                                    }\n                                />\n                            </FormItem>\n                        </Col>\n                        \n                    </Row>\n\n                     <div className='split'></div>\n\n                    {/* 三列带textarea */}\n                    <h4>\n                    三列带textarea\n                     </h4>\n                    <Row className = 'edit-panel edit-panel-textarea'>\n\n                            <Col md={1}>\n                                <Label>订单编号：\n                                    <span className='mast'>*</span>\n                                </Label>\n                            </Col>\n                            <Col md={3}>\n                                <FormControl\n                                    {\n                                    ...getFieldProps('orderCode4', {\n                                        initialValue: '',\n                                        rules: [{\n                                            required: true, message: '请输入订单编号',\n                                        }],\n                                    })\n                                    }\n                                />\n                                <span className='error'>\n                                    {\n                                        getFieldError('orderCode4')\n                                    }\n                                </span>\n                            </Col>\n                            <Col md={1}>\n                                <Label>供应商名称：\n                                    <span className='mast'>*</span>\n                                </Label>\n                            </Col>\n                            <Col md={3}>\n                            <FormControl\n                                {\n                                    ...getFieldProps('supplierName4', {\n                                        initialValue: '',\n                                        rules: [{\n                                            required: true, message: '请输入供应商名称',\n                                        }],\n                                    })\n                                }\n                                />\n                                <span className='error'>\n                                    {\n                                        getFieldError('supplierName4')\n                                    }\n                                </span>\n                            </Col>\n                            <Col md={1}>\n                                <Label className='time'>凭证日期：</Label>\n                            </Col>\n                            <Col md={3}>\n                            <RangePicker\n                                    defaultValue={this.state.voucherDate}\n                                    placeholder={'开始 ~ 结束'}\n                                    dateInputPlaceholder={['开始', '结束']}\n                                    {\n                                    ...getFieldProps('voucherDate4', {\n                                        onChange: function (v) {\n                                            self.setState({\n                                                voucherDate3: v\n                                            })\n                                        }\n                                    })\n                                    }\n                                />\n                            </Col>\n                            <Col md={1}>\n                                <Label className='time'>备注：</Label>\n                            </Col>\n                            <Col md={11}>\n                            <textarea className='u-form-control'\n                                {\n                                    ...getFieldProps('mark', {\n                                        initialValue: '',\n                                    })\n                                }\n                                />\n                            </Col>\n\n                       \n                    </Row>\n                    \n                </Form>\n            </div>\n        )\n    }\n})\n", "desc": " ", "scss_code": ".demo6 {\n    .edit-panel {\n        background: #FFF;\n        padding: 15px 15px 15px 15px;\n        .reset-btn,\n        .reset-btn:hover {\n            background: #fff;\n            border: 1px solid #1E7BE2;\n            color: #1E7BE2;\n            margin-right: 15px;\n        }\n        .submit-btn,\n        .submit-btn:hover {\n            background: #1E7BE2;\n            color: #fff;\n        }\n        .btn-group {\n            text-align: right;\n        }\n        .u-form-item {\n            min-width: 100%;\n            margin-bottom: 10px;\n            min-height: 50px;\n            .error {\n                margin-left: 100px;\n                color: red;\n                display: block;\n            }\n            .u-label {\n                min-width: 100px;\n                display: inline-block;\n            }\n            .u-label.time {\n                position: relative;\n                bottom: 10px;\n            }\n            .u-label+* {\n                min-width: 200px;\n                display: inline-block;\n            }\n            .mast {\n                width: 5px;\n                min-width: auto;\n                margin-right: 5px;\n                color: red;\n            }\n            .datepicker-input-group {\n                .u-input-group-btn {\n                    .uf-calendar {\n                        padding: 0;\n                    }\n                }\n            }\n            .u-switch {\n                min-width: auto;\n            }\n            .u-select {\n                width: auto;\n            }\n            .u-form-control {\n                width: auto;\n            }\n            .calendar-picker {\n                display: inline-block;\n                min-width: 200px;\n                width: auto;\n                input {\n                    width: 100%;\n                }\n            }\n            .u-form-control-close {\n                width: auto;\n                .u-form-control {\n                    width: 100%\n                }\n            }\n        }\n        .search-panel-btn {\n            text-align: right;\n            padding: 10px 0;\n        }\n    }\n    .edit-panel-center {\n        text-align: center;\n        .u-form-item {\n            min-width: auto;\n            display: inline-block;\n            .error {\n                text-align: left;\n            }\n        }\n    }\n    .edit-panel-all {\n        .u-form-item {\n            padding: 0;\n            .u-label {\n                width: 100%;\n                text-align: right;\n                height: 30px;\n                line-height: 30px;\n            }\n            .u-form-control {\n                width: 100%;\n            }\n            .calendar-picker {\n                width: 100%;\n                position: relative;\n            }\n            .u-select {\n                width: 100%;\n            }\n            .error {\n                margin-left: 0;\n            }\n        }\n    }\n    .split {\n        height: 5px;\n        background: #e0e0e0;\n    }\n    .edit-panel-textarea {\n        >div {\n            margin-bottom: 10px;\n            min-height: 50px;\n            .u-label {\n                height: 30px;\n                line-height: 30px;\n                text-align: right;\n                display: block;\n            }\n            .error {\n                margin-left: 100px;\n                color: red;\n                display: block;\n            }\n            .mast {\n                color: red;\n            }\n            textarea {\n                width: 100%;\n                resize: none;\n                min-height: 50px;\n            }\n            .calendar-picker,\n            .u-select {\n                width: 100%;\n            }\n        }\n    }\n}" }];
 	
 	var Demo = function (_Component) {
 	    _inherits(Demo, _Component);
@@ -15418,23 +15418,23 @@
 	
 	var _beeCheckbox2 = _interopRequireDefault(_beeCheckbox);
 	
-	var _beeSwitch = __webpack_require__(513);
+	var _beeSwitch = __webpack_require__(512);
 	
 	var _beeSwitch2 = _interopRequireDefault(_beeSwitch);
 	
-	var _beeSlider = __webpack_require__(515);
+	var _beeSlider = __webpack_require__(514);
 	
 	var _beeSlider2 = _interopRequireDefault(_beeSlider);
 	
-	var _beeInputNumber = __webpack_require__(550);
+	var _beeInputNumber = __webpack_require__(549);
 	
 	var _beeInputNumber2 = _interopRequireDefault(_beeInputNumber);
 	
-	var _beeRate = __webpack_require__(552);
+	var _beeRate = __webpack_require__(551);
 	
 	var _beeRate2 = _interopRequireDefault(_beeRate);
 	
-	var _beeCitySelect = __webpack_require__(558);
+	var _beeCitySelect = __webpack_require__(557);
 	
 	var _beeCitySelect2 = _interopRequireDefault(_beeCitySelect);
 	
@@ -19975,7 +19975,7 @@
 	    classes[this.getPrefixCls()] = true;
 	    classes[props.className] = !!props.className;
 	    var attrs = _extends({}, props.attribute, {
-	      title: props.title,
+	      title: props.title ? props.title : typeof props.children === 'string' ? props.children : "",
 	      className: (0, _classnames2["default"])(classes),
 	      role: 'menuitem',
 	      'aria-selected': selected,
@@ -23260,15 +23260,15 @@
 	
 	var _DatePicker2 = _interopRequireDefault(_DatePicker);
 	
-	var _MonthPicker = __webpack_require__(499);
+	var _MonthPicker = __webpack_require__(498);
 	
 	var _MonthPicker2 = _interopRequireDefault(_MonthPicker);
 	
-	var _RangePicker = __webpack_require__(501);
+	var _RangePicker = __webpack_require__(500);
 	
 	var _RangePicker2 = _interopRequireDefault(_RangePicker);
 	
-	var _WeekPicker = __webpack_require__(512);
+	var _WeekPicker = __webpack_require__(511);
 	
 	var _WeekPicker2 = _interopRequireDefault(_WeekPicker);
 	
@@ -23309,7 +23309,7 @@
 	
 	var _beeFormControl2 = _interopRequireDefault(_beeFormControl);
 	
-	var _Panel = __webpack_require__(490);
+	var _Panel = __webpack_require__(489);
 	
 	var _Panel2 = _interopRequireDefault(_Panel);
 	
@@ -23321,7 +23321,7 @@
 	
 	var _beeIcon2 = _interopRequireDefault(_beeIcon);
 	
-	var _beeInputGroup = __webpack_require__(494);
+	var _beeInputGroup = __webpack_require__(493);
 	
 	var _beeInputGroup2 = _interopRequireDefault(_beeInputGroup);
 	
@@ -23458,9 +23458,7 @@
 	
 	  this.handleChange = function (value) {
 	    var props = _this3.props;
-	    if (!("value" in props)) {
-	      _this3.setState({ value: value });
-	    }
+	    _this3.setState({ value: value });
 	    //props.onChange(value, (value && value.format(props.format)) || '');
 	  };
 	};
@@ -43903,23 +43901,13 @@
 
 	'use strict';
 	
-	exports.__esModule = true;
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
 	
 	var _extends2 = __webpack_require__(145);
 	
 	var _extends3 = _interopRequireDefault(_extends2);
-	
-	var _classCallCheck2 = __webpack_require__(250);
-	
-	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
-	
-	var _possibleConstructorReturn2 = __webpack_require__(316);
-	
-	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
-	
-	var _inherits2 = __webpack_require__(317);
-	
-	var _inherits3 = _interopRequireDefault(_inherits2);
 	
 	var _react = __webpack_require__(4);
 	
@@ -43930,6 +43918,10 @@
 	var _propTypes2 = _interopRequireDefault(_propTypes);
 	
 	var _reactDom = __webpack_require__(12);
+	
+	var _createReactClass = __webpack_require__(160);
+	
+	var _createReactClass2 = _interopRequireDefault(_createReactClass);
 	
 	var _contains = __webpack_require__(473);
 	
@@ -43945,17 +43937,9 @@
 	
 	var _utils = __webpack_require__(487);
 	
-	var _ContainerRender = __webpack_require__(488);
+	var _getContainerRenderMixin = __webpack_require__(488);
 	
-	var _ContainerRender2 = _interopRequireDefault(_ContainerRender);
-	
-	var _Portal = __webpack_require__(489);
-	
-	var _Portal2 = _interopRequireDefault(_Portal);
-	
-	var _classnames = __webpack_require__(3);
-	
-	var _classnames2 = _interopRequireDefault(_classnames);
+	var _getContainerRenderMixin2 = _interopRequireDefault(_getContainerRenderMixin);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
@@ -43969,52 +43953,118 @@
 	  return window.document;
 	}
 	
-	var ALL_HANDLERS = ['onClick', 'onMouseDown', 'onTouchStart', 'onMouseEnter', 'onMouseLeave', 'onFocus', 'onBlur', 'onContextMenu'];
+	var isMobile = typeof navigator !== 'undefined' && !!navigator.userAgent.match(/(Android|iPhone|iPad|iPod|iOS|UCWEB)/i);
 	
-	var IS_REACT_16 = !!_reactDom.createPortal;
+	var ALL_HANDLERS = ['onClick', 'onMouseDown', 'onTouchStart', 'onMouseEnter', 'onMouseLeave', 'onFocus', 'onBlur'];
 	
-	var Trigger = function (_React$Component) {
-	  (0, _inherits3['default'])(Trigger, _React$Component);
+	var Trigger = (0, _createReactClass2['default'])({
+	  displayName: 'Trigger',
+	  propTypes: {
+	    children: _propTypes2['default'].any,
+	    action: _propTypes2['default'].oneOfType([_propTypes2['default'].string, _propTypes2['default'].arrayOf(_propTypes2['default'].string)]),
+	    showAction: _propTypes2['default'].any,
+	    hideAction: _propTypes2['default'].any,
+	    getPopupClassNameFromAlign: _propTypes2['default'].any,
+	    onPopupVisibleChange: _propTypes2['default'].func,
+	    afterPopupVisibleChange: _propTypes2['default'].func,
+	    popup: _propTypes2['default'].oneOfType([_propTypes2['default'].node, _propTypes2['default'].func]).isRequired,
+	    popupStyle: _propTypes2['default'].object,
+	    prefixCls: _propTypes2['default'].string,
+	    popupClassName: _propTypes2['default'].string,
+	    popupPlacement: _propTypes2['default'].string,
+	    builtinPlacements: _propTypes2['default'].object,
+	    popupTransitionName: _propTypes2['default'].oneOfType([_propTypes2['default'].string, _propTypes2['default'].object]),
+	    popupAnimation: _propTypes2['default'].any,
+	    mouseEnterDelay: _propTypes2['default'].number,
+	    mouseLeaveDelay: _propTypes2['default'].number,
+	    zIndex: _propTypes2['default'].number,
+	    focusDelay: _propTypes2['default'].number,
+	    blurDelay: _propTypes2['default'].number,
+	    getPopupContainer: _propTypes2['default'].func,
+	    getDocument: _propTypes2['default'].func,
+	    destroyPopupOnHide: _propTypes2['default'].bool,
+	    mask: _propTypes2['default'].bool,
+	    maskClosable: _propTypes2['default'].bool,
+	    onPopupAlign: _propTypes2['default'].func,
+	    popupAlign: _propTypes2['default'].object,
+	    popupVisible: _propTypes2['default'].bool,
+	    maskTransitionName: _propTypes2['default'].oneOfType([_propTypes2['default'].string, _propTypes2['default'].object]),
+	    maskAnimation: _propTypes2['default'].string
+	  },
 	
-	  function Trigger(props) {
-	    (0, _classCallCheck3['default'])(this, Trigger);
+	  mixins: [(0, _getContainerRenderMixin2['default'])({
+	    autoMount: false,
 	
-	    var _this = (0, _possibleConstructorReturn3['default'])(this, _React$Component.call(this, props));
+	    isVisible: function isVisible(instance) {
+	      return instance.state.popupVisible;
+	    },
+	    getContainer: function getContainer(instance) {
+	      var props = instance.props;
 	
-	    _initialiseProps.call(_this);
+	      var popupContainer = document.createElement('div');
+	      // Make sure default popup container will never cause scrollbar appearing
+	      // https://github.com/react-component/trigger/issues/41
+	      popupContainer.style.position = 'absolute';
+	      popupContainer.style.top = '0';
+	      popupContainer.style.left = '0';
+	      popupContainer.style.width = '100%';
+	      var mountNode = props.getPopupContainer ? props.getPopupContainer((0, _reactDom.findDOMNode)(instance)) : props.getDocument().body;
+	      mountNode.appendChild(popupContainer);
+	      return popupContainer;
+	    }
+	  })],
 	
+	  getDefaultProps: function getDefaultProps() {
+	    return {
+	      prefixCls: 'rc-trigger-popup',
+	      getPopupClassNameFromAlign: returnEmptyString,
+	      getDocument: returnDocument,
+	      onPopupVisibleChange: noop,
+	      afterPopupVisibleChange: noop,
+	      onPopupAlign: noop,
+	      popupClassName: '',
+	      mouseEnterDelay: 0,
+	      mouseLeaveDelay: 0.1,
+	      focusDelay: 0,
+	      blurDelay: 0.15,
+	      popupStyle: {},
+	      destroyPopupOnHide: false,
+	      popupAlign: {},
+	      defaultPopupVisible: false,
+	      mask: false,
+	      maskClosable: true,
+	      action: [],
+	      showAction: [],
+	      hideAction: []
+	    };
+	  },
+	  getInitialState: function getInitialState() {
+	    var props = this.props;
 	    var popupVisible = void 0;
 	    if ('popupVisible' in props) {
 	      popupVisible = !!props.popupVisible;
 	    } else {
 	      popupVisible = !!props.defaultPopupVisible;
 	    }
-	
-	    _this.prevPopupVisible = popupVisible;
-	
-	    _this.state = {
+	    return {
 	      popupVisible: popupVisible
 	    };
-	    return _this;
-	  }
-	
-	  Trigger.prototype.componentWillMount = function componentWillMount() {
-	    var _this2 = this;
+	  },
+	  componentWillMount: function componentWillMount() {
+	    var _this = this;
 	
 	    ALL_HANDLERS.forEach(function (h) {
-	      _this2['fire' + h] = function (e) {
-	        _this2.fireEvents(h, e);
+	      _this['fire' + h] = function (e) {
+	        _this.fireEvents(h, e);
 	      };
 	    });
-	  };
-	
-	  Trigger.prototype.componentDidMount = function componentDidMount() {
+	  },
+	  componentDidMount: function componentDidMount() {
 	    this.componentDidUpdate({}, {
 	      popupVisible: this.state.popupVisible
 	    });
-	  };
-	
-	  Trigger.prototype.componentWillReceiveProps = function componentWillReceiveProps(_ref) {
+	  },
+	  componentWillReceiveProps: function componentWillReceiveProps(_ref) {
 	    var popupVisible = _ref.popupVisible;
 	
 	    if (popupVisible !== undefined) {
@@ -44022,66 +44072,148 @@
 	        popupVisible: popupVisible
 	      });
 	    }
-	  };
-	
-	  Trigger.prototype.componentDidUpdate = function componentDidUpdate(_, prevState) {
+	  },
+	  componentDidUpdate: function componentDidUpdate(_, prevState) {
 	    var props = this.props;
 	    var state = this.state;
-	    var triggerAfterPopupVisibleChange = function triggerAfterPopupVisibleChange() {
+	    this.renderComponent(null, function () {
 	      if (prevState.popupVisible !== state.popupVisible) {
 	        props.afterPopupVisibleChange(state.popupVisible);
 	      }
-	    };
-	    if (!IS_REACT_16) {
-	      this.renderComponent(null, triggerAfterPopupVisibleChange);
-	    }
+	    });
 	
-	    this.prevPopupVisible = prevState.popupVisible;
-	
-	    // We must listen to `mousedown` or `touchstart`, edge case:
+	    // We must listen to `mousedown`, edge case:
 	    // https://github.com/ant-design/ant-design/issues/5804
 	    // https://github.com/react-component/calendar/issues/250
 	    // https://github.com/react-component/trigger/issues/50
 	    if (state.popupVisible) {
 	      var currentDocument = void 0;
-	      if (!this.clickOutsideHandler && (this.isClickToHide() || this.isContextMenuToShow())) {
+	      if (!this.clickOutsideHandler && this.isClickToHide()) {
 	        currentDocument = props.getDocument();
 	        this.clickOutsideHandler = (0, _addEventListener2['default'])(currentDocument, 'mousedown', this.onDocumentClick);
 	      }
 	      // always hide on mobile
-	      if (!this.touchOutsideHandler) {
+	      // `isMobile` fix: mask clicked will cause below element events triggered
+	      // https://github.com/ant-design/ant-design-mobile/issues/1909
+	      // https://github.com/ant-design/ant-design-mobile/issues/1928
+	      if (!this.touchOutsideHandler && isMobile) {
 	        currentDocument = currentDocument || props.getDocument();
-	        this.touchOutsideHandler = (0, _addEventListener2['default'])(currentDocument, 'touchstart', this.onDocumentClick);
-	      }
-	      // close popup when trigger type contains 'onContextMenu' and document is scrolling.
-	      if (!this.contextMenuOutsideHandler1 && this.isContextMenuToShow()) {
-	        currentDocument = currentDocument || props.getDocument();
-	        this.contextMenuOutsideHandler1 = (0, _addEventListener2['default'])(currentDocument, 'scroll', this.onContextMenuClose);
-	      }
-	      // close popup when trigger type contains 'onContextMenu' and window is blur.
-	      if (!this.contextMenuOutsideHandler2 && this.isContextMenuToShow()) {
-	        this.contextMenuOutsideHandler2 = (0, _addEventListener2['default'])(window, 'blur', this.onContextMenuClose);
+	        this.touchOutsideHandler = (0, _addEventListener2['default'])(currentDocument, 'click', this.onDocumentClick);
 	      }
 	      return;
 	    }
 	
 	    this.clearOutsideHandler();
-	  };
-	
-	  Trigger.prototype.componentWillUnmount = function componentWillUnmount() {
+	  },
+	  componentWillUnmount: function componentWillUnmount() {
 	    this.clearDelayTimer();
 	    this.clearOutsideHandler();
-	  };
-	
-	  Trigger.prototype.getPopupDomNode = function getPopupDomNode() {
+	  },
+	  onMouseEnter: function onMouseEnter(e) {
+	    this.fireEvents('onMouseEnter', e);
+	    this.delaySetPopupVisible(true, this.props.mouseEnterDelay);
+	  },
+	  onMouseLeave: function onMouseLeave(e) {
+	    this.fireEvents('onMouseLeave', e);
+	    this.delaySetPopupVisible(false, this.props.mouseLeaveDelay);
+	  },
+	  onPopupMouseEnter: function onPopupMouseEnter() {
+	    this.clearDelayTimer();
+	  },
+	  onPopupMouseLeave: function onPopupMouseLeave(e) {
+	    // https://github.com/react-component/trigger/pull/13
+	    // react bug?
+	    if (e.relatedTarget && !e.relatedTarget.setTimeout && this._component && this._component.getPopupDomNode && (0, _contains2['default'])(this._component.getPopupDomNode(), e.relatedTarget)) {
+	      return;
+	    }
+	    this.delaySetPopupVisible(false, this.props.mouseLeaveDelay);
+	  },
+	  onFocus: function onFocus(e) {
+	    this.fireEvents('onFocus', e);
+	    // incase focusin and focusout
+	    this.clearDelayTimer();
+	    if (this.isFocusToShow()) {
+	      this.focusTime = Date.now();
+	      this.delaySetPopupVisible(true, this.props.focusDelay);
+	    }
+	  },
+	  onMouseDown: function onMouseDown(e) {
+	    this.fireEvents('onMouseDown', e);
+	    this.preClickTime = Date.now();
+	  },
+	  onTouchStart: function onTouchStart(e) {
+	    this.fireEvents('onTouchStart', e);
+	    this.preTouchTime = Date.now();
+	  },
+	  onBlur: function onBlur(e) {
+	    this.fireEvents('onBlur', e);
+	    this.clearDelayTimer();
+	    if (this.isBlurToHide()) {
+	      this.delaySetPopupVisible(false, this.props.blurDelay);
+	    }
+	  },
+	  onClick: function onClick(event) {
+	    this.fireEvents('onClick', event);
+	    // focus will trigger click
+	    if (this.focusTime) {
+	      var preTime = void 0;
+	      if (this.preClickTime && this.preTouchTime) {
+	        preTime = Math.min(this.preClickTime, this.preTouchTime);
+	      } else if (this.preClickTime) {
+	        preTime = this.preClickTime;
+	      } else if (this.preTouchTime) {
+	        preTime = this.preTouchTime;
+	      }
+	      if (Math.abs(preTime - this.focusTime) < 20) {
+	        return;
+	      }
+	      this.focusTime = 0;
+	    }
+	    this.preClickTime = 0;
+	    this.preTouchTime = 0;
+	    event.preventDefault();
+	    var nextVisible = !this.state.popupVisible;
+	    if (this.isClickToHide() && !nextVisible || nextVisible && this.isClickToShow()) {
+	      this.setPopupVisible(!this.state.popupVisible);
+	    }
+	  },
+	  onDocumentClick: function onDocumentClick(event) {
+	    if (this.props.mask && !this.props.maskClosable) {
+	      return;
+	    }
+	    var target = event.target;
+	    var root = (0, _reactDom.findDOMNode)(this);
+	    var popupNode = this.getPopupDomNode();
+	    if (!(0, _contains2['default'])(root, target) && !(0, _contains2['default'])(popupNode, target)) {
+	      this.close();
+	    }
+	  },
+	  getPopupDomNode: function getPopupDomNode() {
 	    // for test
 	    if (this._component && this._component.getPopupDomNode) {
 	      return this._component.getPopupDomNode();
 	    }
 	    return null;
-	  };
+	  },
+	  getRootDomNode: function getRootDomNode() {
+	    return (0, _reactDom.findDOMNode)(this);
+	  },
+	  getPopupClassNameFromAlign: function getPopupClassNameFromAlign(align) {
+	    var className = [];
+	    var props = this.props;
+	    var popupPlacement = props.popupPlacement,
+	        builtinPlacements = props.builtinPlacements,
+	        prefixCls = props.prefixCls;
 	
-	  Trigger.prototype.getPopupAlign = function getPopupAlign() {
+	    if (popupPlacement && builtinPlacements) {
+	      className.push((0, _utils.getPopupClassNameFromAlign)(builtinPlacements, prefixCls, align));
+	    }
+	    if (props.getPopupClassNameFromAlign) {
+	      className.push(props.getPopupClassNameFromAlign(align));
+	    }
+	    return className.join(' ');
+	  },
+	  getPopupAlign: function getPopupAlign() {
 	    var props = this.props;
 	    var popupPlacement = props.popupPlacement,
 	        popupAlign = props.popupAlign,
@@ -44091,148 +44223,140 @@
 	      return (0, _utils.getAlignFromPlacement)(builtinPlacements, popupPlacement, popupAlign);
 	    }
 	    return popupAlign;
-	  };
+	  },
+	  getComponent: function getComponent() {
+	    var props = this.props,
+	        state = this.state;
 	
-	  /**
-	   * @param popupVisible    Show or not the popup element
-	   * @param event           SyntheticEvent, used for `pointAlign`
-	   */
-	  Trigger.prototype.setPopupVisible = function setPopupVisible(popupVisible, event) {
-	    var alignPoint = this.props.alignPoint;
-	
-	
+	    var mouseProps = {};
+	    if (this.isMouseEnterToShow()) {
+	      mouseProps.onMouseEnter = this.onPopupMouseEnter;
+	    }
+	    if (this.isMouseLeaveToHide()) {
+	      mouseProps.onMouseLeave = this.onPopupMouseLeave;
+	    }
+	    return _react2['default'].createElement(
+	      _Popup2['default'],
+	      (0, _extends3['default'])({
+	        prefixCls: props.prefixCls,
+	        destroyPopupOnHide: props.destroyPopupOnHide,
+	        visible: state.popupVisible,
+	        className: props.popupClassName,
+	        action: props.action,
+	        align: this.getPopupAlign(),
+	        onAlign: props.onPopupAlign,
+	        animation: props.popupAnimation,
+	        getClassNameFromAlign: this.getPopupClassNameFromAlign
+	      }, mouseProps, {
+	        getRootDomNode: this.getRootDomNode,
+	        style: props.popupStyle,
+	        mask: props.mask,
+	        zIndex: props.zIndex,
+	        transitionName: props.popupTransitionName,
+	        maskAnimation: props.maskAnimation,
+	        maskTransitionName: props.maskTransitionName
+	      }),
+	      typeof props.popup === 'function' ? props.popup() : props.popup
+	    );
+	  },
+	  setPopupVisible: function setPopupVisible(popupVisible) {
 	    this.clearDelayTimer();
-	
 	    if (this.state.popupVisible !== popupVisible) {
 	      if (!('popupVisible' in this.props)) {
-	        this.setState({ popupVisible: popupVisible });
+	        this.setState({
+	          popupVisible: popupVisible
+	        });
 	      }
 	      this.props.onPopupVisibleChange(popupVisible);
 	    }
-	
-	    // Always record the point position since mouseEnterDelay will delay the show
-	    if (alignPoint && event) {
-	      this.setPoint(event);
-	    }
-	  };
-	
-	  Trigger.prototype.delaySetPopupVisible = function delaySetPopupVisible(visible, delayS, event) {
-	    var _this3 = this;
+	  },
+	  delaySetPopupVisible: function delaySetPopupVisible(visible, delayS) {
+	    var _this2 = this;
 	
 	    var delay = delayS * 1000;
 	    this.clearDelayTimer();
 	    if (delay) {
-	      var point = event ? { pageX: event.pageX, pageY: event.pageY } : null;
 	      this.delayTimer = setTimeout(function () {
-	        _this3.setPopupVisible(visible, point);
-	        _this3.clearDelayTimer();
+	        _this2.setPopupVisible(visible);
+	        _this2.clearDelayTimer();
 	      }, delay);
 	    } else {
-	      this.setPopupVisible(visible, event);
+	      this.setPopupVisible(visible);
 	    }
-	  };
-	
-	  Trigger.prototype.clearDelayTimer = function clearDelayTimer() {
+	  },
+	  clearDelayTimer: function clearDelayTimer() {
 	    if (this.delayTimer) {
 	      clearTimeout(this.delayTimer);
 	      this.delayTimer = null;
 	    }
-	  };
-	
-	  Trigger.prototype.clearOutsideHandler = function clearOutsideHandler() {
+	  },
+	  clearOutsideHandler: function clearOutsideHandler() {
 	    if (this.clickOutsideHandler) {
 	      this.clickOutsideHandler.remove();
 	      this.clickOutsideHandler = null;
-	    }
-	
-	    if (this.contextMenuOutsideHandler1) {
-	      this.contextMenuOutsideHandler1.remove();
-	      this.contextMenuOutsideHandler1 = null;
-	    }
-	
-	    if (this.contextMenuOutsideHandler2) {
-	      this.contextMenuOutsideHandler2.remove();
-	      this.contextMenuOutsideHandler2 = null;
 	    }
 	
 	    if (this.touchOutsideHandler) {
 	      this.touchOutsideHandler.remove();
 	      this.touchOutsideHandler = null;
 	    }
-	  };
-	
-	  Trigger.prototype.createTwoChains = function createTwoChains(event) {
+	  },
+	  createTwoChains: function createTwoChains(event) {
 	    var childPros = this.props.children.props;
 	    var props = this.props;
 	    if (childPros[event] && props[event]) {
 	      return this['fire' + event];
 	    }
 	    return childPros[event] || props[event];
-	  };
-	
-	  Trigger.prototype.isClickToShow = function isClickToShow() {
+	  },
+	  isClickToShow: function isClickToShow() {
 	    var _props = this.props,
 	        action = _props.action,
 	        showAction = _props.showAction;
 	
 	    return action.indexOf('click') !== -1 || showAction.indexOf('click') !== -1;
-	  };
-	
-	  Trigger.prototype.isContextMenuToShow = function isContextMenuToShow() {
+	  },
+	  isClickToHide: function isClickToHide() {
 	    var _props2 = this.props,
 	        action = _props2.action,
-	        showAction = _props2.showAction;
-	
-	    return action.indexOf('contextMenu') !== -1 || showAction.indexOf('contextMenu') !== -1;
-	  };
-	
-	  Trigger.prototype.isClickToHide = function isClickToHide() {
-	    var _props3 = this.props,
-	        action = _props3.action,
-	        hideAction = _props3.hideAction;
+	        hideAction = _props2.hideAction;
 	
 	    return action.indexOf('click') !== -1 || hideAction.indexOf('click') !== -1;
-	  };
-	
-	  Trigger.prototype.isMouseEnterToShow = function isMouseEnterToShow() {
-	    var _props4 = this.props,
-	        action = _props4.action,
-	        showAction = _props4.showAction;
+	  },
+	  isMouseEnterToShow: function isMouseEnterToShow() {
+	    var _props3 = this.props,
+	        action = _props3.action,
+	        showAction = _props3.showAction;
 	
 	    return action.indexOf('hover') !== -1 || showAction.indexOf('mouseEnter') !== -1;
-	  };
-	
-	  Trigger.prototype.isMouseLeaveToHide = function isMouseLeaveToHide() {
-	    var _props5 = this.props,
-	        action = _props5.action,
-	        hideAction = _props5.hideAction;
+	  },
+	  isMouseLeaveToHide: function isMouseLeaveToHide() {
+	    var _props4 = this.props,
+	        action = _props4.action,
+	        hideAction = _props4.hideAction;
 	
 	    return action.indexOf('hover') !== -1 || hideAction.indexOf('mouseLeave') !== -1;
-	  };
-	
-	  Trigger.prototype.isFocusToShow = function isFocusToShow() {
-	    var _props6 = this.props,
-	        action = _props6.action,
-	        showAction = _props6.showAction;
+	  },
+	  isFocusToShow: function isFocusToShow() {
+	    var _props5 = this.props,
+	        action = _props5.action,
+	        showAction = _props5.showAction;
 	
 	    return action.indexOf('focus') !== -1 || showAction.indexOf('focus') !== -1;
-	  };
-	
-	  Trigger.prototype.isBlurToHide = function isBlurToHide() {
-	    var _props7 = this.props,
-	        action = _props7.action,
-	        hideAction = _props7.hideAction;
+	  },
+	  isBlurToHide: function isBlurToHide() {
+	    var _props6 = this.props,
+	        action = _props6.action,
+	        hideAction = _props6.hideAction;
 	
 	    return action.indexOf('focus') !== -1 || hideAction.indexOf('blur') !== -1;
-	  };
-	
-	  Trigger.prototype.forcePopupAlign = function forcePopupAlign() {
+	  },
+	  forcePopupAlign: function forcePopupAlign() {
 	    if (this.state.popupVisible && this._component && this._component.alignInstance) {
 	      this._component.alignInstance.forceAlign();
 	    }
-	  };
-	
-	  Trigger.prototype.fireEvents = function fireEvents(type, e) {
+	  },
+	  fireEvents: function fireEvents(type, e) {
 	    var childCallback = this.props.children.props[type];
 	    if (childCallback) {
 	      childCallback(e);
@@ -44241,31 +44365,15 @@
 	    if (callback) {
 	      callback(e);
 	    }
-	  };
-	
-	  Trigger.prototype.close = function close() {
+	  },
+	  close: function close() {
 	    this.setPopupVisible(false);
-	  };
-	
-	  Trigger.prototype.render = function render() {
-	    var _this4 = this;
-	
-	    var popupVisible = this.state.popupVisible;
-	    var _props8 = this.props,
-	        children = _props8.children,
-	        forceRender = _props8.forceRender,
-	        alignPoint = _props8.alignPoint,
-	        className = _props8.className;
-	
+	  },
+	  render: function render() {
+	    var props = this.props;
+	    var children = props.children;
 	    var child = _react2['default'].Children.only(children);
-	    var newChildProps = { key: 'trigger' };
-	
-	    if (this.isContextMenuToShow()) {
-	      newChildProps.onContextMenu = this.onContextMenu;
-	    } else {
-	      newChildProps.onContextMenu = this.createTwoChains('onContextMenu');
-	    }
-	
+	    var newChildProps = {};
 	    if (this.isClickToHide() || this.isClickToShow()) {
 	      newChildProps.onClick = this.onClick;
 	      newChildProps.onMouseDown = this.onMouseDown;
@@ -44277,9 +44385,6 @@
 	    }
 	    if (this.isMouseEnterToShow()) {
 	      newChildProps.onMouseEnter = this.onMouseEnter;
-	      if (alignPoint) {
-	        newChildProps.onMouseMove = this.onMouseMove;
-	      }
 	    } else {
 	      newChildProps.onMouseEnter = this.createTwoChains('onMouseEnter');
 	    }
@@ -44296,345 +44401,9 @@
 	      newChildProps.onBlur = this.createTwoChains('onBlur');
 	    }
 	
-	    var childrenClassName = (0, _classnames2['default'])(child && child.props && child.props.className, className);
-	    if (childrenClassName) {
-	      newChildProps.className = childrenClassName;
-	    }
-	    var trigger = _react2['default'].cloneElement(child, newChildProps);
-	
-	    if (!IS_REACT_16) {
-	      return _react2['default'].createElement(
-	        _ContainerRender2['default'],
-	        {
-	          parent: this,
-	          visible: popupVisible,
-	          autoMount: false,
-	          forceRender: forceRender,
-	          getComponent: this.getComponent,
-	          getContainer: this.getContainer
-	        },
-	        function (_ref2) {
-	          var renderComponent = _ref2.renderComponent;
-	
-	          _this4.renderComponent = renderComponent;
-	          return trigger;
-	        }
-	      );
-	    }
-	
-	    var portal = void 0;
-	    // prevent unmounting after it's rendered
-	    if (popupVisible || this._component || forceRender) {
-	      portal = _react2['default'].createElement(
-	        _Portal2['default'],
-	        {
-	          key: 'portal',
-	          getContainer: this.getContainer,
-	          didUpdate: this.handlePortalUpdate
-	        },
-	        this.getComponent()
-	      );
-	    }
-	
-	    return [trigger, portal];
-	  };
-	
-	  return Trigger;
-	}(_react2['default'].Component);
-	
-	Trigger.propTypes = {
-	  children: _propTypes2['default'].any,
-	  action: _propTypes2['default'].oneOfType([_propTypes2['default'].string, _propTypes2['default'].arrayOf(_propTypes2['default'].string)]),
-	  showAction: _propTypes2['default'].any,
-	  hideAction: _propTypes2['default'].any,
-	  getPopupClassNameFromAlign: _propTypes2['default'].any,
-	  onPopupVisibleChange: _propTypes2['default'].func,
-	  afterPopupVisibleChange: _propTypes2['default'].func,
-	  popup: _propTypes2['default'].oneOfType([_propTypes2['default'].node, _propTypes2['default'].func]).isRequired,
-	  popupStyle: _propTypes2['default'].object,
-	  prefixCls: _propTypes2['default'].string,
-	  popupClassName: _propTypes2['default'].string,
-	  className: _propTypes2['default'].string,
-	  popupPlacement: _propTypes2['default'].string,
-	  builtinPlacements: _propTypes2['default'].object,
-	  popupTransitionName: _propTypes2['default'].oneOfType([_propTypes2['default'].string, _propTypes2['default'].object]),
-	  popupAnimation: _propTypes2['default'].any,
-	  mouseEnterDelay: _propTypes2['default'].number,
-	  mouseLeaveDelay: _propTypes2['default'].number,
-	  zIndex: _propTypes2['default'].number,
-	  focusDelay: _propTypes2['default'].number,
-	  blurDelay: _propTypes2['default'].number,
-	  getPopupContainer: _propTypes2['default'].func,
-	  getDocument: _propTypes2['default'].func,
-	  forceRender: _propTypes2['default'].bool,
-	  destroyPopupOnHide: _propTypes2['default'].bool,
-	  mask: _propTypes2['default'].bool,
-	  maskClosable: _propTypes2['default'].bool,
-	  onPopupAlign: _propTypes2['default'].func,
-	  popupAlign: _propTypes2['default'].object,
-	  popupVisible: _propTypes2['default'].bool,
-	  defaultPopupVisible: _propTypes2['default'].bool,
-	  maskTransitionName: _propTypes2['default'].oneOfType([_propTypes2['default'].string, _propTypes2['default'].object]),
-	  maskAnimation: _propTypes2['default'].string,
-	  stretch: _propTypes2['default'].string,
-	  alignPoint: _propTypes2['default'].bool // Maybe we can support user pass position in the future
-	};
-	Trigger.defaultProps = {
-	  prefixCls: 'rc-trigger-popup',
-	  getPopupClassNameFromAlign: returnEmptyString,
-	  getDocument: returnDocument,
-	  onPopupVisibleChange: noop,
-	  afterPopupVisibleChange: noop,
-	  onPopupAlign: noop,
-	  popupClassName: '',
-	  mouseEnterDelay: 0,
-	  mouseLeaveDelay: 0.1,
-	  focusDelay: 0,
-	  blurDelay: 0.15,
-	  popupStyle: {},
-	  destroyPopupOnHide: false,
-	  popupAlign: {},
-	  defaultPopupVisible: false,
-	  mask: false,
-	  maskClosable: true,
-	  action: [],
-	  showAction: [],
-	  hideAction: []
-	};
-	
-	var _initialiseProps = function _initialiseProps() {
-	  var _this5 = this;
-	
-	  this.onMouseEnter = function (e) {
-	    var mouseEnterDelay = _this5.props.mouseEnterDelay;
-	
-	    _this5.fireEvents('onMouseEnter', e);
-	    _this5.delaySetPopupVisible(true, mouseEnterDelay, mouseEnterDelay ? null : e);
-	  };
-	
-	  this.onMouseMove = function (e) {
-	    _this5.fireEvents('onMouseMove', e);
-	    _this5.setPoint(e);
-	  };
-	
-	  this.onMouseLeave = function (e) {
-	    _this5.fireEvents('onMouseLeave', e);
-	    _this5.delaySetPopupVisible(false, _this5.props.mouseLeaveDelay);
-	  };
-	
-	  this.onPopupMouseEnter = function () {
-	    _this5.clearDelayTimer();
-	  };
-	
-	  this.onPopupMouseLeave = function (e) {
-	    // https://github.com/react-component/trigger/pull/13
-	    // react bug?
-	    if (e.relatedTarget && !e.relatedTarget.setTimeout && _this5._component && _this5._component.getPopupDomNode && (0, _contains2['default'])(_this5._component.getPopupDomNode(), e.relatedTarget)) {
-	      return;
-	    }
-	    _this5.delaySetPopupVisible(false, _this5.props.mouseLeaveDelay);
-	  };
-	
-	  this.onFocus = function (e) {
-	    _this5.fireEvents('onFocus', e);
-	    // incase focusin and focusout
-	    _this5.clearDelayTimer();
-	    if (_this5.isFocusToShow()) {
-	      _this5.focusTime = Date.now();
-	      _this5.delaySetPopupVisible(true, _this5.props.focusDelay);
-	    }
-	  };
-	
-	  this.onMouseDown = function (e) {
-	    _this5.fireEvents('onMouseDown', e);
-	    _this5.preClickTime = Date.now();
-	  };
-	
-	  this.onTouchStart = function (e) {
-	    _this5.fireEvents('onTouchStart', e);
-	    _this5.preTouchTime = Date.now();
-	  };
-	
-	  this.onBlur = function (e) {
-	    _this5.fireEvents('onBlur', e);
-	    _this5.clearDelayTimer();
-	    if (_this5.isBlurToHide()) {
-	      _this5.delaySetPopupVisible(false, _this5.props.blurDelay);
-	    }
-	  };
-	
-	  this.onContextMenu = function (e) {
-	    e.preventDefault();
-	    _this5.fireEvents('onContextMenu', e);
-	    _this5.setPopupVisible(true, e);
-	  };
-	
-	  this.onContextMenuClose = function () {
-	    if (_this5.isContextMenuToShow()) {
-	      _this5.close();
-	    }
-	  };
-	
-	  this.onClick = function (event) {
-	    _this5.fireEvents('onClick', event);
-	    // focus will trigger click
-	    if (_this5.focusTime) {
-	      var preTime = void 0;
-	      if (_this5.preClickTime && _this5.preTouchTime) {
-	        preTime = Math.min(_this5.preClickTime, _this5.preTouchTime);
-	      } else if (_this5.preClickTime) {
-	        preTime = _this5.preClickTime;
-	      } else if (_this5.preTouchTime) {
-	        preTime = _this5.preTouchTime;
-	      }
-	      if (Math.abs(preTime - _this5.focusTime) < 20) {
-	        return;
-	      }
-	      _this5.focusTime = 0;
-	    }
-	    _this5.preClickTime = 0;
-	    _this5.preTouchTime = 0;
-	    if (event && event.preventDefault) {
-	      event.preventDefault();
-	    }
-	    var nextVisible = !_this5.state.popupVisible;
-	    if (_this5.isClickToHide() && !nextVisible || nextVisible && _this5.isClickToShow()) {
-	      _this5.setPopupVisible(!_this5.state.popupVisible, event);
-	    }
-	  };
-	
-	  this.onDocumentClick = function (event) {
-	    if (_this5.props.mask && !_this5.props.maskClosable) {
-	      return;
-	    }
-	    var target = event.target;
-	    var root = (0, _reactDom.findDOMNode)(_this5);
-	    var popupNode = _this5.getPopupDomNode();
-	    if (!(0, _contains2['default'])(root, target) && !(0, _contains2['default'])(popupNode, target)) {
-	      _this5.close();
-	    }
-	  };
-	
-	  this.getRootDomNode = function () {
-	    return (0, _reactDom.findDOMNode)(_this5);
-	  };
-	
-	  this.getPopupClassNameFromAlign = function (align) {
-	    var className = [];
-	    var _props9 = _this5.props,
-	        popupPlacement = _props9.popupPlacement,
-	        builtinPlacements = _props9.builtinPlacements,
-	        prefixCls = _props9.prefixCls,
-	        alignPoint = _props9.alignPoint,
-	        getPopupClassNameFromAlign = _props9.getPopupClassNameFromAlign;
-	
-	    if (popupPlacement && builtinPlacements) {
-	      className.push((0, _utils.getAlignPopupClassName)(builtinPlacements, prefixCls, align, alignPoint));
-	    }
-	    if (getPopupClassNameFromAlign) {
-	      className.push(getPopupClassNameFromAlign(align));
-	    }
-	    return className.join(' ');
-	  };
-	
-	  this.getComponent = function () {
-	    var _props10 = _this5.props,
-	        prefixCls = _props10.prefixCls,
-	        destroyPopupOnHide = _props10.destroyPopupOnHide,
-	        popupClassName = _props10.popupClassName,
-	        action = _props10.action,
-	        onPopupAlign = _props10.onPopupAlign,
-	        popupAnimation = _props10.popupAnimation,
-	        popupTransitionName = _props10.popupTransitionName,
-	        popupStyle = _props10.popupStyle,
-	        mask = _props10.mask,
-	        maskAnimation = _props10.maskAnimation,
-	        maskTransitionName = _props10.maskTransitionName,
-	        zIndex = _props10.zIndex,
-	        popup = _props10.popup,
-	        stretch = _props10.stretch,
-	        alignPoint = _props10.alignPoint;
-	    var _state = _this5.state,
-	        popupVisible = _state.popupVisible,
-	        point = _state.point;
-	
-	
-	    var align = _this5.getPopupAlign();
-	
-	    var mouseProps = {};
-	    if (_this5.isMouseEnterToShow()) {
-	      mouseProps.onMouseEnter = _this5.onPopupMouseEnter;
-	    }
-	    if (_this5.isMouseLeaveToHide()) {
-	      mouseProps.onMouseLeave = _this5.onPopupMouseLeave;
-	    }
-	
-	    return _react2['default'].createElement(
-	      _Popup2['default'],
-	      (0, _extends3['default'])({
-	        prefixCls: prefixCls,
-	        destroyPopupOnHide: destroyPopupOnHide,
-	        visible: popupVisible,
-	        point: alignPoint && point,
-	        className: popupClassName,
-	        action: action,
-	        align: align,
-	        onAlign: onPopupAlign,
-	        animation: popupAnimation,
-	        getClassNameFromAlign: _this5.getPopupClassNameFromAlign
-	      }, mouseProps, {
-	        stretch: stretch,
-	        getRootDomNode: _this5.getRootDomNode,
-	        style: popupStyle,
-	        mask: mask,
-	        zIndex: zIndex,
-	        transitionName: popupTransitionName,
-	        maskAnimation: maskAnimation,
-	        maskTransitionName: maskTransitionName,
-	        ref: _this5.savePopup
-	      }),
-	      typeof popup === 'function' ? popup() : popup
-	    );
-	  };
-	
-	  this.getContainer = function () {
-	    var props = _this5.props;
-	
-	    var popupContainer = document.createElement('div');
-	    // Make sure default popup container will never cause scrollbar appearing
-	    // https://github.com/react-component/trigger/issues/41
-	    popupContainer.style.position = 'absolute';
-	    popupContainer.style.top = '0';
-	    popupContainer.style.left = '0';
-	    popupContainer.style.width = '100%';
-	    var mountNode = props.getPopupContainer ? props.getPopupContainer((0, _reactDom.findDOMNode)(_this5)) : props.getDocument().body;
-	    mountNode.appendChild(popupContainer);
-	    return popupContainer;
-	  };
-	
-	  this.setPoint = function (point) {
-	    var alignPoint = _this5.props.alignPoint;
-	
-	    if (!alignPoint || !point) return;
-	
-	    _this5.setState({
-	      point: {
-	        pageX: point.pageX,
-	        pageY: point.pageY
-	      }
-	    });
-	  };
-	
-	  this.handlePortalUpdate = function () {
-	    if (_this5.prevPopupVisible !== _this5.state.popupVisible) {
-	      _this5.props.afterPopupVisibleChange(_this5.state.popupVisible);
-	    }
-	  };
-	
-	  this.savePopup = function (node) {
-	    _this5._component = node;
-	  };
-	};
+	    return _react2['default'].cloneElement(child, newChildProps);
+	  }
+	});
 	
 	exports['default'] = Trigger;
 	module.exports = exports['default'];
@@ -44698,7 +44467,9 @@
 
 	'use strict';
 	
-	exports.__esModule = true;
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
 	
 	var _extends2 = __webpack_require__(145);
 	
@@ -44707,6 +44478,10 @@
 	var _classCallCheck2 = __webpack_require__(250);
 	
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+	
+	var _createClass2 = __webpack_require__(251);
+	
+	var _createClass3 = _interopRequireDefault(_createClass2);
 	
 	var _possibleConstructorReturn2 = __webpack_require__(316);
 	
@@ -44754,237 +44529,188 @@
 	  function Popup(props) {
 	    (0, _classCallCheck3['default'])(this, Popup);
 	
-	    var _this = (0, _possibleConstructorReturn3['default'])(this, _Component.call(this, props));
+	    var _this = (0, _possibleConstructorReturn3['default'])(this, (Popup.__proto__ || Object.getPrototypeOf(Popup)).call(this, props));
 	
 	    _initialiseProps.call(_this);
-	
-	    _this.state = {
-	      // Used for stretch
-	      stretchChecked: false,
-	      targetWidth: undefined,
-	      targetHeight: undefined
-	    };
 	
 	    _this.savePopupRef = _utils.saveRef.bind(_this, 'popupInstance');
 	    _this.saveAlignRef = _utils.saveRef.bind(_this, 'alignInstance');
 	    return _this;
 	  }
 	
-	  Popup.prototype.componentDidMount = function componentDidMount() {
-	    this.rootNode = this.getPopupDomNode();
-	    this.setStretchSize();
-	  };
-	
-	  Popup.prototype.componentDidUpdate = function componentDidUpdate() {
-	    this.setStretchSize();
-	  };
-	
-	  // Record size if stretch needed
-	
-	
-	  Popup.prototype.getPopupDomNode = function getPopupDomNode() {
-	    return _reactDom2['default'].findDOMNode(this.popupInstance);
-	  };
-	
-	  // `target` on `rc-align` can accept as a function to get the bind element or a point.
-	  // ref: https://www.npmjs.com/package/rc-align
-	
-	
-	  Popup.prototype.getMaskTransitionName = function getMaskTransitionName() {
-	    var props = this.props;
-	    var transitionName = props.maskTransitionName;
-	    var animation = props.maskAnimation;
-	    if (!transitionName && animation) {
-	      transitionName = props.prefixCls + '-' + animation;
+	  (0, _createClass3['default'])(Popup, [{
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      this.rootNode = this.getPopupDomNode();
 	    }
-	    return transitionName;
-	  };
-	
-	  Popup.prototype.getTransitionName = function getTransitionName() {
-	    var props = this.props;
-	    var transitionName = props.transitionName;
-	    if (!transitionName && props.animation) {
-	      transitionName = props.prefixCls + '-' + props.animation;
+	  }, {
+	    key: 'getPopupDomNode',
+	    value: function getPopupDomNode() {
+	      return _reactDom2['default'].findDOMNode(this.popupInstance);
 	    }
-	    return transitionName;
-	  };
-	
-	  Popup.prototype.getClassName = function getClassName(currentAlignClassName) {
-	    return this.props.prefixCls + ' ' + this.props.className + ' ' + currentAlignClassName;
-	  };
-	
-	  Popup.prototype.getPopupElement = function getPopupElement() {
-	    var _this2 = this;
-	
-	    var savePopupRef = this.savePopupRef;
-	    var _state = this.state,
-	        stretchChecked = _state.stretchChecked,
-	        targetHeight = _state.targetHeight,
-	        targetWidth = _state.targetWidth;
-	    var _props = this.props,
-	        align = _props.align,
-	        visible = _props.visible,
-	        prefixCls = _props.prefixCls,
-	        style = _props.style,
-	        getClassNameFromAlign = _props.getClassNameFromAlign,
-	        destroyPopupOnHide = _props.destroyPopupOnHide,
-	        stretch = _props.stretch,
-	        children = _props.children,
-	        onMouseEnter = _props.onMouseEnter,
-	        onMouseLeave = _props.onMouseLeave;
-	
-	    var className = this.getClassName(this.currentAlignClassName || getClassNameFromAlign(align));
-	    var hiddenClassName = prefixCls + '-hidden';
-	
-	    if (!visible) {
-	      this.currentAlignClassName = null;
-	    }
-	
-	    var sizeStyle = {};
-	    if (stretch) {
-	      // Stretch with target
-	      if (stretch.indexOf('height') !== -1) {
-	        sizeStyle.height = targetHeight;
-	      } else if (stretch.indexOf('minHeight') !== -1) {
-	        sizeStyle.minHeight = targetHeight;
+	  }, {
+	    key: 'getMaskTransitionName',
+	    value: function getMaskTransitionName() {
+	      var props = this.props;
+	      var transitionName = props.maskTransitionName;
+	      var animation = props.maskAnimation;
+	      if (!transitionName && animation) {
+	        transitionName = props.prefixCls + '-' + animation;
 	      }
-	      if (stretch.indexOf('width') !== -1) {
-	        sizeStyle.width = targetWidth;
-	      } else if (stretch.indexOf('minWidth') !== -1) {
-	        sizeStyle.minWidth = targetWidth;
-	      }
-	
-	      // Delay force align to makes ui smooth
-	      if (!stretchChecked) {
-	        sizeStyle.visibility = 'hidden';
-	        setTimeout(function () {
-	          if (_this2.alignInstance) {
-	            _this2.alignInstance.forceAlign();
-	          }
-	        }, 0);
-	      }
+	      return transitionName;
 	    }
+	  }, {
+	    key: 'getTransitionName',
+	    value: function getTransitionName() {
+	      var props = this.props;
+	      var transitionName = props.transitionName;
+	      if (!transitionName && props.animation) {
+	        transitionName = props.prefixCls + '-' + props.animation;
+	      }
+	      return transitionName;
+	    }
+	  }, {
+	    key: 'getClassName',
+	    value: function getClassName(currentAlignClassName) {
+	      return this.props.prefixCls + ' ' + this.props.className + ' ' + currentAlignClassName;
+	    }
+	  }, {
+	    key: 'getPopupElement',
+	    value: function getPopupElement() {
+	      var savePopupRef = this.savePopupRef,
+	          props = this.props;
+	      var align = props.align,
+	          style = props.style,
+	          visible = props.visible,
+	          prefixCls = props.prefixCls,
+	          destroyPopupOnHide = props.destroyPopupOnHide;
 	
-	    var newStyle = (0, _extends3['default'])({}, sizeStyle, style, this.getZIndexStyle());
-	
-	    var popupInnerProps = {
-	      className: className,
-	      prefixCls: prefixCls,
-	      ref: savePopupRef,
-	      onMouseEnter: onMouseEnter,
-	      onMouseLeave: onMouseLeave,
-	      style: newStyle
-	    };
-	    if (destroyPopupOnHide) {
+	      var className = this.getClassName(this.currentAlignClassName || props.getClassNameFromAlign(align));
+	      var hiddenClassName = prefixCls + '-hidden';
+	      if (!visible) {
+	        this.currentAlignClassName = null;
+	      }
+	      var newStyle = (0, _extends3['default'])({}, style, this.getZIndexStyle());
+	      var popupInnerProps = {
+	        className: className,
+	        prefixCls: prefixCls,
+	        ref: savePopupRef,
+	        onMouseEnter: props.onMouseEnter,
+	        onMouseLeave: props.onMouseLeave,
+	        style: newStyle
+	      };
+	      if (destroyPopupOnHide) {
+	        return _react2['default'].createElement(
+	          _rcAnimate2['default'],
+	          {
+	            component: '',
+	            exclusive: true,
+	            transitionAppear: true,
+	            transitionName: this.getTransitionName()
+	          },
+	          visible ? _react2['default'].createElement(
+	            _rcAlign2['default'],
+	            {
+	              target: this.getTarget,
+	              key: 'popup',
+	              ref: this.saveAlignRef,
+	              monitorWindowResize: true,
+	              align: align,
+	              onAlign: this.onAlign
+	            },
+	            _react2['default'].createElement(
+	              _PopupInner2['default'],
+	              (0, _extends3['default'])({
+	                visible: true
+	              }, popupInnerProps),
+	              props.children
+	            )
+	          ) : null
+	        );
+	      }
 	      return _react2['default'].createElement(
 	        _rcAnimate2['default'],
 	        {
 	          component: '',
 	          exclusive: true,
 	          transitionAppear: true,
-	          transitionName: this.getTransitionName()
+	          transitionName: this.getTransitionName(),
+	          showProp: 'xVisible'
 	        },
-	        visible ? _react2['default'].createElement(
+	        _react2['default'].createElement(
 	          _rcAlign2['default'],
 	          {
-	            target: this.getAlignTarget(),
+	            target: this.getTarget,
 	            key: 'popup',
 	            ref: this.saveAlignRef,
 	            monitorWindowResize: true,
+	            xVisible: visible,
+	            childrenProps: { visible: 'xVisible' },
+	            disabled: !visible,
 	            align: align,
 	            onAlign: this.onAlign
 	          },
 	          _react2['default'].createElement(
 	            _PopupInner2['default'],
 	            (0, _extends3['default'])({
-	              visible: true
+	              hiddenClassName: hiddenClassName
 	            }, popupInnerProps),
-	            children
+	            props.children
 	          )
-	        ) : null
+	        )
 	      );
 	    }
-	
-	    return _react2['default'].createElement(
-	      _rcAnimate2['default'],
-	      {
-	        component: '',
-	        exclusive: true,
-	        transitionAppear: true,
-	        transitionName: this.getTransitionName(),
-	        showProp: 'xVisible'
-	      },
-	      _react2['default'].createElement(
-	        _rcAlign2['default'],
-	        {
-	          target: this.getAlignTarget(),
-	          key: 'popup',
-	          ref: this.saveAlignRef,
-	          monitorWindowResize: true,
-	          xVisible: visible,
-	          childrenProps: { visible: 'xVisible' },
-	          disabled: !visible,
-	          align: align,
-	          onAlign: this.onAlign
-	        },
-	        _react2['default'].createElement(
-	          _PopupInner2['default'],
-	          (0, _extends3['default'])({
-	            hiddenClassName: hiddenClassName
-	          }, popupInnerProps),
-	          children
-	        )
-	      )
-	    );
-	  };
-	
-	  Popup.prototype.getZIndexStyle = function getZIndexStyle() {
-	    var style = {};
-	    var props = this.props;
-	    if (props.zIndex !== undefined) {
-	      style.zIndex = props.zIndex;
-	    }
-	    return style;
-	  };
-	
-	  Popup.prototype.getMaskElement = function getMaskElement() {
-	    var props = this.props;
-	    var maskElement = void 0;
-	    if (props.mask) {
-	      var maskTransition = this.getMaskTransitionName();
-	      maskElement = _react2['default'].createElement(_LazyRenderBox2['default'], {
-	        style: this.getZIndexStyle(),
-	        key: 'mask',
-	        className: props.prefixCls + '-mask',
-	        hiddenClassName: props.prefixCls + '-mask-hidden',
-	        visible: props.visible
-	      });
-	      if (maskTransition) {
-	        maskElement = _react2['default'].createElement(
-	          _rcAnimate2['default'],
-	          {
-	            key: 'mask',
-	            showProp: 'visible',
-	            transitionAppear: true,
-	            component: '',
-	            transitionName: maskTransition
-	          },
-	          maskElement
-	        );
+	  }, {
+	    key: 'getZIndexStyle',
+	    value: function getZIndexStyle() {
+	      var style = {};
+	      var props = this.props;
+	      if (props.zIndex !== undefined) {
+	        style.zIndex = props.zIndex;
 	      }
+	      return style;
 	    }
-	    return maskElement;
-	  };
-	
-	  Popup.prototype.render = function render() {
-	    return _react2['default'].createElement(
-	      'div',
-	      null,
-	      this.getMaskElement(),
-	      this.getPopupElement()
-	    );
-	  };
-	
+	  }, {
+	    key: 'getMaskElement',
+	    value: function getMaskElement() {
+	      var props = this.props;
+	      var maskElement = void 0;
+	      if (props.mask) {
+	        var maskTransition = this.getMaskTransitionName();
+	        maskElement = _react2['default'].createElement(_LazyRenderBox2['default'], {
+	          style: this.getZIndexStyle(),
+	          key: 'mask',
+	          className: props.prefixCls + '-mask',
+	          hiddenClassName: props.prefixCls + '-mask-hidden',
+	          visible: props.visible
+	        });
+	        if (maskTransition) {
+	          maskElement = _react2['default'].createElement(
+	            _rcAnimate2['default'],
+	            {
+	              key: 'mask',
+	              showProp: 'visible',
+	              transitionAppear: true,
+	              component: '',
+	              transitionName: maskTransition
+	            },
+	            maskElement
+	          );
+	        }
+	      }
+	      return maskElement;
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      return _react2['default'].createElement(
+	        'div',
+	        null,
+	        this.getMaskElement(),
+	        this.getPopupElement()
+	      );
+	    }
+	  }]);
 	  return Popup;
 	}(_react.Component);
 	
@@ -44999,74 +44725,26 @@
 	  destroyPopupOnHide: _propTypes2['default'].bool,
 	  className: _propTypes2['default'].string,
 	  prefixCls: _propTypes2['default'].string,
-	  onMouseLeave: _propTypes2['default'].func,
-	  stretch: _propTypes2['default'].string,
-	  children: _propTypes2['default'].node,
-	  point: _propTypes2['default'].shape({
-	    pageX: _propTypes2['default'].number,
-	    pageY: _propTypes2['default'].number
-	  })
+	  onMouseLeave: _propTypes2['default'].func
 	};
 	
 	var _initialiseProps = function _initialiseProps() {
-	  var _this3 = this;
+	  var _this2 = this;
 	
 	  this.onAlign = function (popupDomNode, align) {
-	    var props = _this3.props;
+	    var props = _this2.props;
 	    var currentAlignClassName = props.getClassNameFromAlign(align);
 	    // FIX: https://github.com/react-component/trigger/issues/56
 	    // FIX: https://github.com/react-component/tooltip/issues/79
-	    if (_this3.currentAlignClassName !== currentAlignClassName) {
-	      _this3.currentAlignClassName = currentAlignClassName;
-	      popupDomNode.className = _this3.getClassName(currentAlignClassName);
+	    if (_this2.currentAlignClassName !== currentAlignClassName) {
+	      _this2.currentAlignClassName = currentAlignClassName;
+	      popupDomNode.className = _this2.getClassName(currentAlignClassName);
 	    }
 	    props.onAlign(popupDomNode, align);
 	  };
 	
-	  this.setStretchSize = function () {
-	    var _props2 = _this3.props,
-	        stretch = _props2.stretch,
-	        getRootDomNode = _props2.getRootDomNode,
-	        visible = _props2.visible;
-	    var _state2 = _this3.state,
-	        stretchChecked = _state2.stretchChecked,
-	        targetHeight = _state2.targetHeight,
-	        targetWidth = _state2.targetWidth;
-	
-	
-	    if (!stretch || !visible) {
-	      if (stretchChecked) {
-	        _this3.setState({ stretchChecked: false });
-	      }
-	      return;
-	    }
-	
-	    var $ele = getRootDomNode();
-	    if (!$ele) return;
-	
-	    var height = $ele.offsetHeight;
-	    var width = $ele.offsetWidth;
-	
-	    if (targetHeight !== height || targetWidth !== width || !stretchChecked) {
-	      _this3.setState({
-	        stretchChecked: true,
-	        targetHeight: height,
-	        targetWidth: width
-	      });
-	    }
-	  };
-	
-	  this.getTargetElement = function () {
-	    return _this3.props.getRootDomNode();
-	  };
-	
-	  this.getAlignTarget = function () {
-	    var point = _this3.props.point;
-	
-	    if (point) {
-	      return point;
-	    }
-	    return _this3.getTargetElement;
+	  this.getTarget = function () {
+	    return _this2.props.getRootDomNode();
 	  };
 	};
 	
@@ -46355,11 +46033,17 @@
 
 	'use strict';
 	
-	exports.__esModule = true;
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
 	
 	var _classCallCheck2 = __webpack_require__(250);
 	
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+	
+	var _createClass2 = __webpack_require__(251);
+	
+	var _createClass3 = _interopRequireDefault(_createClass2);
 	
 	var _possibleConstructorReturn2 = __webpack_require__(316);
 	
@@ -46388,31 +46072,33 @@
 	
 	  function PopupInner() {
 	    (0, _classCallCheck3['default'])(this, PopupInner);
-	    return (0, _possibleConstructorReturn3['default'])(this, _Component.apply(this, arguments));
+	    return (0, _possibleConstructorReturn3['default'])(this, (PopupInner.__proto__ || Object.getPrototypeOf(PopupInner)).apply(this, arguments));
 	  }
 	
-	  PopupInner.prototype.render = function render() {
-	    var props = this.props;
-	    var className = props.className;
-	    if (!props.visible) {
-	      className += ' ' + props.hiddenClassName;
+	  (0, _createClass3['default'])(PopupInner, [{
+	    key: 'render',
+	    value: function render() {
+	      var props = this.props;
+	      var className = props.className;
+	      if (!props.visible) {
+	        className += ' ' + props.hiddenClassName;
+	      }
+	      return _react2['default'].createElement(
+	        'div',
+	        {
+	          className: className,
+	          onMouseEnter: props.onMouseEnter,
+	          onMouseLeave: props.onMouseLeave,
+	          style: props.style
+	        },
+	        _react2['default'].createElement(
+	          _LazyRenderBox2['default'],
+	          { className: props.prefixCls + '-content', visible: props.visible },
+	          props.children
+	        )
+	      );
 	    }
-	    return _react2['default'].createElement(
-	      'div',
-	      {
-	        className: className,
-	        onMouseEnter: props.onMouseEnter,
-	        onMouseLeave: props.onMouseLeave,
-	        style: props.style
-	      },
-	      _react2['default'].createElement(
-	        _LazyRenderBox2['default'],
-	        { className: props.prefixCls + '-content', visible: props.visible },
-	        props.children
-	      )
-	    );
-	  };
-	
+	  }]);
 	  return PopupInner;
 	}(_react.Component);
 	
@@ -46433,7 +46119,9 @@
 
 	'use strict';
 	
-	exports.__esModule = true;
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
 	
 	var _objectWithoutProperties2 = __webpack_require__(73);
 	
@@ -46442,6 +46130,10 @@
 	var _classCallCheck2 = __webpack_require__(250);
 	
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+	
+	var _createClass2 = __webpack_require__(251);
+	
+	var _createClass3 = _interopRequireDefault(_createClass2);
 	
 	var _possibleConstructorReturn2 = __webpack_require__(316);
 	
@@ -46466,30 +46158,33 @@
 	
 	  function LazyRenderBox() {
 	    (0, _classCallCheck3['default'])(this, LazyRenderBox);
-	    return (0, _possibleConstructorReturn3['default'])(this, _Component.apply(this, arguments));
+	    return (0, _possibleConstructorReturn3['default'])(this, (LazyRenderBox.__proto__ || Object.getPrototypeOf(LazyRenderBox)).apply(this, arguments));
 	  }
 	
-	  LazyRenderBox.prototype.shouldComponentUpdate = function shouldComponentUpdate(nextProps) {
-	    return nextProps.hiddenClassName || nextProps.visible;
-	  };
-	
-	  LazyRenderBox.prototype.render = function render() {
-	    var _props = this.props,
-	        hiddenClassName = _props.hiddenClassName,
-	        visible = _props.visible,
-	        props = (0, _objectWithoutProperties3['default'])(_props, ['hiddenClassName', 'visible']);
-	
-	
-	    if (hiddenClassName || _react2['default'].Children.count(props.children) > 1) {
-	      if (!visible && hiddenClassName) {
-	        props.className += ' ' + hiddenClassName;
-	      }
-	      return _react2['default'].createElement('div', props);
+	  (0, _createClass3['default'])(LazyRenderBox, [{
+	    key: 'shouldComponentUpdate',
+	    value: function shouldComponentUpdate(nextProps) {
+	      return nextProps.hiddenClassName || nextProps.visible;
 	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var _props = this.props,
+	          hiddenClassName = _props.hiddenClassName,
+	          visible = _props.visible,
+	          props = (0, _objectWithoutProperties3['default'])(_props, ['hiddenClassName', 'visible']);
 	
-	    return _react2['default'].Children.only(props.children);
-	  };
 	
+	      if (hiddenClassName || _react2['default'].Children.count(props.children) > 1) {
+	        if (!visible && hiddenClassName) {
+	          props.className += ' ' + hiddenClassName;
+	        }
+	        return _react2['default'].createElement('div', props);
+	      }
+	
+	      return _react2['default'].Children.only(props.children);
+	    }
+	  }]);
 	  return LazyRenderBox;
 	}(_react.Component);
 	
@@ -46508,22 +46203,21 @@
 
 	'use strict';
 	
-	exports.__esModule = true;
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
 	
 	var _extends2 = __webpack_require__(145);
 	
 	var _extends3 = _interopRequireDefault(_extends2);
 	
 	exports.getAlignFromPlacement = getAlignFromPlacement;
-	exports.getAlignPopupClassName = getAlignPopupClassName;
+	exports.getPopupClassNameFromAlign = getPopupClassNameFromAlign;
 	exports.saveRef = saveRef;
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
-	function isPointsEq(a1, a2, isAlignPoint) {
-	  if (isAlignPoint) {
-	    return a1[0] === a2[0];
-	  }
+	function isPointsEq(a1, a2) {
 	  return a1[0] === a2[0] && a1[1] === a2[1];
 	}
 	
@@ -46532,11 +46226,11 @@
 	  return (0, _extends3['default'])({}, baseAlign, align);
 	}
 	
-	function getAlignPopupClassName(builtinPlacements, prefixCls, align, isAlignPoint) {
+	function getPopupClassNameFromAlign(builtinPlacements, prefixCls, align) {
 	  var points = align.points;
 	  for (var placement in builtinPlacements) {
 	    if (builtinPlacements.hasOwnProperty(placement)) {
-	      if (isPointsEq(builtinPlacements[placement].points, points, isAlignPoint)) {
+	      if (isPointsEq(builtinPlacements[placement].points, points)) {
 	        return prefixCls + '-placement-' + placement;
 	      }
 	    }
@@ -46558,230 +46252,106 @@
 	  value: true
 	});
 	
-	var _classCallCheck2 = __webpack_require__(250);
+	var _extends2 = __webpack_require__(145);
 	
-	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+	var _extends3 = _interopRequireDefault(_extends2);
 	
-	var _createClass2 = __webpack_require__(251);
-	
-	var _createClass3 = _interopRequireDefault(_createClass2);
-	
-	var _possibleConstructorReturn2 = __webpack_require__(316);
-	
-	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
-	
-	var _inherits2 = __webpack_require__(317);
-	
-	var _inherits3 = _interopRequireDefault(_inherits2);
-	
-	var _react = __webpack_require__(4);
-	
-	var _react2 = _interopRequireDefault(_react);
+	exports['default'] = getContainerRenderMixin;
 	
 	var _reactDom = __webpack_require__(12);
 	
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 	
-	var _propTypes = __webpack_require__(5);
-	
-	var _propTypes2 = _interopRequireDefault(_propTypes);
-	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
-	var ContainerRender = function (_React$Component) {
-	  (0, _inherits3['default'])(ContainerRender, _React$Component);
+	function defaultGetContainer() {
+	  var container = document.createElement('div');
+	  document.body.appendChild(container);
+	  return container;
+	}
 	
-	  function ContainerRender() {
-	    var _ref;
+	function getContainerRenderMixin(config) {
+	  var _config$autoMount = config.autoMount,
+	      autoMount = _config$autoMount === undefined ? true : _config$autoMount,
+	      _config$autoDestroy = config.autoDestroy,
+	      autoDestroy = _config$autoDestroy === undefined ? true : _config$autoDestroy,
+	      isVisible = config.isVisible,
+	      isForceRender = config.isForceRender,
+	      getComponent = config.getComponent,
+	      _config$getContainer = config.getContainer,
+	      getContainer = _config$getContainer === undefined ? defaultGetContainer : _config$getContainer;
 	
-	    var _temp, _this, _ret;
 	
-	    (0, _classCallCheck3['default'])(this, ContainerRender);
+	  var mixin = void 0;
 	
-	    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-	      args[_key] = arguments[_key];
-	    }
-	
-	    return _ret = (_temp = (_this = (0, _possibleConstructorReturn3['default'])(this, (_ref = ContainerRender.__proto__ || Object.getPrototypeOf(ContainerRender)).call.apply(_ref, [this].concat(args))), _this), _this.removeContainer = function () {
-	      if (_this.container) {
-	        _reactDom2['default'].unmountComponentAtNode(_this.container);
-	        _this.container.parentNode.removeChild(_this.container);
-	        _this.container = null;
+	  function _renderComponent(instance, componentArg, ready) {
+	    if (!isVisible || instance._component || isVisible(instance) || isForceRender && isForceRender(instance)) {
+	      if (!instance._container) {
+	        instance._container = getContainer(instance);
 	      }
-	    }, _this.renderComponent = function (props, ready) {
-	      var _this$props = _this.props,
-	          visible = _this$props.visible,
-	          getComponent = _this$props.getComponent,
-	          forceRender = _this$props.forceRender,
-	          getContainer = _this$props.getContainer,
-	          parent = _this$props.parent;
-	
-	      if (visible || parent._component || forceRender) {
-	        if (!_this.container) {
-	          _this.container = getContainer();
+	      var component = void 0;
+	      if (instance.getComponent) {
+	        component = instance.getComponent(componentArg);
+	      } else {
+	        component = getComponent(instance, componentArg);
+	      }
+	      _reactDom2['default'].unstable_renderSubtreeIntoContainer(instance, component, instance._container, function callback() {
+	        instance._component = this;
+	        if (ready) {
+	          ready.call(this);
 	        }
-	        _reactDom2['default'].unstable_renderSubtreeIntoContainer(parent, getComponent(props), _this.container, function callback() {
-	          if (ready) {
-	            ready.call(this);
-	          }
-	        });
-	      }
-	    }, _temp), (0, _possibleConstructorReturn3['default'])(_this, _ret);
-	  }
-	
-	  (0, _createClass3['default'])(ContainerRender, [{
-	    key: 'componentDidMount',
-	    value: function componentDidMount() {
-	      if (this.props.autoMount) {
-	        this.renderComponent();
-	      }
-	    }
-	  }, {
-	    key: 'componentDidUpdate',
-	    value: function componentDidUpdate() {
-	      if (this.props.autoMount) {
-	        this.renderComponent();
-	      }
-	    }
-	  }, {
-	    key: 'componentWillUnmount',
-	    value: function componentWillUnmount() {
-	      if (this.props.autoDestroy) {
-	        this.removeContainer();
-	      }
-	    }
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      return this.props.children({
-	        renderComponent: this.renderComponent,
-	        removeContainer: this.removeContainer
 	      });
 	    }
-	  }]);
-	  return ContainerRender;
-	}(_react2['default'].Component);
+	  }
 	
-	ContainerRender.propTypes = {
-	  autoMount: _propTypes2['default'].bool,
-	  autoDestroy: _propTypes2['default'].bool,
-	  visible: _propTypes2['default'].bool,
-	  forceRender: _propTypes2['default'].bool,
-	  parent: _propTypes2['default'].any,
-	  getComponent: _propTypes2['default'].func.isRequired,
-	  getContainer: _propTypes2['default'].func.isRequired,
-	  children: _propTypes2['default'].func.isRequired
-	};
-	ContainerRender.defaultProps = {
-	  autoMount: true,
-	  autoDestroy: true,
-	  forceRender: false
-	};
-	exports['default'] = ContainerRender;
+	  if (autoMount) {
+	    mixin = (0, _extends3['default'])({}, mixin, {
+	      componentDidMount: function componentDidMount() {
+	        _renderComponent(this);
+	      },
+	      componentDidUpdate: function componentDidUpdate() {
+	        _renderComponent(this);
+	      }
+	    });
+	  }
+	
+	  if (!autoMount || !autoDestroy) {
+	    mixin = (0, _extends3['default'])({}, mixin, {
+	      renderComponent: function renderComponent(componentArg, ready) {
+	        _renderComponent(this, componentArg, ready);
+	      }
+	    });
+	  }
+	
+	  function _removeContainer(instance) {
+	    if (instance._container) {
+	      var container = instance._container;
+	      _reactDom2['default'].unmountComponentAtNode(container);
+	      container.parentNode.removeChild(container);
+	      instance._container = null;
+	    }
+	  }
+	
+	  if (autoDestroy) {
+	    mixin = (0, _extends3['default'])({}, mixin, {
+	      componentWillUnmount: function componentWillUnmount() {
+	        _removeContainer(this);
+	      }
+	    });
+	  } else {
+	    mixin = (0, _extends3['default'])({}, mixin, {
+	      removeContainer: function removeContainer() {
+	        _removeContainer(this);
+	      }
+	    });
+	  }
+	
+	  return mixin;
+	}
 	module.exports = exports['default'];
 
 /***/ }),
 /* 489 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _classCallCheck2 = __webpack_require__(250);
-	
-	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
-	
-	var _createClass2 = __webpack_require__(251);
-	
-	var _createClass3 = _interopRequireDefault(_createClass2);
-	
-	var _possibleConstructorReturn2 = __webpack_require__(316);
-	
-	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
-	
-	var _inherits2 = __webpack_require__(317);
-	
-	var _inherits3 = _interopRequireDefault(_inherits2);
-	
-	var _react = __webpack_require__(4);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _reactDom = __webpack_require__(12);
-	
-	var _reactDom2 = _interopRequireDefault(_reactDom);
-	
-	var _propTypes = __webpack_require__(5);
-	
-	var _propTypes2 = _interopRequireDefault(_propTypes);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-	
-	var Portal = function (_React$Component) {
-	  (0, _inherits3['default'])(Portal, _React$Component);
-	
-	  function Portal() {
-	    (0, _classCallCheck3['default'])(this, Portal);
-	    return (0, _possibleConstructorReturn3['default'])(this, (Portal.__proto__ || Object.getPrototypeOf(Portal)).apply(this, arguments));
-	  }
-	
-	  (0, _createClass3['default'])(Portal, [{
-	    key: 'componentDidMount',
-	    value: function componentDidMount() {
-	      this.createContainer();
-	    }
-	  }, {
-	    key: 'componentDidUpdate',
-	    value: function componentDidUpdate(prevProps) {
-	      var didUpdate = this.props.didUpdate;
-	
-	      if (didUpdate) {
-	        didUpdate(prevProps);
-	      }
-	    }
-	  }, {
-	    key: 'componentWillUnmount',
-	    value: function componentWillUnmount() {
-	      this.removeContainer();
-	    }
-	  }, {
-	    key: 'createContainer',
-	    value: function createContainer() {
-	      this._container = this.props.getContainer();
-	      this.forceUpdate();
-	    }
-	  }, {
-	    key: 'removeContainer',
-	    value: function removeContainer() {
-	      if (this._container) {
-	        this._container.parentNode.removeChild(this._container);
-	      }
-	    }
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      if (this._container) {
-	        return _reactDom2['default'].createPortal(this.props.children, this._container);
-	      }
-	      return null;
-	    }
-	  }]);
-	  return Portal;
-	}(_react2['default'].Component);
-	
-	Portal.propTypes = {
-	  getContainer: _propTypes2['default'].func.isRequired,
-	  children: _propTypes2['default'].node.isRequired,
-	  didUpdate: _propTypes2['default'].func
-	};
-	exports['default'] = Portal;
-	module.exports = exports['default'];
-
-/***/ }),
-/* 490 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -46818,11 +46388,11 @@
 	
 	var _propTypes2 = _interopRequireDefault(_propTypes);
 	
-	var _Header = __webpack_require__(491);
+	var _Header = __webpack_require__(490);
 	
 	var _Header2 = _interopRequireDefault(_Header);
 	
-	var _Combobox = __webpack_require__(492);
+	var _Combobox = __webpack_require__(491);
 	
 	var _Combobox2 = _interopRequireDefault(_Combobox);
 	
@@ -47059,7 +46629,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 491 */
+/* 490 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -47335,7 +46905,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 492 */
+/* 491 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -47368,7 +46938,7 @@
 	
 	var _propTypes2 = _interopRequireDefault(_propTypes);
 	
-	var _Select = __webpack_require__(493);
+	var _Select = __webpack_require__(492);
 	
 	var _Select2 = _interopRequireDefault(_Select);
 	
@@ -47612,7 +47182,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 493 */
+/* 492 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -47814,15 +47384,15 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 494 */
+/* 493 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	module.exports = __webpack_require__(495);
+	module.exports = __webpack_require__(494);
 
 /***/ }),
-/* 495 */
+/* 494 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -47841,11 +47411,11 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _beeInputGroupAddon = __webpack_require__(496);
+	var _beeInputGroupAddon = __webpack_require__(495);
 	
 	var _beeInputGroupAddon2 = _interopRequireDefault(_beeInputGroupAddon);
 	
-	var _InputGroupButton = __webpack_require__(498);
+	var _InputGroupButton = __webpack_require__(497);
 	
 	var _InputGroupButton2 = _interopRequireDefault(_InputGroupButton);
 	
@@ -47902,7 +47472,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 496 */
+/* 495 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -47911,7 +47481,7 @@
 	  value: true
 	});
 	
-	var _InputGroupAddon = __webpack_require__(497);
+	var _InputGroupAddon = __webpack_require__(496);
 	
 	var _InputGroupAddon2 = _interopRequireDefault(_InputGroupAddon);
 	
@@ -47921,7 +47491,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 497 */
+/* 496 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -47985,7 +47555,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 498 */
+/* 497 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -48048,7 +47618,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 499 */
+/* 498 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -48057,7 +47627,7 @@
 	  value: true
 	});
 	
-	var _MonthCalendar = __webpack_require__(500);
+	var _MonthCalendar = __webpack_require__(499);
 	
 	var _MonthCalendar2 = _interopRequireDefault(_MonthCalendar);
 	
@@ -48161,7 +47731,7 @@
 	module.exports = exports["default"];
 
 /***/ }),
-/* 500 */
+/* 499 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -48279,7 +47849,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 501 */
+/* 500 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -48292,7 +47862,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _RangeCalendar = __webpack_require__(502);
+	var _RangeCalendar = __webpack_require__(501);
 	
 	var _RangeCalendar2 = _interopRequireDefault(_RangeCalendar);
 	
@@ -48304,7 +47874,7 @@
 	
 	var _Picker2 = _interopRequireDefault(_Picker);
 	
-	var _zh_CN = __webpack_require__(511);
+	var _zh_CN = __webpack_require__(510);
 	
 	var _zh_CN2 = _interopRequireDefault(_zh_CN);
 	
@@ -48459,7 +48029,7 @@
 	module.exports = exports["default"];
 
 /***/ }),
-/* 502 */
+/* 501 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -48480,7 +48050,7 @@
 	
 	var _toConsumableArray3 = _interopRequireDefault(_toConsumableArray2);
 	
-	var _slicedToArray2 = __webpack_require__(503);
+	var _slicedToArray2 = __webpack_require__(502);
 	
 	var _slicedToArray3 = _interopRequireDefault(_slicedToArray2);
 	
@@ -48504,7 +48074,7 @@
 	
 	var _classnames3 = _interopRequireDefault(_classnames2);
 	
-	var _CalendarPart = __webpack_require__(510);
+	var _CalendarPart = __webpack_require__(509);
 	
 	var _CalendarPart2 = _interopRequireDefault(_CalendarPart);
 	
@@ -49084,18 +48654,18 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 503 */
+/* 502 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
 	
 	exports.__esModule = true;
 	
-	var _isIterable2 = __webpack_require__(504);
+	var _isIterable2 = __webpack_require__(503);
 	
 	var _isIterable3 = _interopRequireDefault(_isIterable2);
 	
-	var _getIterator2 = __webpack_require__(507);
+	var _getIterator2 = __webpack_require__(506);
 	
 	var _getIterator3 = _interopRequireDefault(_getIterator2);
 	
@@ -49140,22 +48710,22 @@
 	}();
 
 /***/ }),
-/* 504 */
+/* 503 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	module.exports = { "default": __webpack_require__(505), __esModule: true };
+	module.exports = { "default": __webpack_require__(504), __esModule: true };
 
 /***/ }),
-/* 505 */
+/* 504 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	__webpack_require__(121);
 	__webpack_require__(77);
-	module.exports = __webpack_require__(506);
+	module.exports = __webpack_require__(505);
 
 
 /***/ }),
-/* 506 */
+/* 505 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var classof = __webpack_require__(158);
@@ -49171,22 +48741,22 @@
 
 
 /***/ }),
-/* 507 */
+/* 506 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	module.exports = { "default": __webpack_require__(508), __esModule: true };
+	module.exports = { "default": __webpack_require__(507), __esModule: true };
 
 /***/ }),
-/* 508 */
+/* 507 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	__webpack_require__(121);
 	__webpack_require__(77);
-	module.exports = __webpack_require__(509);
+	module.exports = __webpack_require__(508);
 
 
 /***/ }),
-/* 509 */
+/* 508 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var anObject = __webpack_require__(90);
@@ -49199,7 +48769,7 @@
 
 
 /***/ }),
-/* 510 */
+/* 509 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -49356,7 +48926,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 511 */
+/* 510 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -49393,7 +48963,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 512 */
+/* 511 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -49420,7 +48990,7 @@
 	
 	var _beeFormControl2 = _interopRequireDefault(_beeFormControl);
 	
-	var _zh_CN = __webpack_require__(511);
+	var _zh_CN = __webpack_require__(510);
 	
 	var _zh_CN2 = _interopRequireDefault(_zh_CN);
 	
@@ -49617,7 +49187,7 @@
 	module.exports = exports["default"];
 
 /***/ }),
-/* 513 */
+/* 512 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -49626,7 +49196,7 @@
 	  value: true
 	});
 	
-	var _Switch = __webpack_require__(514);
+	var _Switch = __webpack_require__(513);
 	
 	var _Switch2 = _interopRequireDefault(_Switch);
 	
@@ -49636,7 +49206,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 514 */
+/* 513 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -49829,7 +49399,7 @@
 	module.exports = exports["default"];
 
 /***/ }),
-/* 515 */
+/* 514 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -49838,19 +49408,19 @@
 	  value: true
 	});
 	
-	var _Slider = __webpack_require__(516);
+	var _Slider = __webpack_require__(515);
 	
 	var _Slider2 = _interopRequireDefault(_Slider);
 	
-	var _Range = __webpack_require__(524);
+	var _Range = __webpack_require__(523);
 	
 	var _Range2 = _interopRequireDefault(_Range);
 	
-	var _Handle = __webpack_require__(522);
+	var _Handle = __webpack_require__(521);
 	
 	var _Handle2 = _interopRequireDefault(_Handle);
 	
-	var _createSliderWithTooltip = __webpack_require__(526);
+	var _createSliderWithTooltip = __webpack_require__(525);
 	
 	var _createSliderWithTooltip2 = _interopRequireDefault(_createSliderWithTooltip);
 	
@@ -49864,7 +49434,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 516 */
+/* 515 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -49887,15 +49457,15 @@
 	
 	var _warning2 = _interopRequireDefault(_warning);
 	
-	var _Track = __webpack_require__(517);
+	var _Track = __webpack_require__(516);
 	
 	var _Track2 = _interopRequireDefault(_Track);
 	
-	var _createSlider = __webpack_require__(518);
+	var _createSlider = __webpack_require__(517);
 	
 	var _createSlider2 = _interopRequireDefault(_createSlider);
 	
-	var _utils = __webpack_require__(523);
+	var _utils = __webpack_require__(522);
 	
 	var utils = _interopRequireWildcard(_utils);
 	
@@ -50096,7 +49666,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(32)))
 
 /***/ }),
-/* 517 */
+/* 516 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -50141,7 +49711,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 518 */
+/* 517 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -50162,7 +49732,7 @@
 	
 	var _propTypes2 = _interopRequireDefault(_propTypes);
 	
-	var _addEventListener = __webpack_require__(519);
+	var _addEventListener = __webpack_require__(518);
 	
 	var _addEventListener2 = _interopRequireDefault(_addEventListener);
 	
@@ -50174,19 +49744,19 @@
 	
 	var _warning2 = _interopRequireDefault(_warning);
 	
-	var _Steps = __webpack_require__(520);
+	var _Steps = __webpack_require__(519);
 	
 	var _Steps2 = _interopRequireDefault(_Steps);
 	
-	var _Marks = __webpack_require__(521);
+	var _Marks = __webpack_require__(520);
 	
 	var _Marks2 = _interopRequireDefault(_Marks);
 	
-	var _Handle = __webpack_require__(522);
+	var _Handle = __webpack_require__(521);
 	
 	var _Handle2 = _interopRequireDefault(_Handle);
 	
-	var _utils = __webpack_require__(523);
+	var _utils = __webpack_require__(522);
 	
 	var utils = _interopRequireWildcard(_utils);
 	
@@ -50550,7 +50120,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(32)))
 
 /***/ }),
-/* 519 */
+/* 518 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -50582,7 +50152,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 520 */
+/* 519 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -50664,7 +50234,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 521 */
+/* 520 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -50756,7 +50326,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 522 */
+/* 521 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -50848,7 +50418,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 523 */
+/* 522 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -50997,7 +50567,7 @@
 	}
 
 /***/ }),
-/* 524 */
+/* 523 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -51020,7 +50590,7 @@
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
-	var _shallowequal = __webpack_require__(525);
+	var _shallowequal = __webpack_require__(524);
 	
 	var _shallowequal2 = _interopRequireDefault(_shallowequal);
 	
@@ -51028,15 +50598,15 @@
 	
 	var _warning2 = _interopRequireDefault(_warning);
 	
-	var _Track = __webpack_require__(517);
+	var _Track = __webpack_require__(516);
 	
 	var _Track2 = _interopRequireDefault(_Track);
 	
-	var _createSlider = __webpack_require__(518);
+	var _createSlider = __webpack_require__(517);
 	
 	var _createSlider2 = _interopRequireDefault(_createSlider);
 	
-	var _utils = __webpack_require__(523);
+	var _utils = __webpack_require__(522);
 	
 	var utils = _interopRequireWildcard(_utils);
 	
@@ -51458,7 +51028,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 525 */
+/* 524 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -51513,7 +51083,7 @@
 	};
 
 /***/ }),
-/* 526 */
+/* 525 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -51534,11 +51104,11 @@
 	
 	var _propTypes2 = _interopRequireDefault(_propTypes);
 	
-	var _beeTooltip = __webpack_require__(527);
+	var _beeTooltip = __webpack_require__(526);
 	
 	var _beeTooltip2 = _interopRequireDefault(_beeTooltip);
 	
-	var _Handle = __webpack_require__(522);
+	var _Handle = __webpack_require__(521);
 	
 	var _Handle2 = _interopRequireDefault(_Handle);
 	
@@ -51645,7 +51215,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 527 */
+/* 526 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -51654,7 +51224,7 @@
 	  value: true
 	});
 	
-	var _Tooltip = __webpack_require__(528);
+	var _Tooltip = __webpack_require__(527);
 	
 	var _Tooltip2 = _interopRequireDefault(_Tooltip);
 	
@@ -51664,7 +51234,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 528 */
+/* 527 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -51687,7 +51257,7 @@
 	
 	var _propTypes2 = _interopRequireDefault(_propTypes);
 	
-	var _OverlayTrigger = __webpack_require__(529);
+	var _OverlayTrigger = __webpack_require__(528);
 	
 	var _OverlayTrigger2 = _interopRequireDefault(_OverlayTrigger);
 	
@@ -51811,7 +51381,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 529 */
+/* 528 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -51842,15 +51412,15 @@
 	
 	var _warning2 = _interopRequireDefault(_warning);
 	
-	var _Portal = __webpack_require__(530);
+	var _Portal = __webpack_require__(529);
 	
 	var _Portal2 = _interopRequireDefault(_Portal);
 	
-	var _Overlay = __webpack_require__(534);
+	var _Overlay = __webpack_require__(533);
 	
 	var _Overlay2 = _interopRequireDefault(_Overlay);
 	
-	var _createChainedFunction = __webpack_require__(549);
+	var _createChainedFunction = __webpack_require__(548);
 	
 	var _createChainedFunction2 = _interopRequireDefault(_createChainedFunction);
 	
@@ -52178,7 +51748,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 530 */
+/* 529 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -52199,11 +51769,11 @@
 	
 	var _propTypes2 = _interopRequireDefault(_propTypes);
 	
-	var _ownerDocument = __webpack_require__(531);
+	var _ownerDocument = __webpack_require__(530);
 	
 	var _ownerDocument2 = _interopRequireDefault(_ownerDocument);
 	
-	var _getContainer = __webpack_require__(533);
+	var _getContainer = __webpack_require__(532);
 	
 	var _getContainer2 = _interopRequireDefault(_getContainer);
 	
@@ -52386,7 +51956,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 531 */
+/* 530 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -52403,7 +51973,7 @@
 	
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 	
-	var _ownerDocument = __webpack_require__(532);
+	var _ownerDocument = __webpack_require__(531);
 	
 	var _ownerDocument2 = _interopRequireDefault(_ownerDocument);
 	
@@ -52412,7 +51982,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 532 */
+/* 531 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -52427,7 +51997,7 @@
 	module.exports = exports["default"];
 
 /***/ }),
-/* 533 */
+/* 532 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -52456,7 +52026,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 534 */
+/* 533 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -52479,13 +52049,13 @@
 	
 	var _propTypes2 = _interopRequireDefault(_propTypes);
 	
-	var _BaseOverlay = __webpack_require__(535);
+	var _BaseOverlay = __webpack_require__(534);
 	
 	var _BaseOverlay2 = _interopRequireDefault(_BaseOverlay);
 	
 	var _tinperBeeCore = __webpack_require__(26);
 	
-	var _Fade = __webpack_require__(547);
+	var _Fade = __webpack_require__(546);
 	
 	var _Fade2 = _interopRequireDefault(_Fade);
 	
@@ -52610,7 +52180,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 535 */
+/* 534 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -52633,15 +52203,15 @@
 	
 	var _propTypes2 = _interopRequireDefault(_propTypes);
 	
-	var _Portal = __webpack_require__(530);
+	var _Portal = __webpack_require__(529);
 	
 	var _Portal2 = _interopRequireDefault(_Portal);
 	
-	var _Position = __webpack_require__(536);
+	var _Position = __webpack_require__(535);
 	
 	var _Position2 = _interopRequireDefault(_Position);
 	
-	var _RootCloseWrapper = __webpack_require__(544);
+	var _RootCloseWrapper = __webpack_require__(543);
 	
 	var _RootCloseWrapper2 = _interopRequireDefault(_RootCloseWrapper);
 	
@@ -52866,7 +52436,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 536 */
+/* 535 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -52895,15 +52465,15 @@
 	
 	var _tinperBeeCore = __webpack_require__(26);
 	
-	var _calculatePosition = __webpack_require__(537);
+	var _calculatePosition = __webpack_require__(536);
 	
 	var _calculatePosition2 = _interopRequireDefault(_calculatePosition);
 	
-	var _getContainer = __webpack_require__(533);
+	var _getContainer = __webpack_require__(532);
 	
 	var _getContainer2 = _interopRequireDefault(_getContainer);
 	
-	var _ownerDocument = __webpack_require__(531);
+	var _ownerDocument = __webpack_require__(530);
 	
 	var _ownerDocument2 = _interopRequireDefault(_ownerDocument);
 	
@@ -53083,7 +52653,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 537 */
+/* 536 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -53093,19 +52663,19 @@
 	});
 	exports["default"] = calculatePosition;
 	
-	var _offset = __webpack_require__(538);
+	var _offset = __webpack_require__(537);
 	
 	var _offset2 = _interopRequireDefault(_offset);
 	
-	var _position = __webpack_require__(540);
+	var _position = __webpack_require__(539);
 	
 	var _position2 = _interopRequireDefault(_position);
 	
-	var _scrollTop = __webpack_require__(542);
+	var _scrollTop = __webpack_require__(541);
 	
 	var _scrollTop2 = _interopRequireDefault(_scrollTop);
 	
-	var _ownerDocument = __webpack_require__(531);
+	var _ownerDocument = __webpack_require__(530);
 	
 	var _ownerDocument2 = _interopRequireDefault(_ownerDocument);
 	
@@ -53259,7 +52829,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 538 */
+/* 537 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -53273,11 +52843,11 @@
 	
 	var _contains2 = _interopRequireDefault(_contains);
 	
-	var _isWindow = __webpack_require__(539);
+	var _isWindow = __webpack_require__(538);
 	
 	var _isWindow2 = _interopRequireDefault(_isWindow);
 	
-	var _ownerDocument = __webpack_require__(532);
+	var _ownerDocument = __webpack_require__(531);
 	
 	var _ownerDocument2 = _interopRequireDefault(_ownerDocument);
 	
@@ -53309,7 +52879,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 539 */
+/* 538 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -53324,7 +52894,7 @@
 	module.exports = exports["default"];
 
 /***/ }),
-/* 540 */
+/* 539 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -53337,19 +52907,19 @@
 	
 	exports.default = position;
 	
-	var _offset = __webpack_require__(538);
+	var _offset = __webpack_require__(537);
 	
 	var _offset2 = _interopRequireDefault(_offset);
 	
-	var _offsetParent = __webpack_require__(541);
+	var _offsetParent = __webpack_require__(540);
 	
 	var _offsetParent2 = _interopRequireDefault(_offsetParent);
 	
-	var _scrollTop = __webpack_require__(542);
+	var _scrollTop = __webpack_require__(541);
 	
 	var _scrollTop2 = _interopRequireDefault(_scrollTop);
 	
-	var _scrollLeft = __webpack_require__(543);
+	var _scrollLeft = __webpack_require__(542);
 	
 	var _scrollLeft2 = _interopRequireDefault(_scrollLeft);
 	
@@ -53390,7 +52960,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 541 */
+/* 540 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -53400,7 +52970,7 @@
 	});
 	exports.default = offsetParent;
 	
-	var _ownerDocument = __webpack_require__(532);
+	var _ownerDocument = __webpack_require__(531);
 	
 	var _ownerDocument2 = _interopRequireDefault(_ownerDocument);
 	
@@ -53427,7 +52997,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 542 */
+/* 541 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -53437,7 +53007,7 @@
 	});
 	exports.default = scrollTop;
 	
-	var _isWindow = __webpack_require__(539);
+	var _isWindow = __webpack_require__(538);
 	
 	var _isWindow2 = _interopRequireDefault(_isWindow);
 	
@@ -53453,7 +53023,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 543 */
+/* 542 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -53463,7 +53033,7 @@
 	});
 	exports.default = scrollTop;
 	
-	var _isWindow = __webpack_require__(539);
+	var _isWindow = __webpack_require__(538);
 	
 	var _isWindow2 = _interopRequireDefault(_isWindow);
 	
@@ -53479,7 +53049,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 544 */
+/* 543 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -53504,11 +53074,11 @@
 	
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 	
-	var _addEventListener = __webpack_require__(545);
+	var _addEventListener = __webpack_require__(544);
 	
 	var _addEventListener2 = _interopRequireDefault(_addEventListener);
 	
-	var _ownerDocument = __webpack_require__(531);
+	var _ownerDocument = __webpack_require__(530);
 	
 	var _ownerDocument2 = _interopRequireDefault(_ownerDocument);
 	
@@ -53641,7 +53211,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 545 */
+/* 544 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -53664,7 +53234,7 @@
 	
 	var _on2 = _interopRequireDefault(_on);
 	
-	var _off = __webpack_require__(546);
+	var _off = __webpack_require__(545);
 	
 	var _off2 = _interopRequireDefault(_off);
 	
@@ -53673,7 +53243,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 546 */
+/* 545 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -53703,7 +53273,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 547 */
+/* 546 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -53726,7 +53296,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _Transition = __webpack_require__(548);
+	var _Transition = __webpack_require__(547);
 	
 	var _Transition2 = _interopRequireDefault(_Transition);
 	
@@ -53824,7 +53394,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 548 */
+/* 547 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -54173,7 +53743,7 @@
 	exports["default"] = Transition;
 
 /***/ }),
-/* 549 */
+/* 548 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -54221,7 +53791,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 550 */
+/* 549 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -54230,7 +53800,7 @@
 	  value: true
 	});
 	
-	var _InputNumber = __webpack_require__(551);
+	var _InputNumber = __webpack_require__(550);
 	
 	var _InputNumber2 = _interopRequireDefault(_InputNumber);
 	
@@ -54240,7 +53810,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 551 */
+/* 550 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -54259,7 +53829,7 @@
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
-	var _beeInputGroup = __webpack_require__(494);
+	var _beeInputGroup = __webpack_require__(493);
 	
 	var _beeInputGroup2 = _interopRequireDefault(_beeInputGroup);
 	
@@ -54293,7 +53863,8 @@
 	    autoWidth: _propTypes2["default"].bool,
 	    precision: _propTypes2["default"].number,
 	    format: _propTypes2["default"].func,
-	    delay: _propTypes2["default"].number
+	    delay: _propTypes2["default"].number,
+	    disabled: _propTypes2["default"].bool
 	};
 	
 	var defaultProps = {
@@ -54521,7 +54092,11 @@
 	        };
 	
 	        _this.handlePlusMouseDown = function (e) {
-	            var delay = _this.props.delay;
+	            var _this$props7 = _this.props,
+	                delay = _this$props7.delay,
+	                disabled = _this$props7.disabled;
+	
+	            if (disabled) return;
 	            var value = _this.state.value;
 	
 	            _this.plus(value);
@@ -54587,6 +54162,7 @@
 	            step = _props.step,
 	            clsPrefix = _props.clsPrefix,
 	            className = _props.className,
+	            disabled = _props.disabled,
 	            delay = _props.delay,
 	            onBlur = _props.onBlur,
 	            onFocus = _props.onFocus,
@@ -54595,7 +54171,7 @@
 	            onChange = _props.onChange,
 	            format = _props.format,
 	            precision = _props.precision,
-	            others = _objectWithoutProperties(_props, ['max', 'min', 'step', 'clsPrefix', 'className', 'delay', 'onBlur', 'onFocus', 'iconStyle', 'autoWidth', 'onChange', 'format', 'precision']);
+	            others = _objectWithoutProperties(_props, ['max', 'min', 'step', 'clsPrefix', 'className', 'disabled', 'delay', 'onBlur', 'onFocus', 'iconStyle', 'autoWidth', 'onChange', 'format', 'precision']);
 	
 	        var classes = (_classes = {}, _defineProperty(_classes, clsPrefix + '-auto', autoWidth), _defineProperty(_classes, '' + clsPrefix, true), _classes);
 	
@@ -54606,6 +54182,8 @@
 	
 	
 	        value = format ? format(value) : value;
+	        var _class = disabled ? 'disabled' : plusDisabled && 'disabled';
+	
 	        return _react2["default"].createElement(
 	            'div',
 	            null,
@@ -54615,13 +54193,15 @@
 	                _react2["default"].createElement(
 	                    _beeInputGroup2["default"].Addon,
 	                    {
-	                        className: minusDisabled && 'disabled',
+	                        // className={plusDisabled && 'disabled'}
+	                        className: _class,
 	                        onMouseDown: this.handleReduceMouseDown,
 	                        onMouseLeave: this.clear,
 	                        onMouseUp: this.clear },
 	                    '-'
 	                ),
 	                _react2["default"].createElement(_beeFormControl2["default"], _extends({}, others, {
+	                    disabled: true,
 	                    value: value,
 	                    onBlur: this.handleBlur,
 	                    onFocus: this.handleFocus,
@@ -54630,7 +54210,8 @@
 	                _react2["default"].createElement(
 	                    _beeInputGroup2["default"].Addon,
 	                    {
-	                        className: plusDisabled && 'disabled',
+	                        // className={plusDisabled && 'disabled'}
+	                        className: _class,
 	                        onMouseDown: this.handlePlusMouseDown,
 	                        onMouseLeave: this.clear,
 	                        onMouseUp: this.clear },
@@ -54689,7 +54270,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 552 */
+/* 551 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -54698,7 +54279,7 @@
 	  value: true
 	});
 	
-	var _Rate = __webpack_require__(553);
+	var _Rate = __webpack_require__(552);
 	
 	var _Rate2 = _interopRequireDefault(_Rate);
 	
@@ -54708,7 +54289,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 553 */
+/* 552 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -54721,7 +54302,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _rcRate = __webpack_require__(554);
+	var _rcRate = __webpack_require__(553);
 	
 	var _rcRate2 = _interopRequireDefault(_rcRate);
 	
@@ -54808,14 +54389,14 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 554 */
+/* 553 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	exports.__esModule = true;
 	
-	var _Rate = __webpack_require__(555);
+	var _Rate = __webpack_require__(554);
 	
 	var _Rate2 = _interopRequireDefault(_Rate);
 	
@@ -54825,7 +54406,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 555 */
+/* 554 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -54852,9 +54433,9 @@
 	
 	var _KeyCode2 = _interopRequireDefault(_KeyCode);
 	
-	var _util = __webpack_require__(556);
+	var _util = __webpack_require__(555);
 	
-	var _Star = __webpack_require__(557);
+	var _Star = __webpack_require__(556);
 	
 	var _Star2 = _interopRequireDefault(_Star);
 	
@@ -55138,7 +54719,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 556 */
+/* 555 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -55187,7 +54768,7 @@
 	}
 
 /***/ }),
-/* 557 */
+/* 556 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -55328,7 +54909,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 558 */
+/* 557 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -55337,7 +54918,7 @@
 	  value: true
 	});
 	
-	var _CitySelect = __webpack_require__(559);
+	var _CitySelect = __webpack_require__(558);
 	
 	var _CitySelect2 = _interopRequireDefault(_CitySelect);
 	
@@ -55347,7 +54928,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 559 */
+/* 558 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -55372,7 +54953,7 @@
 	
 	var _beeSelect2 = _interopRequireDefault(_beeSelect);
 	
-	var _lodash = __webpack_require__(560);
+	var _lodash = __webpack_require__(559);
 	
 	var _lodash2 = _interopRequireDefault(_lodash);
 	
@@ -55577,7 +55158,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 560 */
+/* 559 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global, module) {/**
@@ -57978,7 +57559,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }()), __webpack_require__(328)(module)))
 
 /***/ }),
-/* 561 */
+/* 560 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -58023,7 +57604,7 @@
 	
 	var _beeCheckbox2 = _interopRequireDefault(_beeCheckbox);
 	
-	var _beeSwitch = __webpack_require__(513);
+	var _beeSwitch = __webpack_require__(512);
 	
 	var _beeSwitch2 = _interopRequireDefault(_beeSwitch);
 	
@@ -58079,6 +57660,7 @@
 	
 	        _this.reset = function () {
 	            _this.props.form.resetFields();
+	            //部分表单元素无法通过this.props.form.resetFields重置，需要手动重置，如下
 	            _this.setState({
 	                approvalState: '',
 	                closeState: '',
@@ -58380,7 +57962,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 562 */
+/* 561 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -58425,7 +58007,7 @@
 	
 	var _beeCheckbox2 = _interopRequireDefault(_beeCheckbox);
 	
-	var _beeSwitch = __webpack_require__(513);
+	var _beeSwitch = __webpack_require__(512);
 	
 	var _beeSwitch2 = _interopRequireDefault(_beeSwitch);
 	
