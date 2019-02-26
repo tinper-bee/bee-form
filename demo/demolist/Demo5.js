@@ -151,7 +151,7 @@ const Demo5 = Form.createForm()(class Demo extends Component {
                                     selectedValue={this.state.approvalState}
                                     {
                                     ...getFieldProps('approvalState', {
-                                        initialValue: '',
+                                        initialValue: '1',
                                         onChange(value) {
                                             self.setState({ approvalState: value });
                                         },
@@ -160,7 +160,6 @@ const Demo5 = Form.createForm()(class Demo extends Component {
                                 >
                                     <Radio value="0" >未审批</Radio>
                                     <Radio value="1" >已审批</Radio>
-                                    <Radio value="" >全部</Radio>
                                 </Radio.RadioGroup>
                             </FormItem>
                         </Col>
@@ -171,7 +170,7 @@ const Demo5 = Form.createForm()(class Demo extends Component {
                                     selectedValue={this.state.closeState}
                                     {
                                     ...getFieldProps('closeState', {
-                                        initialValue: '',
+                                        initialValue: '1',
                                         onChange(value) {
                                             self.setState({ closeState: value });
                                         },
@@ -180,7 +179,6 @@ const Demo5 = Form.createForm()(class Demo extends Component {
                                 >
                                     <Radio value="0" >未关闭</Radio>
                                     <Radio value="1" >已关闭</Radio>
-                                    <Radio value="" >全部</Radio>
                                 </Radio.RadioGroup>
                             </FormItem>
                         </Col>
@@ -191,7 +189,7 @@ const Demo5 = Form.createForm()(class Demo extends Component {
                                     selectedValue={this.state.confirmState}
                                     {
                                     ...getFieldProps('confirmState', {
-                                        initialValue: '',
+                                        initialValue: '1',
                                         onChange(value) {
                                             self.setState({ confirmState: value });
                                         },
@@ -200,7 +198,6 @@ const Demo5 = Form.createForm()(class Demo extends Component {
                                 >
                                     <Radio value="0" >未确认</Radio>
                                     <Radio value="1" >已确认</Radio>
-                                    <Radio value="" >全部</Radio>
                                 </Radio.RadioGroup>
                             </FormItem>
                         </Col>
