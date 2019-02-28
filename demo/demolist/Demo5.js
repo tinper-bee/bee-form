@@ -201,12 +201,6 @@ const Demo5 = Form.createForm()(class Demo extends Component {
                                 </Radio.RadioGroup>
                             </FormItem>
                         </Col>
-                        <Col  lg={4} md={6} xs={12}>
-                            <FormItem>
-                                <Label>未分配：</Label>
-                                <Checkbox colors="primary"></Checkbox>
-                            </FormItem>
-                        </Col>
                     </Row>
                     <div className='submit'>
                         <Button colors="primary" className="login" onClick={this.submit}>查询</Button>
