@@ -318,7 +318,6 @@ const Demo6 = Form.createForm()(class Demo extends Component {
                     三列带textarea
                      </h4>
                     <Row className = 'edit-panel edit-panel-textarea'>
-
                             <Col md={1}>
                                 <Label>订单编号：
                                     <span className='mast'>*</span>
@@ -342,7 +341,7 @@ const Demo6 = Form.createForm()(class Demo extends Component {
                                 </span>
                             </Col>
                             <Col md={1}>
-                                <Label>供应商名称：
+                                <Label>供应商：
                                     <span className='mast'>*</span>
                                 </Label>
                             </Col>
