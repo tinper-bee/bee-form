@@ -76,7 +76,7 @@
 	
 	var CARETUP = _react2['default'].createElement('i', { className: 'uf uf-arrow-up' });
 	
-	var Demo1 = __webpack_require__(84);var Demo2 = __webpack_require__(283);var Demo3 = __webpack_require__(284);var Demo4 = __webpack_require__(290);var Demo5 = __webpack_require__(589);var Demo6 = __webpack_require__(590);var DemoArray = [{ "example": _react2['default'].createElement(Demo1, null), "title": " 单个input校验", "code": '/**\r\n *\r\n * @title \u5355\u4E2Ainput\u6821\u9A8C\r\n * @description \u4F7F\u7528FormItem\r\n */\r\nimport React, { Component } from \'react\';\r\nimport { Form, Label, FormControl } from \'tinper-bee\';\r\n\n\nconst FormItem = Form.FormItem;\r\n\r\n\r\nconst Demo1 = Form.createForm()(class Demo extends Component {\r\n    constructor(props) {\r\n        super(props);\r\n    }\r\n    render() {\r\n        const self=this;\r\n        const { getFieldProps, getFieldError } = this.props.form;\r\n        return (\r\n                <FormItem className=\'demo1\'>\r\n                    <Label>\u59D3\u540D\uFF1A</Label>\r\n                    <FormControl placeholder=\'\u8BF7\u8F93\u5165\u59D3\u540D\'\r\n                     {...getFieldProps(\'name\', {\r\n                        validateTrigger: \'onBlur\',\r\n                        rules: [{\r\n                            required: true, message: \'\u8BF7\u8F93\u5165\u59D3\u540D\'\r\n                        },{\r\n                            max:5,message:\'\u6700\u5927\u957F\u5EA6\u4E3A10\'\r\n                        },{\r\n                            pattern: /[\\u4e00-\\u9fa5]/, message: \'\u8BF7\u8F93\u5165\u4E2D\u6587\u5B57\u7B26\',\r\n                        }],\r\n                    }) } />\r\n                    <span className=\'error\'>\r\n                        {getFieldError(\'name\')}\r\n                    </span>   \r\n                </FormItem>\r\n        )\r\n    }\r\n})\r\n\r\n', "desc": " 使用FormItem", "scss_code": ".demo1 {\r\n    font-size: 14px;\r\n    .u-form-item {\r\n        min-height: auto!important;\r\n    }\r\n    .u-label {\r\n        display: inline;\r\n    }\r\n    .u-form-control {\r\n        width: auto;\r\n    }\r\n    .error {\r\n        font-size: 12px;\r\n        color: red;\r\n        margin-left: 10px;\r\n    }\r\n}" }, { "example": _react2['default'].createElement(Demo2, null), "title": " 基本form校验", "code": "/**\r\n *\r\n * @title 基本form校验\r\n * @description 登录示例\r\n */\r\nimport React, { Component } from 'react';\r\nimport ReactDOM from 'react-dom';\r\nimport { Form, Button, Label, FormControl } from 'tinper-bee';\r\n\n\n\nconst FormItem = Form.FormItem;\r\n\r\nconst Demo2 = Form.createForm()(class Demo2 extends Component {\r\n    submit = (e) => {\r\n        e.preventDefault();\r\n        this.props.form.validateFields((err, values) => {\r\n            if (err) {\r\n                console.log('校验失败', values);\r\n            } else {\r\n                console.log('提交成功', values)\r\n            }\r\n        });\r\n    }\r\n    render() {\r\n        const { getFieldProps, getFieldError } = this.props.form;\r\n        return (\r\n            <div className=\"demo2\">\r\n                <Form >\r\n                    <FormItem>\r\n                        <Label>用户名：</Label>\r\n                        <FormControl placeholder=\"请输入用户名\"\r\n                            {...getFieldProps('username', {\r\n                                validateTrigger: 'onBlur',\r\n                                rules: [{\r\n                                    required: true, message: '请输入用户名',\r\n                                }],\r\n                            }) }\r\n                        />\r\n                        <span className='error'>\r\n                            {getFieldError('username')}\r\n                        </span>\r\n                    </FormItem>\r\n                    <FormItem>\r\n                        <Label>密码：</Label>\r\n                        <FormControl placeholder=\"请输入密码\" type='password'\r\n                            {...getFieldProps('password', {\r\n                                validateTrigger: 'onBlur',\r\n                                rules: [{\r\n                                    required: true, message: '请输入密码',\r\n                                }],\r\n                            }) }\r\n                        />\r\n                        <span className='error'>\r\n                            {getFieldError('password')}\r\n                        </span>\r\n                    </FormItem>\r\n                    <div className='submit'>\r\n                        <Button colors=\"primary\" className=\"login\" onClick={this.submit}>登陆</Button>\r\n                        <Button shape=\"border\" className=\"reset\">取消</Button>\r\n                    </div>\r\n                </Form>\r\n            </div>\r\n        )\r\n    }\r\n})\r\n", "desc": " 登录示例", "scss_code": ".demo2 {\r\n    font-size: 14px;\r\n    .u-label {\r\n        display: inline-block;\r\n        min-width: 80px;\r\n        text-align: right;\r\n    }\r\n    .u-form-control {\r\n        width: auto;\r\n    }\r\n    .error {\r\n        font-size: 12px;\r\n        color: red;\r\n        margin-left: 10px;\r\n    }\r\n    .submit {\r\n        padding-left: 90px;\r\n    }\r\n    .submit .login {\r\n        margin-right: 10px;\r\n    }\r\n    .u-form-item {\r\n        min-height: auto!important;\r\n    }\r\n}" }, { "example": _react2['default'].createElement(Demo3, null), "title": " 基本form校验", "code": "/**\r\n *\r\n * @title 基本form校验\r\n * @description 注册示例\r\n */\r\nimport React, { Component } from 'react';\r\nimport { Form, Label, Checkbox, Button, FormControl } from 'tinper-bee';\r\nconst FormItem = Form.FormItem;\r\n\n\n\n\n\r\nconst Demo3 = Form.createForm()( class Demo extends Component {\r\n    constructor(props) {\r\n        super(props);\r\n        this.state = {\r\n            checkbox: false\r\n        }\r\n    }\r\n    submit = (e) => {\r\n        e.preventDefault();\r\n        this.props.form.validateFields((err, values) => {\r\n            if (err) {\r\n                console.log('校验失败', values);\r\n            } else {\r\n                console.log('提交成功', values)\r\n            }\r\n        });\r\n    }\r\n    handleConfirmPassword = (rule, value, callback) => {\r\n        const { getFieldValue } = this.props.form;\r\n        if (value && value !== getFieldValue('password')) {\r\n            callback('两次输入不一致！')\r\n        }\r\n        callback();\r\n    }\r\n    render() {\r\n        const self = this;\r\n        const { getFieldProps, getFieldError } = this.props.form;\r\n        return (\r\n            <div className=\"demo3\">\r\n                <Form>\r\n                    <FormItem>\r\n                        <Label>用户名：</Label>\r\n                        <FormControl placeholder=\"请输入用户名(包含数字和字母，8-15位)\"\r\n                            {...getFieldProps('username', {\r\n                                validateTrigger: 'onBlur',\r\n                                rules: [{\r\n                                    required: true, message: '请输入用户名',\r\n                                }, {\r\n                                    pattern: /^(?!\\d+$)(?![a-zA-Z]+$)[a-zA-Z0-9]{8,15}$/, message: '用户名格式错误',\r\n                                }],\r\n                            }) }\r\n                        />\r\n                        <span className='error'>\r\n                            {getFieldError('username')}\r\n                        </span>\r\n                    </FormItem>\r\n\r\n                    <FormItem>\r\n                        <Label>密码：</Label>\r\n                        <FormControl placeholder=\"请输入密码\" type='password'\r\n                            {...getFieldProps('password', {\r\n                                validateTrigger: 'onBlur',\r\n                                rules: [{\r\n                                    required: true, message: '请输入密码',\r\n                                }],\r\n                            }) }\r\n                        />\r\n                        <span className='error'>\r\n                            {getFieldError('password')}\r\n                        </span>\r\n                    </FormItem>\r\n\r\n                    <FormItem>\r\n                        <Label>再次输入密码：</Label>\r\n                        <FormControl placeholder=\"请输入密码\" type='password'\r\n                            {...getFieldProps('password2', {\r\n                                validateTrigger: 'onBlur',\r\n                                rules: [{\r\n                                    required: true, message: '请输入密码',\r\n                                }, {\r\n                                    validator: this.handleConfirmPassword\r\n                                }],\r\n                            }) }\r\n                        />\r\n                        <span className='error'>\r\n                            {getFieldError('password2')}\r\n                        </span>\r\n                    </FormItem>\r\n\r\n                    <FormItem>\r\n                        <Label>邮箱：</Label>\r\n                        <FormControl placeholder=\"请输入邮箱\"\r\n                            {...getFieldProps('email', {\r\n                                validateTrigger: 'onBlur',\r\n                                rules: [{\r\n                                    required: true, message: '请输入邮箱',\r\n                                }, {\r\n                                    type: 'email', message: '邮箱格式不正确'\r\n                                }],\r\n                            }) }\r\n                        />\r\n                        <span className='error'>\r\n                            {getFieldError('email')}\r\n                        </span>\r\n                    </FormItem>\r\n                    <FormItem>\r\n                        <Label>手机号：</Label>\r\n\r\n                        <FormControl placeholder=\"请输入手机号\"\r\n                            {...getFieldProps('phone', {\r\n                                validateTrigger: 'onBlur',\r\n                                rules: [{\r\n                                    required: true, message: '请输入手机号',\r\n                                }, {\r\n                                    pattern: /^\\d{11}$/, message: '手机号格式不正确'\r\n                                }],\r\n                            }) }\r\n                        />\r\n\r\n                        <span className='error'>\r\n                            {getFieldError('phone')}\r\n                        </span>\r\n                    </FormItem>\r\n\r\n                    <FormItem style={{'paddingLeft':'110px'}}>\r\n                        <Checkbox colors=\"info\"\r\n                            defaultChecked={this.state.checkbox}\r\n                            {\r\n                            ...getFieldProps('checkbox', {\r\n                                initialValue: false,\r\n                            }\r\n                            ) }\r\n                        />\r\n                        <span>我已经阅读并同意相关条款</span>\r\n                    </FormItem>\r\n                    <div className='submit'>\r\n                        <Button colors=\"primary\" className=\"login\" onClick={this.submit}>注册</Button>\r\n                        <Button shape=\"border\" className=\"reset\">取消</Button>\r\n                    </div>\r\n                </Form>\r\n            </div>\r\n        )\r\n    }\r\n})\r\n", "desc": " 注册示例", "scss_code": ".demo3 {\r\n    font-size: 14px;\r\n    .u-label {\r\n        display: inline-block;\r\n        min-width: 105px;\r\n        text-align: right;\r\n    }\r\n    .u-form-control {\r\n        width: auto;\r\n        min-width: 300px;\r\n    }\r\n    .error {\r\n        font-size: 12px;\r\n        color: red;\r\n        margin-left: 10px;\r\n    }\r\n    .submit {\r\n        padding-left: 110px;\r\n    }\r\n    .submit .login {\r\n        margin-right: 10px;\r\n    }\r\n    .u-form-item {\r\n        min-height: auto!important;\r\n    }\r\n}" }, { "example": _react2['default'].createElement(Demo4, null), "title": " 表单校验", "code": "/**\r\n *\r\n * @title 表单校验\r\n * @description 用户信息录入实例\r\n */\r\nimport React, { Component } from 'react';\r\nimport ReactDOM from 'react-dom';\r\nimport { Form, Button, Label, CitySelect, Rate, InputNumber, Slider, Switch, Checkbox, DatePicker, Radio, Select, FormControl } from 'tinper-bee';\r\n\n\n\n\n\n\n\n\n\n\n\n\nconst FormItem = Form.FormItem;\r\nconst Option = Select.Option;\r\n\r\nconst Demo4 = Form.createForm()(class Demo extends Component {\r\n    constructor(props) {\r\n        super(props);\r\n        this.state = {\r\n            selectedValue: 'man',\r\n        };\r\n    }\r\n    submit = (e) => {\r\n        this.props.form.validateFields((err, values) => {\r\n            if (err) {\r\n                console.log('校验失败', values);\r\n            } else {\r\n                console.log('提交成功', values)\r\n            }\r\n        });\r\n    }\r\n    render() {\r\n        const { getFieldProps, getFieldError } = this.props.form;\r\n        const self = this;\r\n        return (\r\n            <div>\r\n                <Form className='demo4'>\r\n                    <FormItem>\r\n                        <Label>姓名：</Label>\r\n                        <FormControl placeholder=\"请输入姓名\"\r\n                            {...getFieldProps('name', {\r\n                                validateTrigger: 'onBlur',\r\n                                rules: [{\r\n                                    required: true, message: '请输入姓名',\r\n                                }],\r\n                            }) }\r\n                        />\r\n                        <span className='error'>\r\n                            {getFieldError('name')}\r\n                        </span>\r\n                    </FormItem>\r\n                    <FormItem>\r\n                        <Label>身份证号：</Label>\r\n                        <FormControl placeholder=\"请输入身份证号\"\r\n                            {...getFieldProps('id', {\r\n                                validateTrigger: 'onBlur',\r\n                                rules: [{\r\n                                    required: true, message: '请输入身份证号',\r\n                                }],\r\n                            }) }\r\n                        />\r\n                        <span className='error'>\r\n                            {getFieldError('id')}\r\n                        </span>\r\n                    </FormItem>\r\n                    <FormItem className='time'>\r\n                        <Label>出生日期：</Label>\r\n                        <DatePicker\r\n                            {\r\n                            ...getFieldProps('time', {\r\n\r\n                            }\r\n                            ) }\r\n                            placeholder={'请选择出生日期'}\r\n                        />\r\n                    </FormItem>\r\n                    <FormItem>\r\n                        <Label>年龄：</Label>\r\n                        <FormControl placeholder=\"请输入年龄\"\r\n                            {...getFieldProps('age', {\r\n                                validateTrigger: 'onBlur',\r\n                                rules: [{\r\n                                    required: true, message: '请输入年龄',\r\n                                }],\r\n                            }) }\r\n                        />\r\n                        <span className='error'>\r\n                            {getFieldError('age')}\r\n                        </span>\r\n                    </FormItem>\r\n                     <FormItem>\r\n                        <Label>性别：</Label>\r\n                        <Radio.RadioGroup\r\n                            selectedValue={this.state.selectedValue}\r\n                            {\r\n                            ...getFieldProps('sex', {\r\n                                initialValue: 'man',\r\n                                onChange(value) {\r\n                                    self.setState({ selectedValue: value });\r\n                                },\r\n                                rules: [{ required: true }]\r\n                            }\r\n                            ) }\r\n                        >\r\n                            <Radio value=\"man\" >男</Radio>\r\n                            <Radio value=\"woman\" >女</Radio>\r\n                        </Radio.RadioGroup>\r\n                    </FormItem>\r\n                    <FormItem>\r\n                        <Label>学历：</Label>\r\n                        <Select\r\n                            {\r\n                            ...getFieldProps('education', {\r\n                                initialValue: '',\r\n                                rules: [{ required: true }]\r\n                            }\r\n                            ) }\r\n                        >\r\n                            <Option value=\"\">请选择</Option>\r\n                            <Option value=\"nothing\">无</Option>\r\n                            <Option value=\"middle\">初中</Option>\r\n                            <Option value=\"senior\">高中</Option>\r\n                            <Option value=\"college1\">专科</Option>\r\n                            <Option value=\"college2\">本科</Option>\r\n                            <Option value=\"graduate\">研究生及以上</Option>\r\n                            <Option value=\"other\">其它</Option>\r\n                        </Select>\r\n                    </FormItem>\r\n                    <FormItem>\r\n                        <Label>保密等级：</Label>\r\n                        <Rate\r\n                            {\r\n                            ...getFieldProps('rate', {\r\n                                initialValue: 0,\r\n                                rules: [{ required: true }]\r\n                            }\r\n                            ) }\r\n                        />\r\n                    </FormItem>\r\n                    <FormItem >\r\n                        <Label>备注：</Label>\r\n                        <FormControl componentClass='textarea'\r\n                            {\r\n                            ...getFieldProps('remark', {}\r\n                            ) }\r\n                        />\r\n                    </FormItem>  \r\n                    \r\n\r\n\r\n                    <div className='submit'>\r\n                        <Button colors=\"primary\" className=\"login\" onClick={this.submit}>提交</Button>\r\n                        <Button shape=\"border\" className=\"reset\">取消</Button>\r\n                    </div>\r\n                </Form>\r\n            </div>\r\n        )\r\n    }\r\n})\r\n", "desc": " 用户信息录入实例", "scss_code": ".demo4 {\r\n    font-size: 14px;\r\n    .u-label {\r\n        display: inline-block;\r\n        min-width: 100px;\r\n        text-align: right;\r\n    }\r\n    .u-form-control {\r\n        width: auto;\r\n        min-width: 380px;\r\n    }\r\n    .error {\r\n        font-size: 12px;\r\n        color: red;\r\n        margin-left: 10px;\r\n    }\r\n    .submit {\r\n        padding-left: 110px;\r\n    }\r\n    .submit .login {\r\n        margin-right: 10px;\r\n    }\r\n    .u-select {\r\n        max-width: 380px;\r\n    }\r\n    textarea {\r\n        min-height: 100px;\r\n        resize: none;\r\n    }\r\n    .time>div {\r\n        display: inline-block;\r\n    }\r\n    .time .u-label {\r\n        position: relative;\r\n        bottom: 10px;\r\n    }\r\n    .u-city-select {\r\n        display: inline-block;\r\n    }\r\n    .u-city-select .province,\r\n    .u-city-select .city,\r\n    .u-city-select .area {\r\n        width: 120px;\r\n    }\r\n    .u-form-item {\r\n        min-height: auto!important;\r\n    }\r\n}" }, { "example": _react2['default'].createElement(Demo5, null), "title": " 多种表单元素示例", "code": "/**\r\n *\r\n * @title 多种表单元素示例\r\n * @description 查询面板\r\n */\r\nimport React, { Component } from 'react';\r\nimport ReactDOM from 'react-dom';\r\nimport { Form, Button, Label, Switch, Checkbox, DatePicker, Radio, Select,  Col , Row , FormControl } from 'tinper-bee';\r\n\n\n\n\n\n\n\n\n\nimport moment from \"moment/moment\";\r\nconst FormItem = Form.FormItem;\r\nconst Option = Select.Option;\r\nconst { RangePicker } = DatePicker;\r\n\r\nconst Demo5 = Form.createForm()(class Demo extends Component {\r\n    constructor(props) {\r\n        super(props);\r\n        this.state = {\r\n            approvalState: '',\r\n            closeState: '',\r\n            confirmState: '',\r\n            voucherDate: [],\r\n            orderTypes:[\r\n                {\r\n                    'code':'001',\r\n                    'name':'类型1'\r\n                },\r\n                {\r\n                    'code':'002',\r\n                    'name':'类型2'\r\n                },\r\n                {\r\n                    'code':'003',\r\n                    'name':'类型3'\r\n                },\r\n            ]\r\n        };\r\n    }\r\n    submit = (e) => {\r\n        this.props.form.validateFields((err, values) => {\r\n            if (err) {\r\n                console.log('校验失败', values);\r\n            } else {\r\n                console.log('提交成功', values)\r\n            }\r\n        });\r\n    }\r\n    reset = () =>{\r\n        this.props.form.resetFields();\r\n        //部分表单元素无法通过this.props.form.resetFields重置，需要手动重置，如下\r\n        this.setState({\r\n            approvalState: '',\r\n            closeState: '',\r\n            confirmState: '',\r\n            voucherDate: []\r\n        })\r\n    }\r\n    render() {\r\n        const { getFieldProps, getFieldError } = this.props.form;\r\n        const self = this;\r\n        return (\r\n            <div>\r\n                <Form className='demo5'>\r\n                <Row>\r\n                        <Col lg={4} md={6} xs={12}>\r\n                            <FormItem>\r\n                                <Label>订单编号：</Label>\r\n                                <FormControl\r\n                                    {\r\n                                    ...getFieldProps('orderCode', {\r\n                                        initialValue: '',\r\n                                    })\r\n                                    }\r\n                                />\r\n                            </FormItem>\r\n                        </Col>\r\n                        <Col  lg={4} md={6} xs={12}>\r\n                            <FormItem>\r\n                                <Label>供应商名称：</Label>\r\n                                <FormControl\r\n                                    {\r\n                                    ...getFieldProps('supplierName', {\r\n                                        initialValue: '',\r\n                                    })\r\n                                    }\r\n                                />\r\n                            </FormItem>\r\n                        </Col>\r\n                        <Col lg={4} md={6} xs={4}>\r\n                            <FormItem>\r\n                                <Label className='time'>凭证日期：</Label>\r\n                                <RangePicker\r\n                                    defaultValue={this.state.voucherDate}\r\n                                    placeholder={'开始 ~ 结束'}\r\n                                    dateInputPlaceholder={['开始', '结束']}\r\n                                    {\r\n                                    ...getFieldProps('voucherDate', {\r\n                                        onChange: function (v) {\r\n                                            self.setState({\r\n                                                voucherDate: v\r\n                                            })\r\n                                        }\r\n                                    })\r\n                                    }\r\n                                />\r\n                            </FormItem>\r\n                        </Col>\r\n                        <Col  lg={4} md={6} xs={12}>\r\n                            <FormItem>\r\n                                <Label>订单类型：</Label>\r\n                                <Select {\r\n                                    ...getFieldProps('type', {\r\n                                        initialValue: '',\r\n                                    }\r\n                                    )}>\r\n                                    <Option value=\"\">请选择</Option>\r\n                                    {\r\n                                        self.state.orderTypes.map((item, index) => {\r\n                                            return (\r\n                                                <Option key={index} value={item.code}>{item.name}</Option>\r\n                                            )\r\n                                        })\r\n                                    }\r\n                                </Select>\r\n                            </FormItem>\r\n                        </Col>\r\n                        <Col  lg={4} md={6} xs={12}>\r\n                            <FormItem>\r\n                                <Label>采购组：</Label>\r\n                                <FormControl\r\n                                    {\r\n                                    ...getFieldProps('purchasingGroup', {\r\n                                        initialValue: '',\r\n                                    })\r\n                                    }\r\n                                />\r\n                            </FormItem>\r\n                        </Col>\r\n                        <Col  lg={4} md={6} xs={12}>\r\n                            <FormItem>\r\n                                <Label>审批状态：</Label>\r\n                                <Radio.RadioGroup\r\n                                    selectedValue={this.state.approvalState}\r\n                                    {\r\n                                    ...getFieldProps('approvalState', {\r\n                                        initialValue: '1',\r\n                                        onChange(value) {\r\n                                            self.setState({ approvalState: value });\r\n                                        },\r\n                                    }\r\n                                    )}\r\n                                >\r\n                                    <Radio value=\"0\" >未审批</Radio>\r\n                                    <Radio value=\"1\" >已审批</Radio>\r\n                                </Radio.RadioGroup>\r\n                            </FormItem>\r\n                        </Col>\r\n                        <Col  lg={4} md={6} xs={12}>\r\n                            <FormItem>\r\n                                <Label>关闭状态：</Label>\r\n                                <Radio.RadioGroup\r\n                                    selectedValue={this.state.closeState}\r\n                                    {\r\n                                    ...getFieldProps('closeState', {\r\n                                        initialValue: '1',\r\n                                        onChange(value) {\r\n                                            self.setState({ closeState: value });\r\n                                        },\r\n                                    }\r\n                                    )}\r\n                                >\r\n                                    <Radio value=\"0\" >未关闭</Radio>\r\n                                    <Radio value=\"1\" >已关闭</Radio>\r\n                                </Radio.RadioGroup>\r\n                            </FormItem>\r\n                        </Col>\r\n                        <Col  lg={4} md={6} xs={12}>\r\n                            <FormItem>\r\n                                <Label>确认状态：</Label>\r\n                                <Radio.RadioGroup\r\n                                    selectedValue={this.state.confirmState}\r\n                                    {\r\n                                    ...getFieldProps('confirmState', {\r\n                                        initialValue: '1',\r\n                                        onChange(value) {\r\n                                            self.setState({ confirmState: value });\r\n                                        },\r\n                                    }\r\n                                    )}\r\n                                >\r\n                                    <Radio value=\"0\" >未确认</Radio>\r\n                                    <Radio value=\"1\" >已确认</Radio>\r\n                                </Radio.RadioGroup>\r\n                            </FormItem>\r\n                        </Col>\r\n                    </Row>\r\n                    <div className='submit'>\r\n                        <Button colors=\"primary\" className=\"login\" onClick={this.submit}>查询</Button>\r\n                        <Button shape=\"border\" className=\"reset\" onClick={this.reset}>重置</Button>\r\n                    </div>\r\n                </Form>\r\n            </div>\r\n        )\r\n    }\r\n})\r\n", "desc": " 查询面板", "scss_code": ".demo5 {\r\n    .submit{\r\n        padding-left:90px\r\n    }\r\n    .reset{\r\n        margin-left:10px;\r\n    }\r\n    .u-form-item {\r\n        min-width: 100%;\r\n        min-height: 50px!important;\r\n        padding: 0;\r\n        .u-label{\r\n            min-width: 90px;\r\n            display: inline-block;\r\n            text-align:right;\r\n        }\r\n        .u-label.time{\r\n            position: relative;\r\n            bottom: 10px;\r\n        }\r\n        .u-label + *{\r\n            min-width: 200px;\r\n            display: inline-block;\r\n        }\r\n        .datepicker-input-group{\r\n            .u-input-group-btn{\r\n                .uf-calendar{\r\n                    padding: 0;\r\n                }\r\n            }\r\n        }\r\n        .u-switch{\r\n            min-width: auto;\r\n        }\r\n        .u-select{\r\n            width: auto;\r\n        }\r\n        .u-form-control{\r\n            width: auto;\r\n        }\r\n        .calendar-picker{\r\n            display: inline-block;\r\n            min-width:200px;\r\n            width: auto;\r\n            input{\r\n                width: 100%;\r\n                text-align: center;\r\n            }\r\n        }\r\n        .u-radio .u-radio-label{\r\n            font-size:14px;\r\n        }\r\n    }\r\n}\r\n" }, { "example": _react2['default'].createElement(Demo6, null), "title": " 多种布局示例", "code": "/**\r\n *\r\n * @title 多种布局示例\r\n * @description \r\n */\r\nimport React, { Component } from 'react';\r\nimport ReactDOM from 'react-dom';\r\nimport { Form, Button, Label, Switch, Checkbox, DatePicker, Radio, Select,  Col , Row , FormControl } from 'tinper-bee';\r\n\n\n\n\n\n\n\n\n\nimport moment from \"moment/moment\";\r\nconst FormItem = Form.FormItem;\r\nconst Option = Select.Option;\r\nconst { RangePicker } = DatePicker;\r\n\r\nconst Demo6 = Form.createForm()(class Demo extends Component {\r\n    constructor(props) {\r\n        super(props);\r\n        this.state = {\r\n            approvalState: '',\r\n            closeState: '',\r\n            confirmState: '',\r\n            voucherDate: [],\r\n            orderTypes:[\r\n                {\r\n                    'code':'001',\r\n                    'name':'类型1'\r\n                },\r\n                {\r\n                    'code':'002',\r\n                    'name':'类型2'\r\n                },\r\n                {\r\n                    'code':'003',\r\n                    'name':'类型3'\r\n                },\r\n            ]\r\n        };\r\n    }\r\n    render() {\r\n        const { getFieldProps, getFieldError } = this.props.form;\r\n        const self = this;\r\n        const orderTypes= [{\r\n            \"code\":\"D001\",\r\n            \"name\":\"D001\"\r\n          },{\r\n            \"code\":\"D002\",\r\n            \"name\":\"D002\"\r\n          },{\r\n            \"code\":\"D003\",\r\n            \"name\":\"D003\"\r\n          },{\r\n            \"code\":\"D004\",\r\n            \"name\":\"D004\"\r\n          }];\r\n        return (\r\n            <div>\r\n                <Form className='demo6'>\r\n                    {/* 普通栅格布局 */}\r\n                    <h4>\r\n                        普通栅格布局\r\n                    </h4>\r\n                    <Row className = 'edit-panel'>\r\n                        <Col lg={4} md={6} xs={12}>\r\n                            <FormItem>\r\n                                <Label>订单编号：\r\n                                    <span className='mast'>*</span>\r\n                                </Label>\r\n                                <FormControl\r\n                                    {\r\n                                    ...getFieldProps('orderCode1', {\r\n                                        initialValue: '',\r\n                                        rules: [{\r\n                                            required: true, message: '请输入订单编号',\r\n                                        }],\r\n                                    })\r\n                                    }\r\n                                />\r\n                                <span className='error'>\r\n                                    {\r\n                                        getFieldError('orderCode1')\r\n                                    }\r\n                                </span>\r\n                            </FormItem>\r\n                        </Col>\r\n                        <Col lg={4} md={6} xs={12}>\r\n                            <FormItem>\r\n                                <Label>供应商名称：\r\n                                    <span className='mast'>*</span>\r\n                                </Label>\r\n                                <FormControl\r\n                                    {\r\n                                        ...getFieldProps('supplierName1', {\r\n                                            initialValue: '',\r\n                                            rules: [{\r\n                                                required: true, message: '请输入供应商名称',\r\n                                            }],\r\n                                        })\r\n                                    }\r\n                                />\r\n                                <span className='error'>\r\n                                    {\r\n                                        getFieldError('supplierName1')\r\n                                    }\r\n                                </span>\r\n                            </FormItem>\r\n                            \r\n                        </Col>\r\n                        <Col lg={4} md={6} xs={12}>\r\n                            <FormItem>\r\n                                <Label className='time'>凭证日期：</Label>\r\n                                <RangePicker\r\n                                    defaultValue={this.state.voucherDate}\r\n                                    placeholder={'开始 ~ 结束'}\r\n                                    dateInputPlaceholder={['开始', '结束']}\r\n                                    {\r\n                                    ...getFieldProps('voucherDate1', {\r\n                                        onChange: function (v) {\r\n                                            self.setState({\r\n                                                voucherDate1: v\r\n                                            })\r\n                                        }\r\n                                    })\r\n                                    }\r\n                                />\r\n                            </FormItem>\r\n                        </Col>\r\n                    </Row>\r\n\r\n                    <div className='split'></div>\r\n                    \r\n                    \r\n                     {/* 单列铺满 */}\r\n                     <h4>\r\n                        单列铺满\r\n                     </h4>\r\n                     <Row className = 'edit-panel edit-panel-all'>\r\n                        <FormItem>\r\n                            <Col md={2}>\r\n                                <Label>订单编号：\r\n                                    <span className='mast'>*</span>\r\n                                </Label>\r\n                            </Col>\r\n                            <Col md={10}>\r\n                                <FormControl\r\n                                    {\r\n                                    ...getFieldProps('orderCode2', {\r\n                                        initialValue: '',\r\n                                        rules: [{\r\n                                            required: true, message: '请输入订单编号',\r\n                                        }],\r\n                                    })\r\n                                    }\r\n                                />\r\n                                <span className='error'>\r\n                                    {\r\n                                        getFieldError('orderCode2')\r\n                                    }\r\n                                </span>\r\n                            </Col>\r\n                        </FormItem>\r\n\r\n                        <FormItem>\r\n                            <Col md={2}>\r\n                                <Label>供应商名称：\r\n                                    <span className='mast'>*</span>\r\n                                </Label>\r\n                            </Col>\r\n                            <Col md={10}>\r\n                                <FormControl\r\n                                    {\r\n                                        ...getFieldProps('supplierName2', {\r\n                                            initialValue: '',\r\n                                            rules: [{\r\n                                                required: true, message: '请输入供应商名称',\r\n                                            }],\r\n                                        })\r\n                                    }\r\n                                />\r\n                                <span className='error'>\r\n                                    {\r\n                                        getFieldError('supplierName2')\r\n                                    }\r\n                                </span>\r\n                            </Col>\r\n                        </FormItem>\r\n\r\n                        <FormItem>\r\n                            <Col md={2}>\r\n                                <Label>凭证日期：</Label>\r\n                            </Col>\r\n                            <Col md={10}>\r\n                                <RangePicker\r\n                                    defaultValue={this.state.voucherDate}\r\n                                    placeholder={'开始 ~ 结束'}\r\n                                    dateInputPlaceholder={['开始', '结束']}\r\n                                    {\r\n                                    ...getFieldProps('voucherDate2', {\r\n                                        onChange: function (v) {\r\n                                            self.setState({\r\n                                                voucherDate2: v\r\n                                            })\r\n                                        }\r\n                                    })\r\n                                    }\r\n                                />\r\n                            </Col>\r\n                        </FormItem>\r\n                        <FormItem>\r\n                            <Col md={2}>\r\n                                <Label>订单类型：</Label>\r\n                            </Col>\r\n                            <Col md={10}>\r\n                                <Select {\r\n                                    ...getFieldProps('type', {\r\n                                        initialValue: '',\r\n                                    }\r\n                                    )}>\r\n                                    <Option value=\"\">请选择</Option>\r\n                                    {\r\n                                        orderTypes.map((item, index) => {\r\n                                            return (\r\n                                                <Option key={index} value={item.code}>{item.name}</Option>\r\n                                            )\r\n                                        })\r\n                                    }\r\n                                </Select>\r\n                            </Col>\r\n                        </FormItem>\r\n                        \r\n                    </Row>\r\n\r\n                    <div className='split'></div>\r\n\r\n                    {/* 单列居中 */}\r\n                    <h4>\r\n                        单列居中\r\n                     </h4>\r\n                    <Row className = 'edit-panel edit-panel-center'>\r\n                        <Col md={12}>\r\n                            <FormItem>\r\n                                <Label>订单编号：\r\n                                    <span className='mast'>*</span>\r\n                                </Label>\r\n                                <FormControl\r\n                                    {\r\n                                    ...getFieldProps('orderCode3', {\r\n                                        initialValue: '',\r\n                                        rules: [{\r\n                                            required: true, message: '请输入订单编号',\r\n                                        }],\r\n                                    })\r\n                                    }\r\n                                />\r\n                                <span className='error'>\r\n                                    {\r\n                                        getFieldError('orderCode3')\r\n                                    }\r\n                                </span>\r\n                            </FormItem>\r\n                        </Col>\r\n                        <Col md={12}>\r\n                            <FormItem>\r\n                                <Label>供应商名称：\r\n                                    <span className='mast'>*</span>\r\n                                </Label>\r\n                                <FormControl\r\n                                    {\r\n                                        ...getFieldProps('supplierName3', {\r\n                                            initialValue: '',\r\n                                            rules: [{\r\n                                                required: true, message: '请输入供应商名称',\r\n                                            }],\r\n                                        })\r\n                                    }\r\n                                />\r\n                                <span className='error'>\r\n                                    {\r\n                                        getFieldError('supplierName3')\r\n                                    }\r\n                                </span>\r\n                            </FormItem>\r\n                            \r\n                        </Col>\r\n                        <Col md={12}>\r\n                            <FormItem>\r\n                                <Label className='time'>凭证日期：</Label>\r\n                                <RangePicker\r\n                                    defaultValue={this.state.voucherDate}\r\n                                    placeholder={'开始 ~ 结束'}\r\n                                    dateInputPlaceholder={['开始', '结束']}\r\n                                    {\r\n                                    ...getFieldProps('voucherDate3', {\r\n                                        onChange: function (v) {\r\n                                            self.setState({\r\n                                                voucherDate3: v\r\n                                            })\r\n                                        }\r\n                                    })\r\n                                    }\r\n                                />\r\n                            </FormItem>\r\n                        </Col>\r\n                        \r\n                    </Row>\r\n\r\n                     <div className='split'></div>\r\n\r\n                    {/* 三列带textarea */}\r\n                    <h4>\r\n                    三列带textarea\r\n                     </h4>\r\n                    <Row className = 'edit-panel edit-panel-textarea'>\r\n                            <Col md={1}>\r\n                                <Label>订单编号：\r\n                                    <span className='mast'>*</span>\r\n                                </Label>\r\n                            </Col>\r\n                            <Col md={3}>\r\n                                <FormControl\r\n                                    {\r\n                                    ...getFieldProps('orderCode4', {\r\n                                        initialValue: '',\r\n                                        rules: [{\r\n                                            required: true, message: '请输入订单编号',\r\n                                        }],\r\n                                    })\r\n                                    }\r\n                                />\r\n                                <span className='error'>\r\n                                    {\r\n                                        getFieldError('orderCode4')\r\n                                    }\r\n                                </span>\r\n                            </Col>\r\n                            <Col md={1}>\r\n                                <Label>供应商：\r\n                                    <span className='mast'>*</span>\r\n                                </Label>\r\n                            </Col>\r\n                            <Col md={3}>\r\n                            <FormControl\r\n                                {\r\n                                    ...getFieldProps('supplierName4', {\r\n                                        initialValue: '',\r\n                                        rules: [{\r\n                                            required: true, message: '请输入供应商名称',\r\n                                        }],\r\n                                    })\r\n                                }\r\n                                />\r\n                                <span className='error'>\r\n                                    {\r\n                                        getFieldError('supplierName4')\r\n                                    }\r\n                                </span>\r\n                            </Col>\r\n                            <Col md={1}>\r\n                                <Label className='time'>凭证日期：</Label>\r\n                            </Col>\r\n                            <Col md={3}>\r\n                            <RangePicker\r\n                                    defaultValue={this.state.voucherDate}\r\n                                    placeholder={'开始 ~ 结束'}\r\n                                    dateInputPlaceholder={['开始', '结束']}\r\n                                    {\r\n                                    ...getFieldProps('voucherDate4', {\r\n                                        onChange: function (v) {\r\n                                            self.setState({\r\n                                                voucherDate3: v\r\n                                            })\r\n                                        }\r\n                                    })\r\n                                    }\r\n                                />\r\n                            </Col>\r\n                            <Col md={1}>\r\n                                <Label className='time'>备注：</Label>\r\n                            </Col>\r\n                            <Col md={11}>\r\n                            <textarea className='u-form-control'\r\n                                {\r\n                                    ...getFieldProps('mark', {\r\n                                        initialValue: '',\r\n                                    })\r\n                                }\r\n                                />\r\n                            </Col>\r\n\r\n                       \r\n                    </Row>\r\n                    \r\n                </Form>\r\n            </div>\r\n        )\r\n    }\r\n})\r\n", "desc": " ", "scss_code": ".demo6 {\r\n    .edit-panel {\r\n        background: #FFF;\r\n        padding: 15px 15px 15px 15px;\r\n        .reset-btn,\r\n        .reset-btn:hover {\r\n            background: #fff;\r\n            border: 1px solid #1E7BE2;\r\n            color: #1E7BE2;\r\n            margin-right: 15px;\r\n        }\r\n        .submit-btn,\r\n        .submit-btn:hover {\r\n            background: #1E7BE2;\r\n            color: #fff;\r\n        }\r\n        .btn-group {\r\n            text-align: right;\r\n        }\r\n        .u-form-item {\r\n            min-width: 100%;\r\n            margin-bottom: 10px;\r\n            min-height: 50px!important;\r\n            .error {\r\n                margin-left: 100px;\r\n                color: red;\r\n                display: block;\r\n            }\r\n            .u-label {\r\n                min-width: 100px;\r\n                display: inline-block;\r\n            }\r\n            .u-label.time {\r\n                position: relative;\r\n                bottom: 10px;\r\n            }\r\n            .u-label+* {\r\n                min-width: 200px;\r\n                display: inline-block;\r\n            }\r\n            .mast {\r\n                width: 5px;\r\n                min-width: auto;\r\n                margin-right: 5px;\r\n                color: red;\r\n            }\r\n            .datepicker-input-group {\r\n                .u-input-group-btn {\r\n                    .uf-calendar {\r\n                        padding: 0;\r\n                    }\r\n                }\r\n            }\r\n            .u-switch {\r\n                min-width: auto;\r\n            }\r\n            .u-select {\r\n                width: auto;\r\n            }\r\n            .u-form-control {\r\n                width: auto;\r\n            }\r\n            .calendar-picker {\r\n                display: inline-block;\r\n                min-width: 200px;\r\n                width: auto;\r\n                input {\r\n                    width: 100%;\r\n                }\r\n            }\r\n            .u-form-control-close {\r\n                width: auto;\r\n                .u-form-control {\r\n                    width: 100%\r\n                }\r\n            }\r\n        }\r\n        .search-panel-btn {\r\n            text-align: right;\r\n            padding: 10px 0;\r\n        }\r\n    }\r\n    .edit-panel-center {\r\n        text-align: center;\r\n        .u-form-item {\r\n            min-width: auto;\r\n            display: inline-block;\r\n            .error {\r\n                text-align: left;\r\n            }\r\n        }\r\n    }\r\n    .edit-panel-all {\r\n        .u-form-item {\r\n            padding: 0;\r\n            .u-label {\r\n                width: 100%;\r\n                text-align: right;\r\n                height: 30px;\r\n                line-height: 30px;\r\n            }\r\n            .u-form-control {\r\n                width: 100%;\r\n            }\r\n            .calendar-picker {\r\n                width: 100%;\r\n                position: relative;\r\n            }\r\n            .u-select {\r\n                width: 100%;\r\n            }\r\n            .error {\r\n                margin-left: 0;\r\n            }\r\n        }\r\n    }\r\n    .split {\r\n        height: 5px;\r\n        background: #e0e0e0;\r\n    }\r\n    .edit-panel-textarea {\r\n        >div {\r\n            padding: 0;\r\n            margin-bottom: 10px;\r\n            min-height: 50px;\r\n            .u-label {\r\n                height: 30px;\r\n                line-height: 30px;\r\n                text-align: right;\r\n                display: block;\r\n            }\r\n            .error {\r\n                margin-left: 100px;\r\n                color: red;\r\n                display: block;\r\n            }\r\n            .mast {\r\n                color: red;\r\n            }\r\n            textarea {\r\n                width: 100%;\r\n                resize: none;\r\n                min-height: 50px;\r\n            }\r\n            .calendar-picker,\r\n            .u-select {\r\n                width: 100%;\r\n            }\r\n        }\r\n    }\r\n}" }];
+	var Demo1 = __webpack_require__(84);var Demo2 = __webpack_require__(283);var Demo3 = __webpack_require__(284);var Demo4 = __webpack_require__(290);var Demo5 = __webpack_require__(589);var Demo6 = __webpack_require__(590);var DemoArray = [{ "example": _react2['default'].createElement(Demo1, null), "title": " 单个input校验", "code": '/**\n *\n * @title \u5355\u4E2Ainput\u6821\u9A8C\n * @description \u4F7F\u7528FormItem\n */\nimport React, { Component } from \'react\';\nimport { Form, Label, FormControl } from \'tinper-bee\';\nconst FormItem = Form.FormItem;\n\n\nconst Demo1 = Form.createForm()(class Demo extends Component {\n    constructor(props) {\n        super(props);\n    }\n    render() {\n        const self=this;\n        const { getFieldProps, getFieldError } = this.props.form;\n        return (\n                <FormItem className=\'demo1\'>\n                    <Label>\u59D3\u540D\uFF1A</Label>\n                    <FormControl placeholder=\'\u8BF7\u8F93\u5165\u59D3\u540D\'\n                     {...getFieldProps(\'name\', {\n                        validateTrigger: \'onBlur\',\n                        rules: [{\n                            required: true, message: \'\u8BF7\u8F93\u5165\u59D3\u540D\'\n                        },{\n                            max:5,message:\'\u6700\u5927\u957F\u5EA6\u4E3A10\'\n                        },{\n                            pattern: /[\\u4e00-\\u9fa5]/, message: \'\u8BF7\u8F93\u5165\u4E2D\u6587\u5B57\u7B26\',\n                        }],\n                    }) } />\n                    <span className=\'error\'>\n                        {getFieldError(\'name\')}\n                    </span>   \n                </FormItem>\n        )\n    }\n})\n\n', "desc": " 使用FormItem", "scss_code": ".demo1 {\n    font-size: 14px;\n    .u-form-item {\n        min-height: auto!important;\n    }\n    .u-label {\n        display: inline;\n    }\n    .u-form-control {\n        width: auto;\n    }\n    .error {\n        font-size: 12px;\n        color: red;\n        margin-left: 10px;\n    }\n}" }, { "example": _react2['default'].createElement(Demo2, null), "title": " 基本form校验", "code": "/**\n *\n * @title 基本form校验\n * @description 登录示例\n */\nimport React, { Component } from 'react';\nimport ReactDOM from 'react-dom';\nimport { Form, Button, Label, FormControl } from 'tinper-bee';\nconst FormItem = Form.FormItem;\n\nconst Demo2 = Form.createForm()(class Demo2 extends Component {\n    submit = (e) => {\n        e.preventDefault();\n        this.props.form.validateFields((err, values) => {\n            if (err) {\n                console.log('校验失败', values);\n            } else {\n                console.log('提交成功', values)\n            }\n        });\n    }\n    render() {\n        const { getFieldProps, getFieldError } = this.props.form;\n        return (\n            <div className=\"demo2\">\n                <Form >\n                    <FormItem>\n                        <Label>用户名：</Label>\n                        <FormControl placeholder=\"请输入用户名\"\n                            {...getFieldProps('username', {\n                                validateTrigger: 'onBlur',\n                                rules: [{\n                                    required: true, message: '请输入用户名',\n                                }],\n                            }) }\n                        />\n                        <span className='error'>\n                            {getFieldError('username')}\n                        </span>\n                    </FormItem>\n                    <FormItem>\n                        <Label>密码：</Label>\n                        <FormControl placeholder=\"请输入密码\" type='password'\n                            {...getFieldProps('password', {\n                                validateTrigger: 'onBlur',\n                                rules: [{\n                                    required: true, message: '请输入密码',\n                                }],\n                            }) }\n                        />\n                        <span className='error'>\n                            {getFieldError('password')}\n                        </span>\n                    </FormItem>\n                    <div className='submit'>\n                        <Button colors=\"primary\" className=\"login\" onClick={this.submit}>登陆</Button>\n                        <Button shape=\"border\" className=\"reset\">取消</Button>\n                    </div>\n                </Form>\n            </div>\n        )\n    }\n})\n", "desc": " 登录示例", "scss_code": ".demo2 {\n    font-size: 14px;\n    .u-label {\n        display: inline-block;\n        min-width: 80px;\n        text-align: right;\n    }\n    .u-form-control {\n        width: auto;\n    }\n    .error {\n        font-size: 12px;\n        color: red;\n        margin-left: 10px;\n    }\n    .submit {\n        padding-left: 90px;\n    }\n    .submit .login {\n        margin-right: 10px;\n    }\n    .u-form-item {\n        min-height: auto!important;\n    }\n}" }, { "example": _react2['default'].createElement(Demo3, null), "title": " 基本form校验", "code": "/**\n *\n * @title 基本form校验\n * @description 注册示例\n */\nimport React, { Component } from 'react';\nimport { Form, Label, Checkbox, Button, FormControl } from 'tinper-bee';\nconst FormItem = Form.FormItem;\n\nconst Demo3 = Form.createForm()( class Demo extends Component {\n    constructor(props) {\n        super(props);\n        this.state = {\n            checkbox: false\n        }\n    }\n    submit = (e) => {\n        e.preventDefault();\n        this.props.form.validateFields((err, values) => {\n            if (err) {\n                console.log('校验失败', values);\n            } else {\n                console.log('提交成功', values)\n            }\n        });\n    }\n    handleConfirmPassword = (rule, value, callback) => {\n        const { getFieldValue } = this.props.form;\n        if (value && value !== getFieldValue('password')) {\n            callback('两次输入不一致！')\n        }\n        callback();\n    }\n    render() {\n        const self = this;\n        const { getFieldProps, getFieldError } = this.props.form;\n        return (\n            <div className=\"demo3\">\n                <Form>\n                    <FormItem>\n                        <Label>用户名：</Label>\n                        <FormControl placeholder=\"请输入用户名(包含数字和字母，8-15位)\"\n                            {...getFieldProps('username', {\n                                validateTrigger: 'onBlur',\n                                rules: [{\n                                    required: true, message: '请输入用户名',\n                                }, {\n                                    pattern: /^(?!\\d+$)(?![a-zA-Z]+$)[a-zA-Z0-9]{8,15}$/, message: '用户名格式错误',\n                                }],\n                            }) }\n                        />\n                        <span className='error'>\n                            {getFieldError('username')}\n                        </span>\n                    </FormItem>\n\n                    <FormItem>\n                        <Label>密码：</Label>\n                        <FormControl placeholder=\"请输入密码\" type='password'\n                            {...getFieldProps('password', {\n                                validateTrigger: 'onBlur',\n                                rules: [{\n                                    required: true, message: '请输入密码',\n                                }],\n                            }) }\n                        />\n                        <span className='error'>\n                            {getFieldError('password')}\n                        </span>\n                    </FormItem>\n\n                    <FormItem>\n                        <Label>再次输入密码：</Label>\n                        <FormControl placeholder=\"请输入密码\" type='password'\n                            {...getFieldProps('password2', {\n                                validateTrigger: 'onBlur',\n                                rules: [{\n                                    required: true, message: '请输入密码',\n                                }, {\n                                    validator: this.handleConfirmPassword\n                                }],\n                            }) }\n                        />\n                        <span className='error'>\n                            {getFieldError('password2')}\n                        </span>\n                    </FormItem>\n\n                    <FormItem>\n                        <Label>邮箱：</Label>\n                        <FormControl placeholder=\"请输入邮箱\"\n                            {...getFieldProps('email', {\n                                validateTrigger: 'onBlur',\n                                rules: [{\n                                    required: true, message: '请输入邮箱',\n                                }, {\n                                    type: 'email', message: '邮箱格式不正确'\n                                }],\n                            }) }\n                        />\n                        <span className='error'>\n                            {getFieldError('email')}\n                        </span>\n                    </FormItem>\n                    <FormItem>\n                        <Label>手机号：</Label>\n\n                        <FormControl placeholder=\"请输入手机号\"\n                            {...getFieldProps('phone', {\n                                validateTrigger: 'onBlur',\n                                rules: [{\n                                    required: true, message: '请输入手机号',\n                                }, {\n                                    pattern: /^\\d{11}$/, message: '手机号格式不正确'\n                                }],\n                            }) }\n                        />\n\n                        <span className='error'>\n                            {getFieldError('phone')}\n                        </span>\n                    </FormItem>\n\n                    <FormItem style={{'paddingLeft':'110px'}}>\n                        <Checkbox colors=\"info\"\n                            defaultChecked={this.state.checkbox}\n                            {\n                            ...getFieldProps('checkbox', {\n                                initialValue: false,\n                            }\n                            ) }\n                        />\n                        <span>我已经阅读并同意相关条款</span>\n                    </FormItem>\n                    <div className='submit'>\n                        <Button colors=\"primary\" className=\"login\" onClick={this.submit}>注册</Button>\n                        <Button shape=\"border\" className=\"reset\">取消</Button>\n                    </div>\n                </Form>\n            </div>\n        )\n    }\n})\n", "desc": " 注册示例", "scss_code": ".demo3 {\n    font-size: 14px;\n    .u-label {\n        display: inline-block;\n        min-width: 105px;\n        text-align: right;\n    }\n    .u-form-control {\n        width: auto;\n        min-width: 300px;\n    }\n    .error {\n        font-size: 12px;\n        color: red;\n        margin-left: 10px;\n    }\n    .submit {\n        padding-left: 110px;\n    }\n    .submit .login {\n        margin-right: 10px;\n    }\n    .u-form-item {\n        min-height: auto!important;\n    }\n}" }, { "example": _react2['default'].createElement(Demo4, null), "title": " 表单校验", "code": "/**\n *\n * @title 表单校验\n * @description 用户信息录入实例\n */\nimport React, { Component } from 'react';\nimport ReactDOM from 'react-dom';\nimport { Form, Button, Label, CitySelect, Rate, InputNumber, Slider, Switch, Checkbox, DatePicker, Radio, Select, FormControl } from 'tinper-bee';\nconst FormItem = Form.FormItem;\nconst Option = Select.Option;\n\nconst Demo4 = Form.createForm()(class Demo extends Component {\n    constructor(props) {\n        super(props);\n        this.state = {\n            selectedValue: 'man',\n        };\n    }\n    submit = (e) => {\n        this.props.form.validateFields((err, values) => {\n            if (err) {\n                console.log('校验失败', values);\n            } else {\n                console.log('提交成功', values)\n            }\n        });\n    }\n    render() {\n        const { getFieldProps, getFieldError } = this.props.form;\n        const self = this;\n        return (\n            <div>\n                <Form className='demo4'>\n                    <FormItem>\n                        <Label>姓名：</Label>\n                        <FormControl placeholder=\"请输入姓名\"\n                            {...getFieldProps('name', {\n                                validateTrigger: 'onBlur',\n                                rules: [{\n                                    required: true, message: '请输入姓名',\n                                }],\n                            }) }\n                        />\n                        <span className='error'>\n                            {getFieldError('name')}\n                        </span>\n                    </FormItem>\n                    <FormItem>\n                        <Label>身份证号：</Label>\n                        <FormControl placeholder=\"请输入身份证号\"\n                            {...getFieldProps('id', {\n                                validateTrigger: 'onBlur',\n                                rules: [{\n                                    required: true, message: '请输入身份证号',\n                                }],\n                            }) }\n                        />\n                        <span className='error'>\n                            {getFieldError('id')}\n                        </span>\n                    </FormItem>\n                    <FormItem className='time'>\n                        <Label>出生日期：</Label>\n                        <DatePicker\n                            {\n                            ...getFieldProps('time', {\n\n                            }\n                            ) }\n                            placeholder={'请选择出生日期'}\n                        />\n                    </FormItem>\n                    <FormItem>\n                        <Label>年龄：</Label>\n                        <FormControl placeholder=\"请输入年龄\"\n                            {...getFieldProps('age', {\n                                validateTrigger: 'onBlur',\n                                rules: [{\n                                    required: true, message: '请输入年龄',\n                                }],\n                            }) }\n                        />\n                        <span className='error'>\n                            {getFieldError('age')}\n                        </span>\n                    </FormItem>\n                     <FormItem>\n                        <Label>性别：</Label>\n                        <Radio.RadioGroup\n                            selectedValue={this.state.selectedValue}\n                            {\n                            ...getFieldProps('sex', {\n                                initialValue: 'man',\n                                onChange(value) {\n                                    self.setState({ selectedValue: value });\n                                },\n                                rules: [{ required: true }]\n                            }\n                            ) }\n                        >\n                            <Radio value=\"man\" >男</Radio>\n                            <Radio value=\"woman\" >女</Radio>\n                        </Radio.RadioGroup>\n                    </FormItem>\n                    <FormItem>\n                        <Label>学历：</Label>\n                        <Select\n                            {\n                            ...getFieldProps('education', {\n                                initialValue: '',\n                                rules: [{ required: true }]\n                            }\n                            ) }\n                        >\n                            <Option value=\"\">请选择</Option>\n                            <Option value=\"nothing\">无</Option>\n                            <Option value=\"middle\">初中</Option>\n                            <Option value=\"senior\">高中</Option>\n                            <Option value=\"college1\">专科</Option>\n                            <Option value=\"college2\">本科</Option>\n                            <Option value=\"graduate\">研究生及以上</Option>\n                            <Option value=\"other\">其它</Option>\n                        </Select>\n                    </FormItem>\n                    <FormItem>\n                        <Label>保密等级：</Label>\n                        <Rate\n                            {\n                            ...getFieldProps('rate', {\n                                initialValue: 0,\n                                rules: [{ required: true }]\n                            }\n                            ) }\n                        />\n                    </FormItem>\n                    <FormItem >\n                        <Label>备注：</Label>\n                        <FormControl componentClass='textarea'\n                            {\n                            ...getFieldProps('remark', {}\n                            ) }\n                        />\n                    </FormItem>  \n                    \n\n\n                    <div className='submit'>\n                        <Button colors=\"primary\" className=\"login\" onClick={this.submit}>提交</Button>\n                        <Button shape=\"border\" className=\"reset\">取消</Button>\n                    </div>\n                </Form>\n            </div>\n        )\n    }\n})\n", "desc": " 用户信息录入实例", "scss_code": ".demo4 {\n    font-size: 14px;\n    .u-label {\n        display: inline-block;\n        min-width: 100px;\n        text-align: right;\n    }\n    .u-form-control {\n        width: auto;\n        min-width: 380px;\n    }\n    .error {\n        font-size: 12px;\n        color: red;\n        margin-left: 10px;\n    }\n    .submit {\n        padding-left: 110px;\n    }\n    .submit .login {\n        margin-right: 10px;\n    }\n    .u-select {\n        max-width: 380px;\n    }\n    textarea {\n        min-height: 100px;\n        resize: none;\n    }\n    .time>div {\n        display: inline-block;\n    }\n    .time .u-label {\n        position: relative;\n        bottom: 10px;\n    }\n    .u-city-select {\n        display: inline-block;\n    }\n    .u-city-select .province,\n    .u-city-select .city,\n    .u-city-select .area {\n        width: 120px;\n    }\n    .u-form-item {\n        min-height: auto!important;\n    }\n}" }, { "example": _react2['default'].createElement(Demo5, null), "title": " 多种表单元素示例", "code": "/**\n *\n * @title 多种表单元素示例\n * @description 查询面板\n */\nimport React, { Component } from 'react';\nimport ReactDOM from 'react-dom';\nimport { Form, Button, Label, Switch, Checkbox, DatePicker, Radio, Select,  Col , Row , FormControl } from 'tinper-bee';\nimport moment from \"moment/moment\";\nconst FormItem = Form.FormItem;\nconst Option = Select.Option;\nconst { RangePicker } = DatePicker;\n\nconst Demo5 = Form.createForm()(class Demo extends Component {\n    constructor(props) {\n        super(props);\n        this.state = {\n            approvalState: '',\n            closeState: '',\n            confirmState: '',\n            voucherDate: [],\n            orderTypes:[\n                {\n                    'code':'001',\n                    'name':'类型1'\n                },\n                {\n                    'code':'002',\n                    'name':'类型2'\n                },\n                {\n                    'code':'003',\n                    'name':'类型3'\n                },\n            ]\n        };\n    }\n    submit = (e) => {\n        this.props.form.validateFields((err, values) => {\n            if (err) {\n                console.log('校验失败', values);\n            } else {\n                console.log('提交成功', values)\n            }\n        });\n    }\n    reset = () =>{\n        this.props.form.resetFields();\n        //部分表单元素无法通过this.props.form.resetFields重置，需要手动重置，如下\n        this.setState({\n            approvalState: '',\n            closeState: '',\n            confirmState: '',\n            voucherDate: []\n        })\n    }\n    render() {\n        const { getFieldProps, getFieldError } = this.props.form;\n        const self = this;\n        return (\n            <div>\n                <Form className='demo5'>\n                <Row>\n                        <Col lg={4} md={6} xs={12}>\n                            <FormItem>\n                                <Label>订单编号：</Label>\n                                <FormControl\n                                    {\n                                    ...getFieldProps('orderCode', {\n                                        initialValue: '',\n                                    })\n                                    }\n                                />\n                            </FormItem>\n                        </Col>\n                        <Col  lg={4} md={6} xs={12}>\n                            <FormItem>\n                                <Label>供应商名称：</Label>\n                                <FormControl\n                                    {\n                                    ...getFieldProps('supplierName', {\n                                        initialValue: '',\n                                    })\n                                    }\n                                />\n                            </FormItem>\n                        </Col>\n                        <Col lg={4} md={6} xs={4}>\n                            <FormItem>\n                                <Label className='time'>凭证日期：</Label>\n                                <RangePicker\n                                    defaultValue={this.state.voucherDate}\n                                    placeholder={'开始 ~ 结束'}\n                                    dateInputPlaceholder={['开始', '结束']}\n                                    {\n                                    ...getFieldProps('voucherDate', {\n                                        onChange: function (v) {\n                                            self.setState({\n                                                voucherDate: v\n                                            })\n                                        }\n                                    })\n                                    }\n                                />\n                            </FormItem>\n                        </Col>\n                        <Col  lg={4} md={6} xs={12}>\n                            <FormItem>\n                                <Label>订单类型：</Label>\n                                <Select {\n                                    ...getFieldProps('type', {\n                                        initialValue: '',\n                                    }\n                                    )}>\n                                    <Option value=\"\">请选择</Option>\n                                    {\n                                        self.state.orderTypes.map((item, index) => {\n                                            return (\n                                                <Option key={index} value={item.code}>{item.name}</Option>\n                                            )\n                                        })\n                                    }\n                                </Select>\n                            </FormItem>\n                        </Col>\n                        <Col  lg={4} md={6} xs={12}>\n                            <FormItem>\n                                <Label>采购组：</Label>\n                                <FormControl\n                                    {\n                                    ...getFieldProps('purchasingGroup', {\n                                        initialValue: '',\n                                    })\n                                    }\n                                />\n                            </FormItem>\n                        </Col>\n                        <Col  lg={4} md={6} xs={12}>\n                            <FormItem>\n                                <Label>审批状态：</Label>\n                                <Radio.RadioGroup\n                                    selectedValue={this.state.approvalState}\n                                    {\n                                    ...getFieldProps('approvalState', {\n                                        initialValue: '1',\n                                        onChange(value) {\n                                            self.setState({ approvalState: value });\n                                        },\n                                    }\n                                    )}\n                                >\n                                    <Radio value=\"0\" >未审批</Radio>\n                                    <Radio value=\"1\" >已审批</Radio>\n                                </Radio.RadioGroup>\n                            </FormItem>\n                        </Col>\n                        <Col  lg={4} md={6} xs={12}>\n                            <FormItem>\n                                <Label>关闭状态：</Label>\n                                <Radio.RadioGroup\n                                    selectedValue={this.state.closeState}\n                                    {\n                                    ...getFieldProps('closeState', {\n                                        initialValue: '1',\n                                        onChange(value) {\n                                            self.setState({ closeState: value });\n                                        },\n                                    }\n                                    )}\n                                >\n                                    <Radio value=\"0\" >未关闭</Radio>\n                                    <Radio value=\"1\" >已关闭</Radio>\n                                </Radio.RadioGroup>\n                            </FormItem>\n                        </Col>\n                        <Col  lg={4} md={6} xs={12}>\n                            <FormItem>\n                                <Label>确认状态：</Label>\n                                <Radio.RadioGroup\n                                    selectedValue={this.state.confirmState}\n                                    {\n                                    ...getFieldProps('confirmState', {\n                                        initialValue: '1',\n                                        onChange(value) {\n                                            self.setState({ confirmState: value });\n                                        },\n                                    }\n                                    )}\n                                >\n                                    <Radio value=\"0\" >未确认</Radio>\n                                    <Radio value=\"1\" >已确认</Radio>\n                                </Radio.RadioGroup>\n                            </FormItem>\n                        </Col>\n                    </Row>\n                    <div className='submit'>\n                        <Button colors=\"primary\" className=\"login\" onClick={this.submit}>查询</Button>\n                        <Button shape=\"border\" className=\"reset\" onClick={this.reset}>重置</Button>\n                    </div>\n                </Form>\n            </div>\n        )\n    }\n})\n", "desc": " 查询面板", "scss_code": ".demo5 {\n    .submit{\n        padding-left:90px\n    }\n    .reset{\n        margin-left:10px;\n    }\n    .u-form-item {\n        min-width: 100%;\n        min-height: 50px!important;\n        padding: 0;\n        .u-label{\n            min-width: 90px;\n            display: inline-block;\n            text-align:right;\n        }\n        .u-label.time{\n            position: relative;\n            bottom: 10px;\n        }\n        .u-label + *{\n            min-width: 200px;\n            display: inline-block;\n        }\n        .datepicker-input-group{\n            .u-input-group-btn{\n                .uf-calendar{\n                    padding: 0;\n                }\n            }\n        }\n        .u-switch{\n            min-width: auto;\n        }\n        .u-select{\n            width: auto;\n        }\n        .u-form-control{\n            width: auto;\n        }\n        .calendar-picker{\n            display: inline-block;\n            min-width:200px;\n            width: auto;\n            input{\n                width: 100%;\n                text-align: center;\n            }\n        }\n        .u-radio .u-radio-label{\n            font-size:14px;\n        }\n    }\n}\n" }, { "example": _react2['default'].createElement(Demo6, null), "title": " 多种布局示例", "code": "/**\n *\n * @title 多种布局示例\n * @description \n */\nimport React, { Component } from 'react';\nimport ReactDOM from 'react-dom';\nimport { Form, Button, Label, Switch, Checkbox, DatePicker, Radio, Select,  Col , Row , FormControl } from 'tinper-bee';\nimport moment from \"moment/moment\";\nconst FormItem = Form.FormItem;\nconst Option = Select.Option;\nconst { RangePicker } = DatePicker;\n\nconst Demo6 = Form.createForm()(class Demo extends Component {\n    constructor(props) {\n        super(props);\n        this.state = {\n            approvalState: '',\n            closeState: '',\n            confirmState: '',\n            voucherDate: [],\n            orderTypes:[\n                {\n                    'code':'001',\n                    'name':'类型1'\n                },\n                {\n                    'code':'002',\n                    'name':'类型2'\n                },\n                {\n                    'code':'003',\n                    'name':'类型3'\n                },\n            ]\n        };\n    }\n    render() {\n        const { getFieldProps, getFieldError } = this.props.form;\n        const self = this;\n        const orderTypes= [{\n            \"code\":\"D001\",\n            \"name\":\"D001\"\n          },{\n            \"code\":\"D002\",\n            \"name\":\"D002\"\n          },{\n            \"code\":\"D003\",\n            \"name\":\"D003\"\n          },{\n            \"code\":\"D004\",\n            \"name\":\"D004\"\n          }];\n        return (\n            <div>\n                <Form className='demo6'>\n                    {/* 普通栅格布局 */}\n                    <h4>\n                        普通栅格布局\n                    </h4>\n                    <Row className = 'edit-panel'>\n                        <Col lg={4} md={6} xs={12}>\n                            <FormItem>\n                                <Label>订单编号：\n                                    <span className='mast'>*</span>\n                                </Label>\n                                <FormControl\n                                    {\n                                    ...getFieldProps('orderCode1', {\n                                        initialValue: '',\n                                        rules: [{\n                                            required: true, message: '请输入订单编号',\n                                        }],\n                                    })\n                                    }\n                                />\n                                <span className='error'>\n                                    {\n                                        getFieldError('orderCode1')\n                                    }\n                                </span>\n                            </FormItem>\n                        </Col>\n                        <Col lg={4} md={6} xs={12}>\n                            <FormItem>\n                                <Label>供应商名称：\n                                    <span className='mast'>*</span>\n                                </Label>\n                                <FormControl\n                                    {\n                                        ...getFieldProps('supplierName1', {\n                                            initialValue: '',\n                                            rules: [{\n                                                required: true, message: '请输入供应商名称',\n                                            }],\n                                        })\n                                    }\n                                />\n                                <span className='error'>\n                                    {\n                                        getFieldError('supplierName1')\n                                    }\n                                </span>\n                            </FormItem>\n                            \n                        </Col>\n                        <Col lg={4} md={6} xs={12}>\n                            <FormItem>\n                                <Label className='time'>凭证日期：</Label>\n                                <RangePicker\n                                    defaultValue={this.state.voucherDate}\n                                    placeholder={'开始 ~ 结束'}\n                                    dateInputPlaceholder={['开始', '结束']}\n                                    {\n                                    ...getFieldProps('voucherDate1', {\n                                        onChange: function (v) {\n                                            self.setState({\n                                                voucherDate1: v\n                                            })\n                                        }\n                                    })\n                                    }\n                                />\n                            </FormItem>\n                        </Col>\n                    </Row>\n\n                    <div className='split'></div>\n                    \n                    \n                     {/* 单列铺满 */}\n                     <h4>\n                        单列铺满\n                     </h4>\n                     <Row className = 'edit-panel edit-panel-all'>\n                        <FormItem>\n                            <Col md={2}>\n                                <Label>订单编号：\n                                    <span className='mast'>*</span>\n                                </Label>\n                            </Col>\n                            <Col md={10}>\n                                <FormControl\n                                    {\n                                    ...getFieldProps('orderCode2', {\n                                        initialValue: '',\n                                        rules: [{\n                                            required: true, message: '请输入订单编号',\n                                        }],\n                                    })\n                                    }\n                                />\n                                <span className='error'>\n                                    {\n                                        getFieldError('orderCode2')\n                                    }\n                                </span>\n                            </Col>\n                        </FormItem>\n\n                        <FormItem>\n                            <Col md={2}>\n                                <Label>供应商名称：\n                                    <span className='mast'>*</span>\n                                </Label>\n                            </Col>\n                            <Col md={10}>\n                                <FormControl\n                                    {\n                                        ...getFieldProps('supplierName2', {\n                                            initialValue: '',\n                                            rules: [{\n                                                required: true, message: '请输入供应商名称',\n                                            }],\n                                        })\n                                    }\n                                />\n                                <span className='error'>\n                                    {\n                                        getFieldError('supplierName2')\n                                    }\n                                </span>\n                            </Col>\n                        </FormItem>\n\n                        <FormItem>\n                            <Col md={2}>\n                                <Label>凭证日期：</Label>\n                            </Col>\n                            <Col md={10}>\n                                <RangePicker\n                                    defaultValue={this.state.voucherDate}\n                                    placeholder={'开始 ~ 结束'}\n                                    dateInputPlaceholder={['开始', '结束']}\n                                    {\n                                    ...getFieldProps('voucherDate2', {\n                                        onChange: function (v) {\n                                            self.setState({\n                                                voucherDate2: v\n                                            })\n                                        }\n                                    })\n                                    }\n                                />\n                            </Col>\n                        </FormItem>\n                        <FormItem>\n                            <Col md={2}>\n                                <Label>订单类型：</Label>\n                            </Col>\n                            <Col md={10}>\n                                <Select {\n                                    ...getFieldProps('type', {\n                                        initialValue: '',\n                                    }\n                                    )}>\n                                    <Option value=\"\">请选择</Option>\n                                    {\n                                        orderTypes.map((item, index) => {\n                                            return (\n                                                <Option key={index} value={item.code}>{item.name}</Option>\n                                            )\n                                        })\n                                    }\n                                </Select>\n                            </Col>\n                        </FormItem>\n                        \n                    </Row>\n\n                    <div className='split'></div>\n\n                    {/* 单列居中 */}\n                    <h4>\n                        单列居中\n                     </h4>\n                    <Row className = 'edit-panel edit-panel-center'>\n                        <Col md={12}>\n                            <FormItem>\n                                <Label>订单编号：\n                                    <span className='mast'>*</span>\n                                </Label>\n                                <FormControl\n                                    {\n                                    ...getFieldProps('orderCode3', {\n                                        initialValue: '',\n                                        rules: [{\n                                            required: true, message: '请输入订单编号',\n                                        }],\n                                    })\n                                    }\n                                />\n                                <span className='error'>\n                                    {\n                                        getFieldError('orderCode3')\n                                    }\n                                </span>\n                            </FormItem>\n                        </Col>\n                        <Col md={12}>\n                            <FormItem>\n                                <Label>供应商名称：\n                                    <span className='mast'>*</span>\n                                </Label>\n                                <FormControl\n                                    {\n                                        ...getFieldProps('supplierName3', {\n                                            initialValue: '',\n                                            rules: [{\n                                                required: true, message: '请输入供应商名称',\n                                            }],\n                                        })\n                                    }\n                                />\n                                <span className='error'>\n                                    {\n                                        getFieldError('supplierName3')\n                                    }\n                                </span>\n                            </FormItem>\n                            \n                        </Col>\n                        <Col md={12}>\n                            <FormItem>\n                                <Label className='time'>凭证日期：</Label>\n                                <RangePicker\n                                    defaultValue={this.state.voucherDate}\n                                    placeholder={'开始 ~ 结束'}\n                                    dateInputPlaceholder={['开始', '结束']}\n                                    {\n                                    ...getFieldProps('voucherDate3', {\n                                        onChange: function (v) {\n                                            self.setState({\n                                                voucherDate3: v\n                                            })\n                                        }\n                                    })\n                                    }\n                                />\n                            </FormItem>\n                        </Col>\n                        \n                    </Row>\n\n                     <div className='split'></div>\n\n                    {/* 三列带textarea */}\n                    <h4>\n                    三列带textarea\n                     </h4>\n                    <Row className = 'edit-panel edit-panel-textarea'>\n                            <Col md={1}>\n                                <Label>订单编号：\n                                    <span className='mast'>*</span>\n                                </Label>\n                            </Col>\n                            <Col md={3}>\n                                <FormControl\n                                    {\n                                    ...getFieldProps('orderCode4', {\n                                        initialValue: '',\n                                        rules: [{\n                                            required: true, message: '请输入订单编号',\n                                        }],\n                                    })\n                                    }\n                                />\n                                <span className='error'>\n                                    {\n                                        getFieldError('orderCode4')\n                                    }\n                                </span>\n                            </Col>\n                            <Col md={1}>\n                                <Label>供应商：\n                                    <span className='mast'>*</span>\n                                </Label>\n                            </Col>\n                            <Col md={3}>\n                            <FormControl\n                                {\n                                    ...getFieldProps('supplierName4', {\n                                        initialValue: '',\n                                        rules: [{\n                                            required: true, message: '请输入供应商名称',\n                                        }],\n                                    })\n                                }\n                                />\n                                <span className='error'>\n                                    {\n                                        getFieldError('supplierName4')\n                                    }\n                                </span>\n                            </Col>\n                            <Col md={1}>\n                                <Label className='time'>凭证日期：</Label>\n                            </Col>\n                            <Col md={3}>\n                            <RangePicker\n                                    defaultValue={this.state.voucherDate}\n                                    placeholder={'开始 ~ 结束'}\n                                    dateInputPlaceholder={['开始', '结束']}\n                                    {\n                                    ...getFieldProps('voucherDate4', {\n                                        onChange: function (v) {\n                                            self.setState({\n                                                voucherDate3: v\n                                            })\n                                        }\n                                    })\n                                    }\n                                />\n                            </Col>\n                            <Col md={1}>\n                                <Label className='time'>备注：</Label>\n                            </Col>\n                            <Col md={11}>\n                            <textarea className='u-form-control'\n                                {\n                                    ...getFieldProps('mark', {\n                                        initialValue: '',\n                                    })\n                                }\n                                />\n                            </Col>\n\n                       \n                    </Row>\n                    \n                </Form>\n            </div>\n        )\n    }\n})\n", "desc": " ", "scss_code": ".demo6 {\n    .edit-panel {\n        background: #FFF;\n        padding: 15px 15px 15px 15px;\n        .reset-btn,\n        .reset-btn:hover {\n            background: #fff;\n            border: 1px solid #1E7BE2;\n            color: #1E7BE2;\n            margin-right: 15px;\n        }\n        .submit-btn,\n        .submit-btn:hover {\n            background: #1E7BE2;\n            color: #fff;\n        }\n        .btn-group {\n            text-align: right;\n        }\n        .u-form-item {\n            min-width: 100%;\n            margin-bottom: 10px;\n            min-height: 50px!important;\n            .error {\n                margin-left: 100px;\n                color: red;\n                display: block;\n            }\n            .u-label {\n                min-width: 100px;\n                display: inline-block;\n            }\n            .u-label.time {\n                position: relative;\n                bottom: 10px;\n            }\n            .u-label+* {\n                min-width: 200px;\n                display: inline-block;\n            }\n            .mast {\n                width: 5px;\n                min-width: auto;\n                margin-right: 5px;\n                color: red;\n            }\n            .datepicker-input-group {\n                .u-input-group-btn {\n                    .uf-calendar {\n                        padding: 0;\n                    }\n                }\n            }\n            .u-switch {\n                min-width: auto;\n            }\n            .u-select {\n                width: auto;\n            }\n            .u-form-control {\n                width: auto;\n            }\n            .calendar-picker {\n                display: inline-block;\n                min-width: 200px;\n                width: auto;\n                input {\n                    width: 100%;\n                }\n            }\n            .u-form-control-close {\n                width: auto;\n                .u-form-control {\n                    width: 100%\n                }\n            }\n        }\n        .search-panel-btn {\n            text-align: right;\n            padding: 10px 0;\n        }\n    }\n    .edit-panel-center {\n        text-align: center;\n        .u-form-item {\n            min-width: auto;\n            display: inline-block;\n            .error {\n                text-align: left;\n            }\n        }\n    }\n    .edit-panel-all {\n        .u-form-item {\n            padding: 0;\n            .u-label {\n                width: 100%;\n                text-align: right;\n                height: 30px;\n                line-height: 30px;\n            }\n            .u-form-control {\n                width: 100%;\n            }\n            .calendar-picker {\n                width: 100%;\n                position: relative;\n            }\n            .u-select {\n                width: 100%;\n            }\n            .error {\n                margin-left: 0;\n            }\n        }\n    }\n    .split {\n        height: 5px;\n        background: #e0e0e0;\n    }\n    .edit-panel-textarea {\n        >div {\n            padding: 0;\n            margin-bottom: 10px;\n            min-height: 50px;\n            .u-label {\n                height: 30px;\n                line-height: 30px;\n                text-align: right;\n                display: block;\n            }\n            .error {\n                margin-left: 100px;\n                color: red;\n                display: block;\n            }\n            .mast {\n                color: red;\n            }\n            textarea {\n                width: 100%;\n                resize: none;\n                min-height: 50px;\n            }\n            .calendar-picker,\n            .u-select {\n                width: 100%;\n            }\n        }\n    }\n}" }];
 	
 	var Demo = function (_Component) {
 	    _inherits(Demo, _Component);
@@ -7865,7 +7865,7 @@
 	    /**
 	     * @title 尺寸
 	     */
-	    size: _propTypes2["default"].oneOf(['sm', 'xg', 'lg']),
+	    size: _propTypes2["default"].oneOf(['sm', 'md', 'xg', 'lg']),
 	    /**
 	     * @title 样式
 	     */
@@ -7879,7 +7879,7 @@
 	    /**
 	    * @title 类型
 	    */
-	    colors: _propTypes2["default"].oneOf(['primary', 'accent', 'success', 'info', 'warning', 'danger', 'default']),
+	    colors: _propTypes2["default"].oneOf(['primary', 'secondary', 'accent', 'success', 'info', 'warning', 'danger', 'dark', 'light', 'default']),
 	    /**
 	     * @title 是否禁用
 	     * @veIgnore
@@ -7909,16 +7909,20 @@
 	
 	var sizeMap = {
 	    sm: 'sm',
+	    md: 'md',
 	    xg: 'xg',
 	    lg: 'lg'
 	},
 	    colorsMap = {
 	    primary: 'primary',
+	    secondary: 'secondary',
 	    accent: 'accent',
 	    success: 'success',
 	    info: 'info',
 	    warning: 'warning',
-	    danger: 'danger'
+	    danger: 'danger',
+	    dark: 'dark',
+	    light: 'light'
 	},
 	    shapeMap = {
 	    block: 'block',
@@ -19795,7 +19799,6 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.SelectPropTypes = exports.OptGroup = exports.Option = undefined;
 	
 	var _Select = __webpack_require__(292);
 	
@@ -19815,10 +19818,8 @@
 	
 	_Select2["default"].Option = _Option2["default"];
 	_Select2["default"].OptGroup = _OptGroup2["default"];
-	exports.Option = _Option2["default"];
-	exports.OptGroup = _OptGroup2["default"];
-	exports.SelectPropTypes = _PropTypes.SelectPropTypes;
 	exports["default"] = _Select2["default"];
+	module.exports = exports['default'];
 
 /***/ }),
 /* 292 */
@@ -19866,7 +19867,11 @@
 	
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : _defaults(subClass, superClass); }
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : _defaults(subClass, superClass); } /**
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               * This source code is quoted from rc-select.
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               * homepage: https://github.com/react-component/select
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               */
+	
 	
 	var SelectContext = {
 	  antLocale: {
@@ -20060,9 +20065,10 @@
 	
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : _defaults(subClass, superClass); } /* eslint func-names: 1 */
-	/* eslint-disable no-multi-assign, no-lonely-if, jsx-a11y/no-noninteractive-element-interactions, no-restricted-syntax, jsx-a11y/role-has-required-aria-props */
-	// TODO: Fix eslint later
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : _defaults(subClass, superClass); } /**
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               * This source code is quoted from rc-select.
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               * homepage: https://github.com/react-component/select
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               */
 	
 	
 	function noop() {}
@@ -29728,7 +29734,11 @@
 	
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : _defaults(subClass, superClass); }
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : _defaults(subClass, superClass); } /**
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               * This source code is quoted from rc-select.
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               * homepage: https://github.com/react-component/select
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               */
+	
 	
 	var Option = function (_React$Component) {
 	  _inherits(Option, _React$Component);
@@ -30014,7 +30024,10 @@
 	
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : _defaults(subClass, superClass); } // import Trigger from 'rc-trigger';
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : _defaults(subClass, superClass); } /**
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               * This source code is quoted from rc-select.
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               * homepage: https://github.com/react-component/select
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               */
 	
 	
 	_trigger2["default"].displayName = 'Trigger';
@@ -31366,7 +31379,11 @@
 	
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : _defaults(subClass, superClass); }
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : _defaults(subClass, superClass); } /**
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               * This source code is quoted from rc-select.
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               * homepage: https://github.com/react-component/select
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               */
+	
 	
 	var DropdownMenu = function (_React$Component) {
 	  _inherits(DropdownMenu, _React$Component);
@@ -31723,8 +31740,10 @@
 	    var _validate = _propTypes2["default"].oneOfType([_propTypes2["default"].arrayOf(basicType), basicType]);
 	    return _validate.apply(undefined, arguments);
 	  }
-	} /* eslint-disable consistent-return, prefer-rest-params, import/prefer-default-export */
-	// TODO: Fix eslint later
+	} /**
+	  * This source code is quoted from rc-select.
+	  * homepage: https://github.com/react-component/select
+	  */
 	var SelectPropTypes = exports.SelectPropTypes = {
 	  id: _propTypes2["default"].string,
 	  defaultActiveFirstOption: _propTypes2["default"].bool,
@@ -32247,11 +32266,11 @@
 	
 	var _DatePicker2 = _interopRequireDefault(_DatePicker);
 	
-	var _MonthPicker = __webpack_require__(529);
+	var _MonthPicker = __webpack_require__(530);
 	
 	var _MonthPicker2 = _interopRequireDefault(_MonthPicker);
 	
-	var _RangePicker = __webpack_require__(531);
+	var _RangePicker = __webpack_require__(532);
 	
 	var _RangePicker2 = _interopRequireDefault(_RangePicker);
 	
@@ -32293,6 +32312,10 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
+	var _reactDom = __webpack_require__(12);
+	
+	var _reactDom2 = _interopRequireDefault(_reactDom);
+	
 	var _tinperBeeCore = __webpack_require__(27);
 	
 	var _Picker = __webpack_require__(518);
@@ -32318,6 +32341,10 @@
 	var _beeInputGroup = __webpack_require__(524);
 	
 	var _beeInputGroup2 = _interopRequireDefault(_beeInputGroup);
+	
+	var _zh_CN = __webpack_require__(529);
+	
+	var _zh_CN2 = _interopRequireDefault(_zh_CN);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 	
@@ -32347,7 +32374,8 @@
 	      type: "month",
 	      value: props.value || props.defaultValue || _moment2["default"].Moment,
 	      open: props.open || false,
-	      inputValue: props.value && props.value.format(props.format) || props.defaultValue && props.defaultValue.format(props.format) || ''
+	      inputValue: props.value && props.value.format(props.format) || props.defaultValue && props.defaultValue.format(props.format) || '',
+	      showClose: false
 	    };
 	    return _this;
 	  }
@@ -32425,8 +32453,14 @@
 	        function () {
 	          return _react2["default"].createElement(
 	            _beeInputGroup2["default"],
-	            { simple: true, className: "datepicker-input-group" },
+	            { simple: true, className: "datepicker-input-group",
+	              onMouseEnter: _this2.onMouseEnter,
+	              onMouseLeave: _this2.onMouseLeave
+	            },
 	            _react2["default"].createElement(_beeFormControl2["default"], _extends({
+	              ref: function ref(_ref) {
+	                return _this2.outInput = _ref;
+	              },
 	              disabled: props.disabled,
 	              placeholder: _this2.props.placeholder,
 	              onClick: function onClick(event) {
@@ -32438,9 +32472,15 @@
 	              },
 	              onKeyDown: _this2.outInputKeydown
 	            }, keyboardInputProps, autofocus)),
-	            _react2["default"].createElement(
+	            _this2.state.value && _this2.state.showClose && !props.disabled ? _react2["default"].createElement(
 	              _beeInputGroup2["default"].Button,
-	              { shape: "border", onClick: function onClick(e) {
+	              { shape: "border",
+	                onClick: _this2.clear },
+	              _react2["default"].createElement("i", { className: "uf uf-close-c" })
+	            ) : _react2["default"].createElement(
+	              _beeInputGroup2["default"].Button,
+	              { shape: "border",
+	                onClick: function onClick(e) {
 	                  props.keyboardInput ? _this2.iconClick(e) : '';
 	                } },
 	              props.renderIcon()
@@ -32475,12 +32515,13 @@
 	        if (e.keyCode == _tinperBeeCore.KeyCode.DELETE) {
 	          input.value = '';
 	          _this3.props.onChange('', '');
-	        } else if (e.keyCode == _tinperBeeCore.KeyCode.ESC || e.keyCode == _tinperBeeCore.KeyCode.ENTER) {
+	        } else if (e.keyCode == _tinperBeeCore.KeyCode.ESC) {
 	          _this3.setState({
 	            open: false
 	          });
 	          var v = _this3.state.value;
 	          _this3.props.onOpenChange(false, v, v && v.format(_this3.props.format) || '');
+	          _reactDom2["default"].findDOMNode(_this3.outInput).focus(); // 按esc时候焦点回到input输入框
 	        }
 	      };
 	    }
@@ -32567,13 +32608,29 @@
 	      } else {
 	        _this3.props.onChange(null, value);
 	      }
-	    } else if (e.keyCode == _tinperBeeCore.KeyCode.F2) {
-	      _this3.setState({
-	        open: true
-	      });
-	      _this3.onOpenChange(true);
 	    }
 	    _this3.props.outInputKeydown && _this3.props.outInputKeydown(e);
+	  };
+	
+	  this.onMouseLeave = function (e) {
+	    _this3.setState({
+	      showClose: false
+	    });
+	  };
+	
+	  this.onMouseEnter = function (e) {
+	    _this3.setState({
+	      showClose: true
+	    });
+	  };
+	
+	  this.clear = function (e) {
+	    e.stopPropagation();
+	    _this3.setState({
+	      inputValue: '',
+	      value: ''
+	    });
+	    _this3.props.onChange && _this3.props.onChange('', '');
 	  };
 	};
 	
@@ -32583,7 +32640,10 @@
 	  },
 	  focusOnOpen: true,
 	  defultSelect: false,
-	  onOpenChange: function onOpenChange() {}
+	  onOpenChange: function onOpenChange() {},
+	  onChange: function onChange() {},
+	  locale: _zh_CN2["default"],
+	  showMonthInput: false
 	};
 	
 	exports["default"] = DatePicker;
@@ -32595,15 +32655,17 @@
 
 	'use strict';
 	
-	exports.__esModule = true;
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
 	
 	var _Calendar = __webpack_require__(368);
 	
 	var _Calendar2 = _interopRequireDefault(_Calendar);
 	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 	
-	exports['default'] = _Calendar2['default'];
+	exports["default"] = _Calendar2["default"];
 	module.exports = exports['default'];
 
 /***/ }),
@@ -32612,23 +32674,11 @@
 
 	'use strict';
 	
-	exports.__esModule = true;
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
 	
-	var _extends2 = __webpack_require__(111);
-	
-	var _extends3 = _interopRequireDefault(_extends2);
-	
-	var _classCallCheck2 = __webpack_require__(267);
-	
-	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
-	
-	var _possibleConstructorReturn2 = __webpack_require__(297);
-	
-	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
-	
-	var _inherits2 = __webpack_require__(298);
-	
-	var _inherits3 = _interopRequireDefault(_inherits2);
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 	
 	var _react = __webpack_require__(4);
 	
@@ -32656,15 +32706,15 @@
 	
 	var _CalendarHeader2 = _interopRequireDefault(_CalendarHeader);
 	
-	var _CalendarFooter = __webpack_require__(509);
+	var _CalendarFooter = __webpack_require__(510);
 	
 	var _CalendarFooter2 = _interopRequireDefault(_CalendarFooter);
 	
-	var _CalendarMixin = __webpack_require__(513);
+	var _CalendarMixin = __webpack_require__(514);
 	
-	var _CommonMixin = __webpack_require__(514);
+	var _CommonMixin = __webpack_require__(515);
 	
-	var _DateInput = __webpack_require__(516);
+	var _DateInput = __webpack_require__(507);
 	
 	var _DateInput2 = _interopRequireDefault(_DateInput);
 	
@@ -32676,23 +32726,31 @@
 	
 	var _moment2 = _interopRequireDefault(_moment);
 	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+	
+	function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : _defaults(subClass, superClass); }
 	
 	function noop() {}
 	
 	var Calendar = function (_React$Component) {
-	  (0, _inherits3['default'])(Calendar, _React$Component);
+	  _inherits(Calendar, _React$Component);
 	
 	  function Calendar(props) {
-	    (0, _classCallCheck3['default'])(this, Calendar);
+	    _classCallCheck(this, Calendar);
 	
-	    var _this = (0, _possibleConstructorReturn3['default'])(this, _React$Component.call(this, props));
+	    var _this = _possibleConstructorReturn(this, _React$Component.call(this, props));
 	
 	    _initialiseProps.call(_this);
 	
 	    _this.state = {
 	      mode: _this.props.mode || 'date',
-	      value: props.value || props.defaultValue || (0, _moment2['default'])(),
+	      value: props.value || props.defaultValue || (0, _moment2["default"])(),
 	      selectedValue: props.selectedValue || props.defaultSelectedValue
 	    };
 	    return _this;
@@ -32700,7 +32758,7 @@
 	
 	  Calendar.prototype.componentDidMount = function componentDidMount() {
 	    if (this.props.showDateInput) {
-	      this.saveFocusElement(_DateInput2['default'].getInstance());
+	      this.saveFocusElement(_DateInput2["default"].getInstance());
 	    }
 	  };
 	
@@ -32733,7 +32791,8 @@
 	        timePicker = props.timePicker,
 	        disabledTime = props.disabledTime,
 	        clearIcon = props.clearIcon,
-	        renderFooter = props.renderFooter;
+	        renderFooter = props.renderFooter,
+	        showMonthInput = props.showMonthInput;
 	    var value = state.value,
 	        selectedValue = state.selectedValue,
 	        mode = state.mode;
@@ -32744,7 +32803,7 @@
 	    var timePickerEle = null;
 	
 	    if (timePicker && showTimePicker) {
-	      var timePickerProps = (0, _extends3['default'])({
+	      var timePickerProps = _extends({
 	        showHour: true,
 	        showSecond: true,
 	        showMinute: true
@@ -32758,10 +32817,10 @@
 	        timePickerProps.defaultOpenValue = timePicker.props.defaultValue;
 	      }
 	
-	      timePickerEle = _react2['default'].cloneElement(timePicker, timePickerProps);
+	      timePickerEle = _react2["default"].cloneElement(timePicker, timePickerProps);
 	    }
 	
-	    var dateInputElement = props.showDateInput ? _react2['default'].createElement(_DateInput2['default'], {
+	    var dateInputElement = props.showDateInput ? _react2["default"].createElement(_DateInput2["default"], {
 	      format: this.getFormat(),
 	      key: 'date-input',
 	      value: value,
@@ -32782,17 +32841,17 @@
 	    if (props.renderSidebar) {
 	      children.push(props.renderSidebar());
 	    }
-	    children.push(_react2['default'].createElement(
+	    children.push(_react2["default"].createElement(
 	      'div',
 	      { className: prefixCls + '-panel', key: 'panel' },
 	      dateInputElement,
-	      _react2['default'].createElement(
+	      _react2["default"].createElement(
 	        'div',
 	        {
 	          tabIndex: this.props.focusablePanel ? 0 : undefined,
 	          className: prefixCls + '-date-panel'
 	        },
-	        _react2['default'].createElement(_CalendarHeader2['default'], {
+	        _react2["default"].createElement(_CalendarHeader2["default"], {
 	          locale: locale,
 	          mode: mode,
 	          value: value,
@@ -32800,21 +32859,22 @@
 	          onPanelChange: this.onPanelChange,
 	          renderFooter: renderFooter,
 	          showTimePicker: showTimePicker,
-	          prefixCls: prefixCls
+	          prefixCls: prefixCls,
+	          showMonthInput: showMonthInput
 	        }),
-	        timePicker && showTimePicker ? _react2['default'].createElement(
+	        timePicker && showTimePicker ? _react2["default"].createElement(
 	          'div',
 	          { className: prefixCls + '-time-picker' },
-	          _react2['default'].createElement(
+	          _react2["default"].createElement(
 	            'div',
 	            { className: prefixCls + '-time-picker-panel' },
 	            timePickerEle
 	          )
 	        ) : null,
-	        _react2['default'].createElement(
+	        _react2["default"].createElement(
 	          'div',
 	          { className: prefixCls + '-body' },
-	          _react2['default'].createElement(_DateTable2['default'], {
+	          _react2["default"].createElement(_DateTable2["default"], {
 	            locale: locale,
 	            value: value,
 	            selectedValue: selectedValue,
@@ -32825,7 +32885,7 @@
 	            showWeekNumber: props.showWeekNumber
 	          })
 	        ),
-	        _react2['default'].createElement(_CalendarFooter2['default'], {
+	        _react2["default"].createElement(_CalendarFooter2["default"], {
 	          showOk: props.showOk,
 	          mode: mode,
 	          renderFooter: props.renderFooter,
@@ -32856,39 +32916,39 @@
 	  };
 	
 	  return Calendar;
-	}(_react2['default'].Component);
+	}(_react2["default"].Component);
 	
-	Calendar.propTypes = (0, _extends3['default'])({}, _CalendarMixin.calendarMixinPropTypes, _CommonMixin.propType, {
-	  prefixCls: _propTypes2['default'].string,
-	  className: _propTypes2['default'].string,
-	  style: _propTypes2['default'].object,
-	  defaultValue: _propTypes2['default'].object,
-	  value: _propTypes2['default'].object,
-	  selectedValue: _propTypes2['default'].object,
-	  defaultSelectedValue: _propTypes2['default'].object,
-	  mode: _propTypes2['default'].oneOf(['time', 'date', 'month', 'year', 'decade']),
-	  locale: _propTypes2['default'].object,
-	  showDateInput: _propTypes2['default'].bool,
-	  showWeekNumber: _propTypes2['default'].bool,
-	  showToday: _propTypes2['default'].bool,
-	  showOk: _propTypes2['default'].bool,
-	  onSelect: _propTypes2['default'].func,
-	  onOk: _propTypes2['default'].func,
-	  onKeyDown: _propTypes2['default'].func,
-	  timePicker: _propTypes2['default'].element,
-	  dateInputPlaceholder: _propTypes2['default'].any,
-	  onClear: _propTypes2['default'].func,
-	  onChange: _propTypes2['default'].func,
-	  onPanelChange: _propTypes2['default'].func,
-	  disabledDate: _propTypes2['default'].func,
-	  disabledTime: _propTypes2['default'].any,
-	  dateRender: _propTypes2['default'].func,
-	  renderFooter: _propTypes2['default'].func,
-	  renderSidebar: _propTypes2['default'].func,
-	  clearIcon: _propTypes2['default'].node,
-	  focusablePanel: _propTypes2['default'].bool
+	Calendar.propTypes = _extends({}, _CalendarMixin.calendarMixinPropTypes, _CommonMixin.propType, {
+	  prefixCls: _propTypes2["default"].string,
+	  className: _propTypes2["default"].string,
+	  style: _propTypes2["default"].object,
+	  defaultValue: _propTypes2["default"].object,
+	  value: _propTypes2["default"].object,
+	  selectedValue: _propTypes2["default"].object,
+	  defaultSelectedValue: _propTypes2["default"].object,
+	  mode: _propTypes2["default"].oneOf(['time', 'date', 'month', 'year', 'decade']),
+	  locale: _propTypes2["default"].object,
+	  showDateInput: _propTypes2["default"].bool,
+	  showWeekNumber: _propTypes2["default"].bool,
+	  showToday: _propTypes2["default"].bool,
+	  showOk: _propTypes2["default"].bool,
+	  onSelect: _propTypes2["default"].func,
+	  onOk: _propTypes2["default"].func,
+	  onKeyDown: _propTypes2["default"].func,
+	  timePicker: _propTypes2["default"].element,
+	  dateInputPlaceholder: _propTypes2["default"].any,
+	  onClear: _propTypes2["default"].func,
+	  onChange: _propTypes2["default"].func,
+	  onPanelChange: _propTypes2["default"].func,
+	  disabledDate: _propTypes2["default"].func,
+	  disabledTime: _propTypes2["default"].any,
+	  dateRender: _propTypes2["default"].func,
+	  renderFooter: _propTypes2["default"].func,
+	  renderSidebar: _propTypes2["default"].func,
+	  clearIcon: _propTypes2["default"].node,
+	  focusablePanel: _propTypes2["default"].bool
 	});
-	Calendar.defaultProps = (0, _extends3['default'])({}, _CalendarMixin.calendarMixinDefaultProps, _CommonMixin.defaultProp, {
+	Calendar.defaultProps = _extends({}, _CalendarMixin.calendarMixinDefaultProps, _CommonMixin.defaultProp, {
 	  showToday: true,
 	  showDateInput: true,
 	  timePicker: null,
@@ -32921,15 +32981,15 @@
 	    var value = _this2.state.value;
 	
 	    switch (keyCode) {
-	      case _KeyCode2['default'].DOWN:
+	      case _KeyCode2["default"].DOWN:
 	        _this2.goTime(1, 'weeks');
 	        event.preventDefault();
 	        return 1;
-	      case _KeyCode2['default'].UP:
+	      case _KeyCode2["default"].UP:
 	        _this2.goTime(-1, 'weeks');
 	        event.preventDefault();
 	        return 1;
-	      case _KeyCode2['default'].LEFT:
+	      case _KeyCode2["default"].LEFT:
 	        if (ctrlKey) {
 	          _this2.goTime(-1, 'years');
 	        } else {
@@ -32937,7 +32997,7 @@
 	        }
 	        event.preventDefault();
 	        return 1;
-	      case _KeyCode2['default'].RIGHT:
+	      case _KeyCode2["default"].RIGHT:
 	        if (ctrlKey) {
 	          _this2.goTime(1, 'years');
 	        } else {
@@ -32945,23 +33005,23 @@
 	        }
 	        event.preventDefault();
 	        return 1;
-	      case _KeyCode2['default'].HOME:
+	      case _KeyCode2["default"].HOME:
 	        _this2.setValue((0, _toTime.goStartMonth)(_this2.state.value));
 	        event.preventDefault();
 	        return 1;
-	      case _KeyCode2['default'].END:
+	      case _KeyCode2["default"].END:
 	        _this2.setValue((0, _toTime.goEndMonth)(_this2.state.value));
 	        event.preventDefault();
 	        return 1;
-	      case _KeyCode2['default'].PAGE_DOWN:
+	      case _KeyCode2["default"].PAGE_DOWN:
 	        _this2.goTime(1, 'month');
 	        event.preventDefault();
 	        return 1;
-	      case _KeyCode2['default'].PAGE_UP:
+	      case _KeyCode2["default"].PAGE_UP:
 	        _this2.goTime(-1, 'month');
 	        event.preventDefault();
 	        return 1;
-	      case _KeyCode2['default'].ENTER:
+	      case _KeyCode2["default"].ENTER:
 	        if (!disabledDate || !disabledDate(value)) {
 	          _this2.onSelect(value, {
 	            source: 'keyboard'
@@ -33023,7 +33083,7 @@
 	  };
 	
 	  this.getRootDOMNode = function () {
-	    return _reactDom2['default'].findDOMNode(_this2);
+	    return _reactDom2["default"].findDOMNode(_this2);
 	  };
 	
 	  this.openTimePicker = function () {
@@ -33041,7 +33101,7 @@
 	
 	(0, _reactLifecyclesCompat.polyfill)(Calendar);
 	
-	exports['default'] = (0, _CalendarMixin.calendarMixinWrapper)((0, _CommonMixin.commonMixinWrapper)(Calendar));
+	exports["default"] = (0, _CalendarMixin.calendarMixinWrapper)((0, _CommonMixin.commonMixinWrapper)(Calendar));
 	module.exports = exports['default'];
 
 /***/ }),
@@ -33050,19 +33110,9 @@
 
 	'use strict';
 	
-	exports.__esModule = true;
-	
-	var _classCallCheck2 = __webpack_require__(267);
-	
-	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
-	
-	var _possibleConstructorReturn2 = __webpack_require__(297);
-	
-	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
-	
-	var _inherits2 = __webpack_require__(298);
-	
-	var _inherits3 = _interopRequireDefault(_inherits2);
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
 	
 	var _react = __webpack_require__(4);
 	
@@ -33076,31 +33126,40 @@
 	
 	var _DateTBody2 = _interopRequireDefault(_DateTBody);
 	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+	
+	function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : _defaults(subClass, superClass); }
 	
 	var DateTable = function (_React$Component) {
-	  (0, _inherits3['default'])(DateTable, _React$Component);
+	  _inherits(DateTable, _React$Component);
 	
 	  function DateTable() {
-	    (0, _classCallCheck3['default'])(this, DateTable);
-	    return (0, _possibleConstructorReturn3['default'])(this, _React$Component.apply(this, arguments));
+	    _classCallCheck(this, DateTable);
+	
+	    return _possibleConstructorReturn(this, _React$Component.apply(this, arguments));
 	  }
 	
 	  DateTable.prototype.render = function render() {
 	    var props = this.props;
 	    var prefixCls = props.prefixCls;
-	    return _react2['default'].createElement(
+	    return _react2["default"].createElement(
 	      'table',
 	      { className: prefixCls + '-table', cellSpacing: '0', role: 'grid' },
-	      _react2['default'].createElement(_DateTHead2['default'], props),
-	      _react2['default'].createElement(_DateTBody2['default'], props)
+	      _react2["default"].createElement(_DateTHead2["default"], props),
+	      _react2["default"].createElement(_DateTBody2["default"], props)
 	    );
 	  };
 	
 	  return DateTable;
-	}(_react2['default'].Component);
+	}(_react2["default"].Component);
 	
-	exports['default'] = DateTable;
+	exports["default"] = DateTable;
 	module.exports = exports['default'];
 
 /***/ }),
@@ -33109,19 +33168,9 @@
 
 	'use strict';
 	
-	exports.__esModule = true;
-	
-	var _classCallCheck2 = __webpack_require__(267);
-	
-	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
-	
-	var _possibleConstructorReturn2 = __webpack_require__(297);
-	
-	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
-	
-	var _inherits2 = __webpack_require__(298);
-	
-	var _inherits3 = _interopRequireDefault(_inherits2);
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
 	
 	var _react = __webpack_require__(4);
 	
@@ -33135,14 +33184,23 @@
 	
 	var _moment2 = _interopRequireDefault(_moment);
 	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+	
+	function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : _defaults(subClass, superClass); }
 	
 	var DateTHead = function (_React$Component) {
-	  (0, _inherits3['default'])(DateTHead, _React$Component);
+	  _inherits(DateTHead, _React$Component);
 	
 	  function DateTHead() {
-	    (0, _classCallCheck3['default'])(this, DateTHead);
-	    return (0, _possibleConstructorReturn3['default'])(this, _React$Component.apply(this, arguments));
+	    _classCallCheck(this, DateTHead);
+	
+	    return _possibleConstructorReturn(this, _React$Component.apply(this, arguments));
 	  }
 	
 	  DateTHead.prototype.render = function render() {
@@ -33154,22 +33212,22 @@
 	    var weekDays = [];
 	    var firstDayOfWeek = localeData.firstDayOfWeek();
 	    var showWeekNumberEl = void 0;
-	    var now = (0, _moment2['default'])();
-	    for (var dateColIndex = 0; dateColIndex < _DateConstants2['default'].DATE_COL_COUNT; dateColIndex++) {
-	      var index = (firstDayOfWeek + dateColIndex) % _DateConstants2['default'].DATE_COL_COUNT;
+	    var now = (0, _moment2["default"])();
+	    for (var dateColIndex = 0; dateColIndex < _DateConstants2["default"].DATE_COL_COUNT; dateColIndex++) {
+	      var index = (firstDayOfWeek + dateColIndex) % _DateConstants2["default"].DATE_COL_COUNT;
 	      now.day(index);
 	      veryShortWeekdays[dateColIndex] = localeData.weekdaysMin(now);
 	      weekDays[dateColIndex] = localeData.weekdaysShort(now);
 	    }
 	
 	    if (props.showWeekNumber) {
-	      showWeekNumberEl = _react2['default'].createElement(
+	      showWeekNumberEl = _react2["default"].createElement(
 	        'th',
 	        {
 	          role: 'columnheader',
 	          className: prefixCls + '-column-header ' + prefixCls + '-week-number-header'
 	        },
-	        _react2['default'].createElement(
+	        _react2["default"].createElement(
 	          'span',
 	          { className: prefixCls + '-column-header-inner' },
 	          'x'
@@ -33177,7 +33235,7 @@
 	      );
 	    }
 	    var weekDaysEls = weekDays.map(function (day, xindex) {
-	      return _react2['default'].createElement(
+	      return _react2["default"].createElement(
 	        'th',
 	        {
 	          key: xindex,
@@ -33185,17 +33243,17 @@
 	          title: day,
 	          className: prefixCls + '-column-header'
 	        },
-	        _react2['default'].createElement(
+	        _react2["default"].createElement(
 	          'span',
 	          { className: prefixCls + '-column-header-inner' },
 	          veryShortWeekdays[xindex]
 	        )
 	      );
 	    });
-	    return _react2['default'].createElement(
+	    return _react2["default"].createElement(
 	      'thead',
 	      null,
-	      _react2['default'].createElement(
+	      _react2["default"].createElement(
 	        'tr',
 	        { role: 'row' },
 	        showWeekNumberEl,
@@ -33205,9 +33263,9 @@
 	  };
 	
 	  return DateTHead;
-	}(_react2['default'].Component);
+	}(_react2["default"].Component);
 	
-	exports['default'] = DateTHead;
+	exports["default"] = DateTHead;
 	module.exports = exports['default'];
 
 /***/ }),
@@ -33216,12 +33274,14 @@
 
 	"use strict";
 	
-	exports.__esModule = true;
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
 	exports["default"] = {
 	  DATE_ROW_COUNT: 6,
 	  DATE_COL_COUNT: 7
 	};
-	module.exports = exports['default'];
+	module.exports = exports["default"];
 
 /***/ }),
 /* 372 */
@@ -50310,19 +50370,9 @@
 
 	'use strict';
 	
-	exports.__esModule = true;
-	
-	var _classCallCheck2 = __webpack_require__(267);
-	
-	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
-	
-	var _possibleConstructorReturn2 = __webpack_require__(297);
-	
-	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
-	
-	var _inherits2 = __webpack_require__(298);
-	
-	var _inherits3 = _interopRequireDefault(_inherits2);
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
 	
 	var _react = __webpack_require__(4);
 	
@@ -50342,7 +50392,17 @@
 	
 	var _util = __webpack_require__(502);
 	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+	
+	function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
+	
+	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : _defaults(subClass, superClass); }
 	
 	function isSameDay(one, two) {
 	  return one && two && one.isSame(two, 'day');
@@ -50367,11 +50427,12 @@
 	}
 	
 	var DateTBody = function (_React$Component) {
-	  (0, _inherits3['default'])(DateTBody, _React$Component);
+	  _inherits(DateTBody, _React$Component);
 	
 	  function DateTBody() {
-	    (0, _classCallCheck3['default'])(this, DateTBody);
-	    return (0, _possibleConstructorReturn3['default'])(this, _React$Component.apply(this, arguments));
+	    _classCallCheck(this, DateTBody);
+	
+	    return _possibleConstructorReturn(this, _React$Component.apply(this, arguments));
 	  }
 	
 	  DateTBody.prototype.render = function render() {
@@ -50414,8 +50475,8 @@
 	    lastMonth1.add(0 - lastMonthDiffDay, 'days');
 	    var passed = 0;
 	
-	    for (iIndex = 0; iIndex < _DateConstants2['default'].DATE_ROW_COUNT; iIndex++) {
-	      for (jIndex = 0; jIndex < _DateConstants2['default'].DATE_COL_COUNT; jIndex++) {
+	    for (iIndex = 0; iIndex < _DateConstants2["default"].DATE_ROW_COUNT; iIndex++) {
+	      for (jIndex = 0; jIndex < _DateConstants2["default"].DATE_COL_COUNT; jIndex++) {
 	        current = lastMonth1;
 	        if (passed) {
 	          current = current.clone();
@@ -50428,7 +50489,7 @@
 	    var tableHtml = [];
 	    passed = 0;
 	
-	    for (iIndex = 0; iIndex < _DateConstants2['default'].DATE_ROW_COUNT; iIndex++) {
+	    for (iIndex = 0; iIndex < _DateConstants2["default"].DATE_ROW_COUNT; iIndex++) {
 	      var _cx;
 	
 	      var isCurrentWeek = void 0;
@@ -50436,7 +50497,7 @@
 	      var isActiveWeek = false;
 	      var dateCells = [];
 	      if (showWeekNumber) {
-	        weekNumberCell = _react2['default'].createElement(
+	        weekNumberCell = _react2["default"].createElement(
 	          'td',
 	          {
 	            key: dateTable[passed].week(),
@@ -50446,11 +50507,11 @@
 	          dateTable[passed].week()
 	        );
 	      }
-	      for (jIndex = 0; jIndex < _DateConstants2['default'].DATE_COL_COUNT; jIndex++) {
+	      for (jIndex = 0; jIndex < _DateConstants2["default"].DATE_COL_COUNT; jIndex++) {
 	        var next = null;
 	        var last = null;
 	        current = dateTable[passed];
-	        if (jIndex < _DateConstants2['default'].DATE_COL_COUNT - 1) {
+	        if (jIndex < _DateConstants2["default"].DATE_COL_COUNT - 1) {
 	          next = dateTable[passed + 1];
 	        }
 	        if (jIndex > 0) {
@@ -50539,7 +50600,7 @@
 	          dateHtml = dateRender(current, value);
 	        } else {
 	          var content = contentRender ? contentRender(current, value) : current.date();
-	          dateHtml = _react2['default'].createElement(
+	          dateHtml = _react2["default"].createElement(
 	            'div',
 	            {
 	              key: getIdFromDate(current),
@@ -50551,7 +50612,7 @@
 	          );
 	        }
 	
-	        dateCells.push(_react2['default'].createElement(
+	        dateCells.push(_react2["default"].createElement(
 	          'td',
 	          {
 	            key: passed,
@@ -50567,18 +50628,18 @@
 	        passed++;
 	      }
 	
-	      tableHtml.push(_react2['default'].createElement(
+	      tableHtml.push(_react2["default"].createElement(
 	        'tr',
 	        {
 	          key: iIndex,
 	          role: 'row',
-	          className: (0, _classnames2['default'])((_cx = {}, _cx[prefixCls + '-current-week'] = isCurrentWeek, _cx[prefixCls + '-active-week'] = isActiveWeek, _cx))
+	          className: (0, _classnames2["default"])((_cx = {}, _defineProperty(_cx, prefixCls + '-current-week', isCurrentWeek), _defineProperty(_cx, prefixCls + '-active-week', isActiveWeek), _cx))
 	        },
 	        weekNumberCell,
 	        dateCells
 	      ));
 	    }
-	    return _react2['default'].createElement(
+	    return _react2["default"].createElement(
 	      'tbody',
 	      { className: prefixCls + '-tbody' },
 	      tableHtml
@@ -50586,22 +50647,22 @@
 	  };
 	
 	  return DateTBody;
-	}(_react2['default'].Component);
+	}(_react2["default"].Component);
 	
 	DateTBody.propTypes = {
-	  contentRender: _propTypes2['default'].func,
-	  dateRender: _propTypes2['default'].func,
-	  disabledDate: _propTypes2['default'].func,
-	  prefixCls: _propTypes2['default'].string,
-	  selectedValue: _propTypes2['default'].oneOfType([_propTypes2['default'].object, _propTypes2['default'].arrayOf(_propTypes2['default'].object)]),
-	  value: _propTypes2['default'].object,
-	  hoverValue: _propTypes2['default'].any,
-	  showWeekNumber: _propTypes2['default'].bool
+	  contentRender: _propTypes2["default"].func,
+	  dateRender: _propTypes2["default"].func,
+	  disabledDate: _propTypes2["default"].func,
+	  prefixCls: _propTypes2["default"].string,
+	  selectedValue: _propTypes2["default"].oneOfType([_propTypes2["default"].object, _propTypes2["default"].arrayOf(_propTypes2["default"].object)]),
+	  value: _propTypes2["default"].object,
+	  hoverValue: _propTypes2["default"].any,
+	  showWeekNumber: _propTypes2["default"].bool
 	};
 	DateTBody.defaultProps = {
 	  hoverValue: []
 	};
-	exports['default'] = DateTBody;
+	exports["default"] = DateTBody;
 	module.exports = exports['default'];
 
 /***/ }),
@@ -50610,11 +50671,11 @@
 
 	'use strict';
 	
-	exports.__esModule = true;
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
 	
-	var _extends2 = __webpack_require__(111);
-	
-	var _extends3 = _interopRequireDefault(_extends2);
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 	
 	exports.getTodayTime = getTodayTime;
 	exports.getTitleString = getTitleString;
@@ -50631,7 +50692,7 @@
 	
 	var _moment2 = _interopRequireDefault(_moment);
 	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 	
 	var defaultDisabledTime = {
 	  disabledHours: function disabledHours() {
@@ -50646,7 +50707,7 @@
 	};
 	
 	function getTodayTime(value) {
-	  var today = (0, _moment2['default'])();
+	  var today = (0, _moment2["default"])();
 	  today.locale(value.locale()).utcOffset(value.utcOffset());
 	  return today;
 	}
@@ -50667,7 +50728,7 @@
 	}
 	
 	function syncTime(from, to) {
-	  if (!_moment2['default'].isMoment(from) || !_moment2['default'].isMoment(to)) return;
+	  if (!_moment2["default"].isMoment(from) || !_moment2["default"].isMoment(to)) return;
 	  to.hour(from.hour());
 	  to.minute(from.minute());
 	  to.second(from.second());
@@ -50675,7 +50736,7 @@
 	
 	function getTimeConfig(value, disabledTime) {
 	  var disabledTimeConfig = disabledTime ? disabledTime(value) : {};
-	  disabledTimeConfig = (0, _extends3['default'])({}, defaultDisabledTime, disabledTimeConfig);
+	  disabledTimeConfig = _extends({}, defaultDisabledTime, disabledTimeConfig);
 	  return disabledTimeConfig;
 	}
 	
@@ -50738,19 +50799,9 @@
 
 	'use strict';
 	
-	exports.__esModule = true;
-	
-	var _classCallCheck2 = __webpack_require__(267);
-	
-	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
-	
-	var _possibleConstructorReturn2 = __webpack_require__(297);
-	
-	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
-	
-	var _inherits2 = __webpack_require__(298);
-	
-	var _inherits3 = _interopRequireDefault(_inherits2);
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
 	
 	var _react = __webpack_require__(4);
 	
@@ -50768,15 +50819,23 @@
 	
 	var _MonthPanel2 = _interopRequireDefault(_MonthPanel);
 	
-	var _YearPanel = __webpack_require__(507);
+	var _YearPanel = __webpack_require__(508);
 	
 	var _YearPanel2 = _interopRequireDefault(_YearPanel);
 	
-	var _DecadePanel = __webpack_require__(508);
+	var _DecadePanel = __webpack_require__(509);
 	
 	var _DecadePanel2 = _interopRequireDefault(_DecadePanel);
 	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+	
+	function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : _defaults(subClass, superClass); }
 	
 	function goMonth(direction) {
 	  var next = this.props.value.clone();
@@ -50795,12 +50854,12 @@
 	}
 	
 	var CalendarHeader = function (_React$Component) {
-	  (0, _inherits3['default'])(CalendarHeader, _React$Component);
+	  _inherits(CalendarHeader, _React$Component);
 	
 	  function CalendarHeader(props) {
-	    (0, _classCallCheck3['default'])(this, CalendarHeader);
+	    _classCallCheck(this, CalendarHeader);
 	
-	    var _this = (0, _possibleConstructorReturn3['default'])(this, _React$Component.call(this, props));
+	    var _this = _possibleConstructorReturn(this, _React$Component.call(this, props));
 	
 	    _initialiseProps.call(_this);
 	
@@ -50825,13 +50884,18 @@
 	        enableNext = props.enableNext,
 	        enablePrev = props.enablePrev,
 	        disabledMonth = props.disabledMonth,
-	        renderFooter = props.renderFooter;
+	        renderFooter = props.renderFooter,
+	        onChange = props.onChange,
+	        onClear = props.onClear,
+	        showMonthInput = props.showMonthInput;
 	
 	
 	    var panel = null;
 	    if (mode === 'month') {
-	      panel = _react2['default'].createElement(_MonthPanel2['default'], {
+	      panel = _react2["default"].createElement(_MonthPanel2["default"], {
+	        showDateInput: true,
 	        locale: locale,
+	        showMonthInput: showMonthInput,
 	        defaultValue: value,
 	        rootPrefixCls: prefixCls,
 	        onSelect: this.onMonthSelect,
@@ -50841,11 +50905,14 @@
 	        disabledDate: disabledMonth,
 	        cellRender: props.monthCellRender,
 	        contentRender: props.monthCellContentRender,
-	        renderFooter: renderFooter
+	        renderFooter: renderFooter,
+	        onChange: onChange,
+	        onClear: onClear,
+	        value: value
 	      });
 	    }
 	    if (mode === 'year') {
-	      panel = _react2['default'].createElement(_YearPanel2['default'], {
+	      panel = _react2["default"].createElement(_YearPanel2["default"], {
 	        locale: locale,
 	        defaultValue: value,
 	        rootPrefixCls: prefixCls,
@@ -50855,7 +50922,7 @@
 	      });
 	    }
 	    if (mode === 'decade') {
-	      panel = _react2['default'].createElement(_DecadePanel2['default'], {
+	      panel = _react2["default"].createElement(_DecadePanel2["default"], {
 	        locale: locale,
 	        defaultValue: value,
 	        rootPrefixCls: prefixCls,
@@ -50864,31 +50931,31 @@
 	      });
 	    }
 	
-	    return _react2['default'].createElement(
+	    return _react2["default"].createElement(
 	      'div',
 	      { className: prefixCls + '-header' },
-	      _react2['default'].createElement(
+	      _react2["default"].createElement(
 	        'div',
-	        { style: { position: 'relative' } },
-	        showIf(enablePrev && !showTimePicker, _react2['default'].createElement('a', {
+	        { style: { position: 'relative' }, className: prefixCls + '-header-btns' },
+	        showIf(enablePrev && !showTimePicker, _react2["default"].createElement('a', {
 	          className: prefixCls + '-prev-year-btn',
 	          role: 'button',
 	          onClick: this.previousYear,
 	          title: locale.previousYear
 	        })),
-	        showIf(enablePrev && !showTimePicker, _react2['default'].createElement('a', {
+	        showIf(enablePrev && !showTimePicker, _react2["default"].createElement('a', {
 	          className: prefixCls + '-prev-month-btn',
 	          role: 'button',
 	          onClick: this.previousMonth,
 	          title: locale.previousMonth
 	        })),
 	        this.monthYearElement(showTimePicker),
-	        showIf(enableNext && !showTimePicker, _react2['default'].createElement('a', {
+	        showIf(enableNext && !showTimePicker, _react2["default"].createElement('a', {
 	          className: prefixCls + '-next-month-btn',
 	          onClick: this.nextMonth,
 	          title: locale.nextMonth
 	        })),
-	        showIf(enableNext && !showTimePicker, _react2['default'].createElement('a', {
+	        showIf(enableNext && !showTimePicker, _react2["default"].createElement('a', {
 	          className: prefixCls + '-next-year-btn',
 	          onClick: this.nextYear,
 	          title: locale.nextYear
@@ -50899,20 +50966,20 @@
 	  };
 	
 	  return CalendarHeader;
-	}(_react2['default'].Component);
+	}(_react2["default"].Component);
 	
 	CalendarHeader.propTypes = {
-	  prefixCls: _propTypes2['default'].string,
-	  value: _propTypes2['default'].object,
-	  onValueChange: _propTypes2['default'].func,
-	  showTimePicker: _propTypes2['default'].bool,
-	  onPanelChange: _propTypes2['default'].func,
-	  locale: _propTypes2['default'].object,
-	  enablePrev: _propTypes2['default'].any,
-	  enableNext: _propTypes2['default'].any,
-	  disabledMonth: _propTypes2['default'].func,
-	  renderFooter: _propTypes2['default'].func,
-	  onMonthSelect: _propTypes2['default'].func
+	  prefixCls: _propTypes2["default"].string,
+	  value: _propTypes2["default"].object,
+	  onValueChange: _propTypes2["default"].func,
+	  showTimePicker: _propTypes2["default"].bool,
+	  onPanelChange: _propTypes2["default"].func,
+	  locale: _propTypes2["default"].object,
+	  enablePrev: _propTypes2["default"].any,
+	  enableNext: _propTypes2["default"].any,
+	  disabledMonth: _propTypes2["default"].func,
+	  renderFooter: _propTypes2["default"].func,
+	  onMonthSelect: _propTypes2["default"].func
 	};
 	CalendarHeader.defaultProps = {
 	  enableNext: 1,
@@ -50954,7 +51021,7 @@
 	    var monthBeforeYear = locale.monthBeforeYear;
 	    var selectClassName = prefixCls + '-' + (monthBeforeYear ? 'my-select' : 'ym-select');
 	    var timeClassName = showTimePicker ? ' ' + prefixCls + '-time-status' : '';
-	    var year = _react2['default'].createElement(
+	    var year = _react2["default"].createElement(
 	      'a',
 	      {
 	        className: prefixCls + '-year-select' + timeClassName,
@@ -50966,7 +51033,7 @@
 	      },
 	      value.format(locale.yearFormat)
 	    );
-	    var month = _react2['default'].createElement(
+	    var month = _react2["default"].createElement(
 	      'a',
 	      {
 	        className: prefixCls + '-month-select' + timeClassName,
@@ -50978,7 +51045,7 @@
 	    );
 	    var day = void 0;
 	    if (showTimePicker) {
-	      day = _react2['default'].createElement(
+	      day = _react2["default"].createElement(
 	        'a',
 	        {
 	          className: prefixCls + '-day-select' + timeClassName,
@@ -50993,10 +51060,10 @@
 	    } else {
 	      my = [year, month, day];
 	    }
-	    return _react2['default'].createElement(
+	    return _react2["default"].createElement(
 	      'span',
 	      { className: selectClassName },
-	      (0, _mapSelf2['default'])(my)
+	      (0, _mapSelf2["default"])(my)
 	    );
 	  };
 	
@@ -51015,7 +51082,7 @@
 	  };
 	};
 	
-	exports['default'] = CalendarHeader;
+	exports["default"] = CalendarHeader;
 	module.exports = exports['default'];
 
 /***/ }),
@@ -51051,19 +51118,9 @@
 
 	'use strict';
 	
-	exports.__esModule = true;
-	
-	var _classCallCheck2 = __webpack_require__(267);
-	
-	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
-	
-	var _possibleConstructorReturn2 = __webpack_require__(297);
-	
-	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
-	
-	var _inherits2 = __webpack_require__(298);
-	
-	var _inherits3 = _interopRequireDefault(_inherits2);
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
 	
 	var _react = __webpack_require__(4);
 	
@@ -51079,7 +51136,23 @@
 	
 	var _MonthTable2 = _interopRequireDefault(_MonthTable);
 	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+	var _DateInput = __webpack_require__(507);
+	
+	var _DateInput2 = _interopRequireDefault(_DateInput);
+	
+	var _moment = __webpack_require__(372);
+	
+	var _moment2 = _interopRequireDefault(_moment);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+	
+	function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : _defaults(subClass, superClass); }
 	
 	function goYear(direction) {
 	  var next = this.state.value.clone();
@@ -51090,12 +51163,12 @@
 	function noop() {}
 	
 	var MonthPanel = function (_React$Component) {
-	  (0, _inherits3['default'])(MonthPanel, _React$Component);
+	  _inherits(MonthPanel, _React$Component);
 	
 	  function MonthPanel(props) {
-	    (0, _classCallCheck3['default'])(this, MonthPanel);
+	    _classCallCheck(this, MonthPanel);
 	
-	    var _this = (0, _possibleConstructorReturn3['default'])(this, _React$Component.call(this, props));
+	    var _this = _possibleConstructorReturn(this, _React$Component.call(this, props));
 	
 	    _this.setAndChangeValue = function (value) {
 	      _this.setValue(value);
@@ -51143,29 +51216,30 @@
 	    var locale = props.locale,
 	        cellRender = props.cellRender,
 	        contentRender = props.contentRender,
-	        renderFooter = props.renderFooter;
+	        renderFooter = props.renderFooter,
+	        rootPrefixCls = props.rootPrefixCls;
 	
 	    var year = value.year();
 	    var prefixCls = this.prefixCls;
 	
 	    var footer = renderFooter && renderFooter('month');
 	
-	    return _react2['default'].createElement(
+	    return _react2["default"].createElement(
 	      'div',
 	      { className: prefixCls, style: props.style },
-	      _react2['default'].createElement(
+	      _react2["default"].createElement(
 	        'div',
 	        null,
-	        _react2['default'].createElement(
+	        _react2["default"].createElement(
 	          'div',
 	          { className: prefixCls + '-header' },
-	          _react2['default'].createElement('a', {
+	          _react2["default"].createElement('a', {
 	            className: prefixCls + '-prev-year-btn',
 	            role: 'button',
 	            onClick: this.previousYear,
 	            title: locale.previousYear
 	          }),
-	          _react2['default'].createElement(
+	          _react2["default"].createElement(
 	            'a',
 	            {
 	              className: prefixCls + '-year-select',
@@ -51173,28 +51247,28 @@
 	              onClick: props.onYearPanelShow,
 	              title: locale.yearSelect
 	            },
-	            _react2['default'].createElement(
+	            _react2["default"].createElement(
 	              'span',
 	              { className: prefixCls + '-year-select-content' },
 	              year
 	            ),
-	            _react2['default'].createElement(
+	            _react2["default"].createElement(
 	              'span',
 	              { className: prefixCls + '-year-select-arrow' },
 	              'x'
 	            )
 	          ),
-	          _react2['default'].createElement('a', {
+	          _react2["default"].createElement('a', {
 	            className: prefixCls + '-next-year-btn',
 	            role: 'button',
 	            onClick: this.nextYear,
 	            title: locale.nextYear
 	          })
 	        ),
-	        _react2['default'].createElement(
+	        _react2["default"].createElement(
 	          'div',
 	          { className: prefixCls + '-body' },
-	          _react2['default'].createElement(_MonthTable2['default'], {
+	          _react2["default"].createElement(_MonthTable2["default"], {
 	            disabledDate: props.disabledDate,
 	            onSelect: this.setAndSelectValue,
 	            locale: locale,
@@ -51204,7 +51278,7 @@
 	            prefixCls: prefixCls
 	          })
 	        ),
-	        footer && _react2['default'].createElement(
+	        footer && _react2["default"].createElement(
 	          'div',
 	          { className: prefixCls + '-footer' },
 	          footer
@@ -51214,16 +51288,16 @@
 	  };
 	
 	  return MonthPanel;
-	}(_react2['default'].Component);
+	}(_react2["default"].Component);
 	
 	MonthPanel.propTypes = {
-	  onChange: _propTypes2['default'].func,
-	  disabledDate: _propTypes2['default'].func,
-	  onSelect: _propTypes2['default'].func,
-	  renderFooter: _propTypes2['default'].func,
-	  rootPrefixCls: _propTypes2['default'].string,
-	  value: _propTypes2['default'].object,
-	  defaultValue: _propTypes2['default'].object
+	  onChange: _propTypes2["default"].func,
+	  disabledDate: _propTypes2["default"].func,
+	  onSelect: _propTypes2["default"].func,
+	  renderFooter: _propTypes2["default"].func,
+	  rootPrefixCls: _propTypes2["default"].string,
+	  value: _propTypes2["default"].object,
+	  defaultValue: _propTypes2["default"].object
 	};
 	MonthPanel.defaultProps = {
 	  onChange: noop,
@@ -51233,7 +51307,7 @@
 	
 	(0, _reactLifecyclesCompat.polyfill)(MonthPanel);
 	
-	exports['default'] = MonthPanel;
+	exports["default"] = MonthPanel;
 	module.exports = exports['default'];
 
 /***/ }),
@@ -51242,19 +51316,9 @@
 
 	'use strict';
 	
-	exports.__esModule = true;
-	
-	var _classCallCheck2 = __webpack_require__(267);
-	
-	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
-	
-	var _possibleConstructorReturn2 = __webpack_require__(297);
-	
-	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
-	
-	var _inherits2 = __webpack_require__(298);
-	
-	var _inherits3 = _interopRequireDefault(_inherits2);
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
 	
 	var _react = __webpack_require__(4);
 	
@@ -51270,7 +51334,17 @@
 	
 	var _index = __webpack_require__(502);
 	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+	
+	function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
+	
+	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : _defaults(subClass, superClass); }
 	
 	var ROW = 4;
 	var COL = 3;
@@ -51284,12 +51358,12 @@
 	function noop() {}
 	
 	var MonthTable = function (_Component) {
-	  (0, _inherits3['default'])(MonthTable, _Component);
+	  _inherits(MonthTable, _Component);
 	
 	  function MonthTable(props) {
-	    (0, _classCallCheck3['default'])(this, MonthTable);
+	    _classCallCheck(this, MonthTable);
 	
-	    var _this = (0, _possibleConstructorReturn3['default'])(this, _Component.call(this, props));
+	    var _this = _possibleConstructorReturn(this, _Component.call(this, props));
 	
 	    _this.state = {
 	      value: props.value
@@ -51356,7 +51430,7 @@
 	          testValue.month(monthData.value);
 	          disabled = props.disabledDate(testValue);
 	        }
-	        var classNameMap = (_classNameMap = {}, _classNameMap[prefixCls + '-cell'] = 1, _classNameMap[prefixCls + '-cell-disabled'] = disabled, _classNameMap[prefixCls + '-selected-cell'] = monthData.value === currentMonth, _classNameMap[prefixCls + '-current-cell'] = today.year() === value.year() && monthData.value === today.month(), _classNameMap);
+	        var classNameMap = (_classNameMap = {}, _defineProperty(_classNameMap, prefixCls + '-cell', 1), _defineProperty(_classNameMap, prefixCls + '-cell-disabled', disabled), _defineProperty(_classNameMap, prefixCls + '-selected-cell', monthData.value === currentMonth), _defineProperty(_classNameMap, prefixCls + '-current-cell', today.year() === value.year() && monthData.value === today.month()), _classNameMap);
 	        var cellEl = void 0;
 	        if (cellRender) {
 	          var currentValue = value.clone();
@@ -51371,35 +51445,35 @@
 	          } else {
 	            content = monthData.content;
 	          }
-	          cellEl = _react2['default'].createElement(
+	          cellEl = _react2["default"].createElement(
 	            'a',
 	            { className: prefixCls + '-month' },
 	            content
 	          );
 	        }
-	        return _react2['default'].createElement(
+	        return _react2["default"].createElement(
 	          'td',
 	          {
 	            role: 'gridcell',
 	            key: monthData.value,
 	            onClick: disabled ? null : chooseMonth.bind(_this2, monthData.value),
 	            title: monthData.title,
-	            className: (0, _classnames2['default'])(classNameMap)
+	            className: (0, _classnames2["default"])(classNameMap)
 	          },
 	          cellEl
 	        );
 	      });
-	      return _react2['default'].createElement(
+	      return _react2["default"].createElement(
 	        'tr',
 	        { key: index, role: 'row' },
 	        tds
 	      );
 	    });
 	
-	    return _react2['default'].createElement(
+	    return _react2["default"].createElement(
 	      'table',
 	      { className: prefixCls + '-table', cellSpacing: '0', role: 'grid' },
-	      _react2['default'].createElement(
+	      _react2["default"].createElement(
 	        'tbody',
 	        { className: prefixCls + '-tbody' },
 	        monthsEls
@@ -51414,12 +51488,12 @@
 	  onSelect: noop
 	};
 	MonthTable.propTypes = {
-	  onSelect: _propTypes2['default'].func,
-	  cellRender: _propTypes2['default'].func,
-	  prefixCls: _propTypes2['default'].string,
-	  value: _propTypes2['default'].object
+	  onSelect: _propTypes2["default"].func,
+	  cellRender: _propTypes2["default"].func,
+	  prefixCls: _propTypes2["default"].string,
+	  value: _propTypes2["default"].object
 	};
-	exports['default'] = MonthTable;
+	exports["default"] = MonthTable;
 	module.exports = exports['default'];
 
 /***/ }),
@@ -51428,1031 +51502,9 @@
 
 	'use strict';
 	
-	exports.__esModule = true;
-	
-	var _classCallCheck2 = __webpack_require__(267);
-	
-	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
-	
-	var _possibleConstructorReturn2 = __webpack_require__(297);
-	
-	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
-	
-	var _inherits2 = __webpack_require__(298);
-	
-	var _inherits3 = _interopRequireDefault(_inherits2);
-	
-	var _react = __webpack_require__(4);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _propTypes = __webpack_require__(5);
-	
-	var _propTypes2 = _interopRequireDefault(_propTypes);
-	
-	var _classnames = __webpack_require__(3);
-	
-	var _classnames2 = _interopRequireDefault(_classnames);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-	
-	var ROW = 4;
-	var COL = 3;
-	
-	function goYear(direction) {
-	  var value = this.state.value.clone();
-	  value.add(direction, 'year');
-	  this.setState({
-	    value: value
-	  });
-	}
-	
-	function chooseYear(year) {
-	  var value = this.state.value.clone();
-	  value.year(year);
-	  value.month(this.state.value.month());
-	  this.props.onSelect(value);
-	}
-	
-	var YearPanel = function (_React$Component) {
-	  (0, _inherits3['default'])(YearPanel, _React$Component);
-	
-	  function YearPanel(props) {
-	    (0, _classCallCheck3['default'])(this, YearPanel);
-	
-	    var _this = (0, _possibleConstructorReturn3['default'])(this, _React$Component.call(this, props));
-	
-	    _this.prefixCls = props.rootPrefixCls + '-year-panel';
-	    _this.state = {
-	      value: props.value || props.defaultValue
-	    };
-	    _this.nextDecade = goYear.bind(_this, 10);
-	    _this.previousDecade = goYear.bind(_this, -10);
-	    return _this;
-	  }
-	
-	  YearPanel.prototype.years = function years() {
-	    var value = this.state.value;
-	    var currentYear = value.year();
-	    var startYear = parseInt(currentYear / 10, 10) * 10;
-	    var previousYear = startYear - 1;
-	    var years = [];
-	    var index = 0;
-	    for (var rowIndex = 0; rowIndex < ROW; rowIndex++) {
-	      years[rowIndex] = [];
-	      for (var colIndex = 0; colIndex < COL; colIndex++) {
-	        var year = previousYear + index;
-	        var content = String(year);
-	        years[rowIndex][colIndex] = {
-	          content: content,
-	          year: year,
-	          title: content
-	        };
-	        index++;
-	      }
-	    }
-	    return years;
-	  };
-	
-	  YearPanel.prototype.render = function render() {
-	    var _this2 = this;
-	
-	    var props = this.props;
-	    var value = this.state.value;
-	    var locale = props.locale,
-	        renderFooter = props.renderFooter;
-	
-	    var years = this.years();
-	    var currentYear = value.year();
-	    var startYear = parseInt(currentYear / 10, 10) * 10;
-	    var endYear = startYear + 9;
-	    var prefixCls = this.prefixCls;
-	
-	    var yeasEls = years.map(function (row, index) {
-	      var tds = row.map(function (yearData) {
-	        var _classNameMap;
-	
-	        var classNameMap = (_classNameMap = {}, _classNameMap[prefixCls + '-cell'] = 1, _classNameMap[prefixCls + '-selected-cell'] = yearData.year === currentYear, _classNameMap[prefixCls + '-last-decade-cell'] = yearData.year < startYear, _classNameMap[prefixCls + '-next-decade-cell'] = yearData.year > endYear, _classNameMap);
-	        var clickHandler = void 0;
-	        if (yearData.year < startYear) {
-	          clickHandler = _this2.previousDecade;
-	        } else if (yearData.year > endYear) {
-	          clickHandler = _this2.nextDecade;
-	        } else {
-	          clickHandler = chooseYear.bind(_this2, yearData.year);
-	        }
-	        return _react2['default'].createElement(
-	          'td',
-	          {
-	            role: 'gridcell',
-	            title: yearData.title,
-	            key: yearData.content,
-	            onClick: clickHandler,
-	            className: (0, _classnames2['default'])(classNameMap)
-	          },
-	          _react2['default'].createElement(
-	            'a',
-	            {
-	              className: prefixCls + '-year'
-	            },
-	            yearData.content
-	          )
-	        );
-	      });
-	      return _react2['default'].createElement(
-	        'tr',
-	        { key: index, role: 'row' },
-	        tds
-	      );
-	    });
-	
-	    var footer = renderFooter && renderFooter('year');
-	
-	    return _react2['default'].createElement(
-	      'div',
-	      { className: this.prefixCls },
-	      _react2['default'].createElement(
-	        'div',
-	        null,
-	        _react2['default'].createElement(
-	          'div',
-	          { className: prefixCls + '-header' },
-	          _react2['default'].createElement('a', {
-	            className: prefixCls + '-prev-decade-btn',
-	            role: 'button',
-	            onClick: this.previousDecade,
-	            title: locale.previousDecade
-	          }),
-	          _react2['default'].createElement(
-	            'a',
-	            {
-	              className: prefixCls + '-decade-select',
-	              role: 'button',
-	              onClick: props.onDecadePanelShow,
-	              title: locale.decadeSelect
-	            },
-	            _react2['default'].createElement(
-	              'span',
-	              { className: prefixCls + '-decade-select-content' },
-	              startYear,
-	              '-',
-	              endYear
-	            ),
-	            _react2['default'].createElement(
-	              'span',
-	              { className: prefixCls + '-decade-select-arrow' },
-	              'x'
-	            )
-	          ),
-	          _react2['default'].createElement('a', {
-	            className: prefixCls + '-next-decade-btn',
-	            role: 'button',
-	            onClick: this.nextDecade,
-	            title: locale.nextDecade
-	          })
-	        ),
-	        _react2['default'].createElement(
-	          'div',
-	          { className: prefixCls + '-body' },
-	          _react2['default'].createElement(
-	            'table',
-	            { className: prefixCls + '-table', cellSpacing: '0', role: 'grid' },
-	            _react2['default'].createElement(
-	              'tbody',
-	              { className: prefixCls + '-tbody' },
-	              yeasEls
-	            )
-	          )
-	        ),
-	        footer && _react2['default'].createElement(
-	          'div',
-	          { className: prefixCls + '-footer' },
-	          footer
-	        )
-	      )
-	    );
-	  };
-	
-	  return YearPanel;
-	}(_react2['default'].Component);
-	
-	exports['default'] = YearPanel;
-	
-	
-	YearPanel.propTypes = {
-	  rootPrefixCls: _propTypes2['default'].string,
-	  value: _propTypes2['default'].object,
-	  defaultValue: _propTypes2['default'].object,
-	  renderFooter: _propTypes2['default'].func
-	};
-	
-	YearPanel.defaultProps = {
-	  onSelect: function onSelect() {}
-	};
-	module.exports = exports['default'];
-
-/***/ }),
-/* 508 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	exports.__esModule = true;
-	
-	var _classCallCheck2 = __webpack_require__(267);
-	
-	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
-	
-	var _possibleConstructorReturn2 = __webpack_require__(297);
-	
-	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
-	
-	var _inherits2 = __webpack_require__(298);
-	
-	var _inherits3 = _interopRequireDefault(_inherits2);
-	
-	var _react = __webpack_require__(4);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _propTypes = __webpack_require__(5);
-	
-	var _propTypes2 = _interopRequireDefault(_propTypes);
-	
-	var _classnames = __webpack_require__(3);
-	
-	var _classnames2 = _interopRequireDefault(_classnames);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-	
-	var ROW = 4;
-	var COL = 3;
-	
-	
-	function goYear(direction) {
-	  var next = this.state.value.clone();
-	  next.add(direction, 'years');
-	  this.setState({
-	    value: next
-	  });
-	}
-	
-	function chooseDecade(year, event) {
-	  var next = this.state.value.clone();
-	  next.year(year);
-	  next.month(this.state.value.month());
-	  this.props.onSelect(next);
-	  event.preventDefault();
-	}
-	
-	var DecadePanel = function (_React$Component) {
-	  (0, _inherits3['default'])(DecadePanel, _React$Component);
-	
-	  function DecadePanel(props) {
-	    (0, _classCallCheck3['default'])(this, DecadePanel);
-	
-	    var _this = (0, _possibleConstructorReturn3['default'])(this, _React$Component.call(this, props));
-	
-	    _this.state = {
-	      value: props.value || props.defaultValue
-	    };
-	
-	    // bind methods
-	    _this.prefixCls = props.rootPrefixCls + '-decade-panel';
-	    _this.nextCentury = goYear.bind(_this, 100);
-	    _this.previousCentury = goYear.bind(_this, -100);
-	    return _this;
-	  }
-	
-	  DecadePanel.prototype.render = function render() {
-	    var _this2 = this;
-	
-	    var value = this.state.value;
-	    var _props = this.props,
-	        locale = _props.locale,
-	        renderFooter = _props.renderFooter;
-	
-	    var currentYear = value.year();
-	    var startYear = parseInt(currentYear / 100, 10) * 100;
-	    var preYear = startYear - 10;
-	    var endYear = startYear + 99;
-	    var decades = [];
-	    var index = 0;
-	    var prefixCls = this.prefixCls;
-	
-	    for (var rowIndex = 0; rowIndex < ROW; rowIndex++) {
-	      decades[rowIndex] = [];
-	      for (var colIndex = 0; colIndex < COL; colIndex++) {
-	        var startDecade = preYear + index * 10;
-	        var endDecade = preYear + index * 10 + 9;
-	        decades[rowIndex][colIndex] = {
-	          startDecade: startDecade,
-	          endDecade: endDecade
-	        };
-	        index++;
-	      }
-	    }
-	
-	    var footer = renderFooter && renderFooter('decade');
-	
-	    var decadesEls = decades.map(function (row, decadeIndex) {
-	      var tds = row.map(function (decadeData) {
-	        var _classNameMap;
-	
-	        var dStartDecade = decadeData.startDecade;
-	        var dEndDecade = decadeData.endDecade;
-	        var isLast = dStartDecade < startYear;
-	        var isNext = dEndDecade > endYear;
-	        var classNameMap = (_classNameMap = {}, _classNameMap[prefixCls + '-cell'] = 1, _classNameMap[prefixCls + '-selected-cell'] = dStartDecade <= currentYear && currentYear <= dEndDecade, _classNameMap[prefixCls + '-last-century-cell'] = isLast, _classNameMap[prefixCls + '-next-century-cell'] = isNext, _classNameMap);
-	        var content = dStartDecade + '-' + dEndDecade;
-	        var clickHandler = void 0;
-	        if (isLast) {
-	          clickHandler = _this2.previousCentury;
-	        } else if (isNext) {
-	          clickHandler = _this2.nextCentury;
-	        } else {
-	          clickHandler = chooseDecade.bind(_this2, dStartDecade);
-	        }
-	        return _react2['default'].createElement(
-	          'td',
-	          {
-	            key: dStartDecade,
-	            onClick: clickHandler,
-	            role: 'gridcell',
-	            className: (0, _classnames2['default'])(classNameMap)
-	          },
-	          _react2['default'].createElement(
-	            'a',
-	            {
-	              className: prefixCls + '-decade'
-	            },
-	            content
-	          )
-	        );
-	      });
-	      return _react2['default'].createElement(
-	        'tr',
-	        { key: decadeIndex, role: 'row' },
-	        tds
-	      );
-	    });
-	
-	    return _react2['default'].createElement(
-	      'div',
-	      { className: this.prefixCls },
-	      _react2['default'].createElement(
-	        'div',
-	        { className: prefixCls + '-header' },
-	        _react2['default'].createElement('a', {
-	          className: prefixCls + '-prev-century-btn',
-	          role: 'button',
-	          onClick: this.previousCentury,
-	          title: locale.previousCentury
-	        }),
-	        _react2['default'].createElement(
-	          'div',
-	          { className: prefixCls + '-century' },
-	          startYear,
-	          '-',
-	          endYear
-	        ),
-	        _react2['default'].createElement('a', {
-	          className: prefixCls + '-next-century-btn',
-	          role: 'button',
-	          onClick: this.nextCentury,
-	          title: locale.nextCentury
-	        })
-	      ),
-	      _react2['default'].createElement(
-	        'div',
-	        { className: prefixCls + '-body' },
-	        _react2['default'].createElement(
-	          'table',
-	          { className: prefixCls + '-table', cellSpacing: '0', role: 'grid' },
-	          _react2['default'].createElement(
-	            'tbody',
-	            { className: prefixCls + '-tbody' },
-	            decadesEls
-	          )
-	        )
-	      ),
-	      footer && _react2['default'].createElement(
-	        'div',
-	        { className: prefixCls + '-footer' },
-	        footer
-	      )
-	    );
-	  };
-	
-	  return DecadePanel;
-	}(_react2['default'].Component);
-	
-	exports['default'] = DecadePanel;
-	
-	
-	DecadePanel.propTypes = {
-	  locale: _propTypes2['default'].object,
-	  value: _propTypes2['default'].object,
-	  defaultValue: _propTypes2['default'].object,
-	  rootPrefixCls: _propTypes2['default'].string,
-	  renderFooter: _propTypes2['default'].func
-	};
-	
-	DecadePanel.defaultProps = {
-	  onSelect: function onSelect() {}
-	};
-	module.exports = exports['default'];
-
-/***/ }),
-/* 509 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	exports.__esModule = true;
-	
-	var _extends2 = __webpack_require__(111);
-	
-	var _extends3 = _interopRequireDefault(_extends2);
-	
-	var _classCallCheck2 = __webpack_require__(267);
-	
-	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
-	
-	var _possibleConstructorReturn2 = __webpack_require__(297);
-	
-	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
-	
-	var _inherits2 = __webpack_require__(298);
-	
-	var _inherits3 = _interopRequireDefault(_inherits2);
-	
-	var _react = __webpack_require__(4);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _reactDom = __webpack_require__(12);
-	
-	var _reactDom2 = _interopRequireDefault(_reactDom);
-	
-	var _propTypes = __webpack_require__(5);
-	
-	var _propTypes2 = _interopRequireDefault(_propTypes);
-	
-	var _mapSelf = __webpack_require__(504);
-	
-	var _mapSelf2 = _interopRequireDefault(_mapSelf);
-	
-	var _classnames = __webpack_require__(3);
-	
-	var _classnames2 = _interopRequireDefault(_classnames);
-	
-	var _TodayButton = __webpack_require__(510);
-	
-	var _TodayButton2 = _interopRequireDefault(_TodayButton);
-	
-	var _OkButton = __webpack_require__(511);
-	
-	var _OkButton2 = _interopRequireDefault(_OkButton);
-	
-	var _TimePickerButton = __webpack_require__(512);
-	
-	var _TimePickerButton2 = _interopRequireDefault(_TimePickerButton);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-	
-	var CalendarFooter = function (_React$Component) {
-	  (0, _inherits3['default'])(CalendarFooter, _React$Component);
-	
-	  function CalendarFooter() {
-	    (0, _classCallCheck3['default'])(this, CalendarFooter);
-	    return (0, _possibleConstructorReturn3['default'])(this, _React$Component.apply(this, arguments));
-	  }
-	
-	  CalendarFooter.prototype.onSelect = function onSelect(value) {
-	    this.props.onSelect(value);
-	  };
-	
-	  CalendarFooter.prototype.getRootDOMNode = function getRootDOMNode() {
-	    return _reactDom2['default'].findDOMNode(this);
-	  };
-	
-	  CalendarFooter.prototype.render = function render() {
-	    var props = this.props;
-	    var value = props.value,
-	        prefixCls = props.prefixCls,
-	        showOk = props.showOk,
-	        timePicker = props.timePicker,
-	        renderFooter = props.renderFooter,
-	        mode = props.mode;
-	
-	    var footerEl = null;
-	    var extraFooter = renderFooter && renderFooter(mode);
-	    if (props.showToday || timePicker || extraFooter) {
-	      var _cx;
-	
-	      var nowEl = void 0;
-	      if (props.showToday) {
-	        nowEl = _react2['default'].createElement(_TodayButton2['default'], (0, _extends3['default'])({}, props, { value: value }));
-	      }
-	      var okBtn = void 0;
-	      if (showOk === true || showOk !== false && !!props.timePicker) {
-	        okBtn = _react2['default'].createElement(_OkButton2['default'], props);
-	      }
-	      var timePickerBtn = void 0;
-	      if (!!props.timePicker) {
-	        timePickerBtn = _react2['default'].createElement(_TimePickerButton2['default'], props);
-	      }
-	
-	      var footerBtn = void 0;
-	      if (nowEl || timePickerBtn || okBtn || extraFooter) {
-	        footerBtn = _react2['default'].createElement(
-	          'span',
-	          { className: prefixCls + '-footer-btn' },
-	          extraFooter,
-	          (0, _mapSelf2['default'])([nowEl, timePickerBtn, okBtn])
-	        );
-	      }
-	      var cls = (0, _classnames2['default'])(prefixCls + '-footer', (_cx = {}, _cx[prefixCls + '-footer-show-ok'] = okBtn, _cx));
-	      footerEl = _react2['default'].createElement(
-	        'div',
-	        { className: cls },
-	        footerBtn
-	      );
-	    }
-	    return footerEl;
-	  };
-	
-	  return CalendarFooter;
-	}(_react2['default'].Component);
-	
-	CalendarFooter.propTypes = {
-	  prefixCls: _propTypes2['default'].string,
-	  showDateInput: _propTypes2['default'].bool,
-	  disabledTime: _propTypes2['default'].any,
-	  timePicker: _propTypes2['default'].element,
-	  selectedValue: _propTypes2['default'].any,
-	  showOk: _propTypes2['default'].bool,
-	  onSelect: _propTypes2['default'].func,
-	  value: _propTypes2['default'].object,
-	  renderFooter: _propTypes2['default'].func,
-	  defaultValue: _propTypes2['default'].object,
-	  mode: _propTypes2['default'].string
-	};
-	exports['default'] = CalendarFooter;
-	module.exports = exports['default'];
-
-/***/ }),
-/* 510 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	exports.__esModule = true;
-	exports['default'] = TodayButton;
-	
-	var _react = __webpack_require__(4);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _util = __webpack_require__(502);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-	
-	function TodayButton(_ref) {
-	  var prefixCls = _ref.prefixCls,
-	      locale = _ref.locale,
-	      value = _ref.value,
-	      timePicker = _ref.timePicker,
-	      disabled = _ref.disabled,
-	      disabledDate = _ref.disabledDate,
-	      onToday = _ref.onToday,
-	      text = _ref.text;
-	
-	  var localeNow = (!text && timePicker ? locale.now : text) || locale.today;
-	  var disabledToday = disabledDate && !(0, _util.isAllowedDate)((0, _util.getTodayTime)(value), disabledDate);
-	  var isDisabled = disabledToday || disabled;
-	  var disabledTodayClass = isDisabled ? prefixCls + '-today-btn-disabled' : '';
-	  return _react2['default'].createElement(
-	    'a',
-	    {
-	      className: prefixCls + '-today-btn ' + disabledTodayClass,
-	      role: 'button',
-	      onClick: isDisabled ? null : onToday,
-	      title: (0, _util.getTodayTimeStr)(value)
-	    },
-	    localeNow
-	  );
-	}
-	module.exports = exports['default'];
-
-/***/ }),
-/* 511 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	"use strict";
-	
-	exports.__esModule = true;
-	exports["default"] = OkButton;
-	
-	var _react = __webpack_require__(4);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
-	
-	function OkButton(_ref) {
-	  var prefixCls = _ref.prefixCls,
-	      locale = _ref.locale,
-	      okDisabled = _ref.okDisabled,
-	      onOk = _ref.onOk;
-	
-	  var className = prefixCls + "-ok-btn";
-	  if (okDisabled) {
-	    className += " " + prefixCls + "-ok-btn-disabled";
-	  }
-	  return _react2["default"].createElement(
-	    "a",
-	    {
-	      className: className,
-	      role: "button",
-	      onClick: okDisabled ? null : onOk
-	    },
-	    locale.ok
-	  );
-	}
-	module.exports = exports['default'];
-
-/***/ }),
-/* 512 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	exports.__esModule = true;
-	exports['default'] = TimePickerButton;
-	
-	var _react = __webpack_require__(4);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _classnames2 = __webpack_require__(3);
-	
-	var _classnames3 = _interopRequireDefault(_classnames2);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-	
-	function TimePickerButton(_ref) {
-	  var _classnames;
-	
-	  var prefixCls = _ref.prefixCls,
-	      locale = _ref.locale,
-	      showTimePicker = _ref.showTimePicker,
-	      onOpenTimePicker = _ref.onOpenTimePicker,
-	      onCloseTimePicker = _ref.onCloseTimePicker,
-	      timePickerDisabled = _ref.timePickerDisabled;
-	
-	  var className = (0, _classnames3['default'])((_classnames = {}, _classnames[prefixCls + '-time-picker-btn'] = true, _classnames[prefixCls + '-time-picker-btn-disabled'] = timePickerDisabled, _classnames));
-	  var onClick = null;
-	  if (!timePickerDisabled) {
-	    onClick = showTimePicker ? onCloseTimePicker : onOpenTimePicker;
-	  }
-	  return _react2['default'].createElement(
-	    'a',
-	    {
-	      className: className,
-	      role: 'button',
-	      onClick: onClick
-	    },
-	    showTimePicker ? locale.dateSelect : locale.timeSelect
-	  );
-	}
-	module.exports = exports['default'];
-
-/***/ }),
-/* 513 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	exports.__esModule = true;
-	exports.calendarMixinWrapper = exports.calendarMixinDefaultProps = exports.calendarMixinPropTypes = undefined;
-	
-	var _classCallCheck2 = __webpack_require__(267);
-	
-	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
-	
-	var _possibleConstructorReturn2 = __webpack_require__(297);
-	
-	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
-	
-	var _inherits2 = __webpack_require__(298);
-	
-	var _inherits3 = _interopRequireDefault(_inherits2);
-	
-	exports.getNowByCurrentStateValue = getNowByCurrentStateValue;
-	
-	var _react = __webpack_require__(4);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _propTypes = __webpack_require__(5);
-	
-	var _propTypes2 = _interopRequireDefault(_propTypes);
-	
-	var _classnames = __webpack_require__(3);
-	
-	var _classnames2 = _interopRequireDefault(_classnames);
-	
-	var _moment = __webpack_require__(372);
-	
-	var _moment2 = _interopRequireDefault(_moment);
-	
-	var _index = __webpack_require__(502);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-	
-	function noop() {}
-	
-	function getNowByCurrentStateValue(value) {
-	  var ret = void 0;
-	  if (value) {
-	    ret = (0, _index.getTodayTime)(value);
-	  } else {
-	    ret = (0, _moment2['default'])();
-	  }
-	  return ret;
-	}
-	
-	var calendarMixinPropTypes = exports.calendarMixinPropTypes = {
-	  value: _propTypes2['default'].object,
-	  defaultValue: _propTypes2['default'].object,
-	  onKeyDown: _propTypes2['default'].func
-	};
-	
-	var calendarMixinDefaultProps = exports.calendarMixinDefaultProps = {
-	  onKeyDown: noop
-	};
-	
-	var calendarMixinWrapper = exports.calendarMixinWrapper = function calendarMixinWrapper(ComposeComponent) {
-	  var _class, _temp2;
-	
-	  return _temp2 = _class = function (_ComposeComponent) {
-	    (0, _inherits3['default'])(_class, _ComposeComponent);
-	
-	    function _class() {
-	      var _temp, _this, _ret;
-	
-	      (0, _classCallCheck3['default'])(this, _class);
-	
-	      for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-	        args[_key] = arguments[_key];
-	      }
-	
-	      return _ret = (_temp = (_this = (0, _possibleConstructorReturn3['default'])(this, _ComposeComponent.call.apply(_ComposeComponent, [this].concat(args))), _this), _this.onSelect = function (value, cause) {
-	        if (value) {
-	          _this.setValue(value);
-	        }
-	        _this.setSelectedValue(value, cause);
-	      }, _this.renderRoot = function (newProps) {
-	        var _className;
-	
-	        var props = _this.props;
-	        var prefixCls = props.prefixCls;
-	
-	        var className = (_className = {}, _className[prefixCls] = 1, _className[prefixCls + '-hidden'] = !props.visible, _className[props.className] = !!props.className, _className[newProps.className] = !!newProps.className, _className);
-	
-	        return _react2['default'].createElement(
-	          'div',
-	          {
-	            ref: _this.saveRoot,
-	            className: '' + (0, _classnames2['default'])(className),
-	            style: _this.props.style,
-	            tabIndex: '0',
-	            onKeyDown: _this.onKeyDown
-	          },
-	          newProps.children
-	        );
-	      }, _this.setSelectedValue = function (selectedValue, cause) {
-	        // if (this.isAllowedDate(selectedValue)) {
-	        if (!('selectedValue' in _this.props)) {
-	          _this.setState({
-	            selectedValue: selectedValue
-	          });
-	        }
-	        if (_this.props.onSelect) {
-	          _this.props.onSelect(selectedValue, cause);
-	        }
-	        // }
-	      }, _this.setValue = function (value) {
-	        var originalValue = _this.state.value;
-	        if (!('value' in _this.props)) {
-	          _this.setState({
-	            value: value
-	          });
-	        }
-	        if (originalValue && value && !originalValue.isSame(value) || !originalValue && value || originalValue && !value) {
-	          _this.props.onChange(value);
-	        }
-	      }, _this.isAllowedDate = function (value) {
-	        var disabledDate = _this.props.disabledDate;
-	        var disabledTime = _this.props.disabledTime;
-	        return (0, _index.isAllowedDate)(value, disabledDate, disabledTime);
-	      }, _temp), (0, _possibleConstructorReturn3['default'])(_this, _ret);
-	    }
-	
-	    _class.getDerivedStateFromProps = function getDerivedStateFromProps(nextProps, prevState) {
-	      // Use origin function if provided
-	      if (ComposeComponent.getDerivedStateFromProps) {
-	        return ComposeComponent.getDerivedStateFromProps(nextProps, prevState);
-	      }
-	
-	      var value = nextProps.value,
-	          selectedValue = nextProps.selectedValue;
-	
-	      var newState = {};
-	
-	      if ('value' in nextProps) {
-	        newState.value = value || nextProps.defaultValue || getNowByCurrentStateValue(prevState.value);
-	      }
-	      if ('selectedValue' in nextProps) {
-	        newState.selectedValue = selectedValue;
-	      }
-	
-	      return newState;
-	    };
-	
-	    return _class;
-	  }(ComposeComponent), _class.displayName = 'CalendarMixinWrapper', _class.defaultProps = ComposeComponent.defaultProps, _temp2;
-	};
-
-/***/ }),
-/* 514 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	exports.__esModule = true;
-	exports.commonMixinWrapper = exports.defaultProp = exports.propType = undefined;
-	
-	var _classCallCheck2 = __webpack_require__(267);
-	
-	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
-	
-	var _possibleConstructorReturn2 = __webpack_require__(297);
-	
-	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
-	
-	var _inherits2 = __webpack_require__(298);
-	
-	var _inherits3 = _interopRequireDefault(_inherits2);
-	
-	var _propTypes = __webpack_require__(5);
-	
-	var _propTypes2 = _interopRequireDefault(_propTypes);
-	
-	var _en_US = __webpack_require__(515);
-	
-	var _en_US2 = _interopRequireDefault(_en_US);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-	
-	function noop() {}
-	
-	var propType = exports.propType = {
-	  className: _propTypes2['default'].string,
-	  locale: _propTypes2['default'].object,
-	  style: _propTypes2['default'].object,
-	  visible: _propTypes2['default'].bool,
-	  onSelect: _propTypes2['default'].func,
-	  prefixCls: _propTypes2['default'].string,
-	  onChange: _propTypes2['default'].func,
-	  onOk: _propTypes2['default'].func
-	};
-	
-	var defaultProp = exports.defaultProp = {
-	  locale: _en_US2['default'],
-	  style: {},
-	  visible: true,
-	  prefixCls: 'rc-calendar',
-	  className: '',
-	  onSelect: noop,
-	  onChange: noop,
-	  onClear: noop,
-	  renderFooter: function renderFooter() {
-	    return null;
-	  },
-	  renderSidebar: function renderSidebar() {
-	    return null;
-	  }
-	};
-	
-	var commonMixinWrapper = exports.commonMixinWrapper = function commonMixinWrapper(ComposeComponent) {
-	  var _class, _temp2;
-	
-	  return _temp2 = _class = function (_ComposeComponent) {
-	    (0, _inherits3['default'])(_class, _ComposeComponent);
-	
-	    function _class() {
-	      var _temp, _this, _ret;
-	
-	      (0, _classCallCheck3['default'])(this, _class);
-	
-	      for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-	        args[_key] = arguments[_key];
-	      }
-	
-	      return _ret = (_temp = (_this = (0, _possibleConstructorReturn3['default'])(this, _ComposeComponent.call.apply(_ComposeComponent, [this].concat(args))), _this), _this.getFormat = function () {
-	        var format = _this.props.format;
-	        var _this$props = _this.props,
-	            locale = _this$props.locale,
-	            timePicker = _this$props.timePicker;
-	
-	        if (!format) {
-	          if (timePicker) {
-	            format = locale.dateTimeFormat;
-	          } else {
-	            format = locale.dateFormat;
-	          }
-	        }
-	        return format;
-	      }, _this.focus = function () {
-	        if (_this.focusElement) {
-	          _this.focusElement.focus();
-	        } else if (_this.rootInstance) {
-	          _this.rootInstance.focus();
-	        }
-	      }, _this.saveFocusElement = function (focusElement) {
-	        _this.focusElement = focusElement;
-	      }, _this.saveRoot = function (root) {
-	        _this.rootInstance = root;
-	      }, _temp), (0, _possibleConstructorReturn3['default'])(_this, _ret);
-	    }
-	
-	    _class.prototype.shouldComponentUpdate = function shouldComponentUpdate(nextProps) {
-	      return this.props.visible || nextProps.visible;
-	    };
-	
-	    return _class;
-	  }(ComposeComponent), _class.displayName = 'CommonMixinWrapper', _class.defaultProps = ComposeComponent.defaultProps, _class.getDerivedStateFromProps = ComposeComponent.getDerivedStateFromProps, _temp2;
-	};
-
-/***/ }),
-/* 515 */
-/***/ (function(module, exports) {
-
-	'use strict';
-	
-	exports.__esModule = true;
-	exports['default'] = {
-	  today: 'Today',
-	  now: 'Now',
-	  backToToday: 'Back to today',
-	  ok: 'Ok',
-	  clear: 'Clear',
-	  month: 'Month',
-	  year: 'Year',
-	  timeSelect: 'select time',
-	  dateSelect: 'select date',
-	  weekSelect: 'Choose a week',
-	  monthSelect: 'Choose a month',
-	  yearSelect: 'Choose a year',
-	  decadeSelect: 'Choose a decade',
-	  yearFormat: 'YYYY',
-	  dateFormat: 'M/D/YYYY',
-	  dayFormat: 'D',
-	  dateTimeFormat: 'M/D/YYYY HH:mm:ss',
-	  monthBeforeYear: true,
-	  previousMonth: 'Previous month (PageUp)',
-	  nextMonth: 'Next month (PageDown)',
-	  previousYear: 'Last year (Control + left)',
-	  nextYear: 'Next year (Control + right)',
-	  previousDecade: 'Last decade',
-	  nextDecade: 'Next decade',
-	  previousCentury: 'Last century',
-	  nextCentury: 'Next century'
-	};
-	module.exports = exports['default'];
-
-/***/ }),
-/* 516 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	exports.__esModule = true;
-	
-	var _classCallCheck2 = __webpack_require__(267);
-	
-	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
-	
-	var _possibleConstructorReturn2 = __webpack_require__(297);
-	
-	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
-	
-	var _inherits2 = __webpack_require__(298);
-	
-	var _inherits3 = _interopRequireDefault(_inherits2);
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
 	
 	var _react = __webpack_require__(4);
 	
@@ -52478,19 +51530,27 @@
 	
 	var _util = __webpack_require__(502);
 	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+	
+	function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : _defaults(subClass, superClass); }
 	
 	var cachedSelectionStart = void 0;
 	var cachedSelectionEnd = void 0;
 	var dateInputInstance = void 0;
 	
 	var DateInput = function (_React$Component) {
-	  (0, _inherits3['default'])(DateInput, _React$Component);
+	  _inherits(DateInput, _React$Component);
 	
 	  function DateInput(props) {
-	    (0, _classCallCheck3['default'])(this, DateInput);
+	    _classCallCheck(this, DateInput);
 	
-	    var _this = (0, _possibleConstructorReturn3['default'])(this, _React$Component.call(this, props));
+	    var _this = _possibleConstructorReturn(this, _React$Component.call(this, props));
 	
 	    _initialiseProps.call(_this);
 	
@@ -52544,13 +51604,13 @@
 	        clearIcon = props.clearIcon;
 	
 	    var invalidClass = invalid ? prefixCls + '-input-invalid' : '';
-	    return _react2['default'].createElement(
+	    return _react2["default"].createElement(
 	      'div',
 	      { className: prefixCls + '-input-wrap' },
-	      _react2['default'].createElement(
+	      _react2["default"].createElement(
 	        'div',
 	        { className: prefixCls + '-date-input-wrap' },
-	        _react2['default'].createElement('input', {
+	        _react2["default"].createElement('input', {
 	          ref: this.saveDateInput,
 	          className: prefixCls + '-input ' + invalidClass,
 	          value: str,
@@ -52562,35 +51622,35 @@
 	          onBlur: this.onBlur
 	        })
 	      ),
-	      props.showClear ? _react2['default'].createElement(
+	      props.showClear ? _react2["default"].createElement(
 	        'a',
 	        {
 	          role: 'button',
 	          title: locale.clear,
 	          onClick: this.onClear
 	        },
-	        clearIcon || _react2['default'].createElement('span', { className: prefixCls + '-clear-btn' })
+	        clearIcon || _react2["default"].createElement('span', { className: prefixCls + '-clear-btn uf uf-close-c' })
 	      ) : null
 	    );
 	  };
 	
 	  return DateInput;
-	}(_react2['default'].Component);
+	}(_react2["default"].Component);
 	
 	DateInput.propTypes = {
-	  prefixCls: _propTypes2['default'].string,
-	  timePicker: _propTypes2['default'].object,
-	  value: _propTypes2['default'].object,
-	  disabledTime: _propTypes2['default'].any,
-	  format: _propTypes2['default'].oneOfType([_propTypes2['default'].string, _propTypes2['default'].arrayOf(_propTypes2['default'].string)]),
-	  locale: _propTypes2['default'].object,
-	  disabledDate: _propTypes2['default'].func,
-	  onChange: _propTypes2['default'].func,
-	  onClear: _propTypes2['default'].func,
-	  placeholder: _propTypes2['default'].string,
-	  onSelect: _propTypes2['default'].func,
-	  selectedValue: _propTypes2['default'].object,
-	  clearIcon: _propTypes2['default'].node
+	  prefixCls: _propTypes2["default"].string,
+	  timePicker: _propTypes2["default"].object,
+	  value: _propTypes2["default"].object,
+	  disabledTime: _propTypes2["default"].any,
+	  format: _propTypes2["default"].oneOfType([_propTypes2["default"].string, _propTypes2["default"].arrayOf(_propTypes2["default"].string)]),
+	  locale: _propTypes2["default"].object,
+	  disabledDate: _propTypes2["default"].func,
+	  onChange: _propTypes2["default"].func,
+	  onClear: _propTypes2["default"].func,
+	  placeholder: _propTypes2["default"].string,
+	  onSelect: _propTypes2["default"].func,
+	  selectedValue: _propTypes2["default"].object,
+	  clearIcon: _propTypes2["default"].node
 	};
 	
 	var _initialiseProps = function _initialiseProps() {
@@ -52623,7 +51683,7 @@
 	    }
 	
 	    // 不合法直接退出
-	    var parsed = (0, _moment2['default'])(str, format, true);
+	    var parsed = (0, _moment2["default"])(str, format, true);
 	    if (!parsed.isValid()) {
 	      _this2.setState({
 	        invalid: true,
@@ -52669,19 +51729,15 @@
 	    var keyCode = _ref.keyCode;
 	    var _props2 = _this2.props,
 	        onSelect = _props2.onSelect,
-	        value = _props2.value,
-	        disabledDate = _props2.disabledDate;
+	        value = _props2.value;
 	
-	    if (keyCode === _KeyCode2['default'].ENTER && onSelect) {
-	      var validateDate = !disabledDate || !disabledDate(value);
-	      if (validateDate) {
-	        onSelect(value.clone());
-	      }
+	    if (keyCode === _KeyCode2["default"].ENTER && onSelect) {
+	      onSelect(value.clone());
 	    }
 	  };
 	
 	  this.getRootDOMNode = function () {
-	    return _reactDom2['default'].findDOMNode(_this2);
+	    return _reactDom2["default"].findDOMNode(_this2);
 	  };
 	
 	  this.focus = function () {
@@ -52697,7 +51753,1100 @@
 	
 	(0, _reactLifecyclesCompat.polyfill)(DateInput);
 	
-	exports['default'] = DateInput;
+	exports["default"] = DateInput;
+	module.exports = exports['default'];
+
+/***/ }),
+/* 508 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(4);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _propTypes = __webpack_require__(5);
+	
+	var _propTypes2 = _interopRequireDefault(_propTypes);
+	
+	var _classnames = __webpack_require__(3);
+	
+	var _classnames2 = _interopRequireDefault(_classnames);
+	
+	var _DecadePanel = __webpack_require__(509);
+	
+	var _DecadePanel2 = _interopRequireDefault(_DecadePanel);
+	
+	var _DateInput = __webpack_require__(507);
+	
+	var _DateInput2 = _interopRequireDefault(_DateInput);
+	
+	var _moment = __webpack_require__(372);
+	
+	var _moment2 = _interopRequireDefault(_moment);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+	
+	function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
+	
+	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : _defaults(subClass, superClass); }
+	
+	var ROW = 4;
+	var COL = 3;
+	
+	function goYear(direction) {
+	  var value = this.state.value.clone();
+	  value.add(direction, 'year');
+	  this.setState({
+	    value: value
+	  });
+	}
+	
+	function chooseYear(year) {
+	  var value = this.state.value.clone();
+	  value.year(year);
+	  value.month(this.state.value.month());
+	  this.props.onSelect(value);
+	}
+	
+	var YearPanel = function (_React$Component) {
+	  _inherits(YearPanel, _React$Component);
+	
+	  function YearPanel(props) {
+	    _classCallCheck(this, YearPanel);
+	
+	    var _this = _possibleConstructorReturn(this, _React$Component.call(this, props));
+	
+	    _this.onInputChange = function (value) {
+	      var _this$props = _this.props,
+	          onChange = _this$props.onChange,
+	          format = _this$props.format;
+	
+	      _this.setState({
+	        value: value ? value : (0, _moment2["default"])()
+	      });
+	      onChange && onChange(value, value ? value.format(format) : '');
+	    };
+	
+	    _this.onClear = function () {
+	      var _this$props2 = _this.props,
+	          onChange = _this$props2.onChange,
+	          format = _this$props2.format,
+	          onClear = _this$props2.onClear;
+	
+	      _this.setState({
+	        value: (0, _moment2["default"])()
+	      });
+	      onChange && onChange('', '');
+	      onClear && onClear('', '');
+	    };
+	
+	    _this.prefixCls = props.rootPrefixCls + '-year-panel';
+	    _this.state = {
+	      value: props.value || props.defaultValue
+	    };
+	    _this.nextDecade = goYear.bind(_this, 10);
+	    _this.previousDecade = goYear.bind(_this, -10);
+	    ['showDecadePanel', 'onDecadePanelSelect'].forEach(function (method) {
+	      _this[method] = _this[method].bind(_this);
+	    });
+	    return _this;
+	  }
+	
+	  YearPanel.prototype.onDecadePanelSelect = function onDecadePanelSelect(current) {
+	    this.setState({
+	      value: current,
+	      showDecadePanel: 0
+	    });
+	  };
+	
+	  YearPanel.prototype.years = function years() {
+	    var value = this.state.value;
+	    var currentYear = value.year();
+	    var startYear = parseInt(currentYear / 10, 10) * 10;
+	    var previousYear = startYear - 1;
+	    var years = [];
+	    var index = 0;
+	    for (var rowIndex = 0; rowIndex < ROW; rowIndex++) {
+	      years[rowIndex] = [];
+	      for (var colIndex = 0; colIndex < COL; colIndex++) {
+	        var year = previousYear + index;
+	        var content = String(year);
+	        years[rowIndex][colIndex] = {
+	          content: content,
+	          year: year,
+	          title: content
+	        };
+	        index++;
+	      }
+	    }
+	    return years;
+	  };
+	
+	  YearPanel.prototype.showDecadePanel = function showDecadePanel() {
+	    this.setState({
+	      showDecadePanel: 1
+	    });
+	  };
+	
+	  YearPanel.prototype.render = function render() {
+	    var _this2 = this;
+	
+	    var props = this.props;
+	    var value = this.state.value;
+	    var locale = props.locale;
+	    var years = this.years();
+	    var currentYear = value.year();
+	    var startYear = parseInt(currentYear / 10, 10) * 10;
+	    var endYear = startYear + 9;
+	    var prefixCls = this.prefixCls;
+	
+	    var yeasEls = years.map(function (row, index) {
+	      var tds = row.map(function (yearData) {
+	        var _classNameMap;
+	
+	        var classNameMap = (_classNameMap = {}, _defineProperty(_classNameMap, prefixCls + '-cell', 1), _defineProperty(_classNameMap, prefixCls + '-selected-cell', yearData.year === currentYear), _defineProperty(_classNameMap, prefixCls + '-last-decade-cell', yearData.year < startYear), _defineProperty(_classNameMap, prefixCls + '-next-decade-cell', yearData.year > endYear), _classNameMap);
+	        var clickHandler = void 0;
+	        if (yearData.year < startYear) {
+	          clickHandler = _this2.previousDecade;
+	        } else if (yearData.year > endYear) {
+	          clickHandler = _this2.nextDecade;
+	        } else {
+	          clickHandler = chooseYear.bind(_this2, yearData.year);
+	        }
+	        return _react2["default"].createElement(
+	          'td',
+	          {
+	            role: 'gridcell',
+	            title: yearData.title,
+	            key: yearData.content,
+	            onClick: clickHandler,
+	            className: (0, _classnames2["default"])(classNameMap)
+	          },
+	          _react2["default"].createElement(
+	            'a',
+	            {
+	              className: prefixCls + '-year'
+	            },
+	            yearData.content
+	          )
+	        );
+	      });
+	      return _react2["default"].createElement(
+	        'tr',
+	        { key: index, role: 'row' },
+	        tds
+	      );
+	    });
+	
+	    var decadePanel = void 0;
+	    if (this.state.showDecadePanel) {
+	      decadePanel = _react2["default"].createElement(_DecadePanel2["default"], {
+	        locale: locale,
+	        value: value,
+	        rootPrefixCls: props.rootPrefixCls,
+	        onSelect: this.onDecadePanelSelect
+	      });
+	    }
+	    var showDateInput = props.showDateInput,
+	        rootPrefixCls = props.rootPrefixCls,
+	        format = props.format;
+	
+	    return _react2["default"].createElement(
+	      'div',
+	      { className: this.prefixCls },
+	      _react2["default"].createElement(
+	        'div',
+	        null,
+	        showDateInput ? _react2["default"].createElement(_DateInput2["default"], {
+	          value: value,
+	          prefixCls: this.props.rootPrefixCls,
+	          showClear: true,
+	          locale: locale,
+	          format: format,
+	          onChange: this.onInputChange,
+	          selectedValue: value,
+	          onClear: this.onClear
+	        }) : '',
+	        _react2["default"].createElement(
+	          'div',
+	          { className: prefixCls + '-header' },
+	          _react2["default"].createElement('a', {
+	            className: prefixCls + '-prev-decade-btn',
+	            role: 'button',
+	            onClick: this.previousDecade,
+	            title: locale.previousDecade
+	          }),
+	          _react2["default"].createElement(
+	            'a',
+	            {
+	              className: prefixCls + '-decade-select',
+	              role: 'button',
+	              onClick: this.showDecadePanel,
+	              title: locale.decadeSelect
+	            },
+	            _react2["default"].createElement(
+	              'span',
+	              { className: prefixCls + '-decade-select-content' },
+	              startYear,
+	              '-',
+	              endYear
+	            ),
+	            _react2["default"].createElement(
+	              'span',
+	              { className: prefixCls + '-decade-select-arrow' },
+	              'x'
+	            )
+	          ),
+	          _react2["default"].createElement('a', {
+	            className: prefixCls + '-next-decade-btn',
+	            role: 'button',
+	            onClick: this.nextDecade,
+	            title: locale.nextDecade
+	          })
+	        ),
+	        _react2["default"].createElement(
+	          'div',
+	          { className: prefixCls + '-body' },
+	          _react2["default"].createElement(
+	            'table',
+	            { className: prefixCls + '-table', cellSpacing: '0', role: 'grid' },
+	            _react2["default"].createElement(
+	              'tbody',
+	              { className: prefixCls + '-tbody' },
+	              yeasEls
+	            )
+	          )
+	        )
+	      ),
+	      decadePanel
+	    );
+	  };
+	
+	  return YearPanel;
+	}(_react2["default"].Component);
+	
+	exports["default"] = YearPanel;
+	
+	
+	YearPanel.propTypes = {
+	  rootPrefixCls: _propTypes2["default"].string,
+	  value: _propTypes2["default"].object,
+	  defaultValue: _propTypes2["default"].object
+	};
+	
+	YearPanel.defaultProps = {
+	  onSelect: function onSelect() {},
+	
+	  format: 'YYYY',
+	  showDateInput: false
+	};
+	module.exports = exports['default'];
+
+/***/ }),
+/* 509 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(4);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _propTypes = __webpack_require__(5);
+	
+	var _propTypes2 = _interopRequireDefault(_propTypes);
+	
+	var _classnames = __webpack_require__(3);
+	
+	var _classnames2 = _interopRequireDefault(_classnames);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+	
+	function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
+	
+	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : _defaults(subClass, superClass); }
+	
+	var ROW = 4;
+	var COL = 3;
+	
+	
+	function goYear(direction) {
+	  var next = this.state.value.clone();
+	  next.add(direction, 'years');
+	  this.setState({
+	    value: next
+	  });
+	}
+	
+	function chooseDecade(year, event) {
+	  var next = this.state.value.clone();
+	  next.year(year);
+	  next.month(this.state.value.month());
+	  this.props.onSelect(next);
+	  event.preventDefault();
+	}
+	
+	var DecadePanel = function (_React$Component) {
+	  _inherits(DecadePanel, _React$Component);
+	
+	  function DecadePanel(props) {
+	    _classCallCheck(this, DecadePanel);
+	
+	    var _this = _possibleConstructorReturn(this, _React$Component.call(this, props));
+	
+	    _this.state = {
+	      value: props.value || props.defaultValue
+	    };
+	
+	    // bind methods
+	    _this.prefixCls = props.rootPrefixCls + '-decade-panel';
+	    _this.nextCentury = goYear.bind(_this, 100);
+	    _this.previousCentury = goYear.bind(_this, -100);
+	    return _this;
+	  }
+	
+	  DecadePanel.prototype.render = function render() {
+	    var _this2 = this;
+	
+	    var value = this.state.value;
+	    var _props = this.props,
+	        locale = _props.locale,
+	        renderFooter = _props.renderFooter;
+	
+	    var currentYear = value.year();
+	    var startYear = parseInt(currentYear / 100, 10) * 100;
+	    var preYear = startYear - 10;
+	    var endYear = startYear + 99;
+	    var decades = [];
+	    var index = 0;
+	    var prefixCls = this.prefixCls;
+	
+	    for (var rowIndex = 0; rowIndex < ROW; rowIndex++) {
+	      decades[rowIndex] = [];
+	      for (var colIndex = 0; colIndex < COL; colIndex++) {
+	        var startDecade = preYear + index * 10;
+	        var endDecade = preYear + index * 10 + 9;
+	        decades[rowIndex][colIndex] = {
+	          startDecade: startDecade,
+	          endDecade: endDecade
+	        };
+	        index++;
+	      }
+	    }
+	
+	    var footer = renderFooter && renderFooter('decade');
+	
+	    var decadesEls = decades.map(function (row, decadeIndex) {
+	      var tds = row.map(function (decadeData) {
+	        var _classNameMap;
+	
+	        var dStartDecade = decadeData.startDecade;
+	        var dEndDecade = decadeData.endDecade;
+	        var isLast = dStartDecade < startYear;
+	        var isNext = dEndDecade > endYear;
+	        var classNameMap = (_classNameMap = {}, _defineProperty(_classNameMap, prefixCls + '-cell', 1), _defineProperty(_classNameMap, prefixCls + '-selected-cell', dStartDecade <= currentYear && currentYear <= dEndDecade), _defineProperty(_classNameMap, prefixCls + '-last-century-cell', isLast), _defineProperty(_classNameMap, prefixCls + '-next-century-cell', isNext), _classNameMap);
+	        var content = dStartDecade + '-' + dEndDecade;
+	        var clickHandler = void 0;
+	        if (isLast) {
+	          clickHandler = _this2.previousCentury;
+	        } else if (isNext) {
+	          clickHandler = _this2.nextCentury;
+	        } else {
+	          clickHandler = chooseDecade.bind(_this2, dStartDecade);
+	        }
+	        return _react2["default"].createElement(
+	          'td',
+	          {
+	            key: dStartDecade,
+	            onClick: clickHandler,
+	            role: 'gridcell',
+	            className: (0, _classnames2["default"])(classNameMap)
+	          },
+	          _react2["default"].createElement(
+	            'a',
+	            {
+	              className: prefixCls + '-decade'
+	            },
+	            content
+	          )
+	        );
+	      });
+	      return _react2["default"].createElement(
+	        'tr',
+	        { key: decadeIndex, role: 'row' },
+	        tds
+	      );
+	    });
+	
+	    return _react2["default"].createElement(
+	      'div',
+	      { className: this.prefixCls },
+	      _react2["default"].createElement(
+	        'div',
+	        { className: prefixCls + '-header' },
+	        _react2["default"].createElement('a', {
+	          className: prefixCls + '-prev-century-btn',
+	          role: 'button',
+	          onClick: this.previousCentury,
+	          title: locale.previousCentury
+	        }),
+	        _react2["default"].createElement(
+	          'div',
+	          { className: prefixCls + '-century' },
+	          startYear,
+	          '-',
+	          endYear
+	        ),
+	        _react2["default"].createElement('a', {
+	          className: prefixCls + '-next-century-btn',
+	          role: 'button',
+	          onClick: this.nextCentury,
+	          title: locale.nextCentury
+	        })
+	      ),
+	      _react2["default"].createElement(
+	        'div',
+	        { className: prefixCls + '-body' },
+	        _react2["default"].createElement(
+	          'table',
+	          { className: prefixCls + '-table', cellSpacing: '0', role: 'grid' },
+	          _react2["default"].createElement(
+	            'tbody',
+	            { className: prefixCls + '-tbody' },
+	            decadesEls
+	          )
+	        )
+	      ),
+	      footer && _react2["default"].createElement(
+	        'div',
+	        { className: prefixCls + '-footer' },
+	        footer
+	      )
+	    );
+	  };
+	
+	  return DecadePanel;
+	}(_react2["default"].Component);
+	
+	exports["default"] = DecadePanel;
+	
+	
+	DecadePanel.propTypes = {
+	  locale: _propTypes2["default"].object,
+	  value: _propTypes2["default"].object,
+	  defaultValue: _propTypes2["default"].object,
+	  rootPrefixCls: _propTypes2["default"].string,
+	  renderFooter: _propTypes2["default"].func
+	};
+	
+	DecadePanel.defaultProps = {
+	  onSelect: function onSelect() {}
+	};
+	module.exports = exports['default'];
+
+/***/ }),
+/* 510 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(4);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactDom = __webpack_require__(12);
+	
+	var _reactDom2 = _interopRequireDefault(_reactDom);
+	
+	var _propTypes = __webpack_require__(5);
+	
+	var _propTypes2 = _interopRequireDefault(_propTypes);
+	
+	var _mapSelf = __webpack_require__(504);
+	
+	var _mapSelf2 = _interopRequireDefault(_mapSelf);
+	
+	var _classnames = __webpack_require__(3);
+	
+	var _classnames2 = _interopRequireDefault(_classnames);
+	
+	var _TodayButton = __webpack_require__(511);
+	
+	var _TodayButton2 = _interopRequireDefault(_TodayButton);
+	
+	var _OkButton = __webpack_require__(512);
+	
+	var _OkButton2 = _interopRequireDefault(_OkButton);
+	
+	var _TimePickerButton = __webpack_require__(513);
+	
+	var _TimePickerButton2 = _interopRequireDefault(_TimePickerButton);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+	
+	function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
+	
+	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : _defaults(subClass, superClass); }
+	
+	var CalendarFooter = function (_React$Component) {
+	  _inherits(CalendarFooter, _React$Component);
+	
+	  function CalendarFooter() {
+	    _classCallCheck(this, CalendarFooter);
+	
+	    return _possibleConstructorReturn(this, _React$Component.apply(this, arguments));
+	  }
+	
+	  CalendarFooter.prototype.onSelect = function onSelect(value) {
+	    this.props.onSelect(value);
+	  };
+	
+	  CalendarFooter.prototype.getRootDOMNode = function getRootDOMNode() {
+	    return _reactDom2["default"].findDOMNode(this);
+	  };
+	
+	  CalendarFooter.prototype.render = function render() {
+	    var props = this.props;
+	    var value = props.value,
+	        prefixCls = props.prefixCls,
+	        showOk = props.showOk,
+	        timePicker = props.timePicker,
+	        renderFooter = props.renderFooter,
+	        mode = props.mode;
+	
+	    var footerEl = null;
+	    var extraFooter = renderFooter && renderFooter(mode);
+	    if (props.showToday || timePicker || extraFooter) {
+	      var nowEl = void 0;
+	      if (props.showToday) {
+	        nowEl = _react2["default"].createElement(_TodayButton2["default"], _extends({}, props, { value: value }));
+	      }
+	      var okBtn = void 0;
+	      if (showOk === true || showOk !== false && !!props.timePicker) {
+	        okBtn = _react2["default"].createElement(_OkButton2["default"], props);
+	      }
+	      var timePickerBtn = void 0;
+	      if (!!props.timePicker) {
+	        timePickerBtn = _react2["default"].createElement(_TimePickerButton2["default"], props);
+	      }
+	
+	      var footerBtn = void 0;
+	      if (nowEl || timePickerBtn || okBtn || extraFooter) {
+	        footerBtn = _react2["default"].createElement(
+	          'span',
+	          { className: prefixCls + '-footer-btn' },
+	          extraFooter,
+	          (0, _mapSelf2["default"])([nowEl, timePickerBtn, okBtn])
+	        );
+	      }
+	      var cls = (0, _classnames2["default"])(prefixCls + '-footer', _defineProperty({}, prefixCls + '-footer-show-ok', okBtn));
+	      footerEl = _react2["default"].createElement(
+	        'div',
+	        { className: cls },
+	        footerBtn
+	      );
+	    }
+	    return footerEl;
+	  };
+	
+	  return CalendarFooter;
+	}(_react2["default"].Component);
+	
+	CalendarFooter.propTypes = {
+	  prefixCls: _propTypes2["default"].string,
+	  showDateInput: _propTypes2["default"].bool,
+	  disabledTime: _propTypes2["default"].any,
+	  timePicker: _propTypes2["default"].element,
+	  selectedValue: _propTypes2["default"].any,
+	  showOk: _propTypes2["default"].bool,
+	  onSelect: _propTypes2["default"].func,
+	  value: _propTypes2["default"].object,
+	  renderFooter: _propTypes2["default"].func,
+	  defaultValue: _propTypes2["default"].object,
+	  mode: _propTypes2["default"].string
+	};
+	exports["default"] = CalendarFooter;
+	module.exports = exports['default'];
+
+/***/ }),
+/* 511 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports["default"] = TodayButton;
+	
+	var _react = __webpack_require__(4);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _util = __webpack_require__(502);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+	
+	function TodayButton(_ref) {
+	  var prefixCls = _ref.prefixCls,
+	      locale = _ref.locale,
+	      value = _ref.value,
+	      timePicker = _ref.timePicker,
+	      disabled = _ref.disabled,
+	      disabledDate = _ref.disabledDate,
+	      onToday = _ref.onToday,
+	      text = _ref.text;
+	
+	  var localeNow = (!text && timePicker ? locale.now : text) || locale.today;
+	  var disabledToday = disabledDate && !(0, _util.isAllowedDate)((0, _util.getTodayTime)(value), disabledDate);
+	  var isDisabled = disabledToday || disabled;
+	  var disabledTodayClass = isDisabled ? prefixCls + '-today-btn-disabled' : '';
+	  return _react2["default"].createElement(
+	    'a',
+	    {
+	      className: prefixCls + '-today-btn ' + disabledTodayClass,
+	      role: 'button',
+	      onClick: isDisabled ? null : onToday,
+	      title: (0, _util.getTodayTimeStr)(value)
+	    },
+	    localeNow
+	  );
+	}
+	module.exports = exports['default'];
+
+/***/ }),
+/* 512 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports["default"] = OkButton;
+	
+	var _react = __webpack_require__(4);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _beeButton = __webpack_require__(82);
+	
+	var _beeButton2 = _interopRequireDefault(_beeButton);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+	
+	function OkButton(_ref) {
+	  var prefixCls = _ref.prefixCls,
+	      locale = _ref.locale,
+	      okDisabled = _ref.okDisabled,
+	      onOk = _ref.onOk;
+	
+	  var className = prefixCls + '-btn-ok';
+	  // if (okDisabled) {
+	  //   className += ` ${prefixCls}-ok-btn-disabled`;
+	  // }
+	  return _react2["default"].createElement(
+	    _beeButton2["default"],
+	    {
+	      className: className,
+	      size: 'sm', colors: 'primary',
+	      disabled: okDisabled,
+	      onClick: okDisabled ? null : onOk
+	    },
+	    locale.ok
+	  );
+	}
+	module.exports = exports['default'];
+
+/***/ }),
+/* 513 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports["default"] = TimePickerButton;
+	
+	var _react = __webpack_require__(4);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _classnames2 = __webpack_require__(3);
+	
+	var _classnames3 = _interopRequireDefault(_classnames2);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+	
+	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+	
+	function TimePickerButton(_ref) {
+	  var _classnames;
+	
+	  var prefixCls = _ref.prefixCls,
+	      locale = _ref.locale,
+	      showTimePicker = _ref.showTimePicker,
+	      onOpenTimePicker = _ref.onOpenTimePicker,
+	      onCloseTimePicker = _ref.onCloseTimePicker,
+	      timePickerDisabled = _ref.timePickerDisabled;
+	
+	  var className = (0, _classnames3["default"])((_classnames = {}, _defineProperty(_classnames, prefixCls + '-time-picker-btn', true), _defineProperty(_classnames, prefixCls + '-time-picker-btn-disabled', timePickerDisabled), _classnames));
+	  var onClick = null;
+	  if (!timePickerDisabled) {
+	    onClick = showTimePicker ? onCloseTimePicker : onOpenTimePicker;
+	  }
+	  return _react2["default"].createElement(
+	    'a',
+	    {
+	      className: className,
+	      role: 'button',
+	      onClick: onClick
+	    },
+	    showTimePicker ? locale.dateSelect : locale.timeSelect
+	  );
+	}
+	module.exports = exports['default'];
+
+/***/ }),
+/* 514 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.calendarMixinWrapper = exports.calendarMixinDefaultProps = exports.calendarMixinPropTypes = undefined;
+	exports.getNowByCurrentStateValue = getNowByCurrentStateValue;
+	
+	var _react = __webpack_require__(4);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _propTypes = __webpack_require__(5);
+	
+	var _propTypes2 = _interopRequireDefault(_propTypes);
+	
+	var _classnames = __webpack_require__(3);
+	
+	var _classnames2 = _interopRequireDefault(_classnames);
+	
+	var _moment = __webpack_require__(372);
+	
+	var _moment2 = _interopRequireDefault(_moment);
+	
+	var _index = __webpack_require__(502);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+	
+	function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
+	
+	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : _defaults(subClass, superClass); }
+	
+	function noop() {}
+	
+	function getNowByCurrentStateValue(value) {
+	  var ret = void 0;
+	  if (value) {
+	    ret = (0, _index.getTodayTime)(value);
+	  } else {
+	    ret = (0, _moment2["default"])();
+	  }
+	  return ret;
+	}
+	
+	var calendarMixinPropTypes = exports.calendarMixinPropTypes = {
+	  value: _propTypes2["default"].object,
+	  defaultValue: _propTypes2["default"].object,
+	  onKeyDown: _propTypes2["default"].func
+	};
+	
+	var calendarMixinDefaultProps = exports.calendarMixinDefaultProps = {
+	  onKeyDown: noop
+	};
+	
+	var calendarMixinWrapper = exports.calendarMixinWrapper = function calendarMixinWrapper(ComposeComponent) {
+	  var _class, _temp2;
+	
+	  return _temp2 = _class = function (_ComposeComponent) {
+	    _inherits(_class, _ComposeComponent);
+	
+	    function _class() {
+	      var _temp, _this, _ret;
+	
+	      _classCallCheck(this, _class);
+	
+	      for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+	        args[_key] = arguments[_key];
+	      }
+	
+	      return _ret = (_temp = (_this = _possibleConstructorReturn(this, _ComposeComponent.call.apply(_ComposeComponent, [this].concat(args))), _this), _this.onSelect = function (value, cause) {
+	        if (value) {
+	          _this.setValue(value);
+	        }
+	        _this.setSelectedValue(value, cause);
+	      }, _this.renderRoot = function (newProps) {
+	        var _className;
+	
+	        var props = _this.props;
+	        var prefixCls = props.prefixCls;
+	
+	        var className = (_className = {}, _defineProperty(_className, prefixCls, 1), _defineProperty(_className, prefixCls + '-hidden', !props.visible), _defineProperty(_className, props.className, !!props.className), _defineProperty(_className, newProps.className, !!newProps.className), _className);
+	
+	        return _react2["default"].createElement(
+	          'div',
+	          {
+	            ref: _this.saveRoot,
+	            className: '' + (0, _classnames2["default"])(className),
+	            style: _this.props.style,
+	            tabIndex: '0',
+	            onKeyDown: _this.onKeyDown
+	          },
+	          newProps.children
+	        );
+	      }, _this.setSelectedValue = function (selectedValue, cause) {
+	        // if (this.isAllowedDate(selectedValue)) {
+	        if (!('selectedValue' in _this.props)) {
+	          _this.setState({
+	            selectedValue: selectedValue
+	          });
+	        }
+	        if (_this.props.onSelect) {
+	          _this.props.onSelect(selectedValue, cause);
+	        }
+	        // }
+	      }, _this.setValue = function (value) {
+	        var originalValue = _this.state.value;
+	        if (!('value' in _this.props)) {
+	          _this.setState({
+	            value: value
+	          });
+	        }
+	        if (originalValue && value && !originalValue.isSame(value) || !originalValue && value || originalValue && !value) {
+	          _this.props.onChange(value);
+	        }
+	      }, _this.isAllowedDate = function (value) {
+	        var disabledDate = _this.props.disabledDate;
+	        var disabledTime = _this.props.disabledTime;
+	        return (0, _index.isAllowedDate)(value, disabledDate, disabledTime);
+	      }, _temp), _possibleConstructorReturn(_this, _ret);
+	    }
+	
+	    _class.getDerivedStateFromProps = function getDerivedStateFromProps(nextProps, prevState) {
+	      // Use origin function if provided
+	      if (ComposeComponent.getDerivedStateFromProps) {
+	        return ComposeComponent.getDerivedStateFromProps(nextProps, prevState);
+	      }
+	
+	      var value = nextProps.value,
+	          selectedValue = nextProps.selectedValue;
+	
+	      var newState = {};
+	
+	      if ('value' in nextProps) {
+	        newState.value = value || nextProps.defaultValue || getNowByCurrentStateValue(prevState.value);
+	      }
+	      if ('selectedValue' in nextProps) {
+	        newState.selectedValue = selectedValue;
+	      }
+	
+	      return newState;
+	    };
+	
+	    return _class;
+	  }(ComposeComponent), _class.displayName = 'CalendarMixinWrapper', _class.defaultProps = ComposeComponent.defaultProps, _temp2;
+	};
+
+/***/ }),
+/* 515 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.commonMixinWrapper = exports.defaultProp = exports.propType = undefined;
+	
+	var _propTypes = __webpack_require__(5);
+	
+	var _propTypes2 = _interopRequireDefault(_propTypes);
+	
+	var _en_US = __webpack_require__(516);
+	
+	var _en_US2 = _interopRequireDefault(_en_US);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+	
+	function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : _defaults(subClass, superClass); }
+	
+	function noop() {}
+	
+	var propType = exports.propType = {
+	  className: _propTypes2["default"].string,
+	  locale: _propTypes2["default"].object,
+	  style: _propTypes2["default"].object,
+	  visible: _propTypes2["default"].bool,
+	  onSelect: _propTypes2["default"].func,
+	  prefixCls: _propTypes2["default"].string,
+	  onChange: _propTypes2["default"].func,
+	  onOk: _propTypes2["default"].func
+	};
+	
+	var defaultProp = exports.defaultProp = {
+	  locale: _en_US2["default"],
+	  style: {},
+	  visible: true,
+	  prefixCls: 'rc-calendar',
+	  className: '',
+	  onSelect: noop,
+	  onChange: noop,
+	  onClear: noop,
+	  renderFooter: function renderFooter() {
+	    return null;
+	  },
+	  renderSidebar: function renderSidebar() {
+	    return null;
+	  }
+	};
+	
+	var commonMixinWrapper = exports.commonMixinWrapper = function commonMixinWrapper(ComposeComponent) {
+	  var _class, _temp2;
+	
+	  return _temp2 = _class = function (_ComposeComponent) {
+	    _inherits(_class, _ComposeComponent);
+	
+	    function _class() {
+	      var _temp, _this, _ret;
+	
+	      _classCallCheck(this, _class);
+	
+	      for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+	        args[_key] = arguments[_key];
+	      }
+	
+	      return _ret = (_temp = (_this = _possibleConstructorReturn(this, _ComposeComponent.call.apply(_ComposeComponent, [this].concat(args))), _this), _this.getFormat = function () {
+	        var format = _this.props.format;
+	        var _this$props = _this.props,
+	            locale = _this$props.locale,
+	            timePicker = _this$props.timePicker;
+	
+	        if (!format) {
+	          if (timePicker) {
+	            format = locale.dateTimeFormat;
+	          } else {
+	            format = locale.dateFormat;
+	          }
+	        }
+	        return format;
+	      }, _this.focus = function () {
+	        if (_this.focusElement) {
+	          _this.focusElement.focus();
+	        } else if (_this.rootInstance) {
+	          _this.rootInstance.focus();
+	        }
+	      }, _this.saveFocusElement = function (focusElement) {
+	        _this.focusElement = focusElement;
+	      }, _this.saveRoot = function (root) {
+	        _this.rootInstance = root;
+	      }, _temp), _possibleConstructorReturn(_this, _ret);
+	    }
+	
+	    _class.prototype.shouldComponentUpdate = function shouldComponentUpdate(nextProps) {
+	      return this.props.visible || nextProps.visible;
+	    };
+	
+	    return _class;
+	  }(ComposeComponent), _class.displayName = 'CommonMixinWrapper', _class.defaultProps = ComposeComponent.defaultProps, _class.getDerivedStateFromProps = ComposeComponent.getDerivedStateFromProps, _temp2;
+	};
+
+/***/ }),
+/* 516 */
+/***/ (function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports["default"] = {
+	  today: 'Today',
+	  now: 'Now',
+	  backToToday: 'Back to today',
+	  ok: 'Ok',
+	  clear: 'Clear',
+	  month: 'Month',
+	  year: 'Year',
+	  timeSelect: 'select time',
+	  dateSelect: 'select date',
+	  weekSelect: 'Choose a week',
+	  monthSelect: 'Choose a month',
+	  yearSelect: 'Choose a year',
+	  decadeSelect: 'Choose a decade',
+	  yearFormat: 'YYYY',
+	  dateFormat: 'M/D/YYYY',
+	  dayFormat: 'D',
+	  dateTimeFormat: 'M/D/YYYY HH:mm:ss',
+	  monthBeforeYear: true,
+	  previousMonth: 'Previous month (PageUp)',
+	  nextMonth: 'Next month (PageDown)',
+	  previousYear: 'Last year (Control + left)',
+	  nextYear: 'Next year (Control + right)',
+	  previousDecade: 'Last decade',
+	  nextDecade: 'Next decade',
+	  previousCentury: 'Last century',
+	  nextCentury: 'Next century',
+	  lastWeek: 'Last week',
+	  nowWeek: 'Now week',
+	  nextWeek: 'Next week'
+	};
 	module.exports = exports['default'];
 
 /***/ }),
@@ -52706,7 +52855,9 @@
 
 	'use strict';
 	
-	exports.__esModule = true;
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
 	exports.goStartMonth = goStartMonth;
 	exports.goEndMonth = goEndMonth;
 	exports.goTime = goTime;
@@ -52739,19 +52890,9 @@
 
 	'use strict';
 	
-	exports.__esModule = true;
-	
-	var _classCallCheck2 = __webpack_require__(267);
-	
-	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
-	
-	var _possibleConstructorReturn2 = __webpack_require__(297);
-	
-	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
-	
-	var _inherits2 = __webpack_require__(298);
-	
-	var _inherits3 = _interopRequireDefault(_inherits2);
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
 	
 	var _react = __webpack_require__(4);
 	
@@ -52783,7 +52924,15 @@
 	
 	var _rcTrigger2 = _interopRequireDefault(_rcTrigger);
 	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+	
+	function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : _defaults(subClass, superClass); }
 	
 	function noop() {}
 	
@@ -52792,12 +52941,12 @@
 	}
 	
 	var Picker = function (_React$Component) {
-	  (0, _inherits3['default'])(Picker, _React$Component);
+	  _inherits(Picker, _React$Component);
 	
 	  function Picker(props) {
-	    (0, _classCallCheck3['default'])(this, Picker);
+	    _classCallCheck(this, Picker);
 	
-	    var _this = (0, _possibleConstructorReturn3['default'])(this, _React$Component.call(this, props));
+	    var _this = _possibleConstructorReturn(this, _React$Component.call(this, props));
 	
 	    _initialiseProps.call(_this);
 	
@@ -52856,12 +53005,12 @@
 	        children = props.children;
 	
 	    var state = this.state;
-	    return _react2['default'].createElement(
-	      _rcTrigger2['default'],
+	    return _react2["default"].createElement(
+	      _rcTrigger2["default"],
 	      {
 	        popup: this.getCalendarElement(),
 	        popupAlign: align,
-	        builtinPlacements: _placements2['default'],
+	        builtinPlacements: _placements2["default"],
 	        popupPlacement: placement,
 	        action: disabled && !state.open ? [] : ['click'],
 	        destroyPopupOnHide: true,
@@ -52874,30 +53023,30 @@
 	        prefixCls: prefixCls,
 	        popupClassName: dropdownClassName
 	      },
-	      _react2['default'].cloneElement(children(state, props), { onKeyDown: this.onKeyDown })
+	      _react2["default"].cloneElement(children(state, props), { onKeyDown: this.onKeyDown })
 	    );
 	  };
 	
 	  return Picker;
-	}(_react2['default'].Component);
+	}(_react2["default"].Component);
 	
 	Picker.propTypes = {
-	  animation: _propTypes2['default'].oneOfType([_propTypes2['default'].func, _propTypes2['default'].string]),
-	  disabled: _propTypes2['default'].bool,
-	  transitionName: _propTypes2['default'].string,
-	  onChange: _propTypes2['default'].func,
-	  onOpenChange: _propTypes2['default'].func,
-	  children: _propTypes2['default'].func,
-	  getCalendarContainer: _propTypes2['default'].func,
-	  calendar: _propTypes2['default'].element,
-	  style: _propTypes2['default'].object,
-	  open: _propTypes2['default'].bool,
-	  defaultOpen: _propTypes2['default'].bool,
-	  prefixCls: _propTypes2['default'].string,
-	  placement: _propTypes2['default'].any,
-	  value: _propTypes2['default'].oneOfType([_propTypes2['default'].object, _propTypes2['default'].array]),
-	  defaultValue: _propTypes2['default'].oneOfType([_propTypes2['default'].object, _propTypes2['default'].array]),
-	  align: _propTypes2['default'].object
+	  animation: _propTypes2["default"].oneOfType([_propTypes2["default"].func, _propTypes2["default"].string]),
+	  disabled: _propTypes2["default"].bool,
+	  transitionName: _propTypes2["default"].string,
+	  onChange: _propTypes2["default"].func,
+	  onOpenChange: _propTypes2["default"].func,
+	  children: _propTypes2["default"].func,
+	  getCalendarContainer: _propTypes2["default"].func,
+	  calendar: _propTypes2["default"].element,
+	  style: _propTypes2["default"].object,
+	  open: _propTypes2["default"].bool,
+	  defaultOpen: _propTypes2["default"].bool,
+	  prefixCls: _propTypes2["default"].string,
+	  placement: _propTypes2["default"].any,
+	  value: _propTypes2["default"].oneOfType([_propTypes2["default"].object, _propTypes2["default"].array]),
+	  defaultValue: _propTypes2["default"].oneOfType([_propTypes2["default"].object, _propTypes2["default"].array]),
+	  align: _propTypes2["default"].object
 	};
 	Picker.defaultProps = {
 	  prefixCls: 'rc-calendar-picker',
@@ -52913,7 +53062,7 @@
 	  var _this2 = this;
 	
 	  this.onCalendarKeyDown = function (event) {
-	    if (event.keyCode === _KeyCode2['default'].ESC) {
+	    if (event.keyCode === _KeyCode2["default"].ESC) {
 	      event.stopPropagation();
 	      _this2.close(_this2.focus);
 	    }
@@ -52935,7 +53084,7 @@
 	  };
 	
 	  this.onKeyDown = function (event) {
-	    if (!_this2.state.open && (event.keyCode === _KeyCode2['default'].DOWN || event.keyCode === _KeyCode2['default'].ENTER)) {
+	    if (!_this2.state.open && (event.keyCode === _KeyCode2["default"].DOWN || event.keyCode === _KeyCode2["default"].ENTER)) {
 	      _this2.open();
 	      event.preventDefault();
 	    }
@@ -52965,12 +53114,12 @@
 	      defaultValue: defaultValue || calendarProps.defaultValue,
 	      selectedValue: value,
 	      onKeyDown: _this2.onCalendarKeyDown,
-	      onOk: (0, _createChainedFunction2['default'])(calendarProps.onOk, _this2.onCalendarOk),
-	      onSelect: (0, _createChainedFunction2['default'])(calendarProps.onSelect, _this2.onCalendarSelect),
-	      onClear: (0, _createChainedFunction2['default'])(calendarProps.onClear, _this2.onCalendarClear)
+	      onOk: (0, _createChainedFunction2["default"])(calendarProps.onOk, _this2.onCalendarOk),
+	      onSelect: (0, _createChainedFunction2["default"])(calendarProps.onSelect, _this2.onCalendarSelect),
+	      onClear: (0, _createChainedFunction2["default"])(calendarProps.onClear, _this2.onCalendarClear)
 	    };
 	
-	    return _react2['default'].cloneElement(props.calendar, extraProps);
+	    return _react2["default"].cloneElement(props.calendar, extraProps);
 	  };
 	
 	  this.setOpen = function (open, callback) {
@@ -52996,7 +53145,7 @@
 	
 	  this.focus = function () {
 	    if (!_this2.state.open) {
-	      _reactDom2['default'].findDOMNode(_this2).focus();
+	      _reactDom2["default"].findDOMNode(_this2).focus();
 	    }
 	  };
 	
@@ -53009,7 +53158,7 @@
 	
 	(0, _reactLifecyclesCompat.polyfill)(Picker);
 	
-	exports['default'] = Picker;
+	exports["default"] = Picker;
 	module.exports = exports['default'];
 
 /***/ }),
@@ -53018,7 +53167,9 @@
 
 	'use strict';
 	
-	exports.__esModule = true;
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
 	var autoAdjustOverflow = {
 	  adjustX: 1,
 	  adjustY: 1
@@ -53053,7 +53204,7 @@
 	  }
 	};
 	
-	exports['default'] = placements;
+	exports["default"] = placements;
 	module.exports = exports['default'];
 
 /***/ }),
@@ -54374,6 +54525,47 @@
 
 /***/ }),
 /* 529 */
+/***/ (function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports["default"] = {
+	  today: '今天',
+	  now: '此刻',
+	  backToToday: '返回今天',
+	  ok: '确定',
+	  timeSelect: '选择时间',
+	  dateSelect: '选择日期',
+	  weekSelect: '选择周',
+	  clear: '清除',
+	  month: '月',
+	  year: '年',
+	  previousMonth: '上个月 (翻页上键)',
+	  nextMonth: '下个月 (翻页下键)',
+	  monthSelect: '选择月份',
+	  yearSelect: '选择年份',
+	  decadeSelect: '选择年代',
+	  yearFormat: 'YYYY年',
+	  dayFormat: 'D日',
+	  dateFormat: 'YYYY年M月D日',
+	  dateTimeFormat: 'YYYY年M月D日 HH时mm分ss秒',
+	  previousYear: '上一年 (Control键加左方向键)',
+	  nextYear: '下一年 (Control键加右方向键)',
+	  previousDecade: '上一年代',
+	  nextDecade: '下一年代',
+	  previousCentury: '上一世纪',
+	  nextCentury: '下一世纪',
+	  lastWeek: '上一周',
+	  nowWeek: '本周',
+	  nextWeek: '下一周'
+	};
+	module.exports = exports['default'];
+
+/***/ }),
+/* 530 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -54382,7 +54574,9 @@
 	  value: true
 	});
 	
-	var _MonthCalendar = __webpack_require__(530);
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _MonthCalendar = __webpack_require__(531);
 	
 	var _MonthCalendar2 = _interopRequireDefault(_MonthCalendar);
 	
@@ -54405,6 +54599,10 @@
 	var _beeInputGroup = __webpack_require__(524);
 	
 	var _beeInputGroup2 = _interopRequireDefault(_beeInputGroup);
+	
+	var _zh_CN = __webpack_require__(529);
+	
+	var _zh_CN2 = _interopRequireDefault(_zh_CN);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 	
@@ -54430,6 +54628,13 @@
 	      _this.setState({
 	        value: value
 	      });
+	      var _this$props = _this.props,
+	          onChange = _this$props.onChange,
+	          onClear = _this$props.onClear,
+	          onSelect = _this$props.onSelect,
+	          format = _this$props.format;
+	
+	      onChange && onChange(value, value ? value.format(format) : '');
 	    };
 	
 	    _this.onOpenChange = function (open) {
@@ -54444,10 +54649,31 @@
 	      });
 	    };
 	
+	    _this.onMouseLeave = function (e) {
+	      _this.setState({
+	        showClose: false
+	      });
+	    };
+	
+	    _this.onMouseEnter = function (e) {
+	      _this.setState({
+	        showClose: true
+	      });
+	    };
+	
+	    _this.clear = function (e) {
+	      e.stopPropagation();
+	      _this.setState({
+	        value: ''
+	      });
+	      _this.props.onChange && _this.props.onChange('', '');
+	    };
+	
 	    _this.state = {
 	      type: "month",
 	      value: props.value || props.defaultValue,
-	      open: false
+	      open: false,
+	      showClose: false
 	    };
 	    return _this;
 	  }
@@ -54459,8 +54685,9 @@
 	
 	    var props = this.props;
 	
-	    var monthCalendar = _react2["default"].createElement(_MonthCalendar2["default"], props);
-	
+	    var monthCalendar = _react2["default"].createElement(_MonthCalendar2["default"], _extends({}, props, {
+	      onChange: this.onChange
+	    }));
 	    return _react2["default"].createElement(
 	      "div",
 	      null,
@@ -54479,13 +54706,22 @@
 	
 	          return _react2["default"].createElement(
 	            _beeInputGroup2["default"],
-	            { simple: true, className: "datepicker-input-group" },
+	            { simple: true, className: "datepicker-input-group",
+	              onMouseEnter: _this2.onMouseEnter,
+	              onMouseLeave: _this2.onMouseLeave
+	            },
 	            _react2["default"].createElement(_beeFormControl2["default"], {
 	              placeholder: _this2.props.placeholder,
 	              className: _this2.props.className,
-	              value: value && value.format(props.format) || ""
+	              value: value && value.format(props.format) || "",
+	              disabled: props.disabled
 	            }),
-	            _react2["default"].createElement(
+	            _this2.state.value && _this2.state.showClose && !props.disabled ? _react2["default"].createElement(
+	              _beeInputGroup2["default"].Button,
+	              { shape: "border",
+	                onClick: _this2.clear },
+	              _react2["default"].createElement("i", { className: "uf uf-close-c" })
+	            ) : _react2["default"].createElement(
 	              _beeInputGroup2["default"].Button,
 	              { shape: "border" },
 	              props.renderIcon()
@@ -54502,35 +54738,27 @@
 	MonthPicker.defaultProps = {
 	  renderIcon: function renderIcon() {
 	    return _react2["default"].createElement(_beeIcon2["default"], { type: "uf-calendar" });
-	  }
+	  },
+	  format: 'YYYY-MM',
+	  showDateInput: true,
+	  showMonthInput: true,
+	  locale: _zh_CN2["default"]
 	};
 	
 	exports["default"] = MonthPicker;
 	module.exports = exports["default"];
 
 /***/ }),
-/* 530 */
+/* 531 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	exports.__esModule = true;
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
 	
-	var _extends2 = __webpack_require__(111);
-	
-	var _extends3 = _interopRequireDefault(_extends2);
-	
-	var _classCallCheck2 = __webpack_require__(267);
-	
-	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
-	
-	var _possibleConstructorReturn2 = __webpack_require__(297);
-	
-	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
-	
-	var _inherits2 = __webpack_require__(298);
-	
-	var _inherits3 = _interopRequireDefault(_inherits2);
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 	
 	var _react = __webpack_require__(4);
 	
@@ -54548,27 +54776,39 @@
 	
 	var _CalendarHeader2 = _interopRequireDefault(_CalendarHeader);
 	
-	var _CalendarFooter = __webpack_require__(509);
+	var _CalendarFooter = __webpack_require__(510);
 	
 	var _CalendarFooter2 = _interopRequireDefault(_CalendarFooter);
 	
-	var _CalendarMixin = __webpack_require__(513);
+	var _CalendarMixin = __webpack_require__(514);
 	
-	var _CommonMixin = __webpack_require__(514);
+	var _CommonMixin = __webpack_require__(515);
+	
+	var _DateInput = __webpack_require__(507);
+	
+	var _DateInput2 = _interopRequireDefault(_DateInput);
 	
 	var _moment = __webpack_require__(372);
 	
 	var _moment2 = _interopRequireDefault(_moment);
 	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+	
+	function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : _defaults(subClass, superClass); }
 	
 	var MonthCalendar = function (_React$Component) {
-	  (0, _inherits3['default'])(MonthCalendar, _React$Component);
+	  _inherits(MonthCalendar, _React$Component);
 	
 	  function MonthCalendar(props) {
-	    (0, _classCallCheck3['default'])(this, MonthCalendar);
+	    _classCallCheck(this, MonthCalendar);
 	
-	    var _this = (0, _possibleConstructorReturn3['default'])(this, _React$Component.call(this, props));
+	    var _this = _possibleConstructorReturn(this, _React$Component.call(this, props));
 	
 	    _this.onKeyDown = function (event) {
 	      var keyCode = event.keyCode;
@@ -54578,15 +54818,15 @@
 	
 	      var value = stateValue;
 	      switch (keyCode) {
-	        case _KeyCode2['default'].DOWN:
+	        case _KeyCode2["default"].DOWN:
 	          value = stateValue.clone();
 	          value.add(3, 'months');
 	          break;
-	        case _KeyCode2['default'].UP:
+	        case _KeyCode2["default"].UP:
 	          value = stateValue.clone();
 	          value.add(-3, 'months');
 	          break;
-	        case _KeyCode2['default'].LEFT:
+	        case _KeyCode2["default"].LEFT:
 	          value = stateValue.clone();
 	          if (ctrlKey) {
 	            value.add(-1, 'years');
@@ -54594,7 +54834,7 @@
 	            value.add(-1, 'months');
 	          }
 	          break;
-	        case _KeyCode2['default'].RIGHT:
+	        case _KeyCode2["default"].RIGHT:
 	          value = stateValue.clone();
 	          if (ctrlKey) {
 	            value.add(1, 'years');
@@ -54602,7 +54842,7 @@
 	            value.add(1, 'months');
 	          }
 	          break;
-	        case _KeyCode2['default'].ENTER:
+	        case _KeyCode2["default"].ENTER:
 	          if (!disabledDate || !disabledDate(stateValue)) {
 	            _this.onSelect(stateValue);
 	          }
@@ -54624,9 +54864,35 @@
 	      }
 	    };
 	
+	    _this.onInputChange = function (value) {
+	      var _this$props = _this.props,
+	          onChange = _this$props.onChange,
+	          format = _this$props.format;
+	
+	      _this.setState({
+	        value: value ? value : (0, _moment2["default"])()
+	      });
+	      _this.setValue(value);
+	      onChange && onChange(value);
+	    };
+	
+	    _this.onClear = function () {
+	      var _this$props2 = _this.props,
+	          onChange = _this$props2.onChange,
+	          format = _this$props2.format,
+	          onClear = _this$props2.onClear;
+	
+	      _this.setState({
+	        value: (0, _moment2["default"])()
+	      });
+	      _this.setValue((0, _moment2["default"])());
+	      onChange && onChange('', '');
+	      onClear && onClear('', '');
+	    };
+	
 	    _this.state = {
 	      mode: 'month',
-	      value: props.value || props.defaultValue || (0, _moment2['default'])(),
+	      value: props.value || props.defaultValue || (0, _moment2["default"])(),
 	      selectedValue: props.selectedValue || props.defaultSelectedValue
 	    };
 	    return _this;
@@ -54638,13 +54904,33 @@
 	    var mode = state.mode,
 	        value = state.value;
 	
-	    var children = _react2['default'].createElement(
+	    console.log(props);
+	    var prefixCls = props.prefixCls,
+	        locale = props.locale,
+	        format = props.format,
+	        showDateInput = props.showDateInput,
+	        onChange = props.onChange,
+	        onSelect = props.onSelect,
+	        onClear = props.onClear,
+	        showMonthInput = props.showMonthInput;
+	
+	    var children = _react2["default"].createElement(
 	      'div',
 	      { className: props.prefixCls + '-month-calendar-content' },
-	      _react2['default'].createElement(
+	      _react2["default"].createElement(
 	        'div',
 	        { className: props.prefixCls + '-month-header-wrap' },
-	        _react2['default'].createElement(_CalendarHeader2['default'], {
+	        showDateInput && showMonthInput ? _react2["default"].createElement(_DateInput2["default"], {
+	          value: value,
+	          prefixCls: prefixCls,
+	          showClear: true,
+	          locale: locale,
+	          format: format,
+	          onChange: this.onInputChange,
+	          selectedValue: value,
+	          onClear: this.onClear
+	        }) : '',
+	        _react2["default"].createElement(_CalendarHeader2["default"], {
 	          prefixCls: props.prefixCls,
 	          mode: mode,
 	          value: value,
@@ -54655,9 +54941,11 @@
 	          onMonthSelect: this.onSelect,
 	          onValueChange: this.setValue,
 	          onPanelChange: this.handlePanelChange
+	          // onChange={onChange}
+	          , onClear: onClear
 	        })
 	      ),
-	      _react2['default'].createElement(_CalendarFooter2['default'], {
+	      _react2["default"].createElement(_CalendarFooter2["default"], {
 	        prefixCls: props.prefixCls,
 	        renderFooter: props.renderFooter
 	      })
@@ -54669,23 +54957,25 @@
 	  };
 	
 	  return MonthCalendar;
-	}(_react2['default'].Component);
+	}(_react2["default"].Component);
 	
-	MonthCalendar.propTypes = (0, _extends3['default'])({}, _CalendarMixin.calendarMixinPropTypes, _CommonMixin.propType, {
-	  monthCellRender: _propTypes2['default'].func,
-	  dateCellRender: _propTypes2['default'].func,
-	  value: _propTypes2['default'].object,
-	  defaultValue: _propTypes2['default'].object,
-	  selectedValue: _propTypes2['default'].object,
-	  defaultSelectedValue: _propTypes2['default'].object,
-	  disabledDate: _propTypes2['default'].func
+	MonthCalendar.propTypes = _extends({}, _CalendarMixin.calendarMixinPropTypes, _CommonMixin.propType, {
+	  monthCellRender: _propTypes2["default"].func,
+	  dateCellRender: _propTypes2["default"].func,
+	  value: _propTypes2["default"].object,
+	  defaultValue: _propTypes2["default"].object,
+	  selectedValue: _propTypes2["default"].object,
+	  defaultSelectedValue: _propTypes2["default"].object,
+	  disabledDate: _propTypes2["default"].func
 	});
-	MonthCalendar.defaultProps = (0, _extends3['default'])({}, _CommonMixin.defaultProp, _CalendarMixin.calendarMixinDefaultProps);
-	exports['default'] = (0, _CalendarMixin.calendarMixinWrapper)((0, _CommonMixin.commonMixinWrapper)(MonthCalendar));
+	MonthCalendar.defaultProps = _extends({
+	  showDateInput: false
+	}, _CommonMixin.defaultProp, _CalendarMixin.calendarMixinDefaultProps);
+	exports["default"] = (0, _CalendarMixin.calendarMixinWrapper)((0, _CommonMixin.commonMixinWrapper)(MonthCalendar));
 	module.exports = exports['default'];
 
 /***/ }),
-/* 531 */
+/* 532 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -54698,7 +54988,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _RangeCalendar = __webpack_require__(532);
+	var _RangeCalendar = __webpack_require__(533);
 	
 	var _RangeCalendar2 = _interopRequireDefault(_RangeCalendar);
 	
@@ -54718,13 +55008,13 @@
 	
 	var _beeIcon2 = _interopRequireDefault(_beeIcon);
 	
-	var _zh_CN = __webpack_require__(534);
+	var _classnames = __webpack_require__(3);
+	
+	var _classnames2 = _interopRequireDefault(_classnames);
+	
+	var _zh_CN = __webpack_require__(529);
 	
 	var _zh_CN2 = _interopRequireDefault(_zh_CN);
-	
-	var _en_US = __webpack_require__(515);
-	
-	var _en_US2 = _interopRequireDefault(_en_US);
 	
 	var _moment = __webpack_require__(372);
 	
@@ -54746,8 +55036,6 @@
 	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * Created by chief on 17/4/6.
 	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                */
 	
-	
-	var classNames = __webpack_require__(3);
 	
 	function format(v, f) {
 	    return v ? v.format && v.format(f) : '';
@@ -54832,12 +55120,21 @@
 	
 	                return _react2["default"].createElement(
 	                    "div",
-	                    { className: classNames('calendar-picker', 'u-input-group', 'simple', props.className) },
+	                    { className: (0, _classnames2["default"])('calendar-picker', 'u-input-group', 'simple', props.className),
+	                        onMouseEnter: _this2.onMouseEnter,
+	                        onMouseLeave: _this2.onMouseLeave
+	                    },
 	                    _react2["default"].createElement(_beeFormControl2["default"], {
 	                        placeholder: _this2.props.placeholder ? _this2.props.placeholder : 'start ~ end',
-	                        value: isValidRange(value) && format(value[0], formatStr) + " ~ " + format(value[1], formatStr) || ''
+	                        value: isValidRange(value) && format(value[0], formatStr) + " ~ " + format(value[1], formatStr) || '',
+	                        disabled: props.disabled
 	                    }),
-	                    _react2["default"].createElement(
+	                    _this2.state.value && _this2.state.showClose && !props.disabled ? _react2["default"].createElement(
+	                        _beeInputGroup2["default"].Button,
+	                        { shape: "border",
+	                            onClick: _this2.clear },
+	                        _react2["default"].createElement("i", { className: "uf uf-close-c" })
+	                    ) : _react2["default"].createElement(
 	                        _beeInputGroup2["default"].Button,
 	                        { shape: "border" },
 	                        props.renderIcon()
@@ -54854,7 +55151,6 @@
 	    var _this3 = this;
 	
 	    this.onChange = function (value) {
-	        //console.log('onChange', value);
 	        var props = _this3.props;
 	        var formatStr = props.format || 'YYYY-MM-DD';
 	        _this3.setState({
@@ -54876,45 +55172,55 @@
 	    };
 	
 	    this.remove = function (e) {
-	        console.log(e);
 	        _this3.setState({ value: '' });
 	    };
 	
 	    this.handleCalendarChange = function (value) {};
+	
+	    this.onMouseLeave = function (e) {
+	        _this3.setState({
+	            showClose: false
+	        });
+	    };
+	
+	    this.onMouseEnter = function (e) {
+	        _this3.setState({
+	            showClose: true
+	        });
+	    };
+	
+	    this.clear = function (e) {
+	        e.stopPropagation();
+	        _this3.setState({
+	            value: ''
+	        });
+	        _this3.props.onChange && _this3.props.onChange('', '');
+	    };
 	};
 	
 	Picker.defaultProps = {
 	    renderIcon: function renderIcon() {
 	        return _react2["default"].createElement(_beeIcon2["default"], { type: "uf-calendar" });
-	    }
+	    },
+	    locale: _zh_CN2["default"]
 	};
 	
 	exports["default"] = Picker;
 	module.exports = exports["default"];
 
 /***/ }),
-/* 532 */
+/* 533 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	exports.__esModule = true;
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
 	
-	var _extends2 = __webpack_require__(111);
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 	
-	var _extends3 = _interopRequireDefault(_extends2);
-	
-	var _classCallCheck2 = __webpack_require__(267);
-	
-	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
-	
-	var _possibleConstructorReturn2 = __webpack_require__(297);
-	
-	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
-	
-	var _inherits2 = __webpack_require__(298);
-	
-	var _inherits3 = _interopRequireDefault(_inherits2);
+	var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
 	
 	var _react = __webpack_require__(4);
 	
@@ -54938,29 +55244,41 @@
 	
 	var _KeyCode2 = _interopRequireDefault(_KeyCode);
 	
-	var _CalendarPart = __webpack_require__(533);
+	var _CalendarPart = __webpack_require__(534);
 	
 	var _CalendarPart2 = _interopRequireDefault(_CalendarPart);
 	
-	var _TodayButton = __webpack_require__(510);
+	var _TodayButton = __webpack_require__(511);
 	
 	var _TodayButton2 = _interopRequireDefault(_TodayButton);
 	
-	var _OkButton = __webpack_require__(511);
+	var _OkButton = __webpack_require__(512);
 	
 	var _OkButton2 = _interopRequireDefault(_OkButton);
 	
-	var _TimePickerButton = __webpack_require__(512);
+	var _TimePickerButton = __webpack_require__(513);
 	
 	var _TimePickerButton2 = _interopRequireDefault(_TimePickerButton);
 	
-	var _CommonMixin = __webpack_require__(514);
+	var _CommonMixin = __webpack_require__(515);
 	
 	var _util = __webpack_require__(502);
 	
 	var _toTime = __webpack_require__(517);
 	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+	
+	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+	
+	function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
+	
+	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : _defaults(subClass, superClass); }
 	
 	function noop() {}
 	
@@ -54984,8 +55302,9 @@
 	}
 	
 	function getValueFromSelectedValue(selectedValue) {
-	  var start = selectedValue[0],
-	      end = selectedValue[1];
+	  var _selectedValue = _slicedToArray(selectedValue, 2),
+	      start = _selectedValue[0],
+	      end = _selectedValue[1];
 	
 	  var newEnd = end && end.isSame(start, 'month') ? end.clone().add(1, 'month') : end;
 	  return [start, newEnd];
@@ -54995,7 +55314,7 @@
 	  var selectedValue = props.selectedValue || init && props.defaultSelectedValue;
 	  var value = props.value || init && props.defaultValue;
 	  var normalizedValue = value ? getValueFromSelectedValue(value) : getValueFromSelectedValue(selectedValue);
-	  return !isEmptyArray(normalizedValue) ? normalizedValue : init && [(0, _moment2['default'])(), (0, _moment2['default'])().add(1, 'months')];
+	  return !isEmptyArray(normalizedValue) ? normalizedValue : init && [(0, _moment2["default"])(), (0, _moment2["default"])().add(1, 'months')];
 	}
 	
 	function generateOptions(length, extraOptionGen) {
@@ -55024,12 +55343,12 @@
 	}
 	
 	var RangeCalendar = function (_React$Component) {
-	  (0, _inherits3['default'])(RangeCalendar, _React$Component);
+	  _inherits(RangeCalendar, _React$Component);
 	
 	  function RangeCalendar(props) {
-	    (0, _classCallCheck3['default'])(this, RangeCalendar);
+	    _classCallCheck(this, RangeCalendar);
 	
-	    var _this = (0, _possibleConstructorReturn3['default'])(this, _React$Component.call(this, props));
+	    var _this = _possibleConstructorReturn(this, _React$Component.call(this, props));
 	
 	    _initialiseProps.call(_this);
 	
@@ -55088,8 +55407,8 @@
 	        mode = state.mode,
 	        showTimePicker = state.showTimePicker;
 	
-	    var className = (_className = {}, _className[props.className] = !!props.className, _className[prefixCls] = 1, _className[prefixCls + '-hidden'] = !props.visible, _className[prefixCls + '-range'] = 1, _className[prefixCls + '-show-time-picker'] = showTimePicker, _className[prefixCls + '-week-number'] = props.showWeekNumber, _className);
-	    var classes = (0, _classnames3['default'])(className);
+	    var className = (_className = {}, _defineProperty(_className, props.className, !!props.className), _defineProperty(_className, prefixCls, 1), _defineProperty(_className, prefixCls + '-hidden', !props.visible), _defineProperty(_className, prefixCls + '-range', 1), _defineProperty(_className, prefixCls + '-show-time-picker', showTimePicker), _defineProperty(_className, prefixCls + '-week-number', props.showWeekNumber), _className);
+	    var classes = (0, _classnames3["default"])(className);
 	    var newProps = {
 	      selectedValue: state.selectedValue,
 	      onSelect: this.onSelect,
@@ -55101,14 +55420,16 @@
 	
 	    if (dateInputPlaceholder) {
 	      if (Array.isArray(dateInputPlaceholder)) {
-	        placeholder1 = dateInputPlaceholder[0];
-	        placeholder2 = dateInputPlaceholder[1];
+	        var _dateInputPlaceholder = _slicedToArray(dateInputPlaceholder, 2);
+	
+	        placeholder1 = _dateInputPlaceholder[0];
+	        placeholder2 = _dateInputPlaceholder[1];
 	      } else {
 	        placeholder1 = placeholder2 = dateInputPlaceholder;
 	      }
 	    }
 	    var showOkButton = showOk === true || showOk !== false && !!timePicker;
-	    var cls = (0, _classnames3['default'])((_classnames = {}, _classnames[prefixCls + '-footer'] = true, _classnames[prefixCls + '-range-bottom'] = true, _classnames[prefixCls + '-footer-show-ok'] = showOkButton, _classnames));
+	    var cls = (0, _classnames3["default"])((_classnames = {}, _defineProperty(_classnames, prefixCls + '-footer', true), _defineProperty(_classnames, prefixCls + '-range-bottom', true), _defineProperty(_classnames, prefixCls + '-footer-show-ok', showOkButton), _classnames));
 	
 	    var startValue = this.getStartValue();
 	    var endValue = this.getEndValue();
@@ -55125,7 +55446,7 @@
 	
 	    var extraFooter = props.renderFooter();
 	
-	    return _react2['default'].createElement(
+	    return _react2["default"].createElement(
 	      'div',
 	      {
 	        ref: this.saveRoot,
@@ -55135,26 +55456,26 @@
 	        onKeyDown: this.onKeyDown
 	      },
 	      props.renderSidebar(),
-	      _react2['default'].createElement(
+	      _react2["default"].createElement(
 	        'div',
 	        { className: prefixCls + '-panel' },
-	        showClear && selectedValue[0] && selectedValue[1] ? _react2['default'].createElement(
+	        showClear && selectedValue[0] && selectedValue[1] ? _react2["default"].createElement(
 	          'a',
 	          {
 	            role: 'button',
 	            title: locale.clear,
 	            onClick: this.clear
 	          },
-	          clearIcon || _react2['default'].createElement('span', { className: prefixCls + '-clear-btn' })
+	          clearIcon || _react2["default"].createElement('span', { className: prefixCls + '-clear-btn uf uf-close-c' })
 	        ) : null,
-	        _react2['default'].createElement(
+	        _react2["default"].createElement(
 	          'div',
 	          {
 	            className: prefixCls + '-date-panel',
 	            onMouseLeave: type !== 'both' ? this.onDatePanelLeave : undefined,
 	            onMouseEnter: type !== 'both' ? this.onDatePanelEnter : undefined
 	          },
-	          _react2['default'].createElement(_CalendarPart2['default'], (0, _extends3['default'])({}, props, newProps, {
+	          _react2["default"].createElement(_CalendarPart2["default"], _extends({}, props, newProps, {
 	            hoverValue: hoverValue,
 	            direction: 'left',
 	            disabledTime: this.disabledStartTime,
@@ -55174,12 +55495,12 @@
 	            enableNext: !isClosestMonths || this.isMonthYearPanelShow(mode[1]),
 	            clearIcon: clearIcon
 	          })),
-	          _react2['default'].createElement(
+	          _react2["default"].createElement(
 	            'span',
 	            { className: prefixCls + '-range-middle' },
 	            seperator
 	          ),
-	          _react2['default'].createElement(_CalendarPart2['default'], (0, _extends3['default'])({}, props, newProps, {
+	          _react2["default"].createElement(_CalendarPart2["default"], _extends({}, props, newProps, {
 	            hoverValue: hoverValue,
 	            direction: 'right',
 	            format: this.getFormat(),
@@ -55201,26 +55522,26 @@
 	            clearIcon: clearIcon
 	          }))
 	        ),
-	        _react2['default'].createElement(
+	        _react2["default"].createElement(
 	          'div',
 	          { className: cls },
-	          showToday || props.timePicker || showOkButton || extraFooter ? _react2['default'].createElement(
+	          showToday || props.timePicker || showOkButton || extraFooter ? _react2["default"].createElement(
 	            'div',
 	            { className: prefixCls + '-footer-btn' },
 	            extraFooter,
-	            showToday ? _react2['default'].createElement(_TodayButton2['default'], (0, _extends3['default'])({}, props, {
+	            showToday ? _react2["default"].createElement(_TodayButton2["default"], _extends({}, props, {
 	              disabled: isTodayInView,
 	              value: state.value[0],
 	              onToday: this.onToday,
 	              text: locale.backToToday
 	            })) : null,
-	            props.timePicker ? _react2['default'].createElement(_TimePickerButton2['default'], (0, _extends3['default'])({}, props, {
+	            props.timePicker ? _react2["default"].createElement(_TimePickerButton2["default"], _extends({}, props, {
 	              showTimePicker: showTimePicker,
 	              onOpenTimePicker: this.onOpenTimePicker,
 	              onCloseTimePicker: this.onCloseTimePicker,
 	              timePickerDisabled: !this.hasSelectedValue() || hoverValue.length
 	            })) : null,
-	            showOkButton ? _react2['default'].createElement(_OkButton2['default'], (0, _extends3['default'])({}, props, {
+	            showOkButton ? _react2["default"].createElement(_OkButton2["default"], _extends({}, props, {
 	              onOk: this.onOk,
 	              okDisabled: !this.isAllowedDateAndTime(selectedValue) || !this.hasSelectedValue() || hoverValue.length
 	            })) : null
@@ -55231,39 +55552,39 @@
 	  };
 	
 	  return RangeCalendar;
-	}(_react2['default'].Component);
+	}(_react2["default"].Component);
 	
-	RangeCalendar.propTypes = (0, _extends3['default'])({}, _CommonMixin.propType, {
-	  prefixCls: _propTypes2['default'].string,
-	  dateInputPlaceholder: _propTypes2['default'].any,
-	  seperator: _propTypes2['default'].string,
-	  defaultValue: _propTypes2['default'].any,
-	  value: _propTypes2['default'].any,
-	  hoverValue: _propTypes2['default'].any,
-	  mode: _propTypes2['default'].arrayOf(_propTypes2['default'].oneOf(['date', 'month', 'year', 'decade'])),
-	  showDateInput: _propTypes2['default'].bool,
-	  timePicker: _propTypes2['default'].any,
-	  showOk: _propTypes2['default'].bool,
-	  showToday: _propTypes2['default'].bool,
-	  defaultSelectedValue: _propTypes2['default'].array,
-	  selectedValue: _propTypes2['default'].array,
-	  onOk: _propTypes2['default'].func,
-	  showClear: _propTypes2['default'].bool,
-	  locale: _propTypes2['default'].object,
-	  onChange: _propTypes2['default'].func,
-	  onSelect: _propTypes2['default'].func,
-	  onValueChange: _propTypes2['default'].func,
-	  onHoverChange: _propTypes2['default'].func,
-	  onPanelChange: _propTypes2['default'].func,
-	  format: _propTypes2['default'].oneOfType([_propTypes2['default'].object, _propTypes2['default'].string]),
-	  onClear: _propTypes2['default'].func,
-	  type: _propTypes2['default'].any,
-	  disabledDate: _propTypes2['default'].func,
-	  disabledTime: _propTypes2['default'].func,
-	  clearIcon: _propTypes2['default'].node,
-	  onKeyDown: _propTypes2['default'].func
+	RangeCalendar.propTypes = _extends({}, _CommonMixin.propType, {
+	  prefixCls: _propTypes2["default"].string,
+	  dateInputPlaceholder: _propTypes2["default"].any,
+	  seperator: _propTypes2["default"].string,
+	  defaultValue: _propTypes2["default"].any,
+	  value: _propTypes2["default"].any,
+	  hoverValue: _propTypes2["default"].any,
+	  mode: _propTypes2["default"].arrayOf(_propTypes2["default"].oneOf(['date', 'month', 'year', 'decade'])),
+	  showDateInput: _propTypes2["default"].bool,
+	  timePicker: _propTypes2["default"].any,
+	  showOk: _propTypes2["default"].bool,
+	  showToday: _propTypes2["default"].bool,
+	  defaultSelectedValue: _propTypes2["default"].array,
+	  selectedValue: _propTypes2["default"].array,
+	  onOk: _propTypes2["default"].func,
+	  showClear: _propTypes2["default"].bool,
+	  locale: _propTypes2["default"].object,
+	  onChange: _propTypes2["default"].func,
+	  onSelect: _propTypes2["default"].func,
+	  onValueChange: _propTypes2["default"].func,
+	  onHoverChange: _propTypes2["default"].func,
+	  onPanelChange: _propTypes2["default"].func,
+	  format: _propTypes2["default"].oneOfType([_propTypes2["default"].object, _propTypes2["default"].string]),
+	  onClear: _propTypes2["default"].func,
+	  type: _propTypes2["default"].any,
+	  disabledDate: _propTypes2["default"].func,
+	  disabledTime: _propTypes2["default"].func,
+	  clearIcon: _propTypes2["default"].node,
+	  onKeyDown: _propTypes2["default"].func
 	});
-	RangeCalendar.defaultProps = (0, _extends3['default'])({}, _CommonMixin.defaultProp, {
+	RangeCalendar.defaultProps = _extends({}, _CommonMixin.defaultProp, {
 	  type: 'both',
 	  seperator: '~',
 	  defaultSelectedValue: [],
@@ -55357,7 +55678,7 @@
 	      var nextHoverValue = void 0;
 	
 	      if (!firstSelectedValue) {
-	        currentHoverTime = hoverValue[0] || selectedValue[0] || value[0] || (0, _moment2['default'])();
+	        currentHoverTime = hoverValue[0] || selectedValue[0] || value[0] || (0, _moment2["default"])();
 	        nextHoverTime = func(currentHoverTime);
 	        nextHoverValue = [nextHoverTime];
 	        _this2.fireHoverValueChange(nextHoverValue);
@@ -55409,17 +55730,17 @@
 	    };
 	
 	    switch (keyCode) {
-	      case _KeyCode2['default'].DOWN:
+	      case _KeyCode2["default"].DOWN:
 	        updateHoverPoint(function (time) {
 	          return (0, _toTime.goTime)(time, 1, 'weeks');
 	        });
 	        return;
-	      case _KeyCode2['default'].UP:
+	      case _KeyCode2["default"].UP:
 	        updateHoverPoint(function (time) {
 	          return (0, _toTime.goTime)(time, -1, 'weeks');
 	        });
 	        return;
-	      case _KeyCode2['default'].LEFT:
+	      case _KeyCode2["default"].LEFT:
 	        if (ctrlKey) {
 	          updateHoverPoint(function (time) {
 	            return (0, _toTime.goTime)(time, -1, 'years');
@@ -55430,7 +55751,7 @@
 	          });
 	        }
 	        return;
-	      case _KeyCode2['default'].RIGHT:
+	      case _KeyCode2["default"].RIGHT:
 	        if (ctrlKey) {
 	          updateHoverPoint(function (time) {
 	            return (0, _toTime.goTime)(time, 1, 'years');
@@ -55441,27 +55762,27 @@
 	          });
 	        }
 	        return;
-	      case _KeyCode2['default'].HOME:
+	      case _KeyCode2["default"].HOME:
 	        updateHoverPoint(function (time) {
 	          return (0, _toTime.goStartMonth)(time);
 	        });
 	        return;
-	      case _KeyCode2['default'].END:
+	      case _KeyCode2["default"].END:
 	        updateHoverPoint(function (time) {
 	          return (0, _toTime.goEndMonth)(time);
 	        });
 	        return;
-	      case _KeyCode2['default'].PAGE_DOWN:
+	      case _KeyCode2["default"].PAGE_DOWN:
 	        updateHoverPoint(function (time) {
 	          return (0, _toTime.goTime)(time, 1, 'month');
 	        });
 	        return;
-	      case _KeyCode2['default'].PAGE_UP:
+	      case _KeyCode2["default"].PAGE_UP:
 	        updateHoverPoint(function (time) {
 	          return (0, _toTime.goTime)(time, -1, 'month');
 	        });
 	        return;
-	      case _KeyCode2['default'].ENTER:
+	      case _KeyCode2["default"].ENTER:
 	        {
 	          var lastValue = void 0;
 	          if (hoverValue.length === 0) {
@@ -55566,13 +55887,13 @@
 	  };
 	
 	  this.onStartValueChange = function (leftValue) {
-	    var value = [].concat(_this2.state.value);
+	    var value = [].concat(_toConsumableArray(_this2.state.value));
 	    value[0] = leftValue;
 	    return _this2.fireValueChange(value);
 	  };
 	
 	  this.onEndValueChange = function (rightValue) {
-	    var value = [].concat(_this2.state.value);
+	    var value = [].concat(_toConsumableArray(_this2.state.value));
 	    value[1] = rightValue;
 	    return _this2.fireValueChange(value);
 	  };
@@ -55723,7 +56044,7 @@
 	
 	    // 尚未选择过时间，直接输入的话
 	    if (!_this2.state.selectedValue[0] || !_this2.state.selectedValue[1]) {
-	      var startValue = selectedValue[0] || (0, _moment2['default'])();
+	      var startValue = selectedValue[0] || (0, _moment2["default"])();
 	      var endValue = selectedValue[1] || startValue.clone().add(1, 'months');
 	      _this2.setState({
 	        selectedValue: selectedValue,
@@ -55792,32 +56113,20 @@
 	
 	(0, _reactLifecyclesCompat.polyfill)(RangeCalendar);
 	
-	exports['default'] = (0, _CommonMixin.commonMixinWrapper)(RangeCalendar);
+	exports["default"] = (0, _CommonMixin.commonMixinWrapper)(RangeCalendar);
 	module.exports = exports['default'];
 
 /***/ }),
-/* 533 */
+/* 534 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	exports.__esModule = true;
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
 	
-	var _extends2 = __webpack_require__(111);
-	
-	var _extends3 = _interopRequireDefault(_extends2);
-	
-	var _classCallCheck2 = __webpack_require__(267);
-	
-	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
-	
-	var _possibleConstructorReturn2 = __webpack_require__(297);
-	
-	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
-	
-	var _inherits2 = __webpack_require__(298);
-	
-	var _inherits3 = _interopRequireDefault(_inherits2);
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 	
 	var _react = __webpack_require__(4);
 	
@@ -55835,20 +56144,29 @@
 	
 	var _DateTable2 = _interopRequireDefault(_DateTable);
 	
-	var _DateInput = __webpack_require__(516);
+	var _DateInput = __webpack_require__(507);
 	
 	var _DateInput2 = _interopRequireDefault(_DateInput);
 	
 	var _index = __webpack_require__(502);
 	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+	
+	function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : _defaults(subClass, superClass); }
 	
 	var CalendarPart = function (_React$Component) {
-	  (0, _inherits3['default'])(CalendarPart, _React$Component);
+	  _inherits(CalendarPart, _React$Component);
 	
 	  function CalendarPart() {
-	    (0, _classCallCheck3['default'])(this, CalendarPart);
-	    return (0, _possibleConstructorReturn3['default'])(this, _React$Component.apply(this, arguments));
+	    _classCallCheck(this, CalendarPart);
+	
+	    return _possibleConstructorReturn(this, _React$Component.apply(this, arguments));
 	  }
 	
 	  CalendarPart.prototype.render = function render() {
@@ -55883,7 +56201,7 @@
 	      showTimePicker: showTimePicker
 	    };
 	    var index = direction === 'left' ? 0 : 1;
-	    var timePickerEle = shouldShowTimePicker && _react2['default'].cloneElement(timePicker, (0, _extends3['default'])({
+	    var timePickerEle = shouldShowTimePicker && _react2["default"].cloneElement(timePicker, _extends({
 	      showHour: true,
 	      showMinute: true,
 	      showSecond: true
@@ -55893,7 +56211,7 @@
 	      value: selectedValue[index]
 	    }));
 	
-	    var dateInputElement = props.showDateInput && _react2['default'].createElement(_DateInput2['default'], {
+	    var dateInputElement = props.showDateInput && _react2["default"].createElement(_DateInput2["default"], {
 	      format: format,
 	      locale: locale,
 	      prefixCls: prefixCls,
@@ -55909,16 +56227,16 @@
 	      clearIcon: clearIcon
 	    });
 	
-	    return _react2['default'].createElement(
+	    return _react2["default"].createElement(
 	      'div',
 	      {
 	        className: rangeClassName + '-part ' + rangeClassName + '-' + direction
 	      },
 	      dateInputElement,
-	      _react2['default'].createElement(
+	      _react2["default"].createElement(
 	        'div',
 	        { style: { outline: 'none' } },
-	        _react2['default'].createElement(_CalendarHeader2['default'], (0, _extends3['default'])({}, newProps, {
+	        _react2["default"].createElement(_CalendarHeader2["default"], _extends({}, newProps, {
 	          mode: mode,
 	          enableNext: enableNext,
 	          enablePrev: enablePrev,
@@ -55926,19 +56244,19 @@
 	          onPanelChange: props.onPanelChange,
 	          disabledMonth: props.disabledMonth
 	        })),
-	        showTimePicker ? _react2['default'].createElement(
+	        showTimePicker ? _react2["default"].createElement(
 	          'div',
 	          { className: prefixCls + '-time-picker' },
-	          _react2['default'].createElement(
+	          _react2["default"].createElement(
 	            'div',
 	            { className: prefixCls + '-time-picker-panel' },
 	            timePickerEle
 	          )
 	        ) : null,
-	        _react2['default'].createElement(
+	        _react2["default"].createElement(
 	          'div',
 	          { className: prefixCls + '-body' },
-	          _react2['default'].createElement(_DateTable2['default'], (0, _extends3['default'])({}, newProps, {
+	          _react2["default"].createElement(_DateTable2["default"], _extends({}, newProps, {
 	            hoverValue: hoverValue,
 	            selectedValue: selectedValue,
 	            dateRender: props.dateRender,
@@ -55953,66 +56271,30 @@
 	  };
 	
 	  return CalendarPart;
-	}(_react2['default'].Component);
+	}(_react2["default"].Component);
 	
 	CalendarPart.propTypes = {
-	  prefixCls: _propTypes2['default'].string,
-	  value: _propTypes2['default'].any,
-	  hoverValue: _propTypes2['default'].any,
-	  selectedValue: _propTypes2['default'].any,
-	  direction: _propTypes2['default'].any,
-	  locale: _propTypes2['default'].any,
-	  showDateInput: _propTypes2['default'].bool,
-	  showTimePicker: _propTypes2['default'].bool,
-	  format: _propTypes2['default'].any,
-	  placeholder: _propTypes2['default'].any,
-	  disabledDate: _propTypes2['default'].any,
-	  timePicker: _propTypes2['default'].any,
-	  disabledTime: _propTypes2['default'].any,
-	  onInputChange: _propTypes2['default'].func,
-	  onInputSelect: _propTypes2['default'].func,
-	  timePickerDisabledTime: _propTypes2['default'].object,
-	  enableNext: _propTypes2['default'].any,
-	  enablePrev: _propTypes2['default'].any,
-	  clearIcon: _propTypes2['default'].node
+	  prefixCls: _propTypes2["default"].string,
+	  value: _propTypes2["default"].any,
+	  hoverValue: _propTypes2["default"].any,
+	  selectedValue: _propTypes2["default"].any,
+	  direction: _propTypes2["default"].any,
+	  locale: _propTypes2["default"].any,
+	  showDateInput: _propTypes2["default"].bool,
+	  showTimePicker: _propTypes2["default"].bool,
+	  format: _propTypes2["default"].any,
+	  placeholder: _propTypes2["default"].any,
+	  disabledDate: _propTypes2["default"].any,
+	  timePicker: _propTypes2["default"].any,
+	  disabledTime: _propTypes2["default"].any,
+	  onInputChange: _propTypes2["default"].func,
+	  onInputSelect: _propTypes2["default"].func,
+	  timePickerDisabledTime: _propTypes2["default"].object,
+	  enableNext: _propTypes2["default"].any,
+	  enablePrev: _propTypes2["default"].any,
+	  clearIcon: _propTypes2["default"].node
 	};
-	exports['default'] = CalendarPart;
-	module.exports = exports['default'];
-
-/***/ }),
-/* 534 */
-/***/ (function(module, exports) {
-
-	'use strict';
-	
-	exports.__esModule = true;
-	exports['default'] = {
-	  today: '今天',
-	  now: '此刻',
-	  backToToday: '返回今天',
-	  ok: '确定',
-	  timeSelect: '选择时间',
-	  dateSelect: '选择日期',
-	  weekSelect: '选择周',
-	  clear: '清除',
-	  month: '月',
-	  year: '年',
-	  previousMonth: '上个月 (翻页上键)',
-	  nextMonth: '下个月 (翻页下键)',
-	  monthSelect: '选择月份',
-	  yearSelect: '选择年份',
-	  decadeSelect: '选择年代',
-	  yearFormat: 'YYYY年',
-	  dayFormat: 'D日',
-	  dateFormat: 'YYYY年M月D日',
-	  dateTimeFormat: 'YYYY年M月D日 HH时mm分ss秒',
-	  previousYear: '上一年 (Control键加左方向键)',
-	  nextYear: '下一年 (Control键加右方向键)',
-	  previousDecade: '上一年代',
-	  nextDecade: '下一年代',
-	  previousCentury: '上一世纪',
-	  nextCentury: '下一世纪'
-	};
+	exports["default"] = CalendarPart;
 	module.exports = exports['default'];
 
 /***/ }),
@@ -56043,11 +56325,11 @@
 	
 	var _beeFormControl2 = _interopRequireDefault(_beeFormControl);
 	
-	var _zh_CN = __webpack_require__(534);
+	var _zh_CN = __webpack_require__(529);
 	
 	var _zh_CN2 = _interopRequireDefault(_zh_CN);
 	
-	var _en_US = __webpack_require__(515);
+	var _en_US = __webpack_require__(516);
 	
 	var _en_US2 = _interopRequireDefault(_en_US);
 	
@@ -56066,10 +56348,6 @@
 	__webpack_require__(498);
 	
 	__webpack_require__(403);
-	
-	var _YearPicker = __webpack_require__(536);
-	
-	var _YearPicker2 = _interopRequireDefault(_YearPicker);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 	
@@ -56096,7 +56374,7 @@
 	
 	var format = "YYYY-Wo";
 	
-	var style = "\n.week-calendar {\n  width: 386px;\n}\n.week-calendar .rc-calendar-tbody > tr:hover\n.rc-calendar-date {\n  background: #ebfaff;\n}\n\n.week-calendar .rc-calendar-tbody > tr:hover\n.rc-calendar-selected-day .rc-calendar-date {\n    background: #3fc7fa;\n}\n\n.week-calendar .week-calendar-sidebar {\n  position:absolute;\n  top:0;\n  left:0;\n  bottom:0;\n  width:100px;\n  border-right: 1px solid #ccc;\n}\n.week-calendar .rc-calendar-panel {\n  margin-left: 100px;\n}\n";
+	var style = "\n.week-calendar .rc-calendar-tbody > tr:hover\n.rc-calendar-date {\n  background: #ebfaff;\n}\n\n.week-calendar .rc-calendar-tbody > tr:hover\n.rc-calendar-selected-day .rc-calendar-date {\n    background: #3fc7fa;\n}\n.week-calendar .week-calendar-footer {\n  position:absolute;\n  top:0;\n  left:0;\n  bottom:0;\n  width:100%;\n  border-right: 1px solid #ccc;\n}\n";
 	
 	var WeekPicker = function (_Component) {
 	  _inherits(WeekPicker, _Component);
@@ -56156,27 +56434,43 @@
 	      });
 	    };
 	
-	    _this.renderSidebar = function () {
+	    _this.nowWeek = function () {
+	      var value = now;
+	      _this.setState({
+	        value: value,
+	        open: false
+	      });
+	    };
+	
+	    _this.renderFooter = function () {
 	      return _react2["default"].createElement(
 	        "div",
-	        { className: "week-calendar-sidebar", key: "sidebar" },
+	        { className: "week-calendar-footer", key: "footer" },
 	        _react2["default"].createElement(
-	          "button",
+	          "span",
 	          {
-	            className: "week-calendar-sidebar-button",
+	            className: "week-calendar-footer-button",
 	            onClick: _this.lastWeek.bind(_this),
-	            style: { margin: 8 }
+	            style: { 'float': 'left' }
 	          },
-	          "\u4E0A\u4E00\u5468"
+	          _this.props.locale.lastWeek
 	        ),
 	        _react2["default"].createElement(
-	          "button",
+	          "span",
 	          {
-	            className: "week-calendar-sidebar-button",
-	            onClick: _this.nextWeek.bind(_this),
-	            style: { margin: 8 }
+	            className: "week-calendar-footer-button",
+	            onClick: _this.nowWeek.bind(_this)
 	          },
-	          "\u4E0B\u4E00\u5468"
+	          _this.props.locale.nowWeek
+	        ),
+	        _react2["default"].createElement(
+	          "span",
+	          {
+	            className: "week-calendar-footer-button",
+	            onClick: _this.nextWeek.bind(_this),
+	            style: { 'float': 'right' }
+	          },
+	          _this.props.locale.nextWeek
 	        )
 	      );
 	    };
@@ -56191,9 +56485,30 @@
 	      _this.setState({ value: value });
 	    };
 	
+	    _this.onMouseLeave = function (e) {
+	      _this.setState({
+	        showClose: false
+	      });
+	    };
+	
+	    _this.onMouseEnter = function (e) {
+	      _this.setState({
+	        showClose: true
+	      });
+	    };
+	
+	    _this.onClear = function (e) {
+	      e.stopPropagation();
+	      _this.setState({
+	        value: ''
+	      });
+	      _this.props.onChange && _this.props.onChange('', '');
+	    };
+	
 	    _this.state = {
 	      value: props.value || props.defaultValue,
-	      open: false
+	      open: false,
+	      showClose: false
 	    };
 	    return _this;
 	  }
@@ -56207,19 +56522,21 @@
 	    var calendar = _react2["default"].createElement(_rcCalendar2["default"], {
 	      className: "week-calendar",
 	      showWeekNumber: true,
-	      renderSidebar: this.renderSidebar,
+	      showMonthInput: false,
+	      renderFooter: this.renderFooter,
 	      dateRender: this.dateRender,
 	      locale: cn ? _zh_CN2["default"] : _en_US2["default"],
 	      format: format,
 	      dateInputPlaceholder: this.props.placeholder,
 	      defaultValue: now,
 	      showDateInput: true,
-	      onChange: this.handleCalendarChange
+	      onChange: this.handleCalendarChange,
+	      showToday: false,
+	      onClear: this.onClear
 	    });
 	    return _react2["default"].createElement(
 	      "div",
 	      null,
-	      _react2["default"].createElement("style", { dangerouslySetInnerHTML: { __html: style } }),
 	      _react2["default"].createElement(
 	        _Picker2["default"],
 	        _extends({
@@ -56235,16 +56552,24 @@
 	
 	          return _react2["default"].createElement(
 	            _beeInputGroup2["default"],
-	            { simple: true, className: "datepicker-input-group" },
+	            { simple: true, className: "datepicker-input-group",
+	              onMouseEnter: _this2.onMouseEnter,
+	              onMouseLeave: _this2.onMouseLeave
+	            },
 	            _react2["default"].createElement(_beeFormControl2["default"], {
 	              placeholder: _this2.props.placeholder,
-	              disabled: state.disabled,
+	              disabled: props.disabled,
 	              readOnly: true,
 	              tabIndex: "-1",
 	              className: _this2.props.className,
 	              value: value && value.format(format) || ""
 	            }),
-	            _react2["default"].createElement(
+	            _this2.state.value && _this2.state.showClose && !props.disabled ? _react2["default"].createElement(
+	              _beeInputGroup2["default"].Button,
+	              { shape: "border",
+	                onClick: _this2.onClear },
+	              _react2["default"].createElement("i", { className: "uf uf-close-c" })
+	            ) : _react2["default"].createElement(
 	              _beeInputGroup2["default"].Button,
 	              { shape: "border" },
 	              props.renderIcon()
@@ -56261,7 +56586,8 @@
 	WeekPicker.defaultProps = {
 	  renderIcon: function renderIcon() {
 	    return _react2["default"].createElement(_beeIcon2["default"], { type: "uf-calendar" });
-	  }
+	  },
+	  locale: _zh_CN2["default"]
 	};
 	
 	exports["default"] = WeekPicker;
@@ -56279,7 +56605,7 @@
 	
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 	
-	var _YearPanel = __webpack_require__(507);
+	var _YearPanel = __webpack_require__(508);
 	
 	var _YearPanel2 = _interopRequireDefault(_YearPanel);
 	
@@ -56337,7 +56663,8 @@
 	        _this.state = {
 	            type: "year",
 	            value: props.value || props.defaultValue || '',
-	            open: props.open || false
+	            open: props.open || false,
+	            showClose: false
 	        };
 	        return _this;
 	    }
@@ -56362,7 +56689,12 @@
 	        var props = this.props;
 	        var value = state.value;
 	
-	        var Calendar = _react2["default"].createElement(_YearPanel2["default"], _extends({ prefixCls: 'rc-calendar-picker', rootPrefixCls: 'rc-calendar' }, props, { focus: function focus() {} }));
+	        var Calendar = _react2["default"].createElement(_YearPanel2["default"], _extends({
+	            prefixCls: 'rc-calendar-picker',
+	            rootPrefixCls: 'rc-calendar'
+	        }, props, { focus: function focus() {},
+	            showDateInput: true
+	        }));
 	
 	        return _react2["default"].createElement(
 	            "div",
@@ -56383,7 +56715,10 @@
 	
 	                    return _react2["default"].createElement(
 	                        _beeInputGroup2["default"],
-	                        { simple: true, className: "datepicker-input-group" },
+	                        { simple: true, className: "datepicker-input-group",
+	                            onMouseEnter: _this2.onMouseEnter,
+	                            onMouseLeave: _this2.onMouseLeave
+	                        },
 	                        _react2["default"].createElement(_beeFormControl2["default"], {
 	                            placeholder: _this2.props.placeholder,
 	                            className: _this2.props.className,
@@ -56391,7 +56726,12 @@
 	                            readOnly: true,
 	                            value: value && value.format(props.format) || ""
 	                        }),
-	                        _react2["default"].createElement(
+	                        _this2.state.value && _this2.state.showClose && !props.disabled ? _react2["default"].createElement(
+	                            _beeInputGroup2["default"].Button,
+	                            { shape: "border",
+	                                onClick: _this2.clear },
+	                            _react2["default"].createElement("i", { className: "uf uf-close-c" })
+	                        ) : _react2["default"].createElement(
 	                            _beeInputGroup2["default"].Button,
 	                            { shape: "border" },
 	                            props.renderIcon()
@@ -56420,16 +56760,30 @@
 	        });
 	    };
 	
-	    this.onTypeChange = function (type) {
-	        _this3.setState({
-	            type: type
-	        });
-	    };
-	
 	    this.handleChange = function (value) {
 	        var props = _this3.props;
 	        _this3.setState({ value: value });
 	        props.onChange(value, value && value.format(props.format) || '');
+	    };
+	
+	    this.onMouseLeave = function (e) {
+	        _this3.setState({
+	            showClose: false
+	        });
+	    };
+	
+	    this.onMouseEnter = function (e) {
+	        _this3.setState({
+	            showClose: true
+	        });
+	    };
+	
+	    this.clear = function (e) {
+	        e.stopPropagation();
+	        _this3.setState({
+	            value: ''
+	        });
+	        _this3.props.onChange && _this3.props.onChange('', '');
 	    };
 	};
 	
@@ -56736,7 +57090,11 @@
 	
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : _defaults(subClass, superClass); }
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : _defaults(subClass, superClass); } /**
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               * This source code is quoted from rc-slider.
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               * homepage: https://github.com/react-component/slider
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               */
+	
 	
 	var Slider = function (_React$Component) {
 	  _inherits(Slider, _React$Component);
@@ -56933,6 +57291,11 @@
 	});
 	
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	/**
+	* This source code is quoted from rc-slider.
+	* homepage: https://github.com/react-component/slider
+	*/
+	
 	
 	var _react = __webpack_require__(4);
 	
@@ -57031,7 +57394,11 @@
 	
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : _defaults(subClass, superClass); }
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : _defaults(subClass, superClass); } /**
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               * This source code is quoted from rc-slider.
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               * homepage: https://github.com/react-component/slider
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               */
+	
 	
 	function noop() {}
 	
@@ -57380,6 +57747,10 @@
 /* 543 */
 /***/ (function(module, exports, __webpack_require__) {
 
+	/**
+	* This source code is quoted from rc-slider.
+	* homepage: https://github.com/react-component/slider
+	*/
 	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
@@ -57418,7 +57789,11 @@
 	  value: true
 	});
 	
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; /**
+	                                                                                                                                                                                                                                                                  * This source code is quoted from rc-slider.
+	                                                                                                                                                                                                                                                                  * homepage: https://github.com/react-component/slider
+	                                                                                                                                                                                                                                                                  */
+	
 	
 	var _react = __webpack_require__(4);
 	
@@ -57518,7 +57893,11 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 	
-	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; } /**
+	                                                                                                                                                                                                                  * This source code is quoted from rc-slider.
+	                                                                                                                                                                                                                  * homepage: https://github.com/react-component/slider
+	                                                                                                                                                                                                                  */
+	
 	
 	var Marks = function Marks(_ref) {
 	  var className = _ref.className,
@@ -57612,7 +57991,11 @@
 	
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : _defaults(subClass, superClass); }
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : _defaults(subClass, superClass); } /**
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               * This source code is quoted from rc-slider.
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               * homepage: https://github.com/react-component/slider
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               */
+	
 	
 	var Handle = function (_React$Component) {
 	  _inherits(Handle, _React$Component);
@@ -57704,7 +58087,11 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 	
-	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } } /**
+	                                                                                                                                                                                                    * This source code is quoted from rc-slider.
+	                                                                                                                                                                                                    * homepage: https://github.com/react-component/slider
+	                                                                                                                                                                                                    */
+	
 	
 	function isEventFromHandle(e, handles) {
 	  return Object.keys(handles).some(function (key) {
@@ -57881,7 +58268,10 @@
 	
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : _defaults(subClass, superClass); } /* eslint-disable react/prop-types */
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : _defaults(subClass, superClass); } /**
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               * This source code is quoted from rc-slider.
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               * homepage: https://github.com/react-component/slider
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               */
 	
 	
 	var Range = function (_React$Component) {
@@ -58292,6 +58682,10 @@
 	
 	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 	
+	/**
+	* This source code is quoted from rc-slider.
+	* homepage: https://github.com/react-component/slider
+	*/
 	module.exports = function shallowEqual(objA, objB, compare, compareContext) {
 	
 	    var ret = compare ? compare.call(compareContext, objA, objB) : void 0;
@@ -58381,7 +58775,11 @@
 	
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : _defaults(subClass, superClass); }
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : _defaults(subClass, superClass); } /**
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               * This source code is quoted from rc-slider.
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               * homepage: https://github.com/react-component/slider
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               */
+	
 	
 	function createSliderWithTooltip(Component) {
 	  var _class, _temp;
