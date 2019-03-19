@@ -244,7 +244,7 @@ const Demo6 = Form.createForm()(class Demo extends Component {
                         单列居中
                      </h4>
                     <Row className = 'edit-panel edit-panel-center'>
-                        <Col md={12} id={title.trim()} >
+                        <Col md={12} >
                             <FormItem>
                                 <Label>订单编号
                                     <span className='mast'>*</span>
@@ -266,7 +266,7 @@ const Demo6 = Form.createForm()(class Demo extends Component {
                                 </span>
                             </FormItem>
                         </Col>
-                        <Col md={12} id={title.trim()} >
+                        <Col md={12}  >
                             <FormItem>
                                 <Label>供应商名称
                                     <span className='mast'>*</span>
@@ -289,7 +289,7 @@ const Demo6 = Form.createForm()(class Demo extends Component {
                             </FormItem>
                             
                         </Col>
-                        <Col md={12} id={title.trim()} >
+                        <Col md={12}  >
                             <FormItem>
                                 <Label className='time'>凭证日期</Label>
                                 <RangePicker
