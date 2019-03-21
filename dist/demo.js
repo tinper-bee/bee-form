@@ -66,10 +66,6 @@
 	
 	var _beeClipboard2 = _interopRequireDefault(_beeClipboard);
 	
-	var _src = __webpack_require__(157);
-	
-	var _src2 = _interopRequireDefault(_src);
-	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
 	function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
@@ -80,7 +76,7 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : _defaults(subClass, superClass); }
 	
-	var Demo1 = __webpack_require__(346);var Demo2 = __webpack_require__(349);var Demo3 = __webpack_require__(350);var Demo4 = __webpack_require__(356);var Demo5 = __webpack_require__(626);var Demo6 = __webpack_require__(629);var DemoArray = [{ "example": _react2['default'].createElement(Demo1, null), "title": " 单个input校验", "code": '/**\n *\n * @title \u5355\u4E2Ainput\u6821\u9A8C\n * @description \u4F7F\u7528FormItem\n */\nimport React, { Component } from \'react\';\nimport { Form, Label, FormControl } from \'tinper-bee\';\nconst FormItem = Form.FormItem;\n\n\nconst Demo1 = Form.createForm()(class Demo extends Component {\n    constructor(props) {\n        super(props);\n    }\n    render() {\n        const self=this;\n        const { getFieldProps, getFieldError } = this.props.form;\n        return (\n                <FormItem className=\'demo1\'>\n                    <Label>\u59D3\u540D</Label>\n                    <FormControl placeholder=\'\u8BF7\u8F93\u5165\u59D3\u540D\'\n                     {...getFieldProps(\'name\', {\n                        validateTrigger: \'onBlur\',\n                        rules: [{\n                            required: true, message: \'\u8BF7\u8F93\u5165\u59D3\u540D\'\n                        },{\n                            max:5,message:\'\u6700\u5927\u957F\u5EA6\u4E3A10\'\n                        },{\n                            pattern: /[\\u4e00-\\u9fa5]/, message: \'\u8BF7\u8F93\u5165\u4E2D\u6587\u5B57\u7B26\',\n                        }],\n                    }) } />\n                    <span className=\'error\'>\n                        {getFieldError(\'name\')}\n                    </span>   \n                </FormItem>\n        )\n    }\n})\n\n', "desc": " 使用FormItem", "scss_code": ".demo1 {\n    font-size: 14px;\n    .u-form-item {\n        min-height: auto!important;\n    }\n    .u-label {\n        display: inline;\n        padding-right: 12px;\n    }\n    .u-form-control {\n        width: auto;\n    }\n    .error {\n        font-size: 12px;\n        color: red;\n        margin-left: 10px;\n    }\n}" }, { "example": _react2['default'].createElement(Demo2, null), "title": " 基本form校验", "code": "/**\n *\n * @title 基本form校验\n * @description 登录示例\n */\nimport React, { Component } from 'react';\nimport ReactDOM from 'react-dom';\nimport { Form, Button, Label, FormControl } from 'tinper-bee';\nconst FormItem = Form.FormItem;\n\nconst Demo2 = Form.createForm()(class Demo2 extends Component {\n    submit = (e) => {\n        e.preventDefault();\n        this.props.form.validateFields((err, values) => {\n            if (err) {\n                console.log('校验失败', values);\n            } else {\n                console.log('提交成功', values)\n            }\n        });\n    }\n    render() {\n        const { getFieldProps, getFieldError } = this.props.form;\n        return (\n            <div className=\"demo2\">\n                <Form >\n                    <FormItem>\n                        <Label>用户名</Label>\n                        <FormControl placeholder=\"请输入用户名\"\n                            {...getFieldProps('username', {\n                                validateTrigger: 'onBlur',\n                                rules: [{\n                                    required: true, message: '请输入用户名',\n                                }],\n                            }) }\n                        />\n                        <span className='error'>\n                            {getFieldError('username')}\n                        </span>\n                    </FormItem>\n                    <FormItem>\n                        <Label>密码</Label>\n                        <FormControl placeholder=\"请输入密码\" type='password'\n                            {...getFieldProps('password', {\n                                validateTrigger: 'onBlur',\n                                rules: [{\n                                    required: true, message: '请输入密码',\n                                }],\n                            }) }\n                        />\n                        <span className='error'>\n                            {getFieldError('password')}\n                        </span>\n                    </FormItem>\n                    <div className='submit'>\n                        <Button shape=\"border\" className=\"reset\">取消</Button>\n                        <Button colors=\"primary\" className=\"login\" onClick={this.submit}>登录</Button>\n                    </div>\n                </Form>\n            </div>\n        )\n    }\n})\n", "desc": " 登录示例", "scss_code": ".demo2 {\n    font-size: 14px;\n    .u-label {\n        display: inline-block;\n        min-width: 80px;\n        text-align: right;\n        padding-right: 12px;\n    }\n    .u-form-control {\n        width: auto;\n    }\n    .error {\n        font-size: 12px;\n        color: red;\n        margin-left: 10px;\n    }\n    .submit {\n        padding-left: 90px;\n    }\n    .submit .login {\n        margin-left: 10px;\n    }\n    .u-form-item {\n        min-height: auto!important;\n    }\n}" }, { "example": _react2['default'].createElement(Demo3, null), "title": " 基本form校验", "code": "/**\n *\n * @title 基本form校验\n * @description 注册示例\n */\nimport React, { Component } from 'react';\nimport { Form, Label, Checkbox, Button, FormControl } from 'tinper-bee';\nconst FormItem = Form.FormItem;\n\nconst Demo3 = Form.createForm()( class Demo extends Component {\n    constructor(props) {\n        super(props);\n        this.state = {\n            checkbox: false\n        }\n    }\n    submit = (e) => {\n        e.preventDefault();\n        this.props.form.validateFields((err, values) => {\n            if (err) {\n                console.log('校验失败', values);\n            } else {\n                console.log('提交成功', values)\n            }\n        });\n    }\n    handleConfirmPassword = (rule, value, callback) => {\n        const { getFieldValue } = this.props.form;\n        if (value && value !== getFieldValue('password')) {\n            callback('两次输入不一致！')\n        }\n        callback();\n    }\n    render() {\n        const self = this;\n        const { getFieldProps, getFieldError } = this.props.form;\n        return (\n            <div className=\"demo3\">\n                <Form>\n                    <FormItem>\n                        <Label>用户名</Label>\n                        <FormControl placeholder=\"请输入用户名(包含数字和字母，8-15位)\"\n                            {...getFieldProps('username', {\n                                validateTrigger: 'onBlur',\n                                rules: [{\n                                    required: true, message: '请输入用户名',\n                                }, {\n                                    pattern: /^(?!\\d+$)(?![a-zA-Z]+$)[a-zA-Z0-9]{8,15}$/, message: '用户名格式错误',\n                                }],\n                            }) }\n                        />\n                        <span className='error'>\n                            {getFieldError('username')}\n                        </span>\n                    </FormItem>\n\n                    <FormItem>\n                        <Label>密码</Label>\n                        <FormControl placeholder=\"请输入密码\" type='password'\n                            {...getFieldProps('password', {\n                                validateTrigger: 'onBlur',\n                                rules: [{\n                                    required: true, message: '请输入密码',\n                                }],\n                            }) }\n                        />\n                        <span className='error'>\n                            {getFieldError('password')}\n                        </span>\n                    </FormItem>\n\n                    <FormItem>\n                        <Label>再次输入密码</Label>\n                        <FormControl placeholder=\"请输入密码\" type='password'\n                            {...getFieldProps('password2', {\n                                validateTrigger: 'onBlur',\n                                rules: [{\n                                    required: true, message: '请输入密码',\n                                }, {\n                                    validator: this.handleConfirmPassword\n                                }],\n                            }) }\n                        />\n                        <span className='error'>\n                            {getFieldError('password2')}\n                        </span>\n                    </FormItem>\n\n                    <FormItem>\n                        <Label>邮箱</Label>\n                        <FormControl placeholder=\"请输入邮箱\"\n                            {...getFieldProps('email', {\n                                validateTrigger: 'onBlur',\n                                rules: [{\n                                    required: true, message: '请输入邮箱',\n                                }, {\n                                    type: 'email', message: '邮箱格式不正确'\n                                }],\n                            }) }\n                        />\n                        <span className='error'>\n                            {getFieldError('email')}\n                        </span>\n                    </FormItem>\n                    <FormItem>\n                        <Label>手机号</Label>\n\n                        <FormControl placeholder=\"请输入手机号\"\n                            {...getFieldProps('phone', {\n                                validateTrigger: 'onBlur',\n                                rules: [{\n                                    required: true, message: '请输入手机号',\n                                }, {\n                                    pattern: /^\\d{11}$/, message: '手机号格式不正确'\n                                }],\n                            }) }\n                        />\n\n                        <span className='error'>\n                            {getFieldError('phone')}\n                        </span>\n                    </FormItem>\n\n                    <FormItem style={{'paddingLeft':'110px'}}>\n                        <Checkbox\n                            defaultChecked={this.state.checkbox}\n                            {\n                            ...getFieldProps('checkbox', {\n                                initialValue: false,\n                            }\n                            ) }\n                        >\n                        我已经阅读并同意相关条款\n                        </Checkbox>\n                    </FormItem>\n                    <div className='submit'>\n                        <Button shape=\"border\" className=\"reset\">取消</Button>\n                        <Button colors=\"primary\" className=\"login\" onClick={this.submit}>注册</Button>\n                    </div>\n                </Form>\n            </div>\n        )\n    }\n})\n", "desc": " 注册示例", "scss_code": ".demo3 {\n    font-size: 14px;\n    .u-label {\n        display: inline-block;\n        min-width: 105px;\n        text-align: right;\n        padding-right: 12px;\n    }\n    .u-form-control {\n        width: auto;\n        min-width: 300px;\n    }\n    .error {\n        font-size: 12px;\n        color: red;\n        margin-left: 10px;\n    }\n    .submit {\n        padding-left: 110px;\n    }\n    .submit .login {\n        margin-left: 10px;\n    }\n    .u-form-item {\n        min-height: auto!important;\n    }\n}" }, { "example": _react2['default'].createElement(Demo4, null), "title": " 表单校验", "code": "/**\n *\n * @title 表单校验\n * @description 用户信息录入实例\n */\nimport React, { Component } from 'react';\nimport ReactDOM from 'react-dom';\nimport { Form, Button, Label, CitySelect, Rate, InputNumber, Slider, Switch, Checkbox, DatePicker, Radio, Select, FormControl } from 'tinper-bee';\nconst FormItem = Form.FormItem;\nconst Option = Select.Option;\n\nconst Demo4 = Form.createForm()(class Demo extends Component {\n    constructor(props) {\n        super(props);\n        this.state = {\n            selectedValue: 'man',\n        };\n    }\n    submit = (e) => {\n        this.props.form.validateFields((err, values) => {\n            if (err) {\n                console.log('校验失败', values);\n            } else {\n                console.log('提交成功', values)\n            }\n        });\n    }\n    render() {\n        const { getFieldProps, getFieldError } = this.props.form;\n        const self = this;\n        return (\n            <div>\n                <Form className='demo4'>\n                    <FormItem>\n                        <Label>姓名</Label>\n                        <FormControl placeholder=\"请输入姓名\"\n                            {...getFieldProps('name', {\n                                validateTrigger: 'onBlur',\n                                rules: [{\n                                    required: true, message: '请输入姓名',\n                                }],\n                            }) }\n                        />\n                        <span className='error'>\n                            {getFieldError('name')}\n                        </span>\n                    </FormItem>\n                    <FormItem>\n                        <Label>身份证号</Label>\n                        <FormControl placeholder=\"请输入身份证号\"\n                            {...getFieldProps('id', {\n                                validateTrigger: 'onBlur',\n                                rules: [{\n                                    required: true, message: '请输入身份证号',\n                                },{\n                                    pattern: /^[1-9][0-9]{5}([1][9][0-9]{2}|[2][0][0|1][0-9])([0][1-9]|[1][0|1|2])([0][1-9]|[1|2][0-9]|[3][0|1])[0-9]{3}([0-9]|[X])$/, message: '身份证号格式不正确'\n                                }],\n                            }) }\n                        />\n                        <span className='error'>\n                            {getFieldError('id')}\n                        </span>\n                    </FormItem>\n                    <FormItem className='time'>\n                        <Label>出生日期</Label>\n                        <DatePicker\n                            {\n                            ...getFieldProps('time', {\n                                validateTrigger: 'onBlur',\n                                rules: [{\n                                    required: true, message: '请选择出生日期',\n                                }, {\n                                    type: 'date', message: '日期格式不正确'\n                                }],\n                            }\n                            ) }\n                            placeholder={'请选择出生日期'}\n                        />\n                        <span className='error'>\n                            {getFieldError('time')}\n                        </span>\n                    </FormItem>\n                    <FormItem>\n                        <Label>年龄</Label>\n                        <FormControl placeholder=\"请输入年龄\"\n                            {...getFieldProps('age', {\n                                validateTrigger: 'onBlur',\n                                rules: [{\n                                    required: true, message: '请输入年龄',\n                                }],\n                            }) }\n                        />\n                        <span className='error'>\n                            {getFieldError('age')}\n                        </span>\n                    </FormItem>\n                     <FormItem>\n                        <Label>性别</Label>\n                        <Radio.RadioGroup\n                            selectedValue={this.state.selectedValue}\n                            {\n                            ...getFieldProps('sex', {\n                                initialValue: 'man',\n                                onChange(value) {\n                                    self.setState({ selectedValue: value });\n                                },\n                                rules: [{ required: true }]\n                            }\n                            ) }\n                        >\n                            <Radio value=\"man\" >男</Radio>\n                            <Radio value=\"woman\" >女</Radio>\n                        </Radio.RadioGroup>\n                    </FormItem>\n                    <FormItem>\n                        <Label>学历</Label>\n                        <Select\n                            {\n                            ...getFieldProps('education', {\n                                initialValue: '',\n                                rules: [{ required: true, message: '请选择学历' }]\n                            }\n                            ) }\n                        >\n                            <Option value=\"\">请选择</Option>\n                            <Option value=\"nothing\">无</Option>\n                            <Option value=\"middle\">初中</Option>\n                            <Option value=\"senior\">高中</Option>\n                            <Option value=\"college1\">专科</Option>\n                            <Option value=\"college2\">本科</Option>\n                            <Option value=\"graduate\">研究生及以上</Option>\n                            <Option value=\"other\">其它</Option>\n                        </Select>\n                        <span className='error'>\n                            {getFieldError('education')}\n                        </span>\n                    </FormItem>\n                    <FormItem>\n                        <Label>保密等级</Label>\n                        <Rate\n                            {\n                            ...getFieldProps('rate', {\n                                initialValue: 0,\n                                rules: [{ required: true }]\n                            }\n                            ) }\n                        />\n                    </FormItem>\n                    <FormItem className=\"remarks\">\n                        <Label>备注</Label>\n                        <FormControl componentClass='textarea'\n                            {\n                            ...getFieldProps('remark', {}\n                            ) }\n                        />\n                    </FormItem>  \n                    \n\n\n                    <div className='submit'>\n                        <Button shape=\"border\" className=\"reset\">取消</Button>\n                        <Button colors=\"primary\" className=\"login\" onClick={this.submit}>提交</Button>\n                    </div>\n                </Form>\n            </div>\n        )\n    }\n})\n", "desc": " 用户信息录入实例", "scss_code": ".demo4 {\n    font-size: 14px;\n    .u-label {\n        display: inline-block;\n        min-width: 100px;\n        text-align: right;\n        padding-right: 12px;\n    }\n    .u-form-control {\n        width: auto;\n        min-width: 380px;\n    }\n    .error {\n        font-size: 12px;\n        color: red;\n        margin-left: 10px;\n    }\n    .submit {\n        padding-left: 110px;\n    }\n    .submit .login {\n        margin-left: 10px;\n    }\n    .u-select {\n        max-width: 380px;\n    }\n    textarea {\n        min-height: 100px;\n        resize: none;\n    }\n    .time>div {\n        display: inline-block;\n    }\n    .time .u-label {\n        position: relative;\n        bottom: 10px;\n    }\n    .time .error{\n        position: relative;\n        bottom: 10px;\n    }\n    .remarks .u-label{\n        position: relative;\n        bottom: 79px;\n    }\n    .u-city-select {\n        display: inline-block;\n    }\n    .u-city-select .province,\n    .u-city-select .city,\n    .u-city-select .area {\n        width: 120px;\n    }\n    .u-form-item {\n        min-height: auto!important;\n    }\n}" }, { "example": _react2['default'].createElement(Demo5, null), "title": " 多种表单元素示例", "code": "/**\n *\n * @title 多种表单元素示例\n * @description 查询面板\n */\nimport React, { Component } from 'react';\nimport ReactDOM from 'react-dom';\nimport { Form, SearchPanel, Button, Label, Switch, Checkbox, DatePicker, Radio, Select,  Col , Row , FormControl } from 'tinper-bee';\nimport moment from \"moment/moment\";\nconst FormItem = Form.FormItem;\nconst Option = Select.Option;\nconst { RangePicker } = DatePicker;\n\nconst Demo5 = Form.createForm()(class Demo extends Component {\n    constructor(props) {\n        super(props);\n        this.state = {\n            expanded: true,\n            approvalState: '',\n            closeState: '',\n            confirmState: '',\n            voucherDate: [],\n            orderTypes:[\n                {\n                    'code':'001',\n                    'name':'类型1'\n                },\n                {\n                    'code':'002',\n                    'name':'类型2'\n                },\n                {\n                    'code':'003',\n                    'name':'类型3'\n                },\n            ]\n        };\n    }\n    submit = (e) => {\n        this.props.form.validateFields((err, values) => {\n            if (err) {\n                console.log('校验失败', values);\n            } else {\n                console.log('提交成功', values)\n            }\n        });\n    }\n    reset = () =>{\n        this.props.form.resetFields();\n        //部分表单元素无法通过this.props.form.resetFields重置，需要手动重置，如下\n        this.setState({\n            approvalState: '',\n            closeState: '',\n            confirmState: '',\n            voucherDate: []\n        })\n    }\n    onChange = () => {\n        this.setState({expanded: !this.state.expanded})\n    }\n    render() {\n        const { getFieldProps, getFieldError } = this.props.form;\n        const self = this;\n        return (\n            <div>\n                <SearchPanel\n                title='基础示例'\n                onSearch={this.submit}\n                onReset={this.reset}\n                expanded={this.state.expanded}\n                onChange={this.onChange}\n                >\n                    <Form className='demo5'>\n                        <Row>\n                            <Col lg={4} md={6} xs={12}>\n                                <FormItem>\n                                    <Col md={3}>\n                                        <Label>订单编号</Label>\n                                    </Col>\n                                    <Col md={9}>\n                                        <FormControl size=\"sm\"\n                                            {\n                                            ...getFieldProps('orderCode', {\n                                                initialValue: '',\n                                            })\n                                            }\n                                        />\n                                    </Col>\n                                </FormItem>\n                            </Col>\n                            <Col  lg={4} md={6} xs={12}>\n                                <FormItem>\n                                    <Col md={3}>\n                                        <Label>供应商名称</Label>\n                                    </Col>\n                                    <Col md={9}>\n                                        <FormControl size=\"sm\"\n                                            {\n                                            ...getFieldProps('supplierName', {\n                                                initialValue: '',\n                                            })\n                                            }\n                                        />\n                                    </Col>\n                                </FormItem>\n                            </Col>\n                            <Col lg={4} md={6} xs={4}>\n                                <FormItem>\n                                    <Col md={3}>\n                                        <Label className='time'>凭证日期</Label>\n                                    </Col>\n                                    <Col md={9}>\n                                        <RangePicker size=\"sm\"\n                                            defaultValue={this.state.voucherDate}\n                                            placeholder={'开始 ~ 结束'}\n                                            dateInputPlaceholder={['开始', '结束']}\n                                            {\n                                            ...getFieldProps('voucherDate', {\n                                                onChange: function (v) {\n                                                    self.setState({\n                                                        voucherDate: v\n                                                    })\n                                                }\n                                            })\n                                            }\n                                        />\n                                    </Col>\n                                </FormItem>\n                            </Col>\n                            <Col  lg={4} md={6} xs={12}>\n                                <FormItem>\n                                    <Col md={3}>\n                                        <Label>订单类型</Label>\n                                    </Col>\n                                    <Col md={9}>\n                                        <Select size=\"sm\"\n                                            {\n                                            ...getFieldProps('type', {\n                                                initialValue: '',\n                                            }\n                                            )}>\n                                            <Option value=\"\">请选择</Option>\n                                            {\n                                                self.state.orderTypes.map((item, index) => {\n                                                    return (\n                                                        <Option key={index} value={item.code}>{item.name}</Option>\n                                                    )\n                                                })\n                                            }\n                                        </Select>\n                                    </Col>\n                                </FormItem>\n                            </Col>\n                            <Col  lg={4} md={6} xs={12}>\n                                <FormItem>\n                                    <Col md={3}>\n                                        <Label>采购组</Label>\n                                    </Col>\n                                    <Col md={9}>\n                                        <FormControl size=\"sm\"\n                                            {\n                                            ...getFieldProps('purchasingGroup', {\n                                                initialValue: '',\n                                            })\n                                            }\n                                        />\n                                    </Col>\n                                </FormItem>\n                            </Col>\n                            <Col  lg={4} md={6} xs={12}>\n                                <FormItem>\n                                    <Col md={3}>\n                                        <Label>审批状态</Label>\n                                    </Col>\n                                    <Col md={9}>\n                                        <Radio.RadioGroup\n                                            selectedValue={this.state.approvalState}\n                                            {\n                                            ...getFieldProps('approvalState', {\n                                                initialValue: '1',\n                                                onChange(value) {\n                                                    self.setState({ approvalState: value });\n                                                },\n                                            }\n                                            )}\n                                        >\n                                            <Radio value=\"0\" >未审批</Radio>\n                                            <Radio value=\"1\" >已审批</Radio>\n                                        </Radio.RadioGroup>\n                                    </Col>\n                                </FormItem>\n                            </Col>\n                            <Col  lg={4} md={6} xs={12}>\n                                <FormItem>\n                                    <Col md={3}>\n                                        <Label>关闭状态</Label>\n                                    </Col>\n                                    <Col md={9}>\n                                        <Radio.RadioGroup\n                                            selectedValue={this.state.closeState}\n                                            {\n                                            ...getFieldProps('closeState', {\n                                                initialValue: '1',\n                                                onChange(value) {\n                                                    self.setState({ closeState: value });\n                                                },\n                                            }\n                                            )}\n                                        >\n                                            <Radio value=\"0\" >未关闭</Radio>\n                                            <Radio value=\"1\" >已关闭</Radio>\n                                        </Radio.RadioGroup>\n                                    </Col>\n                                </FormItem>\n                            </Col>\n                            <Col  lg={4} md={6} xs={12}>\n                                <FormItem>\n                                    <Col md={3}>\n                                        <Label>确认状态</Label>\n                                    </Col>\n                                    <Col md={9}>\n                                        <Radio.RadioGroup\n                                            selectedValue={this.state.confirmState}\n                                            {\n                                            ...getFieldProps('confirmState', {\n                                                initialValue: '1',\n                                                onChange(value) {\n                                                    self.setState({ confirmState: value });\n                                                },\n                                            }\n                                            )}\n                                        >\n                                            <Radio value=\"0\" >未确认</Radio>\n                                            <Radio value=\"1\" >已确认</Radio>\n                                        </Radio.RadioGroup>\n                                    </Col>\n                                </FormItem>\n                            </Col>\n                        </Row>\n                    </Form>\n                </SearchPanel>\n            </div>\n        )\n    }\n})\n", "desc": " 查询面板", "scss_code": ".demo5 {\n    .submit{\n        padding-left:90px\n    }\n    .reset{\n        margin-right:10px;\n    }\n    .u-form-item {\n        min-width: 100%;\n        min-height: 50px!important;\n        padding: 0;\n        .u-col-md-3,.u-col-md-9{\n            padding: 0;\n        }\n        .u-label{\n            display: inline-block;\n            width: 100%;\n            min-width: 90px;\n            text-align:right;\n            padding-right: 12px;\n        }\n        .u-label + *{\n            min-width: 200px;\n            display: inline-block;\n        }\n        .datepicker-input-group{\n            .u-input-group-btn{\n                .uf-calendar{\n                    padding: 0;\n                }\n            }\n        }\n        .u-switch{\n            min-width: auto;\n        }\n        .u-select{\n            width: 100%;\n        }\n        .u-form-control{\n            width: 100%;\n        }\n        .calendar-picker{\n            display: inline-block;\n            min-width:200px;\n            width: 100%;\n            input{\n                width: 100%;\n                text-align: center;\n                height: 26px;\n                line-height: 26px;\n            }\n            .u-input-group-btn{\n                top: 0;\n            }\n        }\n        .u-radio .u-radio-label{\n            font-size:14px;\n            margin-right: 24px;\n        }\n    }\n}\n" }, { "example": _react2['default'].createElement(Demo6, null), "title": " 多种布局示例", "code": "/**\n *\n * @title 多种布局示例\n * @description 必输项的 * ，在文字左侧或右侧均可 \n */\nimport React, { Component } from 'react';\nimport ReactDOM from 'react-dom';\nimport { Form, Icon, Button, Label, Switch, Checkbox, DatePicker, Radio, Select,  Col , Row , FormControl } from 'tinper-bee';\nimport moment from \"moment/moment\";\nconst FormItem = Form.FormItem;\nconst Option = Select.Option;\nconst { RangePicker } = DatePicker;\n\nconst Demo6 = Form.createForm()(class Demo extends Component {\n    constructor(props) {\n        super(props);\n        this.state = {\n            approvalState: '',\n            closeState: '',\n            confirmState: '',\n            voucherDate: [],\n            orderTypes:[\n                {\n                    'code':'001',\n                    'name':'类型1'\n                },\n                {\n                    'code':'002',\n                    'name':'类型2'\n                },\n                {\n                    'code':'003',\n                    'name':'类型3'\n                },\n            ]\n        };\n    }\n    render() {\n        const { getFieldProps, getFieldError } = this.props.form;\n        const self = this;\n        const orderTypes= [{\n            \"code\":\"D001\",\n            \"name\":\"D001\"\n          },{\n            \"code\":\"D002\",\n            \"name\":\"D002\"\n          },{\n            \"code\":\"D003\",\n            \"name\":\"D003\"\n          },{\n            \"code\":\"D004\",\n            \"name\":\"D004\"\n          }];\n        return (\n            <div>\n                <Form className='demo6'>\n                    {/* 普通栅格布局 */}\n                    <h4>\n                        普通栅格布局\n                    </h4>\n                    <Row className = 'edit-panel'>\n                        <Col lg={4} md={6} xs={12}>\n                            <FormItem>\n                                <Label>订单编号\n                                    <Icon type=\"uf-mi\" className='mast'></Icon>\n                                </Label>\n                                <FormControl\n                                    {\n                                    ...getFieldProps('orderCode1', {\n                                        initialValue: '',\n                                        rules: [{\n                                            required: true, message: '请输入订单编号',\n                                        }],\n                                    })\n                                    }\n                                />\n                                <span className='error'>\n                                    {\n                                        getFieldError('orderCode1')\n                                    }\n                                </span>\n                            </FormItem>\n                        </Col>\n                        <Col lg={4} md={6} xs={12}>\n                            <FormItem>\n                                <Label>供应商名称\n                                    <Icon type=\"uf-mi\" className='mast'></Icon>\n                                </Label>\n                                <FormControl\n                                    {\n                                        ...getFieldProps('supplierName1', {\n                                            initialValue: '',\n                                            rules: [{\n                                                required: true, message: '请输入供应商名称',\n                                            }],\n                                        })\n                                    }\n                                />\n                                <span className='error'>\n                                    {\n                                        getFieldError('supplierName1')\n                                    }\n                                </span>\n                            </FormItem>\n                            \n                        </Col>\n                        <Col lg={4} md={6} xs={12}>\n                            <FormItem>\n                                <Label className='time'>凭证日期</Label>\n                                <RangePicker\n                                    defaultValue={this.state.voucherDate}\n                                    placeholder={'开始 ~ 结束'}\n                                    dateInputPlaceholder={['开始', '结束']}\n                                    {\n                                    ...getFieldProps('voucherDate1', {\n                                        onChange: function (v) {\n                                            self.setState({\n                                                voucherDate1: v\n                                            })\n                                        }\n                                    })\n                                    }\n                                />\n                            </FormItem>\n                        </Col>\n                    </Row>\n\n                    <div className='split'></div>\n                    \n                    \n                     {/* 单列铺满 */}\n                     <h4>\n                        单列铺满\n                     </h4>\n                     <Row className = 'edit-panel edit-panel-all'>\n                        <FormItem>\n                            <Col md={2}>\n                                <Label>\n                                    <Icon type=\"uf-mi\" className='mast'></Icon>\n                                    订单编号\n                                </Label>\n                            </Col>\n                            <Col md={10}>\n                                <FormControl\n                                    {\n                                    ...getFieldProps('orderCode2', {\n                                        initialValue: '',\n                                        rules: [{\n                                            required: true, message: '请输入订单编号',\n                                        }],\n                                    })\n                                    }\n                                />\n                                <span className='error'>\n                                    {\n                                        getFieldError('orderCode2')\n                                    }\n                                </span>\n                            </Col>\n                        </FormItem>\n\n                        <FormItem>\n                            <Col md={2}>\n                                <Label>\n                                    <Icon type=\"uf-mi\" className='mast'></Icon>\n                                    供应商名称\n                                </Label>\n                            </Col>\n                            <Col md={10}>\n                                <FormControl\n                                    {\n                                        ...getFieldProps('supplierName2', {\n                                            initialValue: '',\n                                            rules: [{\n                                                required: true, message: '请输入供应商名称',\n                                            }],\n                                        })\n                                    }\n                                />\n                                <span className='error'>\n                                    {\n                                        getFieldError('supplierName2')\n                                    }\n                                </span>\n                            </Col>\n                        </FormItem>\n\n                        <FormItem>\n                            <Col md={2}>\n                                <Label>凭证日期</Label>\n                            </Col>\n                            <Col md={10}>\n                                <RangePicker\n                                    defaultValue={this.state.voucherDate}\n                                    placeholder={'开始 ~ 结束'}\n                                    dateInputPlaceholder={['开始', '结束']}\n                                    {\n                                    ...getFieldProps('voucherDate2', {\n                                        onChange: function (v) {\n                                            self.setState({\n                                                voucherDate2: v\n                                            })\n                                        }\n                                    })\n                                    }\n                                />\n                            </Col>\n                        </FormItem>\n                        <FormItem>\n                            <Col md={2}>\n                                <Label>订单类型</Label>\n                            </Col>\n                            <Col md={10}>\n                                <Select {\n                                    ...getFieldProps('type', {\n                                        initialValue: '',\n                                    }\n                                    )}>\n                                    <Option value=\"\">请选择</Option>\n                                    {\n                                        orderTypes.map((item, index) => {\n                                            return (\n                                                <Option key={index} value={item.code}>{item.name}</Option>\n                                            )\n                                        })\n                                    }\n                                </Select>\n                            </Col>\n                        </FormItem>\n                        \n                    </Row>\n\n                    <div className='split'></div>\n\n                    {/* 单列居中 */}\n                    <h4>\n                        单列居中\n                     </h4>\n                    <Row className = 'edit-panel edit-panel-center'>\n                        <Col md={12} >\n                            <FormItem>\n                                <Label>\n                                    <Icon type=\"uf-mi\" className='mast'></Icon>\n                                    订单编号\n                                </Label>\n                                <FormControl\n                                    {\n                                    ...getFieldProps('orderCode3', {\n                                        initialValue: '',\n                                        rules: [{\n                                            required: true, message: '请输入订单编号',\n                                        }],\n                                    })\n                                    }\n                                />\n                                <span className='error'>\n                                    {\n                                        getFieldError('orderCode3')\n                                    }\n                                </span>\n                            </FormItem>\n                        </Col>\n                        <Col md={12}  >\n                            <FormItem>\n                                <Label>\n                                    <Icon type=\"uf-mi\" className='mast'></Icon>\n                                    供应商名称\n                                </Label>\n                                <FormControl\n                                    {\n                                        ...getFieldProps('supplierName3', {\n                                            initialValue: '',\n                                            rules: [{\n                                                required: true, message: '请输入供应商名称',\n                                            }],\n                                        })\n                                    }\n                                />\n                                <span className='error'>\n                                    {\n                                        getFieldError('supplierName3')\n                                    }\n                                </span>\n                            </FormItem>\n                            \n                        </Col>\n                        <Col md={12}  >\n                            <FormItem>\n                                <Label className='time'>凭证日期</Label>\n                                <RangePicker\n                                    defaultValue={this.state.voucherDate}\n                                    placeholder={'开始 ~ 结束'}\n                                    dateInputPlaceholder={['开始', '结束']}\n                                    {\n                                    ...getFieldProps('voucherDate3', {\n                                        onChange: function (v) {\n                                            self.setState({\n                                                voucherDate3: v\n                                            })\n                                        }\n                                    })\n                                    }\n                                />\n                            </FormItem>\n                        </Col>\n                        \n                    </Row>\n\n                     <div className='split'></div>\n\n                    {/* 三列带textarea */}\n                    <h4>\n                    三列带textarea\n                     </h4>\n                    <Row className = 'edit-panel edit-panel-textarea'>\n                            <Col md={1}>\n                                <Label>订单编号\n                                    <Icon type=\"uf-mi\" className='mast'></Icon>\n                                </Label>\n                            </Col>\n                            <Col md={3}>\n                                <FormControl\n                                    {\n                                    ...getFieldProps('orderCode4', {\n                                        initialValue: '',\n                                        rules: [{\n                                            required: true, message: '请输入订单编号',\n                                        }],\n                                    })\n                                    }\n                                />\n                                <span className='error'>\n                                    {\n                                        getFieldError('orderCode4')\n                                    }\n                                </span>\n                            </Col>\n                            <Col md={1}>\n                                <Label>供应商\n                                    <Icon type=\"uf-mi\" className='mast'></Icon>\n                                </Label>\n                            </Col>\n                            <Col md={3}>\n                            <FormControl\n                                {\n                                    ...getFieldProps('supplierName4', {\n                                        initialValue: '',\n                                        rules: [{\n                                            required: true, message: '请输入供应商名称',\n                                        }],\n                                    })\n                                }\n                                />\n                                <span className='error'>\n                                    {\n                                        getFieldError('supplierName4')\n                                    }\n                                </span>\n                            </Col>\n                            <Col md={1}>\n                                <Label className='time'>凭证日期</Label>\n                            </Col>\n                            <Col md={3}>\n                            <RangePicker\n                                    defaultValue={this.state.voucherDate}\n                                    placeholder={'开始 ~ 结束'}\n                                    dateInputPlaceholder={['开始', '结束']}\n                                    {\n                                    ...getFieldProps('voucherDate4', {\n                                        onChange: function (v) {\n                                            self.setState({\n                                                voucherDate3: v\n                                            })\n                                        }\n                                    })\n                                    }\n                                />\n                            </Col>\n                            <Col md={1}>\n                                <Label className='time'>备注</Label>\n                            </Col>\n                            <Col md={11}>\n                            <textarea className='u-form-control'\n                                {\n                                    ...getFieldProps('mark', {\n                                        initialValue: '',\n                                    })\n                                }\n                                />\n                            </Col>\n\n                       \n                    </Row>\n                    \n                </Form>\n            </div>\n        )\n    }\n})\n", "desc": " 必输项的 * ，在文字左侧或右侧均可 ", "scss_code": ".demo6 {\n    .edit-panel {\n        background: #FFF;\n        padding: 15px 15px 15px 15px;\n        .reset-btn,\n        .reset-btn:hover {\n            background: #fff;\n            border: 1px solid #1E7BE2;\n            color: #1E7BE2;\n            margin-right: 15px;\n        }\n        .submit-btn,\n        .submit-btn:hover {\n            background: #1E7BE2;\n            color: #fff;\n        }\n        .btn-group {\n            text-align: right;\n        }\n        .u-form-item {\n            min-width: 100%;\n            margin-bottom: 10px;\n            min-height: 50px!important;\n            .error {\n                margin-left: 100px;\n                color: red;\n                display: block;\n            }\n            .u-label {\n                min-width: 100px;\n                text-align: right;\n                display: inline-block;\n                padding-right: 12px;\n            }\n            .u-label.time {\n                position: relative;\n                bottom: 10px;\n            }\n            .u-label+* {\n                min-width: 200px;\n                display: inline-block;\n            }\n            .mast {\n                width: 5px;\n                min-width: auto;\n                margin-left: 4px;\n                padding: 0;\n                color: red;\n            }\n            .datepicker-input-group {\n                .u-input-group-btn {\n                    .uf-calendar {\n                        padding: 0;\n                    }\n                }\n            }\n            .u-switch {\n                min-width: auto;\n            }\n            .u-select {\n                width: auto;\n            }\n            .u-form-control {\n                width: auto;\n            }\n            .calendar-picker {\n                display: inline-block;\n                min-width: 200px;\n                width: auto;\n                input {\n                    width: 100%;\n                }\n            }\n            .u-form-control-close {\n                width: auto;\n                .u-form-control {\n                    width: 100%\n                }\n            }\n        }\n        .search-panel-btn {\n            text-align: right;\n            padding: 10px 0;\n        }\n    }\n    .edit-panel-center {\n        text-align: center;\n        .u-form-item {\n            min-width: auto;\n            display: inline-block;\n            .error {\n                text-align: left;\n            }\n        }\n    }\n    .edit-panel-all {\n        .u-form-item {\n            padding: 0;\n            .u-col-md-2,.u-col-md-10{\n                padding: 0;\n            }\n            .u-label {\n                width: 100%;\n                text-align: right;\n                height: 32px;\n                line-height: 32px;\n            }\n            .u-form-control {\n                width: 100%;\n            }\n            .calendar-picker {\n                width: 100%;\n                position: relative;\n            }\n            .u-select {\n                width: 100%;\n            }\n            .error {\n                margin-left: 0;\n            }\n        }\n    }\n    .split {\n        height: 1px;\n        background: #e0e0e0;\n    }\n    .edit-panel-textarea {\n        >div {\n            padding: 0;\n            margin-bottom: 10px;\n            min-height: 50px;\n            .u-label {\n                height: 32px;\n                line-height: 32px;\n                text-align: right;\n                display: block;\n                padding-right: 12px;\n            }\n            .error {\n                margin-left: 100px;\n                color: red;\n                display: block;\n            }\n            .mast {\n                margin-left:4px;\n                padding: 0;\n                color: red;\n            }\n            textarea {\n                width: 100%;\n                resize: none;\n                min-height: 50px;\n            }\n            .calendar-picker,\n            .u-select {\n                width: 100%;\n            }\n        }\n    }\n}" }];
+	var Demo1 = __webpack_require__(157);var Demo2 = __webpack_require__(349);var Demo3 = __webpack_require__(350);var Demo4 = __webpack_require__(356);var Demo5 = __webpack_require__(626);var Demo6 = __webpack_require__(629);var DemoArray = [{ "example": _react2['default'].createElement(Demo1, null), "title": " 单个input校验", "code": '/**\n *\n * @title \u5355\u4E2Ainput\u6821\u9A8C\n * @description \u4F7F\u7528FormItem\n */\nimport React, { Component } from \'react\';\nimport { Form, Label, FormControl } from \'tinper-bee\';\nconst FormItem = Form.FormItem;\n\n\nconst Demo1 = Form.createForm()(class Demo extends Component {\n    constructor(props) {\n        super(props);\n    }\n    render() {\n        const self=this;\n        const { getFieldProps, getFieldError } = this.props.form;\n        return (\n                <FormItem className=\'demo1\'>\n                    <Label>\u59D3\u540D</Label>\n                    <FormControl placeholder=\'\u8BF7\u8F93\u5165\u59D3\u540D\'\n                     {...getFieldProps(\'name\', {\n                        validateTrigger: \'onBlur\',\n                        rules: [{\n                            required: true, message: \'\u8BF7\u8F93\u5165\u59D3\u540D\'\n                        },{\n                            max:5,message:\'\u6700\u5927\u957F\u5EA6\u4E3A10\'\n                        },{\n                            pattern: /[\\u4e00-\\u9fa5]/, message: \'\u8BF7\u8F93\u5165\u4E2D\u6587\u5B57\u7B26\',\n                        }],\n                    }) } />\n                    <span className=\'error\'>\n                        {getFieldError(\'name\')}\n                    </span>   \n                </FormItem>\n        )\n    }\n})\n\n', "desc": " 使用FormItem", "scss_code": ".demo1 {\n    font-size: 14px;\n    .u-form-item {\n        min-height: auto!important;\n    }\n    .u-label {\n        display: inline;\n        padding-right: 12px;\n    }\n    .u-form-control {\n        width: auto;\n    }\n    .error {\n        font-size: 12px;\n        color: red;\n        margin-left: 10px;\n    }\n}" }, { "example": _react2['default'].createElement(Demo2, null), "title": " 基本form校验", "code": "/**\n *\n * @title 基本form校验\n * @description 登录示例\n */\nimport React, { Component } from 'react';\nimport ReactDOM from 'react-dom';\nimport { Form, Button, Label, FormControl } from 'tinper-bee';\nconst FormItem = Form.FormItem;\n\nconst Demo2 = Form.createForm()(class Demo2 extends Component {\n    submit = (e) => {\n        e.preventDefault();\n        this.props.form.validateFields((err, values) => {\n            if (err) {\n                console.log('校验失败', values);\n            } else {\n                console.log('提交成功', values)\n            }\n        });\n    }\n    render() {\n        const { getFieldProps, getFieldError } = this.props.form;\n        return (\n            <div className=\"demo2\">\n                <Form >\n                    <FormItem>\n                        <Label>用户名</Label>\n                        <FormControl placeholder=\"请输入用户名\"\n                            {...getFieldProps('username', {\n                                validateTrigger: 'onBlur',\n                                rules: [{\n                                    required: true, message: '请输入用户名',\n                                }],\n                            }) }\n                        />\n                        <span className='error'>\n                            {getFieldError('username')}\n                        </span>\n                    </FormItem>\n                    <FormItem>\n                        <Label>密码</Label>\n                        <FormControl placeholder=\"请输入密码\" type='password'\n                            {...getFieldProps('password', {\n                                validateTrigger: 'onBlur',\n                                rules: [{\n                                    required: true, message: '请输入密码',\n                                }],\n                            }) }\n                        />\n                        <span className='error'>\n                            {getFieldError('password')}\n                        </span>\n                    </FormItem>\n                    <div className='submit'>\n                        <Button shape=\"border\" className=\"reset\">取消</Button>\n                        <Button colors=\"primary\" className=\"login\" onClick={this.submit}>登录</Button>\n                    </div>\n                </Form>\n            </div>\n        )\n    }\n})\n", "desc": " 登录示例", "scss_code": ".demo2 {\n    font-size: 14px;\n    .u-label {\n        display: inline-block;\n        min-width: 80px;\n        text-align: right;\n        padding-right: 12px;\n    }\n    .u-form-control {\n        width: auto;\n    }\n    .error {\n        font-size: 12px;\n        color: red;\n        margin-left: 10px;\n    }\n    .submit {\n        padding-left: 90px;\n    }\n    .submit .login {\n        margin-left: 10px;\n    }\n    .u-form-item {\n        min-height: auto!important;\n    }\n}" }, { "example": _react2['default'].createElement(Demo3, null), "title": " 基本form校验", "code": "/**\n *\n * @title 基本form校验\n * @description 注册示例\n */\nimport React, { Component } from 'react';\nimport { Form, Label, Checkbox, Button, FormControl } from 'tinper-bee';\nconst FormItem = Form.FormItem;\n\nconst Demo3 = Form.createForm()( class Demo extends Component {\n    constructor(props) {\n        super(props);\n        this.state = {\n            checkbox: false\n        }\n    }\n    submit = (e) => {\n        e.preventDefault();\n        this.props.form.validateFields((err, values) => {\n            if (err) {\n                console.log('校验失败', values);\n            } else {\n                console.log('提交成功', values)\n            }\n        });\n    }\n    handleConfirmPassword = (rule, value, callback) => {\n        const { getFieldValue } = this.props.form;\n        if (value && value !== getFieldValue('password')) {\n            callback('两次输入不一致！')\n        }\n        callback();\n    }\n    render() {\n        const self = this;\n        const { getFieldProps, getFieldError } = this.props.form;\n        return (\n            <div className=\"demo3\">\n                <Form>\n                    <FormItem>\n                        <Label>用户名</Label>\n                        <FormControl placeholder=\"请输入用户名(包含数字和字母，8-15位)\"\n                            {...getFieldProps('username', {\n                                validateTrigger: 'onBlur',\n                                rules: [{\n                                    required: true, message: '请输入用户名',\n                                }, {\n                                    pattern: /^(?!\\d+$)(?![a-zA-Z]+$)[a-zA-Z0-9]{8,15}$/, message: '用户名格式错误',\n                                }],\n                            }) }\n                        />\n                        <span className='error'>\n                            {getFieldError('username')}\n                        </span>\n                    </FormItem>\n\n                    <FormItem>\n                        <Label>密码</Label>\n                        <FormControl placeholder=\"请输入密码\" type='password'\n                            {...getFieldProps('password', {\n                                validateTrigger: 'onBlur',\n                                rules: [{\n                                    required: true, message: '请输入密码',\n                                }],\n                            }) }\n                        />\n                        <span className='error'>\n                            {getFieldError('password')}\n                        </span>\n                    </FormItem>\n\n                    <FormItem>\n                        <Label>再次输入密码</Label>\n                        <FormControl placeholder=\"请输入密码\" type='password'\n                            {...getFieldProps('password2', {\n                                validateTrigger: 'onBlur',\n                                rules: [{\n                                    required: true, message: '请输入密码',\n                                }, {\n                                    validator: this.handleConfirmPassword\n                                }],\n                            }) }\n                        />\n                        <span className='error'>\n                            {getFieldError('password2')}\n                        </span>\n                    </FormItem>\n\n                    <FormItem>\n                        <Label>邮箱</Label>\n                        <FormControl placeholder=\"请输入邮箱\"\n                            {...getFieldProps('email', {\n                                validateTrigger: 'onBlur',\n                                rules: [{\n                                    required: true, message: '请输入邮箱',\n                                }, {\n                                    type: 'email', message: '邮箱格式不正确'\n                                }],\n                            }) }\n                        />\n                        <span className='error'>\n                            {getFieldError('email')}\n                        </span>\n                    </FormItem>\n                    <FormItem>\n                        <Label>手机号</Label>\n\n                        <FormControl placeholder=\"请输入手机号\"\n                            {...getFieldProps('phone', {\n                                validateTrigger: 'onBlur',\n                                rules: [{\n                                    required: true, message: '请输入手机号',\n                                }, {\n                                    pattern: /^\\d{11}$/, message: '手机号格式不正确'\n                                }],\n                            }) }\n                        />\n\n                        <span className='error'>\n                            {getFieldError('phone')}\n                        </span>\n                    </FormItem>\n\n                    <FormItem style={{'paddingLeft':'110px'}}>\n                        <Checkbox\n                            defaultChecked={this.state.checkbox}\n                            {\n                            ...getFieldProps('checkbox', {\n                                initialValue: false,\n                            }\n                            ) }\n                        >\n                        我已经阅读并同意相关条款\n                        </Checkbox>\n                    </FormItem>\n                    <div className='submit'>\n                        <Button shape=\"border\" className=\"reset\">取消</Button>\n                        <Button colors=\"primary\" className=\"login\" onClick={this.submit}>注册</Button>\n                    </div>\n                </Form>\n            </div>\n        )\n    }\n})\n", "desc": " 注册示例", "scss_code": ".demo3 {\n    font-size: 14px;\n    .u-label {\n        display: inline-block;\n        min-width: 105px;\n        text-align: right;\n        padding-right: 12px;\n    }\n    .u-form-control {\n        width: auto;\n        min-width: 300px;\n    }\n    .error {\n        font-size: 12px;\n        color: red;\n        margin-left: 10px;\n    }\n    .submit {\n        padding-left: 110px;\n    }\n    .submit .login {\n        margin-left: 10px;\n    }\n    .u-form-item {\n        min-height: auto!important;\n    }\n}" }, { "example": _react2['default'].createElement(Demo4, null), "title": " 表单校验", "code": "/**\n *\n * @title 表单校验\n * @description 用户信息录入实例\n */\nimport React, { Component } from 'react';\nimport ReactDOM from 'react-dom';\nimport { Form, Button, Label, CitySelect, Rate, InputNumber, Slider, Switch, Checkbox, DatePicker, Radio, Select, FormControl } from 'tinper-bee';\nconst FormItem = Form.FormItem;\nconst Option = Select.Option;\n\nconst Demo4 = Form.createForm()(class Demo extends Component {\n    constructor(props) {\n        super(props);\n        this.state = {\n            selectedValue: 'man',\n        };\n    }\n    submit = (e) => {\n        this.props.form.validateFields((err, values) => {\n            if (err) {\n                console.log('校验失败', values);\n            } else {\n                console.log('提交成功', values)\n            }\n        });\n    }\n    render() {\n        const { getFieldProps, getFieldError } = this.props.form;\n        const self = this;\n        return (\n            <div>\n                <Form className='demo4'>\n                    <FormItem>\n                        <Label>姓名</Label>\n                        <FormControl placeholder=\"请输入姓名\"\n                            {...getFieldProps('name', {\n                                validateTrigger: 'onBlur',\n                                rules: [{\n                                    required: true, message: '请输入姓名',\n                                }],\n                            }) }\n                        />\n                        <span className='error'>\n                            {getFieldError('name')}\n                        </span>\n                    </FormItem>\n                    <FormItem>\n                        <Label>身份证号</Label>\n                        <FormControl placeholder=\"请输入身份证号\"\n                            {...getFieldProps('id', {\n                                validateTrigger: 'onBlur',\n                                rules: [{\n                                    required: true, message: '请输入身份证号',\n                                },{\n                                    pattern: /^[1-9][0-9]{5}([1][9][0-9]{2}|[2][0][0|1][0-9])([0][1-9]|[1][0|1|2])([0][1-9]|[1|2][0-9]|[3][0|1])[0-9]{3}([0-9]|[X])$/, message: '身份证号格式不正确'\n                                }],\n                            }) }\n                        />\n                        <span className='error'>\n                            {getFieldError('id')}\n                        </span>\n                    </FormItem>\n                    <FormItem className='time'>\n                        <Label>出生日期</Label>\n                        <DatePicker\n                            {\n                            ...getFieldProps('time', {\n                                validateTrigger: 'onBlur',\n                                rules: [{\n                                    required: true, message: '请选择出生日期',\n                                }, {\n                                    type: 'date', message: '日期格式不正确'\n                                }],\n                            }\n                            ) }\n                            placeholder={'请选择出生日期'}\n                        />\n                        <span className='error'>\n                            {getFieldError('time')}\n                        </span>\n                    </FormItem>\n                    <FormItem>\n                        <Label>年龄</Label>\n                        <FormControl placeholder=\"请输入年龄\"\n                            {...getFieldProps('age', {\n                                validateTrigger: 'onBlur',\n                                rules: [{\n                                    required: true, message: '请输入年龄',\n                                }],\n                            }) }\n                        />\n                        <span className='error'>\n                            {getFieldError('age')}\n                        </span>\n                    </FormItem>\n                     <FormItem>\n                        <Label>性别</Label>\n                        <Radio.RadioGroup\n                            selectedValue={this.state.selectedValue}\n                            {\n                            ...getFieldProps('sex', {\n                                initialValue: 'man',\n                                onChange(value) {\n                                    self.setState({ selectedValue: value });\n                                },\n                                rules: [{ required: true }]\n                            }\n                            ) }\n                        >\n                            <Radio value=\"man\" >男</Radio>\n                            <Radio value=\"woman\" >女</Radio>\n                        </Radio.RadioGroup>\n                    </FormItem>\n                    <FormItem>\n                        <Label>学历</Label>\n                        <Select\n                            {\n                            ...getFieldProps('education', {\n                                initialValue: '',\n                                rules: [{ required: true, message: '请选择学历' }]\n                            }\n                            ) }\n                        >\n                            <Option value=\"\">请选择</Option>\n                            <Option value=\"nothing\">无</Option>\n                            <Option value=\"middle\">初中</Option>\n                            <Option value=\"senior\">高中</Option>\n                            <Option value=\"college1\">专科</Option>\n                            <Option value=\"college2\">本科</Option>\n                            <Option value=\"graduate\">研究生及以上</Option>\n                            <Option value=\"other\">其它</Option>\n                        </Select>\n                        <span className='error'>\n                            {getFieldError('education')}\n                        </span>\n                    </FormItem>\n                    <FormItem>\n                        <Label>保密等级</Label>\n                        <Rate\n                            {\n                            ...getFieldProps('rate', {\n                                initialValue: 0,\n                                rules: [{ required: true }]\n                            }\n                            ) }\n                        />\n                    </FormItem>\n                    <FormItem className=\"remarks\">\n                        <Label>备注</Label>\n                        <FormControl componentClass='textarea'\n                            {\n                            ...getFieldProps('remark', {}\n                            ) }\n                        />\n                    </FormItem>  \n                    \n\n\n                    <div className='submit'>\n                        <Button shape=\"border\" className=\"reset\">取消</Button>\n                        <Button colors=\"primary\" className=\"login\" onClick={this.submit}>提交</Button>\n                    </div>\n                </Form>\n            </div>\n        )\n    }\n})\n", "desc": " 用户信息录入实例", "scss_code": ".demo4 {\n    font-size: 14px;\n    .u-label {\n        display: inline-block;\n        min-width: 100px;\n        text-align: right;\n        padding-right: 12px;\n    }\n    .u-form-control {\n        width: auto;\n        min-width: 380px;\n    }\n    .error {\n        font-size: 12px;\n        color: red;\n        margin-left: 10px;\n    }\n    .submit {\n        padding-left: 110px;\n    }\n    .submit .login {\n        margin-left: 10px;\n    }\n    .u-select {\n        max-width: 380px;\n    }\n    textarea {\n        min-height: 100px;\n        resize: none;\n    }\n    .time>div {\n        display: inline-block;\n    }\n    .time .u-label {\n        position: relative;\n        bottom: 10px;\n    }\n    .time .error{\n        position: relative;\n        bottom: 10px;\n    }\n    .remarks .u-label{\n        position: relative;\n        bottom: 79px;\n    }\n    .u-city-select {\n        display: inline-block;\n    }\n    .u-city-select .province,\n    .u-city-select .city,\n    .u-city-select .area {\n        width: 120px;\n    }\n    .u-form-item {\n        min-height: auto!important;\n    }\n}" }, { "example": _react2['default'].createElement(Demo5, null), "title": " 多种表单元素示例", "code": "/**\n *\n * @title 多种表单元素示例\n * @description 查询面板\n */\nimport React, { Component } from 'react';\nimport ReactDOM from 'react-dom';\nimport { Form, SearchPanel, Button, Label, Switch, Checkbox, DatePicker, Radio, Select,  Col , Row , FormControl } from 'tinper-bee';\nimport moment from \"moment/moment\";\nconst FormItem = Form.FormItem;\nconst Option = Select.Option;\nconst { RangePicker } = DatePicker;\n\nconst Demo5 = Form.createForm()(class Demo extends Component {\n    constructor(props) {\n        super(props);\n        this.state = {\n            expanded: true,\n            approvalState: '',\n            closeState: '',\n            confirmState: '',\n            voucherDate: [],\n            orderTypes:[\n                {\n                    'code':'001',\n                    'name':'类型1'\n                },\n                {\n                    'code':'002',\n                    'name':'类型2'\n                },\n                {\n                    'code':'003',\n                    'name':'类型3'\n                },\n            ]\n        };\n    }\n    submit = (e) => {\n        this.props.form.validateFields((err, values) => {\n            if (err) {\n                console.log('校验失败', values);\n            } else {\n                console.log('提交成功', values)\n            }\n        });\n    }\n    reset = () =>{\n        this.props.form.resetFields();\n        //部分表单元素无法通过this.props.form.resetFields重置，需要手动重置，如下\n        this.setState({\n            approvalState: '',\n            closeState: '',\n            confirmState: '',\n            voucherDate: []\n        })\n    }\n    onChange = () => {\n        this.setState({expanded: !this.state.expanded})\n    }\n    render() {\n        const { getFieldProps, getFieldError } = this.props.form;\n        const self = this;\n        return (\n            <div>\n                <SearchPanel\n                title='基础示例'\n                onSearch={this.submit}\n                onReset={this.reset}\n                expanded={this.state.expanded}\n                onChange={this.onChange}\n                >\n                    <Form className='demo5'>\n                        <Row>\n                            <Col lg={4} md={6} xs={12}>\n                                <FormItem>\n                                    <Col md={3}>\n                                        <Label>订单编号</Label>\n                                    </Col>\n                                    <Col md={9}>\n                                        <FormControl size=\"sm\"\n                                            {\n                                            ...getFieldProps('orderCode', {\n                                                initialValue: '',\n                                            })\n                                            }\n                                        />\n                                    </Col>\n                                </FormItem>\n                            </Col>\n                            <Col  lg={4} md={6} xs={12}>\n                                <FormItem>\n                                    <Col md={3}>\n                                        <Label>供应商名称</Label>\n                                    </Col>\n                                    <Col md={9}>\n                                        <FormControl size=\"sm\"\n                                            {\n                                            ...getFieldProps('supplierName', {\n                                                initialValue: '',\n                                            })\n                                            }\n                                        />\n                                    </Col>\n                                </FormItem>\n                            </Col>\n                            <Col lg={4} md={6} xs={4}>\n                                <FormItem>\n                                    <Col md={3}>\n                                        <Label className='time'>凭证日期</Label>\n                                    </Col>\n                                    <Col md={9}>\n                                        <RangePicker size=\"sm\"\n                                            defaultValue={this.state.voucherDate}\n                                            placeholder={'开始 ~ 结束'}\n                                            dateInputPlaceholder={['开始', '结束']}\n                                            {\n                                            ...getFieldProps('voucherDate', {\n                                                onChange: function (v) {\n                                                    self.setState({\n                                                        voucherDate: v\n                                                    })\n                                                }\n                                            })\n                                            }\n                                        />\n                                    </Col>\n                                </FormItem>\n                            </Col>\n                            <Col  lg={4} md={6} xs={12}>\n                                <FormItem>\n                                    <Col md={3}>\n                                        <Label>订单类型</Label>\n                                    </Col>\n                                    <Col md={9}>\n                                        <Select size=\"sm\"\n                                            {\n                                            ...getFieldProps('type', {\n                                                initialValue: '',\n                                            }\n                                            )}>\n                                            <Option value=\"\">请选择</Option>\n                                            {\n                                                self.state.orderTypes.map((item, index) => {\n                                                    return (\n                                                        <Option key={index} value={item.code}>{item.name}</Option>\n                                                    )\n                                                })\n                                            }\n                                        </Select>\n                                    </Col>\n                                </FormItem>\n                            </Col>\n                            <Col  lg={4} md={6} xs={12}>\n                                <FormItem>\n                                    <Col md={3}>\n                                        <Label>采购组</Label>\n                                    </Col>\n                                    <Col md={9}>\n                                        <FormControl size=\"sm\"\n                                            {\n                                            ...getFieldProps('purchasingGroup', {\n                                                initialValue: '',\n                                            })\n                                            }\n                                        />\n                                    </Col>\n                                </FormItem>\n                            </Col>\n                            <Col  lg={4} md={6} xs={12}>\n                                <FormItem>\n                                    <Col md={3}>\n                                        <Label>审批状态</Label>\n                                    </Col>\n                                    <Col md={9}>\n                                        <Radio.RadioGroup\n                                            selectedValue={this.state.approvalState}\n                                            {\n                                            ...getFieldProps('approvalState', {\n                                                initialValue: '1',\n                                                onChange(value) {\n                                                    self.setState({ approvalState: value });\n                                                },\n                                            }\n                                            )}\n                                        >\n                                            <Radio value=\"0\" >未审批</Radio>\n                                            <Radio value=\"1\" >已审批</Radio>\n                                        </Radio.RadioGroup>\n                                    </Col>\n                                </FormItem>\n                            </Col>\n                            <Col  lg={4} md={6} xs={12}>\n                                <FormItem>\n                                    <Col md={3}>\n                                        <Label>关闭状态</Label>\n                                    </Col>\n                                    <Col md={9}>\n                                        <Radio.RadioGroup\n                                            selectedValue={this.state.closeState}\n                                            {\n                                            ...getFieldProps('closeState', {\n                                                initialValue: '1',\n                                                onChange(value) {\n                                                    self.setState({ closeState: value });\n                                                },\n                                            }\n                                            )}\n                                        >\n                                            <Radio value=\"0\" >未关闭</Radio>\n                                            <Radio value=\"1\" >已关闭</Radio>\n                                        </Radio.RadioGroup>\n                                    </Col>\n                                </FormItem>\n                            </Col>\n                            <Col  lg={4} md={6} xs={12}>\n                                <FormItem>\n                                    <Col md={3}>\n                                        <Label>确认状态</Label>\n                                    </Col>\n                                    <Col md={9}>\n                                        <Radio.RadioGroup\n                                            selectedValue={this.state.confirmState}\n                                            {\n                                            ...getFieldProps('confirmState', {\n                                                initialValue: '1',\n                                                onChange(value) {\n                                                    self.setState({ confirmState: value });\n                                                },\n                                            }\n                                            )}\n                                        >\n                                            <Radio value=\"0\" >未确认</Radio>\n                                            <Radio value=\"1\" >已确认</Radio>\n                                        </Radio.RadioGroup>\n                                    </Col>\n                                </FormItem>\n                            </Col>\n                        </Row>\n                    </Form>\n                </SearchPanel>\n            </div>\n        )\n    }\n})\n", "desc": " 查询面板", "scss_code": ".demo5 {\n    .submit{\n        padding-left:90px\n    }\n    .reset{\n        margin-right:10px;\n    }\n    .u-form-item {\n        min-width: 100%;\n        min-height: 50px!important;\n        padding: 0;\n        .u-col-md-3,.u-col-md-9{\n            padding: 0;\n        }\n        .u-label{\n            display: inline-block;\n            width: 100%;\n            min-width: 90px;\n            text-align:right;\n            padding-right: 12px;\n        }\n        .u-label + *{\n            min-width: 200px;\n            display: inline-block;\n        }\n        .datepicker-input-group{\n            .u-input-group-btn{\n                .uf-calendar{\n                    padding: 0;\n                }\n            }\n        }\n        .u-switch{\n            min-width: auto;\n        }\n        .u-select{\n            width: 100%;\n        }\n        .u-form-control{\n            width: 100%;\n        }\n        .calendar-picker{\n            display: inline-block;\n            min-width:200px;\n            width: 100%;\n            input{\n                width: 100%;\n                text-align: center;\n                height: 26px;\n                line-height: 26px;\n            }\n            .u-input-group-btn{\n                top: 0;\n            }\n        }\n        .u-radio .u-radio-label{\n            font-size:14px;\n            margin-right: 24px;\n        }\n    }\n}\n" }, { "example": _react2['default'].createElement(Demo6, null), "title": " 多种布局示例", "code": "/**\n *\n * @title 多种布局示例\n * @description 必输项的 * ，在文字左侧或右侧均可 \n */\nimport React, { Component } from 'react';\nimport ReactDOM from 'react-dom';\nimport { Form, Icon, Button, Label, Switch, Checkbox, DatePicker, Radio, Select,  Col , Row , FormControl } from 'tinper-bee';\nimport moment from \"moment/moment\";\nconst FormItem = Form.FormItem;\nconst Option = Select.Option;\nconst { RangePicker } = DatePicker;\n\nconst Demo6 = Form.createForm()(class Demo extends Component {\n    constructor(props) {\n        super(props);\n        this.state = {\n            approvalState: '',\n            closeState: '',\n            confirmState: '',\n            voucherDate: [],\n            orderTypes:[\n                {\n                    'code':'001',\n                    'name':'类型1'\n                },\n                {\n                    'code':'002',\n                    'name':'类型2'\n                },\n                {\n                    'code':'003',\n                    'name':'类型3'\n                },\n            ]\n        };\n    }\n    render() {\n        const { getFieldProps, getFieldError } = this.props.form;\n        const self = this;\n        const orderTypes= [{\n            \"code\":\"D001\",\n            \"name\":\"D001\"\n          },{\n            \"code\":\"D002\",\n            \"name\":\"D002\"\n          },{\n            \"code\":\"D003\",\n            \"name\":\"D003\"\n          },{\n            \"code\":\"D004\",\n            \"name\":\"D004\"\n          }];\n        return (\n            <div>\n                <Form className='demo6'>\n                    {/* 普通栅格布局 */}\n                    <h4>\n                        普通栅格布局\n                    </h4>\n                    <Row className = 'edit-panel'>\n                        <Col lg={4} md={6} xs={12}>\n                            <FormItem>\n                                <Label>订单编号\n                                    <Icon type=\"uf-mi\" className='mast'></Icon>\n                                </Label>\n                                <FormControl\n                                    {\n                                    ...getFieldProps('orderCode1', {\n                                        initialValue: '',\n                                        rules: [{\n                                            required: true, message: '请输入订单编号',\n                                        }],\n                                    })\n                                    }\n                                />\n                                <span className='error'>\n                                    {\n                                        getFieldError('orderCode1')\n                                    }\n                                </span>\n                            </FormItem>\n                        </Col>\n                        <Col lg={4} md={6} xs={12}>\n                            <FormItem>\n                                <Label>供应商名称\n                                    <Icon type=\"uf-mi\" className='mast'></Icon>\n                                </Label>\n                                <FormControl\n                                    {\n                                        ...getFieldProps('supplierName1', {\n                                            initialValue: '',\n                                            rules: [{\n                                                required: true, message: '请输入供应商名称',\n                                            }],\n                                        })\n                                    }\n                                />\n                                <span className='error'>\n                                    {\n                                        getFieldError('supplierName1')\n                                    }\n                                </span>\n                            </FormItem>\n                            \n                        </Col>\n                        <Col lg={4} md={6} xs={12}>\n                            <FormItem>\n                                <Label className='time'>凭证日期</Label>\n                                <RangePicker\n                                    defaultValue={this.state.voucherDate}\n                                    placeholder={'开始 ~ 结束'}\n                                    dateInputPlaceholder={['开始', '结束']}\n                                    {\n                                    ...getFieldProps('voucherDate1', {\n                                        onChange: function (v) {\n                                            self.setState({\n                                                voucherDate1: v\n                                            })\n                                        }\n                                    })\n                                    }\n                                />\n                            </FormItem>\n                        </Col>\n                    </Row>\n\n                    <div className='split'></div>\n                    \n                    \n                     {/* 单列铺满 */}\n                     <h4>\n                        单列铺满\n                     </h4>\n                     <Row className = 'edit-panel edit-panel-all'>\n                        <FormItem>\n                            <Col md={2}>\n                                <Label>\n                                    <Icon type=\"uf-mi\" className='mast'></Icon>\n                                    订单编号\n                                </Label>\n                            </Col>\n                            <Col md={10}>\n                                <FormControl\n                                    {\n                                    ...getFieldProps('orderCode2', {\n                                        initialValue: '',\n                                        rules: [{\n                                            required: true, message: '请输入订单编号',\n                                        }],\n                                    })\n                                    }\n                                />\n                                <span className='error'>\n                                    {\n                                        getFieldError('orderCode2')\n                                    }\n                                </span>\n                            </Col>\n                        </FormItem>\n\n                        <FormItem>\n                            <Col md={2}>\n                                <Label>\n                                    <Icon type=\"uf-mi\" className='mast'></Icon>\n                                    供应商名称\n                                </Label>\n                            </Col>\n                            <Col md={10}>\n                                <FormControl\n                                    {\n                                        ...getFieldProps('supplierName2', {\n                                            initialValue: '',\n                                            rules: [{\n                                                required: true, message: '请输入供应商名称',\n                                            }],\n                                        })\n                                    }\n                                />\n                                <span className='error'>\n                                    {\n                                        getFieldError('supplierName2')\n                                    }\n                                </span>\n                            </Col>\n                        </FormItem>\n\n                        <FormItem>\n                            <Col md={2}>\n                                <Label>凭证日期</Label>\n                            </Col>\n                            <Col md={10}>\n                                <RangePicker\n                                    defaultValue={this.state.voucherDate}\n                                    placeholder={'开始 ~ 结束'}\n                                    dateInputPlaceholder={['开始', '结束']}\n                                    {\n                                    ...getFieldProps('voucherDate2', {\n                                        onChange: function (v) {\n                                            self.setState({\n                                                voucherDate2: v\n                                            })\n                                        }\n                                    })\n                                    }\n                                />\n                            </Col>\n                        </FormItem>\n                        <FormItem>\n                            <Col md={2}>\n                                <Label>订单类型</Label>\n                            </Col>\n                            <Col md={10}>\n                                <Select {\n                                    ...getFieldProps('type', {\n                                        initialValue: '',\n                                    }\n                                    )}>\n                                    <Option value=\"\">请选择</Option>\n                                    {\n                                        orderTypes.map((item, index) => {\n                                            return (\n                                                <Option key={index} value={item.code}>{item.name}</Option>\n                                            )\n                                        })\n                                    }\n                                </Select>\n                            </Col>\n                        </FormItem>\n                        \n                    </Row>\n\n                    <div className='split'></div>\n\n                    {/* 单列居中 */}\n                    <h4>\n                        单列居中\n                     </h4>\n                    <Row className = 'edit-panel edit-panel-center'>\n                        <Col md={12} >\n                            <FormItem>\n                                <Label>\n                                    <Icon type=\"uf-mi\" className='mast'></Icon>\n                                    订单编号\n                                </Label>\n                                <FormControl\n                                    {\n                                    ...getFieldProps('orderCode3', {\n                                        initialValue: '',\n                                        rules: [{\n                                            required: true, message: '请输入订单编号',\n                                        }],\n                                    })\n                                    }\n                                />\n                                <span className='error'>\n                                    {\n                                        getFieldError('orderCode3')\n                                    }\n                                </span>\n                            </FormItem>\n                        </Col>\n                        <Col md={12}  >\n                            <FormItem>\n                                <Label>\n                                    <Icon type=\"uf-mi\" className='mast'></Icon>\n                                    供应商名称\n                                </Label>\n                                <FormControl\n                                    {\n                                        ...getFieldProps('supplierName3', {\n                                            initialValue: '',\n                                            rules: [{\n                                                required: true, message: '请输入供应商名称',\n                                            }],\n                                        })\n                                    }\n                                />\n                                <span className='error'>\n                                    {\n                                        getFieldError('supplierName3')\n                                    }\n                                </span>\n                            </FormItem>\n                            \n                        </Col>\n                        <Col md={12}  >\n                            <FormItem>\n                                <Label className='time'>凭证日期</Label>\n                                <RangePicker\n                                    defaultValue={this.state.voucherDate}\n                                    placeholder={'开始 ~ 结束'}\n                                    dateInputPlaceholder={['开始', '结束']}\n                                    {\n                                    ...getFieldProps('voucherDate3', {\n                                        onChange: function (v) {\n                                            self.setState({\n                                                voucherDate3: v\n                                            })\n                                        }\n                                    })\n                                    }\n                                />\n                            </FormItem>\n                        </Col>\n                        \n                    </Row>\n\n                     <div className='split'></div>\n\n                    {/* 三列带textarea */}\n                    <h4>\n                    三列带textarea\n                     </h4>\n                    <Row className = 'edit-panel edit-panel-textarea'>\n                            <Col md={1}>\n                                <Label>订单编号\n                                    <Icon type=\"uf-mi\" className='mast'></Icon>\n                                </Label>\n                            </Col>\n                            <Col md={3}>\n                                <FormControl\n                                    {\n                                    ...getFieldProps('orderCode4', {\n                                        initialValue: '',\n                                        rules: [{\n                                            required: true, message: '请输入订单编号',\n                                        }],\n                                    })\n                                    }\n                                />\n                                <span className='error'>\n                                    {\n                                        getFieldError('orderCode4')\n                                    }\n                                </span>\n                            </Col>\n                            <Col md={1}>\n                                <Label>供应商\n                                    <Icon type=\"uf-mi\" className='mast'></Icon>\n                                </Label>\n                            </Col>\n                            <Col md={3}>\n                            <FormControl\n                                {\n                                    ...getFieldProps('supplierName4', {\n                                        initialValue: '',\n                                        rules: [{\n                                            required: true, message: '请输入供应商名称',\n                                        }],\n                                    })\n                                }\n                                />\n                                <span className='error'>\n                                    {\n                                        getFieldError('supplierName4')\n                                    }\n                                </span>\n                            </Col>\n                            <Col md={1}>\n                                <Label className='time'>凭证日期</Label>\n                            </Col>\n                            <Col md={3}>\n                            <RangePicker\n                                    defaultValue={this.state.voucherDate}\n                                    placeholder={'开始 ~ 结束'}\n                                    dateInputPlaceholder={['开始', '结束']}\n                                    {\n                                    ...getFieldProps('voucherDate4', {\n                                        onChange: function (v) {\n                                            self.setState({\n                                                voucherDate3: v\n                                            })\n                                        }\n                                    })\n                                    }\n                                />\n                            </Col>\n                            <Col md={1}>\n                                <Label className='time'>备注</Label>\n                            </Col>\n                            <Col md={11}>\n                            <textarea className='u-form-control'\n                                {\n                                    ...getFieldProps('mark', {\n                                        initialValue: '',\n                                    })\n                                }\n                                />\n                            </Col>\n\n                       \n                    </Row>\n                    \n                </Form>\n            </div>\n        )\n    }\n})\n", "desc": " 必输项的 * ，在文字左侧或右侧均可 ", "scss_code": ".demo6 {\n    .edit-panel {\n        background: #FFF;\n        padding: 15px 15px 15px 15px;\n        .reset-btn,\n        .reset-btn:hover {\n            background: #fff;\n            border: 1px solid #1E7BE2;\n            color: #1E7BE2;\n            margin-right: 15px;\n        }\n        .submit-btn,\n        .submit-btn:hover {\n            background: #1E7BE2;\n            color: #fff;\n        }\n        .btn-group {\n            text-align: right;\n        }\n        .u-form-item {\n            min-width: 100%;\n            margin-bottom: 10px;\n            min-height: 50px!important;\n            .error {\n                margin-left: 100px;\n                color: red;\n                display: block;\n            }\n            .u-label {\n                min-width: 100px;\n                text-align: right;\n                display: inline-block;\n                padding-right: 12px;\n            }\n            .u-label.time {\n                position: relative;\n                bottom: 10px;\n            }\n            .u-label+* {\n                min-width: 200px;\n                display: inline-block;\n            }\n            .mast {\n                width: 5px;\n                min-width: auto;\n                margin-left: 4px;\n                padding: 0;\n                color: red;\n            }\n            .datepicker-input-group {\n                .u-input-group-btn {\n                    .uf-calendar {\n                        padding: 0;\n                    }\n                }\n            }\n            .u-switch {\n                min-width: auto;\n            }\n            .u-select {\n                width: auto;\n            }\n            .u-form-control {\n                width: auto;\n            }\n            .calendar-picker {\n                display: inline-block;\n                min-width: 200px;\n                width: auto;\n                input {\n                    width: 100%;\n                }\n            }\n            .u-form-control-close {\n                width: auto;\n                .u-form-control {\n                    width: 100%\n                }\n            }\n        }\n        .search-panel-btn {\n            text-align: right;\n            padding: 10px 0;\n        }\n    }\n    .edit-panel-center {\n        text-align: center;\n        .u-form-item {\n            min-width: auto;\n            display: inline-block;\n            .error {\n                text-align: left;\n            }\n        }\n    }\n    .edit-panel-all {\n        .u-form-item {\n            padding: 0;\n            .u-col-md-2,.u-col-md-10{\n                padding: 0;\n            }\n            .u-label {\n                width: 100%;\n                text-align: right;\n                height: 32px;\n                line-height: 32px;\n            }\n            .u-form-control {\n                width: 100%;\n            }\n            .calendar-picker {\n                width: 100%;\n                position: relative;\n            }\n            .u-select {\n                width: 100%;\n            }\n            .error {\n                margin-left: 0;\n            }\n        }\n    }\n    .split {\n        height: 1px;\n        background: #e0e0e0;\n    }\n    .edit-panel-textarea {\n        >div {\n            padding: 0;\n            margin-bottom: 10px;\n            min-height: 50px;\n            .u-label {\n                height: 32px;\n                line-height: 32px;\n                text-align: right;\n                display: block;\n                padding-right: 12px;\n            }\n            .error {\n                margin-left: 100px;\n                color: red;\n                display: block;\n            }\n            .mast {\n                margin-left:4px;\n                padding: 0;\n                color: red;\n            }\n            textarea {\n                width: 100%;\n                resize: none;\n                min-height: 50px;\n            }\n            .calendar-picker,\n            .u-select {\n                width: 100%;\n            }\n        }\n    }\n}" }];
 	
 	var Demo = function (_Component) {
 	    _inherits(Demo, _Component);
@@ -16344,14 +16340,107 @@
 	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _src = __webpack_require__(158);
+	
+	var _src2 = _interopRequireDefault(_src);
+	
+	var _beeFormControl = __webpack_require__(153);
+	
+	var _beeFormControl2 = _interopRequireDefault(_beeFormControl);
+	
+	var _beeLabel = __webpack_require__(347);
+	
+	var _beeLabel2 = _interopRequireDefault(_beeLabel);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+	
+	function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : _defaults(subClass, superClass); } /**
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @title 单个input校验
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @description 使用FormItem
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                */
+	
+	
+	var FormItem = _src2['default'].FormItem;
+	
+	var Demo1 = _src2['default'].createForm()(function (_Component) {
+	    _inherits(Demo, _Component);
+	
+	    function Demo(props) {
+	        _classCallCheck(this, Demo);
+	
+	        return _possibleConstructorReturn(this, _Component.call(this, props));
+	    }
+	
+	    Demo.prototype.render = function render() {
+	        var self = this;
+	        var _props$form = this.props.form,
+	            getFieldProps = _props$form.getFieldProps,
+	            getFieldError = _props$form.getFieldError;
+	
+	        return _react2['default'].createElement(
+	            FormItem,
+	            { className: 'demo1' },
+	            _react2['default'].createElement(
+	                _beeLabel2['default'],
+	                null,
+	                '\u59D3\u540D'
+	            ),
+	            _react2['default'].createElement(_beeFormControl2['default'], _extends({ placeholder: '\u8BF7\u8F93\u5165\u59D3\u540D'
+	            }, getFieldProps('name', {
+	                validateTrigger: 'onBlur',
+	                rules: [{
+	                    required: true, message: '请输入姓名'
+	                }, {
+	                    max: 5, message: '最大长度为10'
+	                }, {
+	                    pattern: /[\u4e00-\u9fa5]/, message: '请输入中文字符'
+	                }]
+	            }))),
+	            _react2['default'].createElement(
+	                'span',
+	                { className: 'error' },
+	                getFieldError('name')
+	            )
+	        );
+	    };
+	
+	    return Demo;
+	}(_react.Component));
+	
+	exports['default'] = Demo1;
+	module.exports = exports['default'];
+
+/***/ }),
+/* 158 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
 	
-	var _Form = __webpack_require__(158);
+	var _Form = __webpack_require__(159);
 	
 	var _Form2 = _interopRequireDefault(_Form);
 	
-	var _FormItem = __webpack_require__(345);
+	var _FormItem = __webpack_require__(346);
 	
 	var _FormItem2 = _interopRequireDefault(_FormItem);
 	
@@ -16362,7 +16451,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 158 */
+/* 159 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -16379,7 +16468,7 @@
 	
 	var _propTypes2 = _interopRequireDefault(_propTypes);
 	
-	var _rcForm = __webpack_require__(159);
+	var _rcForm = __webpack_require__(160);
 	
 	var _classnames = __webpack_require__(5);
 	
@@ -16442,7 +16531,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 159 */
+/* 160 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -16452,15 +16541,15 @@
 	});
 	exports.formShape = exports.createFormField = exports.createForm = undefined;
 	
-	var _createForm = __webpack_require__(160);
+	var _createForm = __webpack_require__(161);
 	
 	var _createForm2 = _interopRequireDefault(_createForm);
 	
-	var _createFormField = __webpack_require__(341);
+	var _createFormField = __webpack_require__(342);
 	
 	var _createFormField2 = _interopRequireDefault(_createFormField);
 	
-	var _propTypes = __webpack_require__(344);
+	var _propTypes = __webpack_require__(345);
 	
 	var _propTypes2 = _interopRequireDefault(_propTypes);
 	
@@ -16471,7 +16560,7 @@
 	exports.formShape = _propTypes2['default']; // export this package's api
 
 /***/ }),
-/* 160 */
+/* 161 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -16481,7 +16570,7 @@
 	});
 	exports.mixin = undefined;
 	
-	var _createBaseForm = __webpack_require__(161);
+	var _createBaseForm = __webpack_require__(162);
 	
 	var _createBaseForm2 = _interopRequireDefault(_createBaseForm);
 	
@@ -16519,7 +16608,7 @@
 	exports['default'] = createForm;
 
 /***/ }),
-/* 161 */
+/* 162 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -16528,23 +16617,23 @@
 	  value: true
 	});
 	
-	var _objectWithoutProperties2 = __webpack_require__(162);
+	var _objectWithoutProperties2 = __webpack_require__(163);
 	
 	var _objectWithoutProperties3 = _interopRequireDefault(_objectWithoutProperties2);
 	
-	var _typeof2 = __webpack_require__(163);
+	var _typeof2 = __webpack_require__(164);
 	
 	var _typeof3 = _interopRequireDefault(_typeof2);
 	
-	var _defineProperty2 = __webpack_require__(230);
+	var _defineProperty2 = __webpack_require__(231);
 	
 	var _defineProperty3 = _interopRequireDefault(_defineProperty2);
 	
-	var _extends2 = __webpack_require__(234);
+	var _extends2 = __webpack_require__(235);
 	
 	var _extends3 = _interopRequireDefault(_extends2);
 	
-	var _toConsumableArray2 = __webpack_require__(239);
+	var _toConsumableArray2 = __webpack_require__(240);
 	
 	var _toConsumableArray3 = _interopRequireDefault(_toConsumableArray2);
 	
@@ -16552,11 +16641,11 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _createReactClass = __webpack_require__(249);
+	var _createReactClass = __webpack_require__(250);
 	
 	var _createReactClass2 = _interopRequireDefault(_createReactClass);
 	
-	var _asyncValidator = __webpack_require__(255);
+	var _asyncValidator = __webpack_require__(256);
 	
 	var _asyncValidator2 = _interopRequireDefault(_asyncValidator);
 	
@@ -16564,19 +16653,19 @@
 	
 	var _warning2 = _interopRequireDefault(_warning);
 	
-	var _get = __webpack_require__(280);
+	var _get = __webpack_require__(281);
 	
 	var _get2 = _interopRequireDefault(_get);
 	
-	var _set = __webpack_require__(332);
+	var _set = __webpack_require__(333);
 	
 	var _set2 = _interopRequireDefault(_set);
 	
-	var _createFieldsStore = __webpack_require__(338);
+	var _createFieldsStore = __webpack_require__(339);
 	
 	var _createFieldsStore2 = _interopRequireDefault(_createFieldsStore);
 	
-	var _utils = __webpack_require__(342);
+	var _utils = __webpack_require__(343);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
@@ -17061,7 +17150,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(33)))
 
 /***/ }),
-/* 162 */
+/* 163 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -17081,18 +17170,18 @@
 	};
 
 /***/ }),
-/* 163 */
+/* 164 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
 	
 	exports.__esModule = true;
 	
-	var _iterator = __webpack_require__(164);
+	var _iterator = __webpack_require__(165);
 	
 	var _iterator2 = _interopRequireDefault(_iterator);
 	
-	var _symbol = __webpack_require__(215);
+	var _symbol = __webpack_require__(216);
 	
 	var _symbol2 = _interopRequireDefault(_symbol);
 	
@@ -17107,29 +17196,29 @@
 	};
 
 /***/ }),
-/* 164 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	module.exports = { "default": __webpack_require__(165), __esModule: true };
-
-/***/ }),
 /* 165 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	__webpack_require__(166);
-	__webpack_require__(210);
-	module.exports = __webpack_require__(214).f('iterator');
-
+	module.exports = { "default": __webpack_require__(166), __esModule: true };
 
 /***/ }),
 /* 166 */
 /***/ (function(module, exports, __webpack_require__) {
 
+	__webpack_require__(167);
+	__webpack_require__(211);
+	module.exports = __webpack_require__(215).f('iterator');
+
+
+/***/ }),
+/* 167 */
+/***/ (function(module, exports, __webpack_require__) {
+
 	'use strict';
-	var $at = __webpack_require__(167)(true);
+	var $at = __webpack_require__(168)(true);
 	
 	// 21.1.3.27 String.prototype[@@iterator]()
-	__webpack_require__(170)(String, 'String', function (iterated) {
+	__webpack_require__(171)(String, 'String', function (iterated) {
 	  this._t = String(iterated); // target
 	  this._i = 0;                // next index
 	// 21.1.5.2.1 %StringIteratorPrototype%.next()
@@ -17145,11 +17234,11 @@
 
 
 /***/ }),
-/* 167 */
+/* 168 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var toInteger = __webpack_require__(168);
-	var defined = __webpack_require__(169);
+	var toInteger = __webpack_require__(169);
+	var defined = __webpack_require__(170);
 	// true  -> String#at
 	// false -> String#codePointAt
 	module.exports = function (TO_STRING) {
@@ -17168,7 +17257,7 @@
 
 
 /***/ }),
-/* 168 */
+/* 169 */
 /***/ (function(module, exports) {
 
 	// 7.1.4 ToInteger
@@ -17180,7 +17269,7 @@
 
 
 /***/ }),
-/* 169 */
+/* 170 */
 /***/ (function(module, exports) {
 
 	// 7.2.1 RequireObjectCoercible(argument)
@@ -17191,19 +17280,19 @@
 
 
 /***/ }),
-/* 170 */
+/* 171 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
-	var LIBRARY = __webpack_require__(171);
-	var $export = __webpack_require__(172);
-	var redefine = __webpack_require__(188);
-	var hide = __webpack_require__(177);
-	var Iterators = __webpack_require__(189);
-	var $iterCreate = __webpack_require__(190);
-	var setToStringTag = __webpack_require__(206);
-	var getPrototypeOf = __webpack_require__(208);
-	var ITERATOR = __webpack_require__(207)('iterator');
+	var LIBRARY = __webpack_require__(172);
+	var $export = __webpack_require__(173);
+	var redefine = __webpack_require__(189);
+	var hide = __webpack_require__(178);
+	var Iterators = __webpack_require__(190);
+	var $iterCreate = __webpack_require__(191);
+	var setToStringTag = __webpack_require__(207);
+	var getPrototypeOf = __webpack_require__(209);
+	var ITERATOR = __webpack_require__(208)('iterator');
 	var BUGGY = !([].keys && 'next' in [].keys()); // Safari has buggy iterators w/o `next`
 	var FF_ITERATOR = '@@iterator';
 	var KEYS = 'keys';
@@ -17266,21 +17355,21 @@
 
 
 /***/ }),
-/* 171 */
+/* 172 */
 /***/ (function(module, exports) {
 
 	module.exports = true;
 
 
 /***/ }),
-/* 172 */
+/* 173 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var global = __webpack_require__(173);
-	var core = __webpack_require__(174);
-	var ctx = __webpack_require__(175);
-	var hide = __webpack_require__(177);
-	var has = __webpack_require__(187);
+	var global = __webpack_require__(174);
+	var core = __webpack_require__(175);
+	var ctx = __webpack_require__(176);
+	var hide = __webpack_require__(178);
+	var has = __webpack_require__(188);
 	var PROTOTYPE = 'prototype';
 	
 	var $export = function (type, name, source) {
@@ -17341,7 +17430,7 @@
 
 
 /***/ }),
-/* 173 */
+/* 174 */
 /***/ (function(module, exports) {
 
 	// https://github.com/zloirock/core-js/issues/86#issuecomment-115759028
@@ -17353,7 +17442,7 @@
 
 
 /***/ }),
-/* 174 */
+/* 175 */
 /***/ (function(module, exports) {
 
 	var core = module.exports = { version: '2.5.7' };
@@ -17361,11 +17450,11 @@
 
 
 /***/ }),
-/* 175 */
+/* 176 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	// optional / simple context binding
-	var aFunction = __webpack_require__(176);
+	var aFunction = __webpack_require__(177);
 	module.exports = function (fn, that, length) {
 	  aFunction(fn);
 	  if (that === undefined) return fn;
@@ -17387,7 +17476,7 @@
 
 
 /***/ }),
-/* 176 */
+/* 177 */
 /***/ (function(module, exports) {
 
 	module.exports = function (it) {
@@ -17397,12 +17486,12 @@
 
 
 /***/ }),
-/* 177 */
+/* 178 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var dP = __webpack_require__(178);
-	var createDesc = __webpack_require__(186);
-	module.exports = __webpack_require__(182) ? function (object, key, value) {
+	var dP = __webpack_require__(179);
+	var createDesc = __webpack_require__(187);
+	module.exports = __webpack_require__(183) ? function (object, key, value) {
 	  return dP.f(object, key, createDesc(1, value));
 	} : function (object, key, value) {
 	  object[key] = value;
@@ -17411,15 +17500,15 @@
 
 
 /***/ }),
-/* 178 */
+/* 179 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var anObject = __webpack_require__(179);
-	var IE8_DOM_DEFINE = __webpack_require__(181);
-	var toPrimitive = __webpack_require__(185);
+	var anObject = __webpack_require__(180);
+	var IE8_DOM_DEFINE = __webpack_require__(182);
+	var toPrimitive = __webpack_require__(186);
 	var dP = Object.defineProperty;
 	
-	exports.f = __webpack_require__(182) ? Object.defineProperty : function defineProperty(O, P, Attributes) {
+	exports.f = __webpack_require__(183) ? Object.defineProperty : function defineProperty(O, P, Attributes) {
 	  anObject(O);
 	  P = toPrimitive(P, true);
 	  anObject(Attributes);
@@ -17433,10 +17522,10 @@
 
 
 /***/ }),
-/* 179 */
+/* 180 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var isObject = __webpack_require__(180);
+	var isObject = __webpack_require__(181);
 	module.exports = function (it) {
 	  if (!isObject(it)) throw TypeError(it + ' is not an object!');
 	  return it;
@@ -17444,7 +17533,7 @@
 
 
 /***/ }),
-/* 180 */
+/* 181 */
 /***/ (function(module, exports) {
 
 	module.exports = function (it) {
@@ -17453,26 +17542,26 @@
 
 
 /***/ }),
-/* 181 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	module.exports = !__webpack_require__(182) && !__webpack_require__(183)(function () {
-	  return Object.defineProperty(__webpack_require__(184)('div'), 'a', { get: function () { return 7; } }).a != 7;
-	});
-
-
-/***/ }),
 /* 182 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	// Thank's IE8 for his funny defineProperty
-	module.exports = !__webpack_require__(183)(function () {
-	  return Object.defineProperty({}, 'a', { get: function () { return 7; } }).a != 7;
+	module.exports = !__webpack_require__(183) && !__webpack_require__(184)(function () {
+	  return Object.defineProperty(__webpack_require__(185)('div'), 'a', { get: function () { return 7; } }).a != 7;
 	});
 
 
 /***/ }),
 /* 183 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	// Thank's IE8 for his funny defineProperty
+	module.exports = !__webpack_require__(184)(function () {
+	  return Object.defineProperty({}, 'a', { get: function () { return 7; } }).a != 7;
+	});
+
+
+/***/ }),
+/* 184 */
 /***/ (function(module, exports) {
 
 	module.exports = function (exec) {
@@ -17485,11 +17574,11 @@
 
 
 /***/ }),
-/* 184 */
+/* 185 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var isObject = __webpack_require__(180);
-	var document = __webpack_require__(173).document;
+	var isObject = __webpack_require__(181);
+	var document = __webpack_require__(174).document;
 	// typeof document.createElement is 'object' in old IE
 	var is = isObject(document) && isObject(document.createElement);
 	module.exports = function (it) {
@@ -17498,11 +17587,11 @@
 
 
 /***/ }),
-/* 185 */
+/* 186 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	// 7.1.1 ToPrimitive(input [, PreferredType])
-	var isObject = __webpack_require__(180);
+	var isObject = __webpack_require__(181);
 	// instead of the ES6 spec version, we didn't implement @@toPrimitive case
 	// and the second argument - flag - preferred type is a string
 	module.exports = function (it, S) {
@@ -17516,7 +17605,7 @@
 
 
 /***/ }),
-/* 186 */
+/* 187 */
 /***/ (function(module, exports) {
 
 	module.exports = function (bitmap, value) {
@@ -17530,7 +17619,7 @@
 
 
 /***/ }),
-/* 187 */
+/* 188 */
 /***/ (function(module, exports) {
 
 	var hasOwnProperty = {}.hasOwnProperty;
@@ -17540,31 +17629,31 @@
 
 
 /***/ }),
-/* 188 */
+/* 189 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(177);
+	module.exports = __webpack_require__(178);
 
 
 /***/ }),
-/* 189 */
+/* 190 */
 /***/ (function(module, exports) {
 
 	module.exports = {};
 
 
 /***/ }),
-/* 190 */
+/* 191 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
-	var create = __webpack_require__(191);
-	var descriptor = __webpack_require__(186);
-	var setToStringTag = __webpack_require__(206);
+	var create = __webpack_require__(192);
+	var descriptor = __webpack_require__(187);
+	var setToStringTag = __webpack_require__(207);
 	var IteratorPrototype = {};
 	
 	// 25.1.2.1.1 %IteratorPrototype%[@@iterator]()
-	__webpack_require__(177)(IteratorPrototype, __webpack_require__(207)('iterator'), function () { return this; });
+	__webpack_require__(178)(IteratorPrototype, __webpack_require__(208)('iterator'), function () { return this; });
 	
 	module.exports = function (Constructor, NAME, next) {
 	  Constructor.prototype = create(IteratorPrototype, { next: descriptor(1, next) });
@@ -17573,27 +17662,27 @@
 
 
 /***/ }),
-/* 191 */
+/* 192 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	// 19.1.2.2 / 15.2.3.5 Object.create(O [, Properties])
-	var anObject = __webpack_require__(179);
-	var dPs = __webpack_require__(192);
-	var enumBugKeys = __webpack_require__(204);
-	var IE_PROTO = __webpack_require__(201)('IE_PROTO');
+	var anObject = __webpack_require__(180);
+	var dPs = __webpack_require__(193);
+	var enumBugKeys = __webpack_require__(205);
+	var IE_PROTO = __webpack_require__(202)('IE_PROTO');
 	var Empty = function () { /* empty */ };
 	var PROTOTYPE = 'prototype';
 	
 	// Create object with fake `null` prototype: use iframe Object with cleared prototype
 	var createDict = function () {
 	  // Thrash, waste and sodomy: IE GC bug
-	  var iframe = __webpack_require__(184)('iframe');
+	  var iframe = __webpack_require__(185)('iframe');
 	  var i = enumBugKeys.length;
 	  var lt = '<';
 	  var gt = '>';
 	  var iframeDocument;
 	  iframe.style.display = 'none';
-	  __webpack_require__(205).appendChild(iframe);
+	  __webpack_require__(206).appendChild(iframe);
 	  iframe.src = 'javascript:'; // eslint-disable-line no-script-url
 	  // createDict = iframe.contentWindow.Object;
 	  // html.removeChild(iframe);
@@ -17620,14 +17709,14 @@
 
 
 /***/ }),
-/* 192 */
+/* 193 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var dP = __webpack_require__(178);
-	var anObject = __webpack_require__(179);
-	var getKeys = __webpack_require__(193);
+	var dP = __webpack_require__(179);
+	var anObject = __webpack_require__(180);
+	var getKeys = __webpack_require__(194);
 	
-	module.exports = __webpack_require__(182) ? Object.defineProperties : function defineProperties(O, Properties) {
+	module.exports = __webpack_require__(183) ? Object.defineProperties : function defineProperties(O, Properties) {
 	  anObject(O);
 	  var keys = getKeys(Properties);
 	  var length = keys.length;
@@ -17639,12 +17728,12 @@
 
 
 /***/ }),
-/* 193 */
+/* 194 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	// 19.1.2.14 / 15.2.3.14 Object.keys(O)
-	var $keys = __webpack_require__(194);
-	var enumBugKeys = __webpack_require__(204);
+	var $keys = __webpack_require__(195);
+	var enumBugKeys = __webpack_require__(205);
 	
 	module.exports = Object.keys || function keys(O) {
 	  return $keys(O, enumBugKeys);
@@ -17652,13 +17741,13 @@
 
 
 /***/ }),
-/* 194 */
+/* 195 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var has = __webpack_require__(187);
-	var toIObject = __webpack_require__(195);
-	var arrayIndexOf = __webpack_require__(198)(false);
-	var IE_PROTO = __webpack_require__(201)('IE_PROTO');
+	var has = __webpack_require__(188);
+	var toIObject = __webpack_require__(196);
+	var arrayIndexOf = __webpack_require__(199)(false);
+	var IE_PROTO = __webpack_require__(202)('IE_PROTO');
 	
 	module.exports = function (object, names) {
 	  var O = toIObject(object);
@@ -17675,23 +17764,23 @@
 
 
 /***/ }),
-/* 195 */
+/* 196 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	// to indexed object, toObject with fallback for non-array-like ES3 strings
-	var IObject = __webpack_require__(196);
-	var defined = __webpack_require__(169);
+	var IObject = __webpack_require__(197);
+	var defined = __webpack_require__(170);
 	module.exports = function (it) {
 	  return IObject(defined(it));
 	};
 
 
 /***/ }),
-/* 196 */
+/* 197 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	// fallback for non-array-like ES3 and non-enumerable old V8 strings
-	var cof = __webpack_require__(197);
+	var cof = __webpack_require__(198);
 	// eslint-disable-next-line no-prototype-builtins
 	module.exports = Object('z').propertyIsEnumerable(0) ? Object : function (it) {
 	  return cof(it) == 'String' ? it.split('') : Object(it);
@@ -17699,7 +17788,7 @@
 
 
 /***/ }),
-/* 197 */
+/* 198 */
 /***/ (function(module, exports) {
 
 	var toString = {}.toString;
@@ -17710,14 +17799,14 @@
 
 
 /***/ }),
-/* 198 */
+/* 199 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	// false -> Array#indexOf
 	// true  -> Array#includes
-	var toIObject = __webpack_require__(195);
-	var toLength = __webpack_require__(199);
-	var toAbsoluteIndex = __webpack_require__(200);
+	var toIObject = __webpack_require__(196);
+	var toLength = __webpack_require__(200);
+	var toAbsoluteIndex = __webpack_require__(201);
 	module.exports = function (IS_INCLUDES) {
 	  return function ($this, el, fromIndex) {
 	    var O = toIObject($this);
@@ -17739,11 +17828,11 @@
 
 
 /***/ }),
-/* 199 */
+/* 200 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	// 7.1.15 ToLength
-	var toInteger = __webpack_require__(168);
+	var toInteger = __webpack_require__(169);
 	var min = Math.min;
 	module.exports = function (it) {
 	  return it > 0 ? min(toInteger(it), 0x1fffffffffffff) : 0; // pow(2, 53) - 1 == 9007199254740991
@@ -17751,10 +17840,10 @@
 
 
 /***/ }),
-/* 200 */
+/* 201 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var toInteger = __webpack_require__(168);
+	var toInteger = __webpack_require__(169);
 	var max = Math.max;
 	var min = Math.min;
 	module.exports = function (index, length) {
@@ -17764,22 +17853,22 @@
 
 
 /***/ }),
-/* 201 */
+/* 202 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var shared = __webpack_require__(202)('keys');
-	var uid = __webpack_require__(203);
+	var shared = __webpack_require__(203)('keys');
+	var uid = __webpack_require__(204);
 	module.exports = function (key) {
 	  return shared[key] || (shared[key] = uid(key));
 	};
 
 
 /***/ }),
-/* 202 */
+/* 203 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var core = __webpack_require__(174);
-	var global = __webpack_require__(173);
+	var core = __webpack_require__(175);
+	var global = __webpack_require__(174);
 	var SHARED = '__core-js_shared__';
 	var store = global[SHARED] || (global[SHARED] = {});
 	
@@ -17787,13 +17876,13 @@
 	  return store[key] || (store[key] = value !== undefined ? value : {});
 	})('versions', []).push({
 	  version: core.version,
-	  mode: __webpack_require__(171) ? 'pure' : 'global',
+	  mode: __webpack_require__(172) ? 'pure' : 'global',
 	  copyright: '© 2018 Denis Pushkarev (zloirock.ru)'
 	});
 
 
 /***/ }),
-/* 203 */
+/* 204 */
 /***/ (function(module, exports) {
 
 	var id = 0;
@@ -17804,7 +17893,7 @@
 
 
 /***/ }),
-/* 204 */
+/* 205 */
 /***/ (function(module, exports) {
 
 	// IE 8- don't enum bug keys
@@ -17814,20 +17903,20 @@
 
 
 /***/ }),
-/* 205 */
+/* 206 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var document = __webpack_require__(173).document;
+	var document = __webpack_require__(174).document;
 	module.exports = document && document.documentElement;
 
 
 /***/ }),
-/* 206 */
+/* 207 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var def = __webpack_require__(178).f;
-	var has = __webpack_require__(187);
-	var TAG = __webpack_require__(207)('toStringTag');
+	var def = __webpack_require__(179).f;
+	var has = __webpack_require__(188);
+	var TAG = __webpack_require__(208)('toStringTag');
 	
 	module.exports = function (it, tag, stat) {
 	  if (it && !has(it = stat ? it : it.prototype, TAG)) def(it, TAG, { configurable: true, value: tag });
@@ -17835,12 +17924,12 @@
 
 
 /***/ }),
-/* 207 */
+/* 208 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var store = __webpack_require__(202)('wks');
-	var uid = __webpack_require__(203);
-	var Symbol = __webpack_require__(173).Symbol;
+	var store = __webpack_require__(203)('wks');
+	var uid = __webpack_require__(204);
+	var Symbol = __webpack_require__(174).Symbol;
 	var USE_SYMBOL = typeof Symbol == 'function';
 	
 	var $exports = module.exports = function (name) {
@@ -17852,13 +17941,13 @@
 
 
 /***/ }),
-/* 208 */
+/* 209 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	// 19.1.2.9 / 15.2.3.2 Object.getPrototypeOf(O)
-	var has = __webpack_require__(187);
-	var toObject = __webpack_require__(209);
-	var IE_PROTO = __webpack_require__(201)('IE_PROTO');
+	var has = __webpack_require__(188);
+	var toObject = __webpack_require__(210);
+	var IE_PROTO = __webpack_require__(202)('IE_PROTO');
 	var ObjectProto = Object.prototype;
 	
 	module.exports = Object.getPrototypeOf || function (O) {
@@ -17871,25 +17960,25 @@
 
 
 /***/ }),
-/* 209 */
+/* 210 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	// 7.1.13 ToObject(argument)
-	var defined = __webpack_require__(169);
+	var defined = __webpack_require__(170);
 	module.exports = function (it) {
 	  return Object(defined(it));
 	};
 
 
 /***/ }),
-/* 210 */
+/* 211 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	__webpack_require__(211);
-	var global = __webpack_require__(173);
-	var hide = __webpack_require__(177);
-	var Iterators = __webpack_require__(189);
-	var TO_STRING_TAG = __webpack_require__(207)('toStringTag');
+	__webpack_require__(212);
+	var global = __webpack_require__(174);
+	var hide = __webpack_require__(178);
+	var Iterators = __webpack_require__(190);
+	var TO_STRING_TAG = __webpack_require__(208)('toStringTag');
 	
 	var DOMIterables = ('CSSRuleList,CSSStyleDeclaration,CSSValueList,ClientRectList,DOMRectList,DOMStringList,' +
 	  'DOMTokenList,DataTransferItemList,FileList,HTMLAllCollection,HTMLCollection,HTMLFormElement,HTMLSelectElement,' +
@@ -17907,20 +17996,20 @@
 
 
 /***/ }),
-/* 211 */
+/* 212 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
-	var addToUnscopables = __webpack_require__(212);
-	var step = __webpack_require__(213);
-	var Iterators = __webpack_require__(189);
-	var toIObject = __webpack_require__(195);
+	var addToUnscopables = __webpack_require__(213);
+	var step = __webpack_require__(214);
+	var Iterators = __webpack_require__(190);
+	var toIObject = __webpack_require__(196);
 	
 	// 22.1.3.4 Array.prototype.entries()
 	// 22.1.3.13 Array.prototype.keys()
 	// 22.1.3.29 Array.prototype.values()
 	// 22.1.3.30 Array.prototype[@@iterator]()
-	module.exports = __webpack_require__(170)(Array, 'Array', function (iterated, kind) {
+	module.exports = __webpack_require__(171)(Array, 'Array', function (iterated, kind) {
 	  this._t = toIObject(iterated); // target
 	  this._i = 0;                   // next index
 	  this._k = kind;                // kind
@@ -17947,14 +18036,14 @@
 
 
 /***/ }),
-/* 212 */
+/* 213 */
 /***/ (function(module, exports) {
 
 	module.exports = function () { /* empty */ };
 
 
 /***/ }),
-/* 213 */
+/* 214 */
 /***/ (function(module, exports) {
 
 	module.exports = function (done, value) {
@@ -17963,60 +18052,60 @@
 
 
 /***/ }),
-/* 214 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	exports.f = __webpack_require__(207);
-
-
-/***/ }),
 /* 215 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	module.exports = { "default": __webpack_require__(216), __esModule: true };
+	exports.f = __webpack_require__(208);
+
 
 /***/ }),
 /* 216 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	__webpack_require__(217);
-	__webpack_require__(227);
-	__webpack_require__(228);
-	__webpack_require__(229);
-	module.exports = __webpack_require__(174).Symbol;
-
+	module.exports = { "default": __webpack_require__(217), __esModule: true };
 
 /***/ }),
 /* 217 */
 /***/ (function(module, exports, __webpack_require__) {
 
+	__webpack_require__(218);
+	__webpack_require__(228);
+	__webpack_require__(229);
+	__webpack_require__(230);
+	module.exports = __webpack_require__(175).Symbol;
+
+
+/***/ }),
+/* 218 */
+/***/ (function(module, exports, __webpack_require__) {
+
 	'use strict';
 	// ECMAScript 6 symbols shim
-	var global = __webpack_require__(173);
-	var has = __webpack_require__(187);
-	var DESCRIPTORS = __webpack_require__(182);
-	var $export = __webpack_require__(172);
-	var redefine = __webpack_require__(188);
-	var META = __webpack_require__(218).KEY;
-	var $fails = __webpack_require__(183);
-	var shared = __webpack_require__(202);
-	var setToStringTag = __webpack_require__(206);
-	var uid = __webpack_require__(203);
-	var wks = __webpack_require__(207);
-	var wksExt = __webpack_require__(214);
-	var wksDefine = __webpack_require__(219);
-	var enumKeys = __webpack_require__(220);
-	var isArray = __webpack_require__(223);
-	var anObject = __webpack_require__(179);
-	var isObject = __webpack_require__(180);
-	var toIObject = __webpack_require__(195);
-	var toPrimitive = __webpack_require__(185);
-	var createDesc = __webpack_require__(186);
-	var _create = __webpack_require__(191);
-	var gOPNExt = __webpack_require__(224);
-	var $GOPD = __webpack_require__(226);
-	var $DP = __webpack_require__(178);
-	var $keys = __webpack_require__(193);
+	var global = __webpack_require__(174);
+	var has = __webpack_require__(188);
+	var DESCRIPTORS = __webpack_require__(183);
+	var $export = __webpack_require__(173);
+	var redefine = __webpack_require__(189);
+	var META = __webpack_require__(219).KEY;
+	var $fails = __webpack_require__(184);
+	var shared = __webpack_require__(203);
+	var setToStringTag = __webpack_require__(207);
+	var uid = __webpack_require__(204);
+	var wks = __webpack_require__(208);
+	var wksExt = __webpack_require__(215);
+	var wksDefine = __webpack_require__(220);
+	var enumKeys = __webpack_require__(221);
+	var isArray = __webpack_require__(224);
+	var anObject = __webpack_require__(180);
+	var isObject = __webpack_require__(181);
+	var toIObject = __webpack_require__(196);
+	var toPrimitive = __webpack_require__(186);
+	var createDesc = __webpack_require__(187);
+	var _create = __webpack_require__(192);
+	var gOPNExt = __webpack_require__(225);
+	var $GOPD = __webpack_require__(227);
+	var $DP = __webpack_require__(179);
+	var $keys = __webpack_require__(194);
 	var gOPD = $GOPD.f;
 	var dP = $DP.f;
 	var gOPN = gOPNExt.f;
@@ -18139,11 +18228,11 @@
 	
 	  $GOPD.f = $getOwnPropertyDescriptor;
 	  $DP.f = $defineProperty;
-	  __webpack_require__(225).f = gOPNExt.f = $getOwnPropertyNames;
-	  __webpack_require__(222).f = $propertyIsEnumerable;
-	  __webpack_require__(221).f = $getOwnPropertySymbols;
+	  __webpack_require__(226).f = gOPNExt.f = $getOwnPropertyNames;
+	  __webpack_require__(223).f = $propertyIsEnumerable;
+	  __webpack_require__(222).f = $getOwnPropertySymbols;
 	
-	  if (DESCRIPTORS && !__webpack_require__(171)) {
+	  if (DESCRIPTORS && !__webpack_require__(172)) {
 	    redefine(ObjectProto, 'propertyIsEnumerable', $propertyIsEnumerable, true);
 	  }
 	
@@ -18217,7 +18306,7 @@
 	});
 	
 	// 19.4.3.4 Symbol.prototype[@@toPrimitive](hint)
-	$Symbol[PROTOTYPE][TO_PRIMITIVE] || __webpack_require__(177)($Symbol[PROTOTYPE], TO_PRIMITIVE, $Symbol[PROTOTYPE].valueOf);
+	$Symbol[PROTOTYPE][TO_PRIMITIVE] || __webpack_require__(178)($Symbol[PROTOTYPE], TO_PRIMITIVE, $Symbol[PROTOTYPE].valueOf);
 	// 19.4.3.5 Symbol.prototype[@@toStringTag]
 	setToStringTag($Symbol, 'Symbol');
 	// 20.2.1.9 Math[@@toStringTag]
@@ -18227,18 +18316,18 @@
 
 
 /***/ }),
-/* 218 */
+/* 219 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var META = __webpack_require__(203)('meta');
-	var isObject = __webpack_require__(180);
-	var has = __webpack_require__(187);
-	var setDesc = __webpack_require__(178).f;
+	var META = __webpack_require__(204)('meta');
+	var isObject = __webpack_require__(181);
+	var has = __webpack_require__(188);
+	var setDesc = __webpack_require__(179).f;
 	var id = 0;
 	var isExtensible = Object.isExtensible || function () {
 	  return true;
 	};
-	var FREEZE = !__webpack_require__(183)(function () {
+	var FREEZE = !__webpack_require__(184)(function () {
 	  return isExtensible(Object.preventExtensions({}));
 	});
 	var setMeta = function (it) {
@@ -18286,14 +18375,14 @@
 
 
 /***/ }),
-/* 219 */
+/* 220 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var global = __webpack_require__(173);
-	var core = __webpack_require__(174);
-	var LIBRARY = __webpack_require__(171);
-	var wksExt = __webpack_require__(214);
-	var defineProperty = __webpack_require__(178).f;
+	var global = __webpack_require__(174);
+	var core = __webpack_require__(175);
+	var LIBRARY = __webpack_require__(172);
+	var wksExt = __webpack_require__(215);
+	var defineProperty = __webpack_require__(179).f;
 	module.exports = function (name) {
 	  var $Symbol = core.Symbol || (core.Symbol = LIBRARY ? {} : global.Symbol || {});
 	  if (name.charAt(0) != '_' && !(name in $Symbol)) defineProperty($Symbol, name, { value: wksExt.f(name) });
@@ -18301,13 +18390,13 @@
 
 
 /***/ }),
-/* 220 */
+/* 221 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	// all enumerable object keys, includes symbols
-	var getKeys = __webpack_require__(193);
-	var gOPS = __webpack_require__(221);
-	var pIE = __webpack_require__(222);
+	var getKeys = __webpack_require__(194);
+	var gOPS = __webpack_require__(222);
+	var pIE = __webpack_require__(223);
 	module.exports = function (it) {
 	  var result = getKeys(it);
 	  var getSymbols = gOPS.f;
@@ -18322,37 +18411,37 @@
 
 
 /***/ }),
-/* 221 */
+/* 222 */
 /***/ (function(module, exports) {
 
 	exports.f = Object.getOwnPropertySymbols;
 
 
 /***/ }),
-/* 222 */
+/* 223 */
 /***/ (function(module, exports) {
 
 	exports.f = {}.propertyIsEnumerable;
 
 
 /***/ }),
-/* 223 */
+/* 224 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	// 7.2.2 IsArray(argument)
-	var cof = __webpack_require__(197);
+	var cof = __webpack_require__(198);
 	module.exports = Array.isArray || function isArray(arg) {
 	  return cof(arg) == 'Array';
 	};
 
 
 /***/ }),
-/* 224 */
+/* 225 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	// fallback for IE11 buggy Object.getOwnPropertyNames with iframe and window
-	var toIObject = __webpack_require__(195);
-	var gOPN = __webpack_require__(225).f;
+	var toIObject = __webpack_require__(196);
+	var gOPN = __webpack_require__(226).f;
 	var toString = {}.toString;
 	
 	var windowNames = typeof window == 'object' && window && Object.getOwnPropertyNames
@@ -18372,12 +18461,12 @@
 
 
 /***/ }),
-/* 225 */
+/* 226 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	// 19.1.2.7 / 15.2.3.4 Object.getOwnPropertyNames(O)
-	var $keys = __webpack_require__(194);
-	var hiddenKeys = __webpack_require__(204).concat('length', 'prototype');
+	var $keys = __webpack_require__(195);
+	var hiddenKeys = __webpack_require__(205).concat('length', 'prototype');
 	
 	exports.f = Object.getOwnPropertyNames || function getOwnPropertyNames(O) {
 	  return $keys(O, hiddenKeys);
@@ -18385,18 +18474,18 @@
 
 
 /***/ }),
-/* 226 */
+/* 227 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var pIE = __webpack_require__(222);
-	var createDesc = __webpack_require__(186);
-	var toIObject = __webpack_require__(195);
-	var toPrimitive = __webpack_require__(185);
-	var has = __webpack_require__(187);
-	var IE8_DOM_DEFINE = __webpack_require__(181);
+	var pIE = __webpack_require__(223);
+	var createDesc = __webpack_require__(187);
+	var toIObject = __webpack_require__(196);
+	var toPrimitive = __webpack_require__(186);
+	var has = __webpack_require__(188);
+	var IE8_DOM_DEFINE = __webpack_require__(182);
 	var gOPD = Object.getOwnPropertyDescriptor;
 	
-	exports.f = __webpack_require__(182) ? gOPD : function getOwnPropertyDescriptor(O, P) {
+	exports.f = __webpack_require__(183) ? gOPD : function getOwnPropertyDescriptor(O, P) {
 	  O = toIObject(O);
 	  P = toPrimitive(P, true);
 	  if (IE8_DOM_DEFINE) try {
@@ -18407,34 +18496,34 @@
 
 
 /***/ }),
-/* 227 */
+/* 228 */
 /***/ (function(module, exports) {
 
-
-
-/***/ }),
-/* 228 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	__webpack_require__(219)('asyncIterator');
 
 
 /***/ }),
 /* 229 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	__webpack_require__(219)('observable');
+	__webpack_require__(220)('asyncIterator');
 
 
 /***/ }),
 /* 230 */
 /***/ (function(module, exports, __webpack_require__) {
 
+	__webpack_require__(220)('observable');
+
+
+/***/ }),
+/* 231 */
+/***/ (function(module, exports, __webpack_require__) {
+
 	"use strict";
 	
 	exports.__esModule = true;
 	
-	var _defineProperty = __webpack_require__(231);
+	var _defineProperty = __webpack_require__(232);
 	
 	var _defineProperty2 = _interopRequireDefault(_defineProperty);
 	
@@ -18456,40 +18545,40 @@
 	};
 
 /***/ }),
-/* 231 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	module.exports = { "default": __webpack_require__(232), __esModule: true };
-
-/***/ }),
 /* 232 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	__webpack_require__(233);
-	var $Object = __webpack_require__(174).Object;
+	module.exports = { "default": __webpack_require__(233), __esModule: true };
+
+/***/ }),
+/* 233 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	__webpack_require__(234);
+	var $Object = __webpack_require__(175).Object;
 	module.exports = function defineProperty(it, key, desc) {
 	  return $Object.defineProperty(it, key, desc);
 	};
 
 
 /***/ }),
-/* 233 */
+/* 234 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var $export = __webpack_require__(172);
+	var $export = __webpack_require__(173);
 	// 19.1.2.4 / 15.2.3.6 Object.defineProperty(O, P, Attributes)
-	$export($export.S + $export.F * !__webpack_require__(182), 'Object', { defineProperty: __webpack_require__(178).f });
+	$export($export.S + $export.F * !__webpack_require__(183), 'Object', { defineProperty: __webpack_require__(179).f });
 
 
 /***/ }),
-/* 234 */
+/* 235 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
 	
 	exports.__esModule = true;
 	
-	var _assign = __webpack_require__(235);
+	var _assign = __webpack_require__(236);
 	
 	var _assign2 = _interopRequireDefault(_assign);
 	
@@ -18510,44 +18599,44 @@
 	};
 
 /***/ }),
-/* 235 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	module.exports = { "default": __webpack_require__(236), __esModule: true };
-
-/***/ }),
 /* 236 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	__webpack_require__(237);
-	module.exports = __webpack_require__(174).Object.assign;
-
+	module.exports = { "default": __webpack_require__(237), __esModule: true };
 
 /***/ }),
 /* 237 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	// 19.1.3.1 Object.assign(target, source)
-	var $export = __webpack_require__(172);
-	
-	$export($export.S + $export.F, 'Object', { assign: __webpack_require__(238) });
+	__webpack_require__(238);
+	module.exports = __webpack_require__(175).Object.assign;
 
 
 /***/ }),
 /* 238 */
 /***/ (function(module, exports, __webpack_require__) {
 
+	// 19.1.3.1 Object.assign(target, source)
+	var $export = __webpack_require__(173);
+	
+	$export($export.S + $export.F, 'Object', { assign: __webpack_require__(239) });
+
+
+/***/ }),
+/* 239 */
+/***/ (function(module, exports, __webpack_require__) {
+
 	'use strict';
 	// 19.1.2.1 Object.assign(target, source, ...)
-	var getKeys = __webpack_require__(193);
-	var gOPS = __webpack_require__(221);
-	var pIE = __webpack_require__(222);
-	var toObject = __webpack_require__(209);
-	var IObject = __webpack_require__(196);
+	var getKeys = __webpack_require__(194);
+	var gOPS = __webpack_require__(222);
+	var pIE = __webpack_require__(223);
+	var toObject = __webpack_require__(210);
+	var IObject = __webpack_require__(197);
 	var $assign = Object.assign;
 	
 	// should work with symbols and should have deterministic property order (V8 bug)
-	module.exports = !$assign || __webpack_require__(183)(function () {
+	module.exports = !$assign || __webpack_require__(184)(function () {
 	  var A = {};
 	  var B = {};
 	  // eslint-disable-next-line no-undef
@@ -18574,14 +18663,14 @@
 
 
 /***/ }),
-/* 239 */
+/* 240 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
 	
 	exports.__esModule = true;
 	
-	var _from = __webpack_require__(240);
+	var _from = __webpack_require__(241);
 	
 	var _from2 = _interopRequireDefault(_from);
 	
@@ -18600,35 +18689,35 @@
 	};
 
 /***/ }),
-/* 240 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	module.exports = { "default": __webpack_require__(241), __esModule: true };
-
-/***/ }),
 /* 241 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	__webpack_require__(166);
-	__webpack_require__(242);
-	module.exports = __webpack_require__(174).Array.from;
-
+	module.exports = { "default": __webpack_require__(242), __esModule: true };
 
 /***/ }),
 /* 242 */
 /***/ (function(module, exports, __webpack_require__) {
 
+	__webpack_require__(167);
+	__webpack_require__(243);
+	module.exports = __webpack_require__(175).Array.from;
+
+
+/***/ }),
+/* 243 */
+/***/ (function(module, exports, __webpack_require__) {
+
 	'use strict';
-	var ctx = __webpack_require__(175);
-	var $export = __webpack_require__(172);
-	var toObject = __webpack_require__(209);
-	var call = __webpack_require__(243);
-	var isArrayIter = __webpack_require__(244);
-	var toLength = __webpack_require__(199);
-	var createProperty = __webpack_require__(245);
-	var getIterFn = __webpack_require__(246);
+	var ctx = __webpack_require__(176);
+	var $export = __webpack_require__(173);
+	var toObject = __webpack_require__(210);
+	var call = __webpack_require__(244);
+	var isArrayIter = __webpack_require__(245);
+	var toLength = __webpack_require__(200);
+	var createProperty = __webpack_require__(246);
+	var getIterFn = __webpack_require__(247);
 	
-	$export($export.S + $export.F * !__webpack_require__(248)(function (iter) { Array.from(iter); }), 'Array', {
+	$export($export.S + $export.F * !__webpack_require__(249)(function (iter) { Array.from(iter); }), 'Array', {
 	  // 22.1.2.1 Array.from(arrayLike, mapfn = undefined, thisArg = undefined)
 	  from: function from(arrayLike /* , mapfn = undefined, thisArg = undefined */) {
 	    var O = toObject(arrayLike);
@@ -18658,11 +18747,11 @@
 
 
 /***/ }),
-/* 243 */
+/* 244 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	// call something on iterator step with safe closing on error
-	var anObject = __webpack_require__(179);
+	var anObject = __webpack_require__(180);
 	module.exports = function (iterator, fn, value, entries) {
 	  try {
 	    return entries ? fn(anObject(value)[0], value[1]) : fn(value);
@@ -18676,12 +18765,12 @@
 
 
 /***/ }),
-/* 244 */
+/* 245 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	// check on default Array iterator
-	var Iterators = __webpack_require__(189);
-	var ITERATOR = __webpack_require__(207)('iterator');
+	var Iterators = __webpack_require__(190);
+	var ITERATOR = __webpack_require__(208)('iterator');
 	var ArrayProto = Array.prototype;
 	
 	module.exports = function (it) {
@@ -18690,12 +18779,12 @@
 
 
 /***/ }),
-/* 245 */
+/* 246 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
-	var $defineProperty = __webpack_require__(178);
-	var createDesc = __webpack_require__(186);
+	var $defineProperty = __webpack_require__(179);
+	var createDesc = __webpack_require__(187);
 	
 	module.exports = function (object, index, value) {
 	  if (index in object) $defineProperty.f(object, index, createDesc(0, value));
@@ -18704,13 +18793,13 @@
 
 
 /***/ }),
-/* 246 */
+/* 247 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var classof = __webpack_require__(247);
-	var ITERATOR = __webpack_require__(207)('iterator');
-	var Iterators = __webpack_require__(189);
-	module.exports = __webpack_require__(174).getIteratorMethod = function (it) {
+	var classof = __webpack_require__(248);
+	var ITERATOR = __webpack_require__(208)('iterator');
+	var Iterators = __webpack_require__(190);
+	module.exports = __webpack_require__(175).getIteratorMethod = function (it) {
 	  if (it != undefined) return it[ITERATOR]
 	    || it['@@iterator']
 	    || Iterators[classof(it)];
@@ -18718,12 +18807,12 @@
 
 
 /***/ }),
-/* 247 */
+/* 248 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	// getting tag from 19.1.3.6 Object.prototype.toString()
-	var cof = __webpack_require__(197);
-	var TAG = __webpack_require__(207)('toStringTag');
+	var cof = __webpack_require__(198);
+	var TAG = __webpack_require__(208)('toStringTag');
 	// ES3 wrong here
 	var ARG = cof(function () { return arguments; }()) == 'Arguments';
 	
@@ -18747,10 +18836,10 @@
 
 
 /***/ }),
-/* 248 */
+/* 249 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var ITERATOR = __webpack_require__(207)('iterator');
+	var ITERATOR = __webpack_require__(208)('iterator');
 	var SAFE_CLOSING = false;
 	
 	try {
@@ -18775,7 +18864,7 @@
 
 
 /***/ }),
-/* 249 */
+/* 250 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/**
@@ -18789,7 +18878,7 @@
 	'use strict';
 	
 	var React = __webpack_require__(1);
-	var factory = __webpack_require__(250);
+	var factory = __webpack_require__(251);
 	
 	if (typeof React === 'undefined') {
 	  throw Error(
@@ -18809,7 +18898,7 @@
 
 
 /***/ }),
-/* 250 */
+/* 251 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -18824,11 +18913,11 @@
 	
 	var _assign = __webpack_require__(44);
 	
-	var emptyObject = __webpack_require__(251);
-	var _invariant = __webpack_require__(252);
+	var emptyObject = __webpack_require__(252);
+	var _invariant = __webpack_require__(253);
 	
 	if (process.env.NODE_ENV !== 'production') {
-	  var warning = __webpack_require__(253);
+	  var warning = __webpack_require__(254);
 	}
 	
 	var MIXINS_KEY = 'mixins';
@@ -19742,7 +19831,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(33)))
 
 /***/ }),
-/* 251 */
+/* 252 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -19765,7 +19854,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(33)))
 
 /***/ }),
-/* 252 */
+/* 253 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -19824,7 +19913,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(33)))
 
 /***/ }),
-/* 253 */
+/* 254 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -19837,7 +19926,7 @@
 	
 	'use strict';
 	
-	var emptyFunction = __webpack_require__(254);
+	var emptyFunction = __webpack_require__(255);
 	
 	/**
 	 * Similar to invariant but only logs a warning if the condition is not met.
@@ -19892,7 +19981,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(33)))
 
 /***/ }),
-/* 254 */
+/* 255 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -19933,7 +20022,7 @@
 	module.exports = emptyFunction;
 
 /***/ }),
-/* 255 */
+/* 256 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -19942,21 +20031,21 @@
 	  value: true
 	});
 	
-	var _extends2 = __webpack_require__(234);
+	var _extends2 = __webpack_require__(235);
 	
 	var _extends3 = _interopRequireDefault(_extends2);
 	
-	var _typeof2 = __webpack_require__(163);
+	var _typeof2 = __webpack_require__(164);
 	
 	var _typeof3 = _interopRequireDefault(_typeof2);
 	
-	var _util = __webpack_require__(256);
+	var _util = __webpack_require__(257);
 	
-	var _validator = __webpack_require__(257);
+	var _validator = __webpack_require__(258);
 	
 	var _validator2 = _interopRequireDefault(_validator);
 	
-	var _messages2 = __webpack_require__(279);
+	var _messages2 = __webpack_require__(280);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
@@ -20219,7 +20308,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 256 */
+/* 257 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -20229,11 +20318,11 @@
 	});
 	exports.warning = undefined;
 	
-	var _extends2 = __webpack_require__(234);
+	var _extends2 = __webpack_require__(235);
 	
 	var _extends3 = _interopRequireDefault(_extends2);
 	
-	var _typeof2 = __webpack_require__(163);
+	var _typeof2 = __webpack_require__(164);
 	
 	var _typeof3 = _interopRequireDefault(_typeof2);
 	
@@ -20435,7 +20524,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(33)))
 
 /***/ }),
-/* 257 */
+/* 258 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -20444,59 +20533,59 @@
 	  value: true
 	});
 	
-	var _string = __webpack_require__(258);
+	var _string = __webpack_require__(259);
 	
 	var _string2 = _interopRequireDefault(_string);
 	
-	var _method = __webpack_require__(266);
+	var _method = __webpack_require__(267);
 	
 	var _method2 = _interopRequireDefault(_method);
 	
-	var _number = __webpack_require__(267);
+	var _number = __webpack_require__(268);
 	
 	var _number2 = _interopRequireDefault(_number);
 	
-	var _boolean = __webpack_require__(268);
+	var _boolean = __webpack_require__(269);
 	
 	var _boolean2 = _interopRequireDefault(_boolean);
 	
-	var _regexp = __webpack_require__(269);
+	var _regexp = __webpack_require__(270);
 	
 	var _regexp2 = _interopRequireDefault(_regexp);
 	
-	var _integer = __webpack_require__(270);
+	var _integer = __webpack_require__(271);
 	
 	var _integer2 = _interopRequireDefault(_integer);
 	
-	var _float = __webpack_require__(271);
+	var _float = __webpack_require__(272);
 	
 	var _float2 = _interopRequireDefault(_float);
 	
-	var _array = __webpack_require__(272);
+	var _array = __webpack_require__(273);
 	
 	var _array2 = _interopRequireDefault(_array);
 	
-	var _object = __webpack_require__(273);
+	var _object = __webpack_require__(274);
 	
 	var _object2 = _interopRequireDefault(_object);
 	
-	var _enum = __webpack_require__(274);
+	var _enum = __webpack_require__(275);
 	
 	var _enum2 = _interopRequireDefault(_enum);
 	
-	var _pattern = __webpack_require__(275);
+	var _pattern = __webpack_require__(276);
 	
 	var _pattern2 = _interopRequireDefault(_pattern);
 	
-	var _date = __webpack_require__(276);
+	var _date = __webpack_require__(277);
 	
 	var _date2 = _interopRequireDefault(_date);
 	
-	var _required = __webpack_require__(277);
+	var _required = __webpack_require__(278);
 	
 	var _required2 = _interopRequireDefault(_required);
 	
-	var _type = __webpack_require__(278);
+	var _type = __webpack_require__(279);
 	
 	var _type2 = _interopRequireDefault(_type);
 	
@@ -20523,7 +20612,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 258 */
+/* 259 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -20532,11 +20621,11 @@
 	  value: true
 	});
 	
-	var _rule = __webpack_require__(259);
+	var _rule = __webpack_require__(260);
 	
 	var _rule2 = _interopRequireDefault(_rule);
 	
-	var _util = __webpack_require__(256);
+	var _util = __webpack_require__(257);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
@@ -20574,7 +20663,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 259 */
+/* 260 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -20583,27 +20672,27 @@
 	  value: true
 	});
 	
-	var _required = __webpack_require__(260);
+	var _required = __webpack_require__(261);
 	
 	var _required2 = _interopRequireDefault(_required);
 	
-	var _whitespace = __webpack_require__(261);
+	var _whitespace = __webpack_require__(262);
 	
 	var _whitespace2 = _interopRequireDefault(_whitespace);
 	
-	var _type = __webpack_require__(262);
+	var _type = __webpack_require__(263);
 	
 	var _type2 = _interopRequireDefault(_type);
 	
-	var _range = __webpack_require__(263);
+	var _range = __webpack_require__(264);
 	
 	var _range2 = _interopRequireDefault(_range);
 	
-	var _enum = __webpack_require__(264);
+	var _enum = __webpack_require__(265);
 	
 	var _enum2 = _interopRequireDefault(_enum);
 	
-	var _pattern = __webpack_require__(265);
+	var _pattern = __webpack_require__(266);
 	
 	var _pattern2 = _interopRequireDefault(_pattern);
 	
@@ -20620,7 +20709,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 260 */
+/* 261 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -20629,7 +20718,7 @@
 	  value: true
 	});
 	
-	var _util = __webpack_require__(256);
+	var _util = __webpack_require__(257);
 	
 	var util = _interopRequireWildcard(_util);
 	
@@ -20656,7 +20745,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 261 */
+/* 262 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -20665,7 +20754,7 @@
 	  value: true
 	});
 	
-	var _util = __webpack_require__(256);
+	var _util = __webpack_require__(257);
 	
 	var util = _interopRequireWildcard(_util);
 	
@@ -20692,7 +20781,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 262 */
+/* 263 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -20701,15 +20790,15 @@
 	  value: true
 	});
 	
-	var _typeof2 = __webpack_require__(163);
+	var _typeof2 = __webpack_require__(164);
 	
 	var _typeof3 = _interopRequireDefault(_typeof2);
 	
-	var _util = __webpack_require__(256);
+	var _util = __webpack_require__(257);
 	
 	var util = _interopRequireWildcard(_util);
 	
-	var _required = __webpack_require__(260);
+	var _required = __webpack_require__(261);
 	
 	var _required2 = _interopRequireDefault(_required);
 	
@@ -20804,7 +20893,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 263 */
+/* 264 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -20813,7 +20902,7 @@
 	  value: true
 	});
 	
-	var _util = __webpack_require__(256);
+	var _util = __webpack_require__(257);
 	
 	var util = _interopRequireWildcard(_util);
 	
@@ -20878,7 +20967,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 264 */
+/* 265 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -20887,7 +20976,7 @@
 	  value: true
 	});
 	
-	var _util = __webpack_require__(256);
+	var _util = __webpack_require__(257);
 	
 	var util = _interopRequireWildcard(_util);
 	
@@ -20917,7 +21006,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 265 */
+/* 266 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -20926,7 +21015,7 @@
 	  value: true
 	});
 	
-	var _util = __webpack_require__(256);
+	var _util = __webpack_require__(257);
 	
 	var util = _interopRequireWildcard(_util);
 	
@@ -20966,7 +21055,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 266 */
+/* 267 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -20975,11 +21064,11 @@
 	  value: true
 	});
 	
-	var _rule = __webpack_require__(259);
+	var _rule = __webpack_require__(260);
 	
 	var _rule2 = _interopRequireDefault(_rule);
 	
-	var _util = __webpack_require__(256);
+	var _util = __webpack_require__(257);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
@@ -21012,7 +21101,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 267 */
+/* 268 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -21021,11 +21110,11 @@
 	  value: true
 	});
 	
-	var _rule = __webpack_require__(259);
+	var _rule = __webpack_require__(260);
 	
 	var _rule2 = _interopRequireDefault(_rule);
 	
-	var _util = __webpack_require__(256);
+	var _util = __webpack_require__(257);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
@@ -21059,7 +21148,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 268 */
+/* 269 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -21068,9 +21157,9 @@
 	  value: true
 	});
 	
-	var _util = __webpack_require__(256);
+	var _util = __webpack_require__(257);
 	
-	var _rule = __webpack_require__(259);
+	var _rule = __webpack_require__(260);
 	
 	var _rule2 = _interopRequireDefault(_rule);
 	
@@ -21105,7 +21194,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 269 */
+/* 270 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -21114,11 +21203,11 @@
 	  value: true
 	});
 	
-	var _rule = __webpack_require__(259);
+	var _rule = __webpack_require__(260);
 	
 	var _rule2 = _interopRequireDefault(_rule);
 	
-	var _util = __webpack_require__(256);
+	var _util = __webpack_require__(257);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
@@ -21151,7 +21240,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 270 */
+/* 271 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -21160,11 +21249,11 @@
 	  value: true
 	});
 	
-	var _rule = __webpack_require__(259);
+	var _rule = __webpack_require__(260);
 	
 	var _rule2 = _interopRequireDefault(_rule);
 	
-	var _util = __webpack_require__(256);
+	var _util = __webpack_require__(257);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
@@ -21198,7 +21287,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 271 */
+/* 272 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -21207,11 +21296,11 @@
 	  value: true
 	});
 	
-	var _rule = __webpack_require__(259);
+	var _rule = __webpack_require__(260);
 	
 	var _rule2 = _interopRequireDefault(_rule);
 	
-	var _util = __webpack_require__(256);
+	var _util = __webpack_require__(257);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
@@ -21245,7 +21334,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 272 */
+/* 273 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -21254,11 +21343,11 @@
 	  value: true
 	});
 	
-	var _rule = __webpack_require__(259);
+	var _rule = __webpack_require__(260);
 	
 	var _rule2 = _interopRequireDefault(_rule);
 	
-	var _util = __webpack_require__(256);
+	var _util = __webpack_require__(257);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
@@ -21292,7 +21381,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 273 */
+/* 274 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -21301,11 +21390,11 @@
 	  value: true
 	});
 	
-	var _rule = __webpack_require__(259);
+	var _rule = __webpack_require__(260);
 	
 	var _rule2 = _interopRequireDefault(_rule);
 	
-	var _util = __webpack_require__(256);
+	var _util = __webpack_require__(257);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
@@ -21338,7 +21427,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 274 */
+/* 275 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -21347,11 +21436,11 @@
 	  value: true
 	});
 	
-	var _rule = __webpack_require__(259);
+	var _rule = __webpack_require__(260);
 	
 	var _rule2 = _interopRequireDefault(_rule);
 	
-	var _util = __webpack_require__(256);
+	var _util = __webpack_require__(257);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
@@ -21386,7 +21475,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 275 */
+/* 276 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -21395,11 +21484,11 @@
 	  value: true
 	});
 	
-	var _rule = __webpack_require__(259);
+	var _rule = __webpack_require__(260);
 	
 	var _rule2 = _interopRequireDefault(_rule);
 	
-	var _util = __webpack_require__(256);
+	var _util = __webpack_require__(257);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
@@ -21435,7 +21524,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 276 */
+/* 277 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -21444,11 +21533,11 @@
 	  value: true
 	});
 	
-	var _rule = __webpack_require__(259);
+	var _rule = __webpack_require__(260);
 	
 	var _rule2 = _interopRequireDefault(_rule);
 	
-	var _util = __webpack_require__(256);
+	var _util = __webpack_require__(257);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
@@ -21484,7 +21573,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 277 */
+/* 278 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -21493,11 +21582,11 @@
 	  value: true
 	});
 	
-	var _typeof2 = __webpack_require__(163);
+	var _typeof2 = __webpack_require__(164);
 	
 	var _typeof3 = _interopRequireDefault(_typeof2);
 	
-	var _rule = __webpack_require__(259);
+	var _rule = __webpack_require__(260);
 	
 	var _rule2 = _interopRequireDefault(_rule);
 	
@@ -21514,7 +21603,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 278 */
+/* 279 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -21523,11 +21612,11 @@
 	  value: true
 	});
 	
-	var _rule = __webpack_require__(259);
+	var _rule = __webpack_require__(260);
 	
 	var _rule2 = _interopRequireDefault(_rule);
 	
-	var _util = __webpack_require__(256);
+	var _util = __webpack_require__(257);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
@@ -21551,7 +21640,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 279 */
+/* 280 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -21618,10 +21707,10 @@
 	var messages = exports.messages = newMessages();
 
 /***/ }),
-/* 280 */
+/* 281 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var baseGet = __webpack_require__(281);
+	var baseGet = __webpack_require__(282);
 	
 	/**
 	 * Gets the value at `path` of `object`. If the resolved value is
@@ -21657,11 +21746,11 @@
 
 
 /***/ }),
-/* 281 */
+/* 282 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var castPath = __webpack_require__(282),
-	    toKey = __webpack_require__(331);
+	var castPath = __webpack_require__(283),
+	    toKey = __webpack_require__(332);
 	
 	/**
 	 * The base implementation of `_.get` without support for default values.
@@ -21687,13 +21776,13 @@
 
 
 /***/ }),
-/* 282 */
+/* 283 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var isArray = __webpack_require__(283),
-	    isKey = __webpack_require__(284),
-	    stringToPath = __webpack_require__(293),
-	    toString = __webpack_require__(328);
+	var isArray = __webpack_require__(284),
+	    isKey = __webpack_require__(285),
+	    stringToPath = __webpack_require__(294),
+	    toString = __webpack_require__(329);
 	
 	/**
 	 * Casts `value` to a path array if it's not one.
@@ -21714,7 +21803,7 @@
 
 
 /***/ }),
-/* 283 */
+/* 284 */
 /***/ (function(module, exports) {
 
 	/**
@@ -21746,11 +21835,11 @@
 
 
 /***/ }),
-/* 284 */
+/* 285 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var isArray = __webpack_require__(283),
-	    isSymbol = __webpack_require__(285);
+	var isArray = __webpack_require__(284),
+	    isSymbol = __webpack_require__(286);
 	
 	/** Used to match property names within property paths. */
 	var reIsDeepProp = /\.|\[(?:[^[\]]*|(["'])(?:(?!\1)[^\\]|\\.)*?\1)\]/,
@@ -21781,11 +21870,11 @@
 
 
 /***/ }),
-/* 285 */
+/* 286 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var baseGetTag = __webpack_require__(286),
-	    isObjectLike = __webpack_require__(292);
+	var baseGetTag = __webpack_require__(287),
+	    isObjectLike = __webpack_require__(293);
 	
 	/** `Object#toString` result references. */
 	var symbolTag = '[object Symbol]';
@@ -21816,12 +21905,12 @@
 
 
 /***/ }),
-/* 286 */
+/* 287 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var Symbol = __webpack_require__(287),
-	    getRawTag = __webpack_require__(290),
-	    objectToString = __webpack_require__(291);
+	var Symbol = __webpack_require__(288),
+	    getRawTag = __webpack_require__(291),
+	    objectToString = __webpack_require__(292);
 	
 	/** `Object#toString` result references. */
 	var nullTag = '[object Null]',
@@ -21850,10 +21939,10 @@
 
 
 /***/ }),
-/* 287 */
+/* 288 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var root = __webpack_require__(288);
+	var root = __webpack_require__(289);
 	
 	/** Built-in value references. */
 	var Symbol = root.Symbol;
@@ -21862,10 +21951,10 @@
 
 
 /***/ }),
-/* 288 */
+/* 289 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var freeGlobal = __webpack_require__(289);
+	var freeGlobal = __webpack_require__(290);
 	
 	/** Detect free variable `self`. */
 	var freeSelf = typeof self == 'object' && self && self.Object === Object && self;
@@ -21877,7 +21966,7 @@
 
 
 /***/ }),
-/* 289 */
+/* 290 */
 /***/ (function(module, exports) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {/** Detect free variable `global` from Node.js. */
@@ -21888,10 +21977,10 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ }),
-/* 290 */
+/* 291 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var Symbol = __webpack_require__(287);
+	var Symbol = __webpack_require__(288);
 	
 	/** Used for built-in method references. */
 	var objectProto = Object.prototype;
@@ -21940,7 +22029,7 @@
 
 
 /***/ }),
-/* 291 */
+/* 292 */
 /***/ (function(module, exports) {
 
 	/** Used for built-in method references. */
@@ -21968,7 +22057,7 @@
 
 
 /***/ }),
-/* 292 */
+/* 293 */
 /***/ (function(module, exports) {
 
 	/**
@@ -22003,10 +22092,10 @@
 
 
 /***/ }),
-/* 293 */
+/* 294 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var memoizeCapped = __webpack_require__(294);
+	var memoizeCapped = __webpack_require__(295);
 	
 	/** Used to match property names within property paths. */
 	var rePropName = /[^.[\]]+|\[(?:(-?\d+(?:\.\d+)?)|(["'])((?:(?!\2)[^\\]|\\.)*?)\2)\]|(?=(?:\.|\[\])(?:\.|\[\]|$))/g;
@@ -22036,10 +22125,10 @@
 
 
 /***/ }),
-/* 294 */
+/* 295 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var memoize = __webpack_require__(295);
+	var memoize = __webpack_require__(296);
 	
 	/** Used as the maximum memoize cache size. */
 	var MAX_MEMOIZE_SIZE = 500;
@@ -22068,10 +22157,10 @@
 
 
 /***/ }),
-/* 295 */
+/* 296 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var MapCache = __webpack_require__(296);
+	var MapCache = __webpack_require__(297);
 	
 	/** Error message constants. */
 	var FUNC_ERROR_TEXT = 'Expected a function';
@@ -22147,14 +22236,14 @@
 
 
 /***/ }),
-/* 296 */
+/* 297 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var mapCacheClear = __webpack_require__(297),
-	    mapCacheDelete = __webpack_require__(322),
-	    mapCacheGet = __webpack_require__(325),
-	    mapCacheHas = __webpack_require__(326),
-	    mapCacheSet = __webpack_require__(327);
+	var mapCacheClear = __webpack_require__(298),
+	    mapCacheDelete = __webpack_require__(323),
+	    mapCacheGet = __webpack_require__(326),
+	    mapCacheHas = __webpack_require__(327),
+	    mapCacheSet = __webpack_require__(328);
 	
 	/**
 	 * Creates a map cache object to store key-value pairs.
@@ -22185,12 +22274,12 @@
 
 
 /***/ }),
-/* 297 */
+/* 298 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var Hash = __webpack_require__(298),
-	    ListCache = __webpack_require__(313),
-	    Map = __webpack_require__(321);
+	var Hash = __webpack_require__(299),
+	    ListCache = __webpack_require__(314),
+	    Map = __webpack_require__(322);
 	
 	/**
 	 * Removes all key-value entries from the map.
@@ -22212,14 +22301,14 @@
 
 
 /***/ }),
-/* 298 */
+/* 299 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var hashClear = __webpack_require__(299),
-	    hashDelete = __webpack_require__(309),
-	    hashGet = __webpack_require__(310),
-	    hashHas = __webpack_require__(311),
-	    hashSet = __webpack_require__(312);
+	var hashClear = __webpack_require__(300),
+	    hashDelete = __webpack_require__(310),
+	    hashGet = __webpack_require__(311),
+	    hashHas = __webpack_require__(312),
+	    hashSet = __webpack_require__(313);
 	
 	/**
 	 * Creates a hash object.
@@ -22250,10 +22339,10 @@
 
 
 /***/ }),
-/* 299 */
+/* 300 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var nativeCreate = __webpack_require__(300);
+	var nativeCreate = __webpack_require__(301);
 	
 	/**
 	 * Removes all key-value entries from the hash.
@@ -22271,10 +22360,10 @@
 
 
 /***/ }),
-/* 300 */
+/* 301 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var getNative = __webpack_require__(301);
+	var getNative = __webpack_require__(302);
 	
 	/* Built-in method references that are verified to be native. */
 	var nativeCreate = getNative(Object, 'create');
@@ -22283,11 +22372,11 @@
 
 
 /***/ }),
-/* 301 */
+/* 302 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var baseIsNative = __webpack_require__(302),
-	    getValue = __webpack_require__(308);
+	var baseIsNative = __webpack_require__(303),
+	    getValue = __webpack_require__(309);
 	
 	/**
 	 * Gets the native function at `key` of `object`.
@@ -22306,13 +22395,13 @@
 
 
 /***/ }),
-/* 302 */
+/* 303 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var isFunction = __webpack_require__(303),
-	    isMasked = __webpack_require__(305),
-	    isObject = __webpack_require__(304),
-	    toSource = __webpack_require__(307);
+	var isFunction = __webpack_require__(304),
+	    isMasked = __webpack_require__(306),
+	    isObject = __webpack_require__(305),
+	    toSource = __webpack_require__(308);
 	
 	/**
 	 * Used to match `RegExp`
@@ -22359,11 +22448,11 @@
 
 
 /***/ }),
-/* 303 */
+/* 304 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var baseGetTag = __webpack_require__(286),
-	    isObject = __webpack_require__(304);
+	var baseGetTag = __webpack_require__(287),
+	    isObject = __webpack_require__(305);
 	
 	/** `Object#toString` result references. */
 	var asyncTag = '[object AsyncFunction]',
@@ -22402,7 +22491,7 @@
 
 
 /***/ }),
-/* 304 */
+/* 305 */
 /***/ (function(module, exports) {
 
 	/**
@@ -22439,10 +22528,10 @@
 
 
 /***/ }),
-/* 305 */
+/* 306 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var coreJsData = __webpack_require__(306);
+	var coreJsData = __webpack_require__(307);
 	
 	/** Used to detect methods masquerading as native. */
 	var maskSrcKey = (function() {
@@ -22465,10 +22554,10 @@
 
 
 /***/ }),
-/* 306 */
+/* 307 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var root = __webpack_require__(288);
+	var root = __webpack_require__(289);
 	
 	/** Used to detect overreaching core-js shims. */
 	var coreJsData = root['__core-js_shared__'];
@@ -22477,7 +22566,7 @@
 
 
 /***/ }),
-/* 307 */
+/* 308 */
 /***/ (function(module, exports) {
 
 	/** Used for built-in method references. */
@@ -22509,7 +22598,7 @@
 
 
 /***/ }),
-/* 308 */
+/* 309 */
 /***/ (function(module, exports) {
 
 	/**
@@ -22528,7 +22617,7 @@
 
 
 /***/ }),
-/* 309 */
+/* 310 */
 /***/ (function(module, exports) {
 
 	/**
@@ -22551,10 +22640,10 @@
 
 
 /***/ }),
-/* 310 */
+/* 311 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var nativeCreate = __webpack_require__(300);
+	var nativeCreate = __webpack_require__(301);
 	
 	/** Used to stand-in for `undefined` hash values. */
 	var HASH_UNDEFINED = '__lodash_hash_undefined__';
@@ -22587,10 +22676,10 @@
 
 
 /***/ }),
-/* 311 */
+/* 312 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var nativeCreate = __webpack_require__(300);
+	var nativeCreate = __webpack_require__(301);
 	
 	/** Used for built-in method references. */
 	var objectProto = Object.prototype;
@@ -22616,10 +22705,10 @@
 
 
 /***/ }),
-/* 312 */
+/* 313 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var nativeCreate = __webpack_require__(300);
+	var nativeCreate = __webpack_require__(301);
 	
 	/** Used to stand-in for `undefined` hash values. */
 	var HASH_UNDEFINED = '__lodash_hash_undefined__';
@@ -22645,14 +22734,14 @@
 
 
 /***/ }),
-/* 313 */
+/* 314 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var listCacheClear = __webpack_require__(314),
-	    listCacheDelete = __webpack_require__(315),
-	    listCacheGet = __webpack_require__(318),
-	    listCacheHas = __webpack_require__(319),
-	    listCacheSet = __webpack_require__(320);
+	var listCacheClear = __webpack_require__(315),
+	    listCacheDelete = __webpack_require__(316),
+	    listCacheGet = __webpack_require__(319),
+	    listCacheHas = __webpack_require__(320),
+	    listCacheSet = __webpack_require__(321);
 	
 	/**
 	 * Creates an list cache object.
@@ -22683,7 +22772,7 @@
 
 
 /***/ }),
-/* 314 */
+/* 315 */
 /***/ (function(module, exports) {
 
 	/**
@@ -22702,10 +22791,10 @@
 
 
 /***/ }),
-/* 315 */
+/* 316 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var assocIndexOf = __webpack_require__(316);
+	var assocIndexOf = __webpack_require__(317);
 	
 	/** Used for built-in method references. */
 	var arrayProto = Array.prototype;
@@ -22743,10 +22832,10 @@
 
 
 /***/ }),
-/* 316 */
+/* 317 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var eq = __webpack_require__(317);
+	var eq = __webpack_require__(318);
 	
 	/**
 	 * Gets the index at which the `key` is found in `array` of key-value pairs.
@@ -22770,7 +22859,7 @@
 
 
 /***/ }),
-/* 317 */
+/* 318 */
 /***/ (function(module, exports) {
 
 	/**
@@ -22813,10 +22902,10 @@
 
 
 /***/ }),
-/* 318 */
+/* 319 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var assocIndexOf = __webpack_require__(316);
+	var assocIndexOf = __webpack_require__(317);
 	
 	/**
 	 * Gets the list cache value for `key`.
@@ -22838,10 +22927,10 @@
 
 
 /***/ }),
-/* 319 */
+/* 320 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var assocIndexOf = __webpack_require__(316);
+	var assocIndexOf = __webpack_require__(317);
 	
 	/**
 	 * Checks if a list cache value for `key` exists.
@@ -22860,10 +22949,10 @@
 
 
 /***/ }),
-/* 320 */
+/* 321 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var assocIndexOf = __webpack_require__(316);
+	var assocIndexOf = __webpack_require__(317);
 	
 	/**
 	 * Sets the list cache `key` to `value`.
@@ -22892,11 +22981,11 @@
 
 
 /***/ }),
-/* 321 */
+/* 322 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var getNative = __webpack_require__(301),
-	    root = __webpack_require__(288);
+	var getNative = __webpack_require__(302),
+	    root = __webpack_require__(289);
 	
 	/* Built-in method references that are verified to be native. */
 	var Map = getNative(root, 'Map');
@@ -22905,10 +22994,10 @@
 
 
 /***/ }),
-/* 322 */
+/* 323 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var getMapData = __webpack_require__(323);
+	var getMapData = __webpack_require__(324);
 	
 	/**
 	 * Removes `key` and its value from the map.
@@ -22929,10 +23018,10 @@
 
 
 /***/ }),
-/* 323 */
+/* 324 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var isKeyable = __webpack_require__(324);
+	var isKeyable = __webpack_require__(325);
 	
 	/**
 	 * Gets the data for `map`.
@@ -22953,7 +23042,7 @@
 
 
 /***/ }),
-/* 324 */
+/* 325 */
 /***/ (function(module, exports) {
 
 	/**
@@ -22974,10 +23063,10 @@
 
 
 /***/ }),
-/* 325 */
+/* 326 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var getMapData = __webpack_require__(323);
+	var getMapData = __webpack_require__(324);
 	
 	/**
 	 * Gets the map value for `key`.
@@ -22996,10 +23085,10 @@
 
 
 /***/ }),
-/* 326 */
+/* 327 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var getMapData = __webpack_require__(323);
+	var getMapData = __webpack_require__(324);
 	
 	/**
 	 * Checks if a map value for `key` exists.
@@ -23018,10 +23107,10 @@
 
 
 /***/ }),
-/* 327 */
+/* 328 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var getMapData = __webpack_require__(323);
+	var getMapData = __webpack_require__(324);
 	
 	/**
 	 * Sets the map `key` to `value`.
@@ -23046,10 +23135,10 @@
 
 
 /***/ }),
-/* 328 */
+/* 329 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var baseToString = __webpack_require__(329);
+	var baseToString = __webpack_require__(330);
 	
 	/**
 	 * Converts `value` to a string. An empty string is returned for `null`
@@ -23080,13 +23169,13 @@
 
 
 /***/ }),
-/* 329 */
+/* 330 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var Symbol = __webpack_require__(287),
-	    arrayMap = __webpack_require__(330),
-	    isArray = __webpack_require__(283),
-	    isSymbol = __webpack_require__(285);
+	var Symbol = __webpack_require__(288),
+	    arrayMap = __webpack_require__(331),
+	    isArray = __webpack_require__(284),
+	    isSymbol = __webpack_require__(286);
 	
 	/** Used as references for various `Number` constants. */
 	var INFINITY = 1 / 0;
@@ -23123,7 +23212,7 @@
 
 
 /***/ }),
-/* 330 */
+/* 331 */
 /***/ (function(module, exports) {
 
 	/**
@@ -23150,10 +23239,10 @@
 
 
 /***/ }),
-/* 331 */
+/* 332 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var isSymbol = __webpack_require__(285);
+	var isSymbol = __webpack_require__(286);
 	
 	/** Used as references for various `Number` constants. */
 	var INFINITY = 1 / 0;
@@ -23177,10 +23266,10 @@
 
 
 /***/ }),
-/* 332 */
+/* 333 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var baseSet = __webpack_require__(333);
+	var baseSet = __webpack_require__(334);
 	
 	/**
 	 * Sets the value at `path` of `object`. If a portion of `path` doesn't exist,
@@ -23218,14 +23307,14 @@
 
 
 /***/ }),
-/* 333 */
+/* 334 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var assignValue = __webpack_require__(334),
-	    castPath = __webpack_require__(282),
-	    isIndex = __webpack_require__(337),
-	    isObject = __webpack_require__(304),
-	    toKey = __webpack_require__(331);
+	var assignValue = __webpack_require__(335),
+	    castPath = __webpack_require__(283),
+	    isIndex = __webpack_require__(338),
+	    isObject = __webpack_require__(305),
+	    toKey = __webpack_require__(332);
 	
 	/**
 	 * The base implementation of `_.set`.
@@ -23271,11 +23360,11 @@
 
 
 /***/ }),
-/* 334 */
+/* 335 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var baseAssignValue = __webpack_require__(335),
-	    eq = __webpack_require__(317);
+	var baseAssignValue = __webpack_require__(336),
+	    eq = __webpack_require__(318);
 	
 	/** Used for built-in method references. */
 	var objectProto = Object.prototype;
@@ -23305,10 +23394,10 @@
 
 
 /***/ }),
-/* 335 */
+/* 336 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var defineProperty = __webpack_require__(336);
+	var defineProperty = __webpack_require__(337);
 	
 	/**
 	 * The base implementation of `assignValue` and `assignMergeValue` without
@@ -23336,10 +23425,10 @@
 
 
 /***/ }),
-/* 336 */
+/* 337 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var getNative = __webpack_require__(301);
+	var getNative = __webpack_require__(302);
 	
 	var defineProperty = (function() {
 	  try {
@@ -23353,7 +23442,7 @@
 
 
 /***/ }),
-/* 337 */
+/* 338 */
 /***/ (function(module, exports) {
 
 	/** Used as references for various `Number` constants. */
@@ -23384,7 +23473,7 @@
 
 
 /***/ }),
-/* 338 */
+/* 339 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -23393,33 +23482,33 @@
 	  value: true
 	});
 	
-	var _defineProperty2 = __webpack_require__(230);
+	var _defineProperty2 = __webpack_require__(231);
 	
 	var _defineProperty3 = _interopRequireDefault(_defineProperty2);
 	
-	var _extends2 = __webpack_require__(234);
+	var _extends2 = __webpack_require__(235);
 	
 	var _extends3 = _interopRequireDefault(_extends2);
 	
-	var _classCallCheck2 = __webpack_require__(339);
+	var _classCallCheck2 = __webpack_require__(340);
 	
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 	
-	var _createClass2 = __webpack_require__(340);
+	var _createClass2 = __webpack_require__(341);
 	
 	var _createClass3 = _interopRequireDefault(_createClass2);
 	
 	exports['default'] = createFieldsStore;
 	
-	var _set = __webpack_require__(332);
+	var _set = __webpack_require__(333);
 	
 	var _set2 = _interopRequireDefault(_set);
 	
-	var _createFormField = __webpack_require__(341);
+	var _createFormField = __webpack_require__(342);
 	
 	var _createFormField2 = _interopRequireDefault(_createFormField);
 	
-	var _utils = __webpack_require__(342);
+	var _utils = __webpack_require__(343);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
@@ -23717,7 +23806,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 339 */
+/* 340 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -23731,14 +23820,14 @@
 	};
 
 /***/ }),
-/* 340 */
+/* 341 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
 	
 	exports.__esModule = true;
 	
-	var _defineProperty = __webpack_require__(231);
+	var _defineProperty = __webpack_require__(232);
 	
 	var _defineProperty2 = _interopRequireDefault(_defineProperty);
 	
@@ -23763,7 +23852,7 @@
 	}();
 
 /***/ }),
-/* 341 */
+/* 342 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -23772,11 +23861,11 @@
 	  value: true
 	});
 	
-	var _extends2 = __webpack_require__(234);
+	var _extends2 = __webpack_require__(235);
 	
 	var _extends3 = _interopRequireDefault(_extends2);
 	
-	var _classCallCheck2 = __webpack_require__(339);
+	var _classCallCheck2 = __webpack_require__(340);
 	
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 	
@@ -23803,7 +23892,7 @@
 	}
 
 /***/ }),
-/* 342 */
+/* 343 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -23812,11 +23901,11 @@
 	  value: true
 	});
 	
-	var _extends2 = __webpack_require__(234);
+	var _extends2 = __webpack_require__(235);
 	
 	var _extends3 = _interopRequireDefault(_extends2);
 	
-	var _typeof2 = __webpack_require__(163);
+	var _typeof2 = __webpack_require__(164);
 	
 	var _typeof3 = _interopRequireDefault(_typeof2);
 	
@@ -23834,7 +23923,7 @@
 	exports.hasRules = hasRules;
 	exports.startsWith = startsWith;
 	
-	var _hoistNonReactStatics = __webpack_require__(343);
+	var _hoistNonReactStatics = __webpack_require__(344);
 	
 	var _hoistNonReactStatics2 = _interopRequireDefault(_hoistNonReactStatics);
 	
@@ -23993,7 +24082,7 @@
 	}
 
 /***/ }),
-/* 343 */
+/* 344 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -24067,7 +24156,7 @@
 
 
 /***/ }),
-/* 344 */
+/* 345 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -24107,7 +24196,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 345 */
+/* 346 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -24176,99 +24265,6 @@
 	FormItem.propTypes = propTypes;
 	FormItem.defaultProps = defaultProps;
 	exports['default'] = FormItem;
-	module.exports = exports['default'];
-
-/***/ }),
-/* 346 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-	
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-	
-	var _react = __webpack_require__(1);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _src = __webpack_require__(157);
-	
-	var _src2 = _interopRequireDefault(_src);
-	
-	var _beeFormControl = __webpack_require__(153);
-	
-	var _beeFormControl2 = _interopRequireDefault(_beeFormControl);
-	
-	var _beeLabel = __webpack_require__(347);
-	
-	var _beeLabel2 = _interopRequireDefault(_beeLabel);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-	
-	function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : _defaults(subClass, superClass); } /**
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @title 单个input校验
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @description 使用FormItem
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                */
-	
-	
-	var FormItem = _src2['default'].FormItem;
-	
-	var Demo1 = _src2['default'].createForm()(function (_Component) {
-	    _inherits(Demo, _Component);
-	
-	    function Demo(props) {
-	        _classCallCheck(this, Demo);
-	
-	        return _possibleConstructorReturn(this, _Component.call(this, props));
-	    }
-	
-	    Demo.prototype.render = function render() {
-	        var self = this;
-	        var _props$form = this.props.form,
-	            getFieldProps = _props$form.getFieldProps,
-	            getFieldError = _props$form.getFieldError;
-	
-	        return _react2['default'].createElement(
-	            FormItem,
-	            { className: 'demo1' },
-	            _react2['default'].createElement(
-	                _beeLabel2['default'],
-	                null,
-	                '\u59D3\u540D'
-	            ),
-	            _react2['default'].createElement(_beeFormControl2['default'], _extends({ placeholder: '\u8BF7\u8F93\u5165\u59D3\u540D'
-	            }, getFieldProps('name', {
-	                validateTrigger: 'onBlur',
-	                rules: [{
-	                    required: true, message: '请输入姓名'
-	                }, {
-	                    max: 5, message: '最大长度为10'
-	                }, {
-	                    pattern: /[\u4e00-\u9fa5]/, message: '请输入中文字符'
-	                }]
-	            }))),
-	            _react2['default'].createElement(
-	                'span',
-	                { className: 'error' },
-	                getFieldError('name')
-	            )
-	        );
-	    };
-	
-	    return Demo;
-	}(_react.Component));
-	
-	exports['default'] = Demo1;
 	module.exports = exports['default'];
 
 /***/ }),
@@ -24389,7 +24385,7 @@
 	
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 	
-	var _src = __webpack_require__(157);
+	var _src = __webpack_require__(158);
 	
 	var _src2 = _interopRequireDefault(_src);
 	
@@ -24538,7 +24534,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _src = __webpack_require__(157);
+	var _src = __webpack_require__(158);
 	
 	var _src2 = _interopRequireDefault(_src);
 	
@@ -27005,7 +27001,7 @@
 	
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 	
-	var _src = __webpack_require__(157);
+	var _src = __webpack_require__(158);
 	
 	var _src2 = _interopRequireDefault(_src);
 	
@@ -29093,15 +29089,15 @@
 	
 	exports.__esModule = true;
 	
-	var _extends2 = __webpack_require__(234);
+	var _extends2 = __webpack_require__(235);
 	
 	var _extends3 = _interopRequireDefault(_extends2);
 	
-	var _objectWithoutProperties2 = __webpack_require__(162);
+	var _objectWithoutProperties2 = __webpack_require__(163);
 	
 	var _objectWithoutProperties3 = _interopRequireDefault(_objectWithoutProperties2);
 	
-	var _classCallCheck2 = __webpack_require__(339);
+	var _classCallCheck2 = __webpack_require__(340);
 	
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 	
@@ -29379,7 +29375,7 @@
 	
 	exports.__esModule = true;
 	
-	var _typeof2 = __webpack_require__(163);
+	var _typeof2 = __webpack_require__(164);
 	
 	var _typeof3 = _interopRequireDefault(_typeof2);
 	
@@ -29409,7 +29405,7 @@
 	
 	var _create2 = _interopRequireDefault(_create);
 	
-	var _typeof2 = __webpack_require__(163);
+	var _typeof2 = __webpack_require__(164);
 	
 	var _typeof3 = _interopRequireDefault(_typeof2);
 	
@@ -29442,7 +29438,7 @@
 /***/ (function(module, exports, __webpack_require__) {
 
 	__webpack_require__(366);
-	module.exports = __webpack_require__(174).Object.setPrototypeOf;
+	module.exports = __webpack_require__(175).Object.setPrototypeOf;
 
 
 /***/ }),
@@ -29450,7 +29446,7 @@
 /***/ (function(module, exports, __webpack_require__) {
 
 	// 19.1.3.19 Object.setPrototypeOf(O, proto)
-	var $export = __webpack_require__(172);
+	var $export = __webpack_require__(173);
 	$export($export.S, 'Object', { setPrototypeOf: __webpack_require__(367).set });
 
 
@@ -29460,8 +29456,8 @@
 
 	// Works with __proto__ only. Old v8 can't work with null proto objects.
 	/* eslint-disable no-proto */
-	var isObject = __webpack_require__(180);
-	var anObject = __webpack_require__(179);
+	var isObject = __webpack_require__(181);
+	var anObject = __webpack_require__(180);
 	var check = function (O, proto) {
 	  anObject(O);
 	  if (!isObject(proto) && proto !== null) throw TypeError(proto + ": can't set as prototype!");
@@ -29470,7 +29466,7 @@
 	  set: Object.setPrototypeOf || ('__proto__' in {} ? // eslint-disable-line
 	    function (test, buggy, set) {
 	      try {
-	        set = __webpack_require__(175)(Function.call, __webpack_require__(226).f(Object.prototype, '__proto__').set, 2);
+	        set = __webpack_require__(176)(Function.call, __webpack_require__(227).f(Object.prototype, '__proto__').set, 2);
 	        set(test, []);
 	        buggy = !(test instanceof Array);
 	      } catch (e) { buggy = true; }
@@ -29496,7 +29492,7 @@
 /***/ (function(module, exports, __webpack_require__) {
 
 	__webpack_require__(370);
-	var $Object = __webpack_require__(174).Object;
+	var $Object = __webpack_require__(175).Object;
 	module.exports = function create(P, D) {
 	  return $Object.create(P, D);
 	};
@@ -29506,9 +29502,9 @@
 /* 370 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var $export = __webpack_require__(172);
+	var $export = __webpack_require__(173);
 	// 19.1.2.2 / 15.2.3.5 Object.create(O [, Properties])
-	$export($export.S, 'Object', { create: __webpack_require__(191) });
+	$export($export.S, 'Object', { create: __webpack_require__(192) });
 
 
 /***/ }),
@@ -29647,7 +29643,7 @@
 	
 	var _shallowequal2 = _interopRequireDefault(_shallowequal);
 	
-	var _hoistNonReactStatics = __webpack_require__(343);
+	var _hoistNonReactStatics = __webpack_require__(344);
 	
 	var _hoistNonReactStatics2 = _interopRequireDefault(_hoistNonReactStatics);
 	
@@ -29896,11 +29892,11 @@
 	exports.__esModule = true;
 	exports.SubPopupMenu = undefined;
 	
-	var _objectWithoutProperties2 = __webpack_require__(162);
+	var _objectWithoutProperties2 = __webpack_require__(163);
 	
 	var _objectWithoutProperties3 = _interopRequireDefault(_objectWithoutProperties2);
 	
-	var _classCallCheck2 = __webpack_require__(339);
+	var _classCallCheck2 = __webpack_require__(340);
 	
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 	
@@ -29912,7 +29908,7 @@
 	
 	var _inherits3 = _interopRequireDefault(_inherits2);
 	
-	var _extends4 = __webpack_require__(234);
+	var _extends4 = __webpack_require__(235);
 	
 	var _extends5 = _interopRequireDefault(_extends4);
 	
@@ -31010,15 +31006,15 @@
 	
 	exports.__esModule = true;
 	
-	var _extends2 = __webpack_require__(234);
+	var _extends2 = __webpack_require__(235);
 	
 	var _extends3 = _interopRequireDefault(_extends2);
 	
-	var _objectWithoutProperties2 = __webpack_require__(162);
+	var _objectWithoutProperties2 = __webpack_require__(163);
 	
 	var _objectWithoutProperties3 = _interopRequireDefault(_objectWithoutProperties2);
 	
-	var _classCallCheck2 = __webpack_require__(339);
+	var _classCallCheck2 = __webpack_require__(340);
 	
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 	
@@ -32333,7 +32329,7 @@
 	exports.__esModule = true;
 	exports.SubMenu = undefined;
 	
-	var _classCallCheck2 = __webpack_require__(339);
+	var _classCallCheck2 = __webpack_require__(340);
 	
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 	
@@ -32345,7 +32341,7 @@
 	
 	var _inherits3 = _interopRequireDefault(_inherits2);
 	
-	var _extends3 = __webpack_require__(234);
+	var _extends3 = __webpack_require__(235);
 	
 	var _extends4 = _interopRequireDefault(_extends3);
 	
@@ -32980,11 +32976,11 @@
 	
 	exports.__esModule = true;
 	
-	var _extends2 = __webpack_require__(234);
+	var _extends2 = __webpack_require__(235);
 	
 	var _extends3 = _interopRequireDefault(_extends2);
 	
-	var _classCallCheck2 = __webpack_require__(339);
+	var _classCallCheck2 = __webpack_require__(340);
 	
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 	
@@ -33813,11 +33809,11 @@
 	  value: true
 	});
 	
-	var _classCallCheck2 = __webpack_require__(339);
+	var _classCallCheck2 = __webpack_require__(340);
 	
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 	
-	var _createClass2 = __webpack_require__(340);
+	var _createClass2 = __webpack_require__(341);
 	
 	var _createClass3 = _interopRequireDefault(_createClass2);
 	
@@ -33945,11 +33941,11 @@
 	  value: true
 	});
 	
-	var _classCallCheck2 = __webpack_require__(339);
+	var _classCallCheck2 = __webpack_require__(340);
 	
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 	
-	var _createClass2 = __webpack_require__(340);
+	var _createClass2 = __webpack_require__(341);
 	
 	var _createClass3 = _interopRequireDefault(_createClass2);
 	
@@ -34043,7 +34039,7 @@
 	
 	exports.__esModule = true;
 	
-	var _extends2 = __webpack_require__(234);
+	var _extends2 = __webpack_require__(235);
 	
 	var _extends3 = _interopRequireDefault(_extends2);
 	
@@ -34089,11 +34085,11 @@
 	
 	exports.__esModule = true;
 	
-	var _extends2 = __webpack_require__(234);
+	var _extends2 = __webpack_require__(235);
 	
 	var _extends3 = _interopRequireDefault(_extends2);
 	
-	var _classCallCheck2 = __webpack_require__(339);
+	var _classCallCheck2 = __webpack_require__(340);
 	
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 	
@@ -34498,11 +34494,11 @@
 	  value: true
 	});
 	
-	var _classCallCheck2 = __webpack_require__(339);
+	var _classCallCheck2 = __webpack_require__(340);
 	
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 	
-	var _createClass2 = __webpack_require__(340);
+	var _createClass2 = __webpack_require__(341);
 	
 	var _createClass3 = _interopRequireDefault(_createClass2);
 	
@@ -34807,19 +34803,19 @@
 	  value: true
 	});
 	
-	var _extends2 = __webpack_require__(234);
+	var _extends2 = __webpack_require__(235);
 	
 	var _extends3 = _interopRequireDefault(_extends2);
 	
-	var _defineProperty2 = __webpack_require__(230);
+	var _defineProperty2 = __webpack_require__(231);
 	
 	var _defineProperty3 = _interopRequireDefault(_defineProperty2);
 	
-	var _classCallCheck2 = __webpack_require__(339);
+	var _classCallCheck2 = __webpack_require__(340);
 	
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 	
-	var _createClass2 = __webpack_require__(340);
+	var _createClass2 = __webpack_require__(341);
 	
 	var _createClass3 = _interopRequireDefault(_createClass2);
 	
@@ -35323,11 +35319,11 @@
 	  value: true
 	});
 	
-	var _classCallCheck2 = __webpack_require__(339);
+	var _classCallCheck2 = __webpack_require__(340);
 	
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 	
-	var _createClass2 = __webpack_require__(340);
+	var _createClass2 = __webpack_require__(341);
 	
 	var _createClass3 = _interopRequireDefault(_createClass2);
 	
@@ -35473,7 +35469,7 @@
 	});
 	exports.isCssAnimationSupported = undefined;
 	
-	var _typeof2 = __webpack_require__(163);
+	var _typeof2 = __webpack_require__(164);
 	
 	var _typeof3 = _interopRequireDefault(_typeof2);
 	
@@ -35838,7 +35834,7 @@
 	
 	exports.__esModule = true;
 	
-	var _classCallCheck2 = __webpack_require__(339);
+	var _classCallCheck2 = __webpack_require__(340);
 	
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 	
@@ -35920,11 +35916,11 @@
 	
 	exports.__esModule = true;
 	
-	var _objectWithoutProperties2 = __webpack_require__(162);
+	var _objectWithoutProperties2 = __webpack_require__(163);
 	
 	var _objectWithoutProperties3 = _interopRequireDefault(_objectWithoutProperties2);
 	
-	var _classCallCheck2 = __webpack_require__(339);
+	var _classCallCheck2 = __webpack_require__(340);
 	
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 	
@@ -36048,11 +36044,11 @@
 	exports.__esModule = true;
 	exports.MenuItem = undefined;
 	
-	var _extends2 = __webpack_require__(234);
+	var _extends2 = __webpack_require__(235);
 	
 	var _extends3 = _interopRequireDefault(_extends2);
 	
-	var _classCallCheck2 = __webpack_require__(339);
+	var _classCallCheck2 = __webpack_require__(340);
 	
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 	
@@ -36913,15 +36909,15 @@
 	
 	exports.__esModule = true;
 	
-	var _extends2 = __webpack_require__(234);
+	var _extends2 = __webpack_require__(235);
 	
 	var _extends3 = _interopRequireDefault(_extends2);
 	
-	var _objectWithoutProperties2 = __webpack_require__(162);
+	var _objectWithoutProperties2 = __webpack_require__(163);
 	
 	var _objectWithoutProperties3 = _interopRequireDefault(_objectWithoutProperties2);
 	
-	var _classCallCheck2 = __webpack_require__(339);
+	var _classCallCheck2 = __webpack_require__(340);
 	
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 	
@@ -37031,7 +37027,7 @@
 	
 	exports.__esModule = true;
 	
-	var _classCallCheck2 = __webpack_require__(339);
+	var _classCallCheck2 = __webpack_require__(340);
 	
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 	
@@ -72428,7 +72424,7 @@
 	
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 	
-	var _src = __webpack_require__(157);
+	var _src = __webpack_require__(158);
 	
 	var _src2 = _interopRequireDefault(_src);
 	
@@ -73125,7 +73121,7 @@
 	
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 	
-	var _src = __webpack_require__(157);
+	var _src = __webpack_require__(158);
 	
 	var _src2 = _interopRequireDefault(_src);
 	
