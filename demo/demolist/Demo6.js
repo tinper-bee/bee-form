@@ -144,13 +144,13 @@ const Demo6 = Form.createForm()(class Demo extends Component {
                      </h4>
                      <Row className = 'edit-panel edit-panel-all'>
                         <FormItem>
-                            <Col md={2}>
+                            <Col md={2} xs={2}>
                                 <Label>
                                     <Icon type="uf-mi" className='mast'></Icon>
                                     订单编号
                                 </Label>
                             </Col>
-                            <Col md={10}>
+                            <Col md={10} xs={10}>
                                 <FormControl
                                     {
                                     ...getFieldProps('orderCode2', {
@@ -170,13 +170,13 @@ const Demo6 = Form.createForm()(class Demo extends Component {
                         </FormItem>
 
                         <FormItem>
-                            <Col md={2}>
+                            <Col md={2} xs={2}>
                                 <Label>
                                     <Icon type="uf-mi" className='mast'></Icon>
                                     供应商名称
                                 </Label>
                             </Col>
-                            <Col md={10}>
+                            <Col md={10} xs={10}>
                                 <FormControl
                                     {
                                         ...getFieldProps('supplierName2', {
@@ -196,10 +196,10 @@ const Demo6 = Form.createForm()(class Demo extends Component {
                         </FormItem>
 
                         <FormItem>
-                            <Col md={2}>
+                            <Col md={2} xs={2}>
                                 <Label>凭证日期</Label>
                             </Col>
-                            <Col md={10}>
+                            <Col md={10} xs={10}>
                                 <RangePicker
                                     defaultValue={this.state.voucherDate}
                                     placeholder={'开始 ~ 结束'}
@@ -217,10 +217,10 @@ const Demo6 = Form.createForm()(class Demo extends Component {
                             </Col>
                         </FormItem>
                         <FormItem>
-                            <Col md={2}>
+                            <Col md={2} xs={2}>
                                 <Label>订单类型</Label>
                             </Col>
-                            <Col md={10}>
+                            <Col md={10} xs={10}>
                                 <Select {
                                     ...getFieldProps('type', {
                                         initialValue: '',
@@ -323,12 +323,12 @@ const Demo6 = Form.createForm()(class Demo extends Component {
                     三列带textarea
                      </h4>
                     <Row className = 'edit-panel edit-panel-textarea'>
-                            <Col md={1}>
+                            <Col md={1} xs={2}>
                                 <Label>订单编号
                                     <Icon type="uf-mi" className='mast'></Icon>
                                 </Label>
                             </Col>
-                            <Col md={3}>
+                            <Col md={3} xs={10}>
                                 <FormControl
                                     {
                                     ...getFieldProps('orderCode4', {
@@ -345,12 +345,12 @@ const Demo6 = Form.createForm()(class Demo extends Component {
                                     }
                                 </span>
                             </Col>
-                            <Col md={1}>
+                            <Col md={1} xs={2}>
                                 <Label>供应商
                                     <Icon type="uf-mi" className='mast'></Icon>
                                 </Label>
                             </Col>
-                            <Col md={3}>
+                            <Col md={3} xs={10}>
                             <FormControl
                                 {
                                     ...getFieldProps('supplierName4', {
@@ -367,10 +367,10 @@ const Demo6 = Form.createForm()(class Demo extends Component {
                                     }
                                 </span>
                             </Col>
-                            <Col md={1}>
+                            <Col md={1} xs={2}>
                                 <Label className='time'>凭证日期</Label>
                             </Col>
-                            <Col md={3}>
+                            <Col md={3} xs={10}>
                             <RangePicker
                                     defaultValue={this.state.voucherDate}
                                     placeholder={'开始 ~ 结束'}
@@ -386,10 +386,10 @@ const Demo6 = Form.createForm()(class Demo extends Component {
                                     }
                                 />
                             </Col>
-                            <Col md={1}>
+                            <Col md={1} xs={2}>
                                 <Label className='time'>备注</Label>
                             </Col>
-                            <Col md={11}>
+                            <Col md={11} xs={10}>
                             <textarea className='u-form-control'
                                 {
                                     ...getFieldProps('mark', {
