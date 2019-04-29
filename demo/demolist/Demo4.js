@@ -124,23 +124,14 @@ const Demo4 = Form.createForm()(class Demo extends Component {
                         </span>
                     </FormItem>
                     <FormItem className='time flex'>
-                        <Label className="line-height-32"><Icon type="uf-mi" className='mast'></Icon>需求日期</Label>
+                        <Label className="line-height-32">需求日期</Label>
                         <DatePicker
                             {
                             ...getFieldProps('time', {
-                                validateTrigger: 'onBlur',
-                                rules: [{
-                                    required: true, message: <span><Icon type="uf-exc-t"></Icon><span>请选择需求日期</span></span>,
-                                }, {
-                                    type: 'date', message: <span><Icon type="uf-exc-t"></Icon><span>日期格式不正确</span></span>
-                                }],
                             }
                             ) }
                             placeholder={'请选择需求日期'}
                         />
-                        <span className='error line-height-32'>
-                            {getFieldError('time')}
-                        </span>
                     </FormItem>
                     <FormItem>
                         <Label><Icon type="uf-mi" className='mast'></Icon>物料关重程度</Label>
