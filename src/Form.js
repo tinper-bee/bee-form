@@ -1,6 +1,6 @@
 import React, { Component, Children } from 'react';
 import PropTypes from 'prop-types';
-import { createForm, createFormField } from 'rc-form';
+import { createForm, createFormField ,formShape} from 'rc-form';
 import classNames from 'classnames';
 const propTypes = {
     prefixCls: PropTypes.string,
@@ -26,6 +26,7 @@ class Form extends Component {
 };
 Form.createForm = createForm;
 Form.createFormField = createFormField;
+Form.formShape = formShape;
 Form.propTypes = propTypes;
 Form.defaultProps = defaultProps;
 export default Form;

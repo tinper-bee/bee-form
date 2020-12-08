@@ -74,6 +74,7 @@ var Form = function (_Component) {
 ;
 Form.createForm = _rcForm.createForm;
 Form.createFormField = _rcForm.createFormField;
+Form.formShape = _rcForm.formShape;
 Form.propTypes = propTypes;
 Form.defaultProps = defaultProps;
 exports["default"] = Form;
